@@ -57,6 +57,8 @@
     <nav class="max-w-7xl mx-auto px-4">
       <div class="flex space-x-1 overflow-x-auto">
         <button onclick="showTab('activity')" id="tab-btn-activity" class="tab-btn px-4 py-2 text-sm font-medium tab-active">📊 Activity Feed</button>
+        <button onclick="showTab('sage')" id="tab-btn-sage" class="tab-btn px-4 py-2 text-sm font-medium">🌿 Sage (Health)</button>
+        <button onclick="showTab('joy')" id="tab-btn-joy" class="tab-btn px-4 py-2 text-sm font-medium">✨ Joy (Fun)</button>
         <button onclick="showTab('calendar')" id="tab-btn-calendar" class="tab-btn px-4 py-2 text-sm font-medium">📅 Calendar</button>
         <button onclick="showTab('search')" id="tab-btn-search" class="tab-btn px-4 py-2 text-sm font-medium">🔍 Search</button>
         <button onclick="showTab('audits')" id="tab-btn-audits" class="tab-btn px-4 py-2 text-sm font-medium">📋 Audits</button>
@@ -92,6 +94,32 @@
       </div>
       <div id="activity-feed" class="activity-feed space-y-2">
         <div class="card rounded p-4 text-center text-gray-500">Loading activity feed...</div>
+      </div>
+    </div>
+
+    <!-- Sage (Health) Tab -->
+    <div id="tab-sage" class="tab-content hidden">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">🌿 Sage - Health Agent Activity</h2>
+        <div id="sage-stats" class="text-sm text-gray-400">
+          <span id="sage-activity-count">0</span> activities today
+        </div>
+      </div>
+      <div id="sage-feed" class="activity-feed space-y-2">
+        <div class="card rounded p-4 text-center text-gray-500">Loading Sage activity...</div>
+      </div>
+    </div>
+
+    <!-- Joy (Fun) Tab -->
+    <div id="tab-joy" class="tab-content hidden">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">✨ Joy - Fun Agent Activity</h2>
+        <div id="joy-stats" class="text-sm text-gray-400">
+          <span id="joy-activity-count">0</span> activities today
+        </div>
+      </div>
+      <div id="joy-feed" class="activity-feed space-y-2">
+        <div class="card rounded p-4 text-center text-gray-500">Loading Joy activity...</div>
       </div>
     </div>
 

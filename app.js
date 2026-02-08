@@ -155,6 +155,12 @@ function renderCurrentTab() {
     case 'activity':
       renderActivityTab();
       break;
+    case 'sage':
+      renderAgentTab('sage', 'Health');
+      break;
+    case 'joy':
+      renderAgentTab('joy', 'Fun');
+      break;
     case 'audits':
       renderAuditsTab();
       break;
@@ -272,6 +278,87 @@ function toggleActivityDetails(entryId) {
   if (details) {
     details.classList.toggle('hidden');
   }
+}
+
+// ============================================
+// AGENT-SPECIFIC TABS (Sage/Joy)
+// ============================================
+function renderAgentTab(agentKey, agentName) {
+  const container = document.getElementById(`${agentKey}-feed`);
+  const countEl = document.getElementById(`${agentKey}-activity-count`);
+  if (!container) return;
+
+  // Map agentKey to agent id used in data
+  const agentId = agentKey === 'sage' ? 'health' : 'fun';
+
+  let entries = AppState.data.activityLog.entries?.filter(e => e.agent === agentId) || [];
+
+  // Sort by timestamp (newest first)
+  entries.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+  // Update count
+  if (countEl) {
+    const today = new Date().toDateString();
+    const todayCount = entries.filter(e => new Date(e.timestamp).toDateString() === today).length;
+    countEl.textContent = todayCount;
+  }
+
+  if (entries.length === 0) {
+    container.innerHTML = `
+      <div class="card rounded p-8 text-center text-gray-500">
+        <div class="text-4xl mb-2">🌿</div>
+        <p>No ${agentName} agent activity yet.</p>
+        <p class="text-sm mt-1">Activities will appear when ${agentName} agent completes tasks.</p>
+      </div>
+    `;
+    return;
+  }
+
+  let currentDate = null;
+  let html = '';
+
+  entries.slice(0, 50).forEach((entry) => {
+    const entryDate = new Date(entry.timestamp).toDateString();
+    const dateLabel = getDateLabel(entry.timestamp);
+
+    // Add date separator if new date
+    if (entryDate !== currentDate) {
+      currentDate = entryDate;
+      html += `
+        <div class="flex items-center gap-4 my-4">
+          <div class="flex-1 h-px bg-dark-700"></div>
+          <span class="text-xs text-gray-500 font-medium">${dateLabel}</span>
+          <div class="flex-1 h-px bg-dark-700"></div>
+        </div>
+      `;
+    }
+
+    const agentColor = AGENT_COLORS[entry.agent] || '#6B7280';
+    const icon = TYPE_ICONS[entry.type] || '📄';
+    const time = formatTime(entry.timestamp);
+    const statusColor = getStatusColor(entry.status);
+    const duration = entry.duration_ms ? formatDuration(entry.duration_ms) : '';
+
+    html += `
+      <div class="card rounded p-3 hover:bg-dark-800 transition-colors">
+        <div class="flex items-start gap-3">
+          <span class="text-lg select-none" title="${TYPE_LABELS[entry.type] || entry.type}">${icon}</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-xs text-gray-500 font-mono">${time}</span>
+              <span class="px-2 py-0.5 rounded text-xs font-medium text-white" 
+                    style="background-color: ${agentColor}">${AGENT_LABELS[entry.agent] || entry.agent}</span>
+              ${entry.status ? `<span class="text-xs ${statusColor}">● ${entry.status}</span>` : ''}
+              ${duration ? `<span class="text-xs text-gray-500">⏱️ ${duration}</span>` : ''}
+            </div>
+            <p class="text-sm mt-1 text-gray-200">${escapeHtml(entry.action)}</p>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
 }
 
 // ============================================
@@ -1383,6 +1470,12 @@ async function scanAuditsFolder() {
 // Initialize on load
 document.addEventListener('DOMContentLoaded', () => {
   initAutoRefresh();
+  
+  // Start auto-refresh if enabled (default: true, 30s)
+  if (AppState.settings.autoRefresh) {
+    startAutoRefresh();
+  }
+  
   scanAuditsFolder();
   
   // Also scan when tab becomes visible
