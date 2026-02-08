@@ -1291,3 +1291,104 @@ function highlightMatch(text, query) {
   const regex = new RegExp(`(${query})`, 'gi');
   return text.replace(regex, '<mark class="bg-yellow-500/30 text-yellow-200">$1</mark>');
 }
+
+// ============================================
+// REAL-TIME AUDIT SCANNER & AUTO-REFRESH
+// ============================================
+
+let autoRefreshInterval = null;
+let lastAuditCount = 0;
+
+// Initialize auto-refresh
+function initAutoRefresh() {
+  const toggle = document.getElementById('auto-refresh-toggle');
+  const intervalSelect = document.getElementById('refresh-interval');
+  
+  if (toggle) {
+    toggle.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        startAutoRefresh();
+      } else {
+        stopAutoRefresh();
+      }
+    });
+  }
+  
+  if (intervalSelect) {
+    intervalSelect.addEventListener('change', () => {
+      if (toggle && toggle.checked) {
+        startAutoRefresh();
+      }
+    });
+  }
+}
+
+function startAutoRefresh() {
+  stopAutoRefresh();
+  const intervalSec = parseInt(document.getElementById('refresh-interval')?.value || 60);
+  console.log(`[AutoRefresh] Starting ${intervalSec}s interval`);
+  
+  autoRefreshInterval = setInterval(() => {
+    console.log('[AutoRefresh] Refreshing data...');
+    loadAllData().then(() => {
+      renderCurrentTab();
+      scanAuditsFolder();
+    });
+  }, intervalSec * 1000);
+}
+
+function stopAutoRefresh() {
+  if (autoRefreshInterval) {
+    clearInterval(autoRefreshInterval);
+    autoRefreshInterval = null;
+    console.log('[AutoRefresh] Stopped');
+  }
+}
+
+// Real-time audit folder scanner
+async function scanAuditsFolder() {
+  try {
+    const response = await fetch('data/audits.json?t=' + Date.now());
+    const data = await response.json();
+    
+    const currentCount = data.totalAvailable || data.audits?.length || 0;
+    const avgGrade = data.agentStats?.nox?.avgGrade || 0;
+    
+    // Update stats display
+    const totalAuditsEl = document.getElementById('stat-total-audits');
+    const avgGradeEl = document.getElementById('stat-avg-grade');
+    
+    if (totalAuditsEl) totalAuditsEl.textContent = currentCount;
+    if (avgGradeEl) avgGradeEl.textContent = `${avgGrade}%`;
+    
+    // Detect new audits
+    if (lastAuditCount > 0 && currentCount > lastAuditCount) {
+      console.log(`[AuditScanner] ${currentCount - lastAuditCount} new audit(s) detected!`);
+      // Flash notification or update indicator
+      const indicator = document.getElementById('new-audit-indicator');
+      if (indicator) {
+        indicator.classList.remove('hidden');
+        setTimeout(() => indicator.classList.add('hidden'), 5000);
+      }
+    }
+    
+    lastAuditCount = currentCount;
+    console.log(`[AuditScanner] ${currentCount} audits, avg: ${avgGrade}%`);
+    
+  } catch (err) {
+    console.error('[AuditScanner] Error:', err);
+  }
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', () => {
+  initAutoRefresh();
+  scanAuditsFolder();
+  
+  // Also scan when tab becomes visible
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      scanAuditsFolder();
+    }
+  });
+});
