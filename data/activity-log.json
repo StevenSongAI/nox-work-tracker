@@ -1,6 +1,28 @@
 {
   "entries": [
     {
+      "id": "act-032",
+      "timestamp": "2026-02-08T21:04:00Z",
+      "agent": "nox",
+      "icon": "🎬",
+      "type": "content_update",
+      "title": "ZMDE 1000 Years Outlier Added + Viral Formula",
+      "description": "Replaced placeholder with real ZMDE entry: 'I Survived 1000 Years as a Dragon' (2.85M views, 47.5x outlier). Added insight-004: Time Compression + Creature Evolution viral formula.",
+      "grade": 88,
+      "status": "completed"
+    },
+    {
+      "id": "act-033",
+      "timestamp": "2026-02-08T21:05:00Z",
+      "agent": "nox",
+      "icon": "🔗",
+      "type": "ui_fix",
+      "title": "Competitor Tracker YouTube Links",
+      "description": "Made competitor channel names clickable links to YouTube (RogersPets, PetSimulatedWorld, CreatureLab, etc.)",
+      "grade": 85,
+      "status": "completed"
+    },
+    {
       "id": "act-031",
       "timestamp": "2026-02-08T21:00:00Z",
       "agent": "nox",
