@@ -1,0 +1,1027 @@
+/**
+ * Nox Work Tracker - Main Application
+ * Tracks all agent activity, audits, ralph chains, and agent profiles
+ */
+
+// ============================================
+// GLOBAL STATE
+// ============================================
+const AppState = {
+  data: {
+    activityLog: { entries: [] },
+    audits: { audits: [], agentStats: {} },
+    ralphChains: { chains: [] },
+    agents: { agents: [] },
+    meta: { lastUpdated: null, syncStatus: 'unknown' }
+  },
+  settings: {
+    theme: 'dark',
+    timeFormat: '24h',
+    autoRefresh: false,
+    refreshInterval: 60
+  },
+  filters: {
+    activity: { agent: '', type: '', status: '', search: '' },
+    audits: { agent: '', gradeMin: '', gradeMax: '', category: '' },
+    ralph: { status: '' }
+  },
+  currentTab: 'activity',
+  charts: {},
+  autoRefreshTimer: null
+};
+
+// ============================================
+// CONSTANTS
+// ============================================
+const AGENT_COLORS = {
+  nox: '#3B82F6',
+  health: '#10B981',
+  fun: '#8B5CF6'
+};
+
+const AGENT_LABELS = {
+  nox: 'Nox',
+  health: 'Health',
+  fun: 'Fun'
+};
+
+const TYPE_ICONS = {
+  heartbeat: '💓',
+  subagent_spawn: '🚀',
+  subagent_complete: '✅',
+  proactive_work: '🔨',
+  ralph_chain: '🔄',
+  user_request: '👤',
+  error: '❌',
+  system: '⚙️'
+};
+
+const TYPE_LABELS = {
+  heartbeat: 'Heartbeat',
+  subagent_spawn: 'Subagent Spawn',
+  subagent_complete: 'Subagent Complete',
+  proactive_work: 'Proactive Work',
+  ralph_chain: 'Ralph Chain',
+  user_request: 'User Request',
+  error: 'Error',
+  system: 'System'
+};
+
+const DATA_URLS = {
+  activity: 'data/activity-log.json',
+  audits: 'data/audits.json',
+  ralphChains: 'data/ralph-chains.json',
+  agents: 'data/agents.json',
+  meta: 'data/meta.json'
+};
+
+// ============================================
+// DATA LOADING
+// ============================================
+async function loadAllData() {
+  console.log('[WorkTracker] Loading all data...');
+  
+  try {
+    const [activityRes, auditsRes, ralphRes, agentsRes, metaRes] = await Promise.all([
+      fetch(DATA_URLS.activity).catch(() => ({ json: () => ({ entries: [] }) })),
+      fetch(DATA_URLS.audits).catch(() => ({ json: () => ({ audits: [], agentStats: {} }) })),
+      fetch(DATA_URLS.ralphChains).catch(() => ({ json: () => ({ chains: [] }) })),
+      fetch(DATA_URLS.agents).catch(() => ({ json: () => ({ agents: [] }) })),
+      fetch(DATA_URLS.meta).catch(() => ({ json: () => ({ lastUpdated: null, syncStatus: 'offline' }) }))
+    ]);
+
+    AppState.data.activityLog = await activityRes.json();
+    AppState.data.audits = await auditsRes.json();
+    AppState.data.ralphChains = await ralphRes.json();
+    AppState.data.agents = await agentsRes.json();
+    AppState.data.meta = await metaRes.json();
+
+    // Ensure arrays exist
+    AppState.data.activityLog.entries = AppState.data.activityLog.entries || [];
+    AppState.data.audits.audits = AppState.data.audits.audits || [];
+    AppState.data.ralphChains.chains = AppState.data.ralphChains.chains || [];
+    AppState.data.agents.agents = AppState.data.agents.agents || [];
+
+    console.log('[WorkTracker] Data loaded:', {
+      activities: AppState.data.activityLog.entries.length,
+      audits: AppState.data.audits.audits.length,
+      chains: AppState.data.ralphChains.chains.length,
+      agents: AppState.data.agents.agents.length
+    });
+
+    updateLastRefreshTime();
+    renderCurrentTab();
+  } catch (error) {
+    console.error('[WorkTracker] Error loading data:', error);
+    showError('Failed to load data. Please check the data files exist.');
+  }
+}
+
+function refreshData() {
+  console.log('[WorkTracker] Refreshing data...');
+  loadAllData();
+}
+
+// ============================================
+// TAB NAVIGATION
+// ============================================
+function showTab(tabName) {
+  AppState.currentTab = tabName;
+  
+  // Update tab buttons
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.remove('tab-active');
+  });
+  document.getElementById(`tab-btn-${tabName}`)?.classList.add('tab-active');
+  
+  // Update tab content
+  document.querySelectorAll('.tab-content').forEach(content => {
+    content.classList.add('hidden');
+  });
+  document.getElementById(`tab-${tabName}`)?.classList.remove('hidden');
+  
+  // Render the tab
+  renderCurrentTab();
+}
+
+function renderCurrentTab() {
+  switch (AppState.currentTab) {
+    case 'activity':
+      renderActivityTab();
+      break;
+    case 'audits':
+      renderAuditsTab();
+      break;
+    case 'ralph':
+      renderRalphTab();
+      break;
+    case 'agents':
+      renderAgentsTab();
+      break;
+    case 'settings':
+      renderSettingsTab();
+      break;
+  }
+}
+
+// ============================================
+// ACTIVITY TAB
+// ============================================
+function renderActivityTab() {
+  const container = document.getElementById('activity-feed');
+  if (!container) return;
+
+  let entries = [...AppState.data.activityLog.entries];
+  
+  // Apply filters
+  const agentFilter = document.getElementById('activity-agent-filter')?.value || '';
+  const typeFilter = document.getElementById('activity-type-filter')?.value || '';
+  
+  if (agentFilter) {
+    entries = entries.filter(e => e.agent === agentFilter);
+  }
+  if (typeFilter) {
+    entries = entries.filter(e => e.type === typeFilter);
+  }
+  
+  // Sort by timestamp (newest first)
+  entries.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  
+  if (entries.length === 0) {
+    container.innerHTML = `
+      <div class="card rounded p-8 text-center text-gray-500">
+        <div class="text-4xl mb-2">📭</div>
+        <p>No activity entries found.</p>
+        <p class="text-sm mt-1">Activities will appear here when agents log their work.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  let currentDate = null;
+  let html = '';
+  
+  entries.forEach((entry, index) => {
+    const entryDate = new Date(entry.timestamp).toDateString();
+    const dateLabel = getDateLabel(entry.timestamp);
+    
+    // Add date separator if new date
+    if (entryDate !== currentDate) {
+      currentDate = entryDate;
+      html += `
+        <div class="flex items-center gap-4 my-4">
+          <div class="flex-1 h-px bg-dark-700"></div>
+          <span class="text-xs text-gray-500 font-medium">${dateLabel}</span>
+          <div class="flex-1 h-px bg-dark-700"></div>
+        </div>
+      `;
+    }
+    
+    const agentColor = AGENT_COLORS[entry.agent] || '#6B7280';
+    const icon = TYPE_ICONS[entry.type] || '📄';
+    const time = formatTime(entry.timestamp);
+    const statusColor = getStatusColor(entry.status);
+    const duration = entry.duration_ms ? formatDuration(entry.duration_ms) : '';
+    
+    html += `
+      <div class="card rounded p-3 hover:bg-dark-800 transition-colors cursor-pointer" 
+           onclick="toggleActivityDetails('${entry.id}')">
+        <div class="flex items-start gap-3">
+          <span class="text-lg select-none" title="${TYPE_LABELS[entry.type] || entry.type}">${icon}</span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-xs text-gray-500 font-mono">${time}</span>
+              <span class="px-2 py-0.5 rounded text-xs font-medium text-white" 
+                    style="background-color: ${agentColor}">${AGENT_LABELS[entry.agent] || entry.agent}</span>
+              ${entry.status ? `<span class="text-xs ${statusColor}">● ${entry.status}</span>` : ''}
+              ${duration ? `<span class="text-xs text-gray-500">⏱️ ${duration}</span>` : ''}
+            </div>
+            <p class="text-sm mt-1 text-gray-200">${escapeHtml(entry.action)}</p>
+          </div>
+        </div>
+        <div id="activity-details-${entry.id}" class="hidden mt-3 pt-3 border-t border-dark-700">
+          <div class="text-xs text-gray-400 space-y-1 font-mono">
+            <p><span class="text-gray-500">ID:</span> ${entry.id}</p>
+            <p><span class="text-gray-500">Type:</span> ${entry.type}</p>
+            <p><span class="text-gray-500">Timestamp:</span> ${entry.timestamp}</p>
+            ${entry.details ? `<p><span class="text-gray-500">Details:</span> ${escapeHtml(entry.details)}</p>` : ''}
+            ${entry.relatedIds?.length ? `<p><span class="text-gray-500">Related:</span> ${entry.relatedIds.join(', ')}</p>` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  
+  html += `
+    <div class="text-center text-xs text-gray-500 py-4">
+      Showing ${entries.length} of ${AppState.data.activityLog.entries.length} entries
+    </div>
+  `;
+  
+  container.innerHTML = html;
+}
+
+function toggleActivityDetails(entryId) {
+  const details = document.getElementById(`activity-details-${entryId}`);
+  if (details) {
+    details.classList.toggle('hidden');
+  }
+}
+
+// ============================================
+// AUDITS TAB
+// ============================================
+function renderAuditsTab() {
+  renderAuditSummary();
+  renderAuditDistributionChart();
+  renderAuditList();
+}
+
+function renderAuditSummary() {
+  const container = document.getElementById('audit-summary');
+  if (!container) return;
+
+  const audits = AppState.data.audits.audits || [];
+  const agents = AppState.data.agents.agents || [];
+  
+  if (audits.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-3 card rounded-lg p-6 text-center text-gray-500">
+        <div class="text-4xl mb-2">📋</div>
+        <p>No audits recorded yet.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  let html = '';
+  
+  agents.forEach(agent => {
+    const agentAudits = audits.filter(a => a.agent === agent.id);
+    if (agentAudits.length === 0) return;
+    
+    const avgGrade = Math.round(agentAudits.reduce((sum, a) => sum + (a.grade || 0), 0) / agentAudits.length);
+    const grades = agentAudits.map(a => a.grade).sort((a, b) => a - b);
+    const minGrade = grades[0];
+    const maxGrade = grades[grades.length - 1];
+    
+    // Calculate trend (compare last 5 vs previous 5)
+    const recent = agentAudits.slice(-5).map(a => a.grade);
+    const previous = agentAudits.slice(-10, -5).map(a => a.grade);
+    const recentAvg = recent.reduce((a, b) => a + b, 0) / recent.length;
+    const previousAvg = previous.length > 0 ? previous.reduce((a, b) => a + b, 0) / previous.length : recentAvg;
+    const trend = recentAvg > previousAvg + 2 ? '↑' : recentAvg < previousAvg - 2 ? '↓' : '→';
+    const trendColor = trend === '↑' ? 'text-green-400' : trend === '↓' ? 'text-red-400' : 'text-gray-400';
+    
+    const gradeClass = avgGrade >= 80 ? 'grade-high' : avgGrade >= 60 ? 'grade-med' : 'grade-low';
+    
+    html += `
+      <div class="card rounded-lg p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-3 h-3 rounded-full" style="background-color: ${agent.color || AGENT_COLORS[agent.id]}"></div>
+          <span class="font-medium">${agent.name}</span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-bold ${gradeClass}">${avgGrade}</span>
+          <span class="text-sm text-gray-500">avg</span>
+          <span class="text-lg ${trendColor} ml-2" title="${trend === '↑' ? 'Improving' : trend === '↓' ? 'Declining' : 'Stable'}">${trend}</span>
+        </div>
+        <div class="text-sm text-gray-400 mt-1">${agentAudits.length} audits · ${minGrade}—${maxGrade}</div>
+      </div>
+    `;
+  });
+  
+  container.innerHTML = html || '<div class="col-span-3 text-center text-gray-500">No audit data available</div>';
+}
+
+function renderAuditDistributionChart() {
+  const ctx = document.getElementById('audit-distribution-chart');
+  if (!ctx) return;
+
+  const audits = AppState.data.audits.audits || [];
+  
+  // Create grade distribution (0-9, 10-19, ..., 90-100)
+  const distribution = new Array(10).fill(0);
+  audits.forEach(audit => {
+    const grade = audit.grade || 0;
+    const bucket = Math.min(Math.floor(grade / 10), 9);
+    distribution[bucket]++;
+  });
+  
+  // Destroy existing chart
+  if (AppState.charts.auditDistribution) {
+    AppState.charts.auditDistribution.destroy();
+  }
+  
+  AppState.charts.auditDistribution = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79', '80-89', '90-100'],
+      datasets: [{
+        label: 'Number of Audits',
+        data: distribution,
+        backgroundColor: distribution.map((_, i) => {
+          if (i >= 8) return '#10B981'; // Green for 80-100
+          if (i >= 6) return '#F59E0B'; // Yellow for 60-79
+          return '#EF4444'; // Red for <60
+        }),
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { color: '#6B7280' },
+          grid: { color: '#1e1e30' }
+        },
+        x: {
+          ticks: { color: '#6B7280' },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+}
+
+function renderAuditList() {
+  const container = document.getElementById('audit-list');
+  if (!container) return;
+
+  let audits = [...AppState.data.audits.audits];
+  
+  // Sort by date (newest first)
+  audits.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  
+  if (audits.length === 0) {
+    container.innerHTML = `
+      <div class="card rounded-lg p-8 text-center text-gray-500">
+        <div class="text-4xl mb-2">📋</div>
+        <p>No audits available.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  let html = '';
+  
+  audits.forEach(audit => {
+    const agentColor = AGENT_COLORS[audit.agent] || '#6B7280';
+    const gradeClass = audit.grade >= 80 ? 'grade-high' : audit.grade >= 60 ? 'grade-med' : 'grade-low';
+    const date = formatDate(audit.timestamp);
+    const time = formatTime(audit.timestamp);
+    
+    html += `
+      <div class="card rounded-lg p-4 hover:bg-dark-800 transition-colors cursor-pointer"
+           onclick="toggleAuditDetails('${audit.id}')">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <div class="flex items-center gap-3">
+            <span class="px-2 py-1 rounded text-xs font-medium text-white" 
+                  style="background-color: ${agentColor}">${AGENT_LABELS[audit.agent] || audit.agent}</span>
+            <span class="text-sm font-medium">${escapeHtml(audit.project)}</span>
+            ${audit.category ? `<span class="px-2 py-0.5 rounded text-xs bg-dark-700 text-gray-300">${audit.category}</span>` : ''}
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-2xl font-bold ${gradeClass}">${audit.grade}</span>
+            <span class="text-xs text-gray-500">${date} ${time}</span>
+          </div>
+        </div>
+        ${audit.summary ? `<p class="text-sm text-gray-400 mt-2">${escapeHtml(audit.summary)}</p>` : ''}
+        
+        <div id="audit-details-${audit.id}" class="hidden mt-4 pt-4 border-t border-dark-700">
+          <div class="space-y-3 text-sm">
+            ${audit.fullReport ? `
+              <div>
+                <h4 class="text-gray-500 mb-1">Full Report</h4>
+                <div class="bg-dark-900 rounded p-3 text-gray-300 whitespace-pre-wrap">${escapeHtml(audit.fullReport)}</div>
+              </div>
+            ` : ''}
+            ${audit.feedback ? `
+              <div>
+                <h4 class="text-gray-500 mb-1">Feedback</h4>
+                ${audit.feedback.strengths?.length ? `
+                  <div class="mb-2">
+                    <span class="text-green-400 text-xs">Strengths:</span>
+                    <ul class="list-disc list-inside text-gray-300 mt-1">
+                      ${audit.feedback.strengths.map(s => `<li>${escapeHtml(s)}</li>`).join('')}
+                    </ul>
+                  </div>
+                ` : ''}
+                ${audit.feedback.weaknesses?.length ? `
+                  <div class="mb-2">
+                    <span class="text-red-400 text-xs">Weaknesses:</span>
+                    <ul class="list-disc list-inside text-gray-300 mt-1">
+                      ${audit.feedback.weaknesses.map(w => `<li>${escapeHtml(w)}</li>`).join('')}
+                    </ul>
+                  </div>
+                ` : ''}
+                ${audit.feedback.actionItems?.length ? `
+                  <div>
+                    <span class="text-blue-400 text-xs">Action Items:</span>
+                    <ul class="list-disc list-inside text-gray-300 mt-1">
+                      ${audit.feedback.actionItems.map(a => `<li>${escapeHtml(a)}</li>`).join('')}
+                    </ul>
+                  </div>
+                ` : ''}
+              </div>
+            ` : ''}
+            ${audit.evidenceOfResearch?.length ? `
+              <div>
+                <h4 class="text-gray-500 mb-1">Evidence of Research</h4>
+                <ul class="list-disc list-inside text-gray-300">
+                  ${audit.evidenceOfResearch.map(e => `<li>${escapeHtml(e)}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  
+  container.innerHTML = html;
+}
+
+function toggleAuditDetails(auditId) {
+  const details = document.getElementById(`audit-details-${auditId}`);
+  if (details) {
+    details.classList.toggle('hidden');
+  }
+}
+
+// ============================================
+// RALPH CHAINS TAB
+// ============================================
+function renderRalphTab() {
+  renderActiveChainBanner();
+  renderRalphChainHistory();
+}
+
+function renderActiveChainBanner() {
+  const banner = document.getElementById('ralph-active-banner');
+  const chains = AppState.data.ralphChains.chains || [];
+  const activeChain = chains.find(c => c.status === 'in_progress');
+  
+  if (!activeChain || !banner) {
+    if (banner) banner.classList.add('hidden');
+    return;
+  }
+  
+  banner.classList.remove('hidden');
+  
+  const currentBatch = activeChain.batchPlan?.find(b => b.status === 'in_progress') || 
+                       activeChain.batchPlan?.[activeChain.completedBatches] ||
+                       activeChain.batchPlan?.[activeChain.batchPlan?.length - 1];
+  
+  document.getElementById('ralph-active-name').textContent = activeChain.name;
+  document.getElementById('ralph-active-batch').textContent = currentBatch ? `${currentBatch.batch}: ${currentBatch.name}` : '-';
+  document.getElementById('ralph-active-phase').textContent = 'Building...'; // Could be more specific
+  document.getElementById('ralph-active-progress').textContent = `${activeChain.completedBatches}/${activeChain.totalBatches}`;
+  
+  const progressPercent = (activeChain.completedBatches / activeChain.totalBatches) * 100;
+  document.getElementById('ralph-progress-bar').style.width = `${progressPercent}%`;
+}
+
+function renderRalphChainHistory() {
+  const container = document.getElementById('ralph-history');
+  if (!container) return;
+
+  let chains = [...AppState.data.ralphChains.chains];
+  
+  // Sort by started date (newest first)
+  chains.sort((a, b) => new Date(b.startedAt) - new Date(a.startedAt));
+  
+  if (chains.length === 0) {
+    container.innerHTML = `
+      <div class="card rounded-lg p-8 text-center text-gray-500">
+        <div class="text-4xl mb-2">🔄</div>
+        <p>No ralph chains recorded yet.</p>
+        <p class="text-sm mt-1">Ralph chains orchestrate multi-batch build processes.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  let html = '';
+  
+  chains.forEach(chain => {
+    const statusColors = {
+      completed: 'text-green-400',
+      in_progress: 'text-blue-400',
+      stopped: 'text-red-400'
+    };
+    
+    const duration = chain.completedAt ? 
+      formatDuration(new Date(chain.completedAt) - new Date(chain.startedAt)) : 
+      'In progress';
+    
+    const avgGrade = chain.averageAuditGrade ? 
+      `<span class="${chain.averageAuditGrade >= 80 ? 'grade-high' : chain.averageAuditGrade >= 60 ? 'grade-med' : 'grade-low'}">${chain.averageAuditGrade} avg</span>` : 
+      '<span class="text-gray-500">No audits</span>';
+    
+    html += `
+      <div class="card rounded-lg p-4 hover:bg-dark-800 transition-colors">
+        <div class="flex items-center justify-between flex-wrap gap-2 cursor-pointer" onclick="toggleChainDetails('${chain.id}')">
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-semibold">${escapeHtml(chain.name)}</h3>
+              <span class="text-xs ${statusColors[chain.status] || 'text-gray-400'}">● ${chain.status}</span>
+            </div>
+            <div class="text-sm text-gray-400 mt-1">
+              ${formatDate(chain.startedAt)} · ${chain.totalBatches} batches · ${chain.totalDefectsFound || 0} defects · ${avgGrade}
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="text-sm font-medium">${duration}</div>
+            <div class="text-xs text-gray-500">${chain.completedBatches}/${chain.totalBatches} complete</div>
+          </div>
+        </div>
+        
+        <div class="mt-3 h-2 bg-dark-700 rounded">
+          <div class="h-full bg-blue-500 rounded transition-all" style="width: ${(chain.completedBatches / chain.totalBatches) * 100}%"></div>
+        </div>
+        
+        <div id="chain-details-${chain.id}" class="hidden mt-4 pt-4 border-t border-dark-700">
+          ${chain.batchPlan?.length ? `
+            <h4 class="text-sm font-medium text-gray-400 mb-3">Batch Breakdown</h4>
+            <div class="space-y-2">
+              ${chain.batchPlan.map(batch => `
+                <div class="bg-dark-900 rounded p-3 text-sm">
+                  <div class="flex items-center justify-between">
+                    <span class="font-medium">${batch.batch}. ${escapeHtml(batch.name)}</span>
+                    <span class="text-xs ${batch.status === 'completed' ? 'text-green-400' : batch.status === 'in_progress' ? 'text-blue-400' : 'text-gray-500'}">${batch.status}</span>
+                  </div>
+                  <p class="text-gray-400 text-xs mt-1">${escapeHtml(batch.scope)}</p>
+                  <div class="flex gap-4 mt-2 text-xs text-gray-500">
+                    ${batch.defectsFound !== undefined ? `<span>Defects: ${batch.defectsFound}/${batch.defectsFixed || 0}</span>` : ''}
+                    ${batch.builderIterations ? `<span>Builder iterations: ${batch.builderIterations}</span>` : ''}
+                    ${batch.redTeamIterations ? `<span>Red team: ${batch.redTeamIterations}</span>` : ''}
+                    ${batch.auditGrade ? `<span class="${batch.auditGrade >= 80 ? 'text-green-400' : batch.auditGrade >= 60 ? 'text-yellow-400' : 'text-red-400'}">Grade: ${batch.auditGrade}</span>` : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+          ${chain.requirements ? `
+            <div class="mt-4">
+              <h4 class="text-sm font-medium text-gray-400 mb-2">Requirements</h4>
+              <div class="bg-dark-900 rounded p-3 text-xs text-gray-300 whitespace-pre-wrap">${escapeHtml(chain.requirements)}</div>
+            </div>
+          ` : ''}
+          <div class="mt-4 grid grid-cols-3 gap-4 text-center">
+            <div class="bg-dark-900 rounded p-2">
+              <div class="text-lg font-bold text-blue-400">${chain.totalBuilderIterations || 0}</div>
+              <div class="text-xs text-gray-500">Builder Iterations</div>
+            </div>
+            <div class="bg-dark-900 rounded p-2">
+              <div class="text-lg font-bold text-purple-400">${chain.totalRedTeamIterations || 0}</div>
+              <div class="text-xs text-gray-500">Red Team Iterations</div>
+            </div>
+            <div class="bg-dark-900 rounded p-2">
+              <div class="text-lg font-bold text-green-400">${chain.totalDefectsFound || 0}</div>
+              <div class="text-xs text-gray-500">Defects Found</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  
+  container.innerHTML = html;
+}
+
+function toggleChainDetails(chainId) {
+  const details = document.getElementById(`chain-details-${chainId}`);
+  if (details) {
+    details.classList.toggle('hidden');
+  }
+}
+
+// ============================================
+// AGENTS TAB
+// ============================================
+let selectedAgentId = null;
+
+function renderAgentsTab() {
+  renderAgentCards();
+  if (selectedAgentId) {
+    renderAgentDetail(selectedAgentId);
+  }
+}
+
+function renderAgentCards() {
+  const container = document.getElementById('agent-cards');
+  if (!container) return;
+
+  const agents = AppState.data.agents.agents || [];
+  
+  if (agents.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-3 card rounded-lg p-8 text-center text-gray-500">
+        <div class="text-4xl mb-2">👥</div>
+        <p>No agent profiles found.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  let html = '';
+  
+  agents.forEach(agent => {
+    const stats = agent.stats || {};
+    const avgGrade = stats.averageAuditGrade || 0;
+    const gradeClass = avgGrade >= 80 ? 'grade-high' : avgGrade >= 60 ? 'grade-med' : 'grade-low';
+    const trend = stats.auditGradeTrend || 'stable';
+    const trendIcon = trend === 'improving' ? '↑' : trend === 'declining' ? '↓' : '→';
+    const trendColor = trend === 'improving' ? 'text-green-400' : trend === 'declining' ? 'text-red-400' : 'text-gray-400';
+    
+    html += `
+      <div class="card rounded-lg p-4 cursor-pointer hover:bg-dark-800 transition-colors ${selectedAgentId === agent.id ? 'ring-2 ring-blue-500' : ''}"
+           onclick="selectAgent('${agent.id}')">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl font-bold"
+               style="background-color: ${agent.color || AGENT_COLORS[agent.id]}">
+            ${agent.name.charAt(0)}
+          </div>
+          <div>
+            <h3 class="font-semibold">${agent.name}</h3>
+            <p class="text-xs text-gray-400">${agent.role}</p>
+          </div>
+        </div>
+        <div class="flex items-baseline gap-2 mb-2">
+          <span class="text-3xl font-bold ${gradeClass}">${avgGrade || '-'}</span>
+          <span class="text-xs text-gray-500">avg grade</span>
+          <span class="text-lg ${trendColor}">${trendIcon}</span>
+        </div>
+        <div class="text-xs text-gray-500">
+          ${stats.lastActive ? `Last active: ${timeAgo(stats.lastActive)}` : 'Never active'}
+        </div>
+      </div>
+    `;
+  });
+  
+  container.innerHTML = html;
+}
+
+function selectAgent(agentId) {
+  selectedAgentId = agentId;
+  renderAgentCards(); // Re-render to update selection highlight
+  renderAgentDetail(agentId);
+}
+
+function renderAgentDetail(agentId) {
+  const container = document.getElementById('agent-detail');
+  const content = document.getElementById('agent-detail-content');
+  if (!container || !content) return;
+
+  const agent = AppState.data.agents.agents.find(a => a.id === agentId);
+  if (!agent) return;
+  
+  container.classList.remove('hidden');
+  
+  const stats = agent.stats || {};
+  const audits = AppState.data.audits.audits.filter(a => a.agent === agentId);
+  
+  // Calculate grade history for chart
+  const gradeHistory = audits
+    .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
+    .map((a, i) => ({ x: i + 1, y: a.grade }));
+  
+  content.innerHTML = `
+    <div class="flex items-start justify-between flex-wrap gap-4 mb-6">
+      <div class="flex items-center gap-4">
+        <div class="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl font-bold"
+             style="background-color: ${agent.color || AGENT_COLORS[agent.id]}">
+          ${agent.name.charAt(0)}
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold">${agent.name}</h2>
+          <p class="text-gray-400">${agent.role}</p>
+        </div>
+      </div>
+      <button onclick="closeAgentDetail()" class="text-gray-500 hover:text-gray-300">
+        ✕ Close
+      </button>
+    </div>
+    
+    <p class="text-gray-300 mb-4">${agent.description}</p>
+    
+    <div class="flex flex-wrap gap-2 mb-6">
+      ${(agent.focusAreas || []).map(area => `
+        <span class="px-3 py-1 rounded-full text-sm bg-dark-700 text-gray-300">${area}</span>
+      `).join('')}
+    </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-dark-900 rounded p-3 text-center">
+        <div class="text-2xl font-bold text-blue-400">${stats.totalHeartbeats || 0}</div>
+        <div class="text-xs text-gray-500">Heartbeats</div>
+      </div>
+      <div class="bg-dark-900 rounded p-3 text-center">
+        <div class="text-2xl font-bold text-purple-400">${stats.totalSubagentsSpawned || 0}</div>
+        <div class="text-xs text-gray-500">Subagents</div>
+      </div>
+      <div class="bg-dark-900 rounded p-3 text-center">
+        <div class="text-2xl font-bold text-green-400">${stats.totalProactiveWorkItems || 0}</div>
+        <div class="text-xs text-gray-500">Work Items</div>
+      </div>
+      <div class="bg-dark-900 rounded p-3 text-center">
+        <div class="text-2xl font-bold text-yellow-400">${stats.totalRalphChains || 0}</div>
+        <div class="text-xs text-gray-500">Ralph Chains</div>
+      </div>
+    </div>
+    
+    <div class="mb-6">
+      <h3 class="font-semibold mb-3">Grade History</h3>
+      <canvas id="agent-grade-chart" height="100"></canvas>
+    </div>
+    
+    ${stats.topFeedback?.length ? `
+      <div class="mb-6">
+        <h3 class="font-semibold mb-3">Top Feedback Themes</h3>
+        <div class="space-y-2">
+          ${stats.topFeedback.map(fb => `
+            <div class="flex items-center gap-3">
+              <div class="flex-1 bg-dark-700 rounded h-6 relative overflow-hidden">
+                <div class="absolute inset-y-0 left-0 bg-blue-500/30" style="width: ${Math.min(fb.frequency * 10, 100)}%"></div>
+                <span class="absolute inset-0 flex items-center px-3 text-sm">${escapeHtml(fb.feedback)}</span>
+              </div>
+              <span class="text-sm text-gray-500 w-8 text-right">${fb.frequency}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    ` : ''}
+    
+    ${agent.recentActivity?.length ? `
+      <div>
+        <h3 class="font-semibold mb-3">Recent Activity</h3>
+        <div class="space-y-2 max-h-64 overflow-y-auto">
+          ${agent.recentActivity.slice(0, 20).map(activity => `
+            <div class="text-sm py-2 border-b border-dark-700 last:border-0">
+              <span class="text-gray-500 text-xs">${formatDateTime(activity.timestamp)}</span>
+              <p class="text-gray-300 mt-0.5">${escapeHtml(activity.action)}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    ` : ''}
+  `;
+  
+  // Render grade chart
+  setTimeout(() => {
+    const ctx = document.getElementById('agent-grade-chart');
+    if (ctx && gradeHistory.length > 0) {
+      if (AppState.charts.agentGrade) {
+        AppState.charts.agentGrade.destroy();
+      }
+      
+      AppState.charts.agentGrade = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: gradeHistory.map((_, i) => `#${i + 1}`),
+          datasets: [{
+            label: 'Audit Grade',
+            data: gradeHistory.map(g => g.y),
+            borderColor: agent.color || AGENT_COLORS[agent.id],
+            backgroundColor: (agent.color || AGENT_COLORS[agent.id]) + '20',
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: {
+              min: 0,
+              max: 100,
+              ticks: { color: '#6B7280' },
+              grid: { color: '#1e1e30' }
+            },
+            x: {
+              ticks: { color: '#6B7280' },
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+  }, 0);
+}
+
+function closeAgentDetail() {
+  selectedAgentId = null;
+  document.getElementById('agent-detail')?.classList.add('hidden');
+  renderAgentCards();
+}
+
+// ============================================
+// SETTINGS TAB
+// ============================================
+function renderSettingsTab() {
+  // Settings are rendered server-side in HTML, just update values
+  document.getElementById('theme-setting').value = AppState.settings.theme;
+  document.getElementById('time-format-setting').value = AppState.settings.timeFormat;
+  document.getElementById('auto-refresh-toggle').checked = AppState.settings.autoRefresh;
+  document.getElementById('refresh-interval').value = AppState.settings.refreshInterval;
+}
+
+function initSettings() {
+  // Theme toggle
+  document.getElementById('theme-setting')?.addEventListener('change', (e) => {
+    AppState.settings.theme = e.target.value;
+    document.documentElement.classList.toggle('dark', AppState.settings.theme === 'dark');
+  });
+  
+  // Time format toggle
+  document.getElementById('time-format-setting')?.addEventListener('change', (e) => {
+    AppState.settings.timeFormat = e.target.value;
+    renderCurrentTab(); // Re-render to update timestamps
+  });
+  
+  // Auto-refresh toggle
+  document.getElementById('auto-refresh-toggle')?.addEventListener('change', (e) => {
+    AppState.settings.autoRefresh = e.target.checked;
+    setupAutoRefresh();
+  });
+  
+  // Refresh interval
+  document.getElementById('refresh-interval')?.addEventListener('change', (e) => {
+    AppState.settings.refreshInterval = parseInt(e.target.value);
+    setupAutoRefresh();
+  });
+}
+
+function setupAutoRefresh() {
+  if (AppState.autoRefreshTimer) {
+    clearInterval(AppState.autoRefreshTimer);
+    AppState.autoRefreshTimer = null;
+  }
+  
+  if (AppState.settings.autoRefresh) {
+    AppState.autoRefreshTimer = setInterval(() => {
+      refreshData();
+    }, AppState.settings.refreshInterval * 1000);
+  }
+}
+
+// ============================================
+// UTILITY FUNCTIONS
+// ============================================
+function getDateLabel(timestamp) {
+  const date = new Date(timestamp);
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  
+  if (date.toDateString() === today.toDateString()) {
+    return 'Today';
+  } else if (date.toDateString() === yesterday.toDateString()) {
+    return 'Yesterday';
+  } else {
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+}
+
+function formatTime(timestamp) {
+  const date = new Date(timestamp);
+  if (AppState.settings.timeFormat === '12h') {
+    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+  }
+  return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+}
+
+function formatDate(timestamp) {
+  const date = new Date(timestamp);
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function formatDateTime(timestamp) {
+  return `${formatDate(timestamp)} ${formatTime(timestamp)}`;
+}
+
+function timeAgo(timestamp) {
+  const seconds = Math.floor((new Date() - new Date(timestamp)) / 1000);
+  
+  const intervals = {
+    year: 31536000,
+    month: 2592000,
+    week: 604800,
+    day: 86400,
+    hour: 3600,
+    minute: 60
+  };
+  
+  for (const [unit, secondsInUnit] of Object.entries(intervals)) {
+    const interval = Math.floor(seconds / secondsInUnit);
+    if (interval >= 1) {
+      return `${interval} ${unit}${interval > 1 ? 's' : ''} ago`;
+    }
+  }
+  
+  return 'Just now';
+}
+
+function formatDuration(ms) {
+  if (ms < 1000) return `${ms}ms`;
+  if (ms < 60000) return `${Math.floor(ms / 1000)}s`;
+  if (ms < 3600000) return `${Math.floor(ms / 60000)}m ${Math.floor((ms % 60000) / 1000)}s`;
+  return `${Math.floor(ms / 3600000)}h ${Math.floor((ms % 3600000) / 60000)}m`;
+}
+
+function getStatusColor(status) {
+  const colors = {
+    success: 'text-green-400',
+    failed: 'text-red-400',
+    in_progress: 'text-blue-400',
+    pending: 'text-yellow-400'
+  };
+  return colors[status] || 'text-gray-400';
+}
+
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function updateLastRefreshTime() {
+  const el = document.getElementById('last-refresh-time');
+  if (el) {
+    el.textContent = new Date().toLocaleTimeString();
+  }
+}
+
+function showError(message) {
+  console.error('[WorkTracker]', message);
+  // Could show a toast notification here
+}
+
+// ============================================
+// INITIALIZATION
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('[WorkTracker] Initializing...');
+  
+  // Initialize settings
+  initSettings();
+  
+  // Setup filter listeners
+  document.getElementById('activity-agent-filter')?.addEventListener('change', renderActivityTab);
+  document.getElementById('activity-type-filter')?.addEventListener('change', renderActivityTab);
+  
+  // Load initial data
+  loadAllData();
+  
+  console.log('[WorkTracker] Initialization complete');
+});

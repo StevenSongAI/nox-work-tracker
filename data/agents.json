@@ -1,0 +1,61 @@
+{
+  "agents": [
+    {
+      "id": "nox",
+      "name": "Nox",
+      "role": "Business & Work",
+      "description": "Handles YouTube strategy, business opportunities, investment research, tool building, and autonomous build chains.",
+      "color": "#3B82F6",
+      "focusAreas": ["YouTube", "New Business", "Investments", "Tool Building"],
+      "stats": {
+        "totalHeartbeats": 0,
+        "totalSubagentsSpawned": 0,
+        "totalProactiveWorkItems": 0,
+        "totalRalphChains": 0,
+        "averageAuditGrade": 0,
+        "auditGradeTrend": "stable",
+        "lastActive": null,
+        "uptime": "0%"
+      },
+      "recentActivity": []
+    },
+    {
+      "id": "health",
+      "name": "Health Agent",
+      "role": "Health, Fitness & Nutrition",
+      "description": "Proactive health research, supplement analysis, fitness optimization.",
+      "color": "#10B981",
+      "focusAreas": ["Nutrition", "Supplements", "Fitness", "Recovery"],
+      "stats": {
+        "totalHeartbeats": 0,
+        "totalSubagentsSpawned": 0,
+        "totalProactiveWorkItems": 0,
+        "totalRalphChains": 0,
+        "averageAuditGrade": 0,
+        "auditGradeTrend": "stable",
+        "lastActive": null,
+        "uptime": "0%"
+      },
+      "recentActivity": []
+    },
+    {
+      "id": "fun",
+      "name": "Fun Agent",
+      "role": "Entertainment & Leisure",
+      "description": "Discovers games, curates entertainment, finds cool stuff.",
+      "color": "#8B5CF6",
+      "focusAreas": ["Gaming", "Discoveries", "Minecraft", "Leisure"],
+      "stats": {
+        "totalHeartbeats": 0,
+        "totalSubagentsSpawned": 0,
+        "totalProactiveWorkItems": 0,
+        "totalRalphChains": 0,
+        "averageAuditGrade": 0,
+        "auditGradeTrend": "stable",
+        "lastActive": null,
+        "uptime": "0%"
+      },
+      "recentActivity": []
+    }
+  ]
+}

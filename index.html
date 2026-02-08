@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nox Work Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: { 900: '#0a0a0f', 800: '#141420', 700: '#1e1e30' },
+            agent: { nox: '#3B82F6', health: '#10B981', fun: '#8B5CF6' }
+          },
+          fontFamily: {
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background: #0a0a0f; color: #e2e8f0; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; }
+    .tab-active { border-bottom: 2px solid #3B82F6; color: #3B82F6; }
+    .card { background: #141420; border: 1px solid #1e1e30; }
+    .grade-high { color: #10B981; }
+    .grade-med { color: #F59E0B; }
+    .grade-low { color: #EF4444; }
+    .activity-feed { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; }
+  </style>
+</head>
+<body class="min-h-screen">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-dark-900 border-b border-dark-700">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <div class="flex items-center justify-between">
+        <h1 class="text-xl font-bold">⚡ Nox Work Tracker</h1>
+        <div class="flex items-center gap-4">
+          <div id="live-indicator" class="flex items-center gap-2 text-sm">
+            <span class="w-2 h-2 bg-accent-green rounded-full animate-pulse"></span>
+            <span class="text-gray-400">LIVE</span>
+          </div>
+          <button onclick="refreshData()" class="px-3 py-1 bg-dark-700 rounded text-sm hover:bg-dark-600">🔄 Refresh</button>
+        </div>
+      </div>
+    </div>
+    <!-- Tab Navigation -->
+    <nav class="max-w-7xl mx-auto px-4">
+      <div class="flex space-x-1 overflow-x-auto">
+        <button onclick="showTab('activity')" id="tab-btn-activity" class="tab-btn px-4 py-2 text-sm font-medium tab-active">📊 Live Activity</button>
+        <button onclick="showTab('audits')" id="tab-btn-audits" class="tab-btn px-4 py-2 text-sm font-medium">📋 Audits</button>
+        <button onclick="showTab('ralph')" id="tab-btn-ralph" class="tab-btn px-4 py-2 text-sm font-medium">🔄 Ralph Chains</button>
+        <button onclick="showTab('agents')" id="tab-btn-agents" class="tab-btn px-4 py-2 text-sm font-medium">👥 Agents</button>
+        <button onclick="showTab('settings')" id="tab-btn-settings" class="tab-btn px-4 py-2 text-sm font-medium">⚙️ Settings</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 py-6">
+    <!-- Activity Tab -->
+    <div id="tab-activity" class="tab-content">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-3">
+        <h2 class="text-xl font-semibold">📊 Live Activity Feed</h2>
+        <div class="flex gap-2">
+          <select id="activity-agent-filter" class="px-3 py-1 bg-dark-700 rounded border border-dark-600 text-sm">
+            <option value="">All Agents</option>
+            <option value="nox">Nox</option>
+            <option value="health">Health</option>
+            <option value="fun">Fun</option>
+          </select>
+          <select id="activity-type-filter" class="px-3 py-1 bg-dark-700 rounded border border-dark-600 text-sm">
+            <option value="">All Types</option>
+            <option value="heartbeat">💓 Heartbeat</option>
+            <option value="subagent_spawn">🚀 Subagent Spawn</option>
+            <option value="subagent_complete">✅ Subagent Complete</option>
+            <option value="proactive_work">🔨 Proactive Work</option>
+            <option value="ralph_chain">🔄 Ralph Chain</option>
+          </select>
+        </div>
+      </div>
+      <div id="activity-feed" class="activity-feed space-y-2">
+        <div class="card rounded p-4 text-center text-gray-500">Loading activity feed...</div>
+      </div>
+    </div>
+
+    <!-- Audits Tab -->
+    <div id="tab-audits" class="tab-content hidden">
+      <div id="audit-summary" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="card rounded-lg p-4 text-center"><div class="text-gray-500">Loading audit stats...</div></div>
+      </div>
+      <div class="card rounded-lg p-4 mb-4">
+        <h3 class="font-semibold mb-3">Grade Distribution</h3>
+        <canvas id="audit-distribution-chart" height="80"></canvas>
+      </div>
+      <div id="audit-list" class="space-y-3">
+        <div class="card rounded-lg p-4 text-center text-gray-500">Loading audits...</div>
+      </div>
+    </div>
+
+    <!-- Ralph Chains Tab -->
+    <div id="tab-ralph" class="tab-content hidden">
+      <div id="ralph-active-banner" class="hidden mb-4">
+        <div class="card rounded-lg p-4 border-l-4 border-accent-blue">
+          <div class="flex justify-between items-center">
+            <div>
+              <div class="text-sm text-gray-400">🔄 Active Ralph Chain</div>
+              <h3 id="ralph-active-name" class="text-xl font-bold">-</h3>
+              <div class="text-sm mt-1">Batch <span id="ralph-active-batch">-</span> · <span id="ralph-active-phase">-</span></div>
+            </div>
+            <div class="text-right">
+              <div class="text-2xl font-bold" id="ralph-active-progress">-</div>
+              <div class="text-sm text-gray-400">complete</div>
+            </div>
+          </div>
+          <div class="mt-3 h-2 bg-dark-700 rounded">
+            <div id="ralph-progress-bar" class="h-full bg-accent-blue rounded transition-all" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+      <div id="ralph-history" class="space-y-4">
+        <div class="card rounded-lg p-4 text-center text-gray-500">Loading ralph chain history...</div>
+      </div>
+    </div>
+
+    <!-- Agents Tab -->
+    <div id="tab-agents" class="tab-content hidden">
+      <div id="agent-cards" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="card rounded-lg p-4 text-center"><div class="text-gray-500">Loading agent profiles...</div></div>
+      </div>
+      <div id="agent-detail" class="hidden">
+        <div class="card rounded-lg p-6">
+          <div id="agent-detail-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Tab -->
+    <div id="tab-settings" class="tab-content hidden">
+      <div class="card rounded-lg p-6 max-w-2xl">
+        <h2 class="text-xl font-semibold mb-4">⚙️ Settings</h2>
+        <div class="space-y-4">
+          <div class="flex justify-between items-center py-2 border-b border-dark-700">
+            <span>Theme</span>
+            <select id="theme-setting" class="px-3 py-1 bg-dark-700 rounded">
+              <option value="dark">Dark</option>
+              <option value="light">Light</option>
+            </select>
+          </div>
+          <div class="flex justify-between items-center py-2 border-b border-dark-700">
+            <span>Time Format</span>
+            <select id="time-format-setting" class="px-3 py-1 bg-dark-700 rounded">
+              <option value="24h">24-hour</option>
+              <option value="12h">12-hour</option>
+            </select>
+          </div>
+          <div class="flex justify-between items-center py-2 border-b border-dark-700">
+            <span>Auto-refresh</span>
+            <div class="flex items-center gap-2">
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="auto-refresh-toggle" class="sr-only">
+                <div class="w-11 h-6 bg-dark-700 rounded-full peer"></div>
+              </label>
+              <select id="refresh-interval" class="px-2 py-1 bg-dark-700 rounded text-sm">
+                <option value="30">30s</option>
+                <option value="60">1m</option>
+                <option value="300">5m</option>
+              </select>
+            </div>
+          </div>
+          <div class="pt-4">
+            <div class="text-sm text-gray-400 mb-2">Data Sources:</div>
+            <code class="text-xs bg-dark-900 p-2 rounded block">activity-log.json</code>
+            <code class="text-xs bg-dark-900 p-2 rounded block mt-1">audits.json</code>
+            <code class="text-xs bg-dark-900 p-2 rounded block mt-1">ralph-chains.json</code>
+          </div>
+          <div class="pt-4 flex justify-between">
+            <span class="text-sm text-gray-400">Last refresh: <span id="last-refresh-time">-</span></span>
+            <button onclick="refreshData()" class="px-4 py-2 bg-accent-blue rounded hover:bg-blue-600">Refresh Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
