@@ -211,12 +211,13 @@
             <span>Auto-refresh</span>
             <div class="flex items-center gap-2">
               <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" id="auto-refresh-toggle" class="sr-only">
+                <input type="checkbox" id="auto-refresh-toggle" class="sr-only" checked>
                 <div class="w-11 h-6 bg-dark-700 rounded-full peer"></div>
               </label>
               <select id="refresh-interval" class="px-2 py-1 bg-dark-700 rounded text-sm">
                 <option value="30">30s</option>
                 <option value="60">1m</option>
+                <option value="120" selected>2m</option>
                 <option value="300">5m</option>
               </select>
             </div>

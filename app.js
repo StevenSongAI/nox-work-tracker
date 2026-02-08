@@ -17,8 +17,8 @@ const AppState = {
   settings: {
     theme: 'dark',
     timeFormat: '24h',
-    autoRefresh: false,
-    refreshInterval: 60
+    autoRefresh: true,
+    refreshInterval: 120
   },
   filters: {
     activity: { agent: '', type: '', status: '', search: '' },
