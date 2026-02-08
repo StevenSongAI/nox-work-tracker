@@ -83,19 +83,43 @@
       "totalAudits": 7,
       "avgGrade": 88,
       "lastAudit": "2026-02-08T12:30:00Z",
-      "trend": "improving"
+      "trend": "improving",
+      "auditFolder": "~/Desktop/Nox Builds/nox-dashboard-repo/audits/"
     },
     "health": {
       "totalAudits": 0,
       "avgGrade": 0,
       "lastAudit": null,
-      "trend": "stable"
+      "trend": "stable",
+      "auditFolder": "~/Desktop/Nox Builds/Health Agent/Audits/"
     },
     "fun": {
       "totalAudits": 0,
       "avgGrade": 0,
       "lastAudit": null,
-      "trend": "stable"
+      "trend": "stable",
+      "auditFolder": "~/Desktop/Nox Builds/Fun Agent/Audits/"
+    },
+    "sage": {
+      "totalAudits": 0,
+      "avgGrade": 0,
+      "lastAudit": null,
+      "trend": "stable",
+      "auditFolder": "~/Desktop/Nox Builds/Sage Builds/Audits/"
+    },
+    "joy": {
+      "totalAudits": 0,
+      "avgGrade": 0,
+      "lastAudit": null,
+      "trend": "stable",
+      "auditFolder": "~/Desktop/Nox Builds/Joy Plans/Audits/"
     }
+  },
+  "auditFolders": {
+    "nox": "~/Desktop/Nox Builds/nox-dashboard-repo/audits/",
+    "health": "~/Desktop/Nox Builds/Health Agent/Audits/",
+    "fun": "~/Desktop/Nox Builds/Fun Agent/Audits/",
+    "sage": "~/Desktop/Nox Builds/Sage Builds/Audits/",
+    "joy": "~/Desktop/Nox Builds/Joy Plans/Audits/"
   }
 }

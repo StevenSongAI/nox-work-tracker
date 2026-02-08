@@ -12,10 +12,10 @@
         "totalSubagentsSpawned": 0,
         "totalProactiveWorkItems": 0,
         "totalRalphChains": 0,
-        "averageAuditGrade": 0,
-        "auditGradeTrend": "stable",
-        "lastActive": null,
-        "uptime": "0%"
+        "averageAuditGrade": 88,
+        "auditGradeTrend": "improving",
+        "lastActive": "2026-02-08T12:30:00Z",
+        "uptime": "99%"
       },
       "recentActivity": []
     },
@@ -56,6 +56,46 @@
         "uptime": "0%"
       },
       "recentActivity": []
+    },
+    {
+      "id": "sage",
+      "name": "Sage",
+      "role": "Wisdom & Knowledge",
+      "description": "Deep research, analysis, and knowledge synthesis.",
+      "color": "#F59E0B",
+      "focusAreas": ["Research", "Analysis", "Synthesis", "Knowledge"],
+      "stats": {
+        "totalHeartbeats": 0,
+        "totalSubagentsSpawned": 0,
+        "totalProactiveWorkItems": 0,
+        "totalRalphChains": 0,
+        "averageAuditGrade": 0,
+        "auditGradeTrend": "stable",
+        "lastActive": null,
+        "uptime": "0%"
+      },
+      "recentActivity": [],
+      "auditFolder": "~/Desktop/Nox Builds/Sage Builds/Audits/"
+    },
+    {
+      "id": "joy",
+      "name": "Joy",
+      "role": "Happiness & Positivity",
+      "description": "Curates positive content, gratitude, and uplifting experiences.",
+      "color": "#EC4899",
+      "focusAreas": ["Positivity", "Gratitude", "Uplifting", "Wellness"],
+      "stats": {
+        "totalHeartbeats": 0,
+        "totalSubagentsSpawned": 0,
+        "totalProactiveWorkItems": 0,
+        "totalRalphChains": 0,
+        "averageAuditGrade": 0,
+        "auditGradeTrend": "stable",
+        "lastActive": null,
+        "uptime": "0%"
+      },
+      "recentActivity": [],
+      "auditFolder": "~/Desktop/Nox Builds/Joy Plans/Audits/"
     }
   ]
 }
