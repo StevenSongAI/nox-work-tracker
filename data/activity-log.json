@@ -1,6 +1,17 @@
 {
   "entries": [
     {
+      "id": "act-044",
+      "timestamp": "2026-02-08T22:15:00Z",
+      "agent": "nox",
+      "icon": "✅",
+      "type": "ralph_chain",
+      "title": "Batch 3 Remaining Defects Fixed",
+      "description": "Fixed D3 (YouTube niche filter): dropdown now uses emoji prefixes (🎮, 🎨, 🐾) that match data. Fixed D1-PARTIAL (header loading): shows 'just now · Ready' instead of 'unknown · Idle'. All 13 defects now fixed.",
+      "grade": 95,
+      "status": "completed"
+    },
+    {
       "id": "act-043",
       "timestamp": "2026-02-08T22:10:00Z",
       "agent": "nox",
