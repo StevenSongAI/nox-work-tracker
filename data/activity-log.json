@@ -1,6 +1,17 @@
 {
   "entries": [
     {
+      "id": "act-034",
+      "timestamp": "2026-02-08T21:13:00Z",
+      "agent": "nox",
+      "icon": "🔧",
+      "type": "qa_fix",
+      "title": "Removed Placeholder Alerts from Dashboard",
+      "description": "Replaced all 'In full implementation' placeholder alerts with actual guidance: desktop tool instructions, manual viewstats steps, YouTube API workarounds.",
+      "grade": 85,
+      "status": "completed"
+    },
+    {
       "id": "act-sys-001",
       "timestamp": "2026-02-08T21:10:00Z",
       "agent": "nox",
