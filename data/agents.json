@@ -8,62 +8,25 @@
       "color": "#3B82F6",
       "focusAreas": ["YouTube", "New Business", "Investments", "Tool Building"],
       "stats": {
-        "totalHeartbeats": 0,
-        "totalSubagentsSpawned": 0,
-        "totalProactiveWorkItems": 0,
-        "totalRalphChains": 0,
+        "totalHeartbeats": 2,
+        "totalSubagentsSpawned": 12,
+        "totalProactiveWorkItems": 15,
+        "totalRalphChains": 1,
         "averageAuditGrade": 88,
         "auditGradeTrend": "improving",
-        "lastActive": "2026-02-08T12:30:00Z",
+        "lastActive": "2026-02-08T12:40:00Z",
         "uptime": "99%"
       },
-      "recentActivity": []
-    },
-    {
-      "id": "health",
-      "name": "Health Agent",
-      "role": "Health, Fitness & Nutrition",
-      "description": "Proactive health research, supplement analysis, fitness optimization.",
-      "color": "#10B981",
-      "focusAreas": ["Nutrition", "Supplements", "Fitness", "Recovery"],
-      "stats": {
-        "totalHeartbeats": 0,
-        "totalSubagentsSpawned": 0,
-        "totalProactiveWorkItems": 0,
-        "totalRalphChains": 0,
-        "averageAuditGrade": 0,
-        "auditGradeTrend": "stable",
-        "lastActive": null,
-        "uptime": "0%"
-      },
-      "recentActivity": []
-    },
-    {
-      "id": "fun",
-      "name": "Fun Agent",
-      "role": "Entertainment & Leisure",
-      "description": "Discovers games, curates entertainment, finds cool stuff.",
-      "color": "#8B5CF6",
-      "focusAreas": ["Gaming", "Discoveries", "Minecraft", "Leisure"],
-      "stats": {
-        "totalHeartbeats": 0,
-        "totalSubagentsSpawned": 0,
-        "totalProactiveWorkItems": 0,
-        "totalRalphChains": 0,
-        "averageAuditGrade": 0,
-        "auditGradeTrend": "stable",
-        "lastActive": null,
-        "uptime": "0%"
-      },
-      "recentActivity": []
+      "recentActivity": [],
+      "auditFolder": "~/Desktop/Nox Builds/nox-dashboard-repo/audits/"
     },
     {
       "id": "sage",
-      "name": "Sage",
-      "role": "Wisdom & Knowledge",
-      "description": "Deep research, analysis, and knowledge synthesis.",
-      "color": "#F59E0B",
-      "focusAreas": ["Research", "Analysis", "Synthesis", "Knowledge"],
+      "name": "Sage (Health)",
+      "role": "Health, Fitness & Nutrition",
+      "description": "Proactive health research, supplement analysis, fitness optimization. Also known as Health Agent.",
+      "color": "#10B981",
+      "focusAreas": ["Nutrition", "Supplements", "Fitness", "Recovery"],
       "stats": {
         "totalHeartbeats": 0,
         "totalSubagentsSpawned": 0,
@@ -79,11 +42,11 @@
     },
     {
       "id": "joy",
-      "name": "Joy",
-      "role": "Happiness & Positivity",
-      "description": "Curates positive content, gratitude, and uplifting experiences.",
-      "color": "#EC4899",
-      "focusAreas": ["Positivity", "Gratitude", "Uplifting", "Wellness"],
+      "name": "Joy (Fun)",
+      "role": "Entertainment & Leisure",
+      "description": "Discovers games, curates entertainment, finds cool stuff. Also known as Fun Agent.",
+      "color": "#8B5CF6",
+      "focusAreas": ["Gaming", "Discoveries", "Minecraft", "Leisure"],
       "stats": {
         "totalHeartbeats": 0,
         "totalSubagentsSpawned": 0,
