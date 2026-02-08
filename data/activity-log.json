@@ -1,6 +1,17 @@
 {
   "entries": [
     {
+      "id": "act-042",
+      "timestamp": "2026-02-08T22:05:00Z",
+      "agent": "nox",
+      "icon": "🔧",
+      "type": "qa_fix",
+      "title": "Stock Price Display Fixed",
+      "description": "Fixed formatCurrency to show '—' instead of '$0.00' for missing prices. Added Refresh Prices button to watchlist. Shows status indicator (✓ Updated / API unavailable).",
+      "grade": 90,
+      "status": "completed"
+    },
+    {
       "id": "act-041",
       "timestamp": "2026-02-08T22:00:00Z",
       "agent": "nox",
