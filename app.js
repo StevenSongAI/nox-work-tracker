@@ -72,7 +72,9 @@ const DATA_URLS = {
   audits: 'data/audits.json',
   ralphChains: 'data/ralph-chains.json',
   agents: 'data/agents.json',
-  meta: 'data/meta.json'
+  meta: 'data/meta.json',
+  calendar: 'data/calendar.json',
+  searchIndex: 'data/search-index.json'
 };
 
 // ============================================
@@ -111,6 +113,10 @@ async function loadAllData() {
 
     updateLastRefreshTime();
     renderCurrentTab();
+    
+    // Load calendar and search data
+    loadCalendarData();
+    loadSearchIndex();
   } catch (error) {
     console.error('[WorkTracker] Error loading data:', error);
     showError('Failed to load data. Please check the data files exist.');
@@ -1023,5 +1029,265 @@ document.addEventListener('DOMContentLoaded', () => {
   // Load initial data
   loadAllData();
   
+  // Setup search on Enter key
+  document.getElementById('global-search')?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      showTab('search');
+      document.getElementById('search-input').value = e.target.value;
+      performGlobalSearch();
+    }
+  });
+  
+  document.getElementById('search-input')?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') performGlobalSearch();
+  });
+  
   console.log('[WorkTracker] Initialization complete');
 });
+
+// ============================================
+// CALENDAR FUNCTIONS
+// ============================================
+let calendarCurrentWeek = new Date();
+let calendarData = { scheduledTasks: [], recurring: [] };
+
+async function loadCalendarData() {
+  try {
+    const response = await fetch('data/calendar.json');
+    calendarData = await response.json();
+    renderCalendar();
+  } catch (err) {
+    console.error('[Calendar] Failed to load:', err);
+  }
+}
+
+function changeWeek(direction) {
+  calendarCurrentWeek.setDate(calendarCurrentWeek.getDate() + (direction * 7));
+  renderCalendar();
+}
+
+function renderCalendar() {
+  const grid = document.getElementById('calendar-grid');
+  const eventsContainer = document.getElementById('calendar-events');
+  const weekLabel = document.getElementById('calendar-week-label');
+  
+  // Get week start (Sunday)
+  const weekStart = new Date(calendarCurrentWeek);
+  weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+  
+  // Update label
+  const weekEnd = new Date(weekStart);
+  weekEnd.setDate(weekEnd.getDate() + 6);
+  weekLabel.textContent = `${weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+  
+  // Render day headers
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  grid.innerHTML = days.map((day, i) => {
+    const date = new Date(weekStart);
+    date.setDate(date.getDate() + i);
+    const isToday = new Date().toDateString() === date.toDateString();
+    return `
+      <div class="card rounded p-2 text-center ${isToday ? 'border-accent-blue' : ''}">
+        <div class="text-xs text-gray-500">${day}</div>
+        <div class="text-lg font-semibold ${isToday ? 'text-accent-blue' : ''}">${date.getDate()}</div>
+      </div>
+    `;
+  }).join('');
+  
+  // Find tasks for this week
+  const weekTasks = calendarData.scheduledTasks?.filter(task => {
+    if (!task.nextRun) return false;
+    const taskDate = new Date(task.nextRun);
+    return taskDate >= weekStart && taskDate <= weekEnd;
+  }) || [];
+  
+  // Render events
+  if (weekTasks.length === 0) {
+    eventsContainer.innerHTML = `
+      <div class="card rounded p-4 text-center text-gray-500">
+        No scheduled tasks for this week.
+      </div>
+    `;
+  } else {
+    eventsContainer.innerHTML = weekTasks.map(task => `
+      <div class="card rounded p-3 flex justify-between items-center">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-lg">${getTaskIcon(task.category)}</span>
+            <span class="font-semibold">${task.title}</span>
+            <span class="px-2 py-0.5 text-xs rounded ${getStatusClass(task.status)}">${task.status}</span>
+          </div>
+          <p class="text-sm text-gray-400 ml-6">${task.description}</p>
+          <p class="text-xs text-gray-500 ml-6">${formatDateTime(task.nextRun)} • ${task.type}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+function getTaskIcon(category) {
+  const icons = {
+    'content-research': '🎬',
+    'intelligence': '🧠',
+    'maintenance': '🔧',
+    'monitoring': '👁️'
+  };
+  return icons[category] || '📋';
+}
+
+function getStatusClass(status) {
+  const classes = {
+    'scheduled': 'bg-green-900/50 text-green-400',
+    'pending': 'bg-yellow-900/50 text-yellow-400',
+    'completed': 'bg-gray-700 text-gray-400'
+  };
+  return classes[status] || 'bg-dark-700';
+}
+
+function formatDateTime(isoString) {
+  if (!isoString) return 'Not scheduled';
+  return new Date(isoString).toLocaleString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit'
+  });
+}
+
+// ============================================
+// SEARCH FUNCTIONS
+// ============================================
+let searchIndex = { documents: [] };
+let currentSearchFilter = 'all';
+
+async function loadSearchIndex() {
+  try {
+    const response = await fetch('data/search-index.json');
+    searchIndex = await response.json();
+  } catch (err) {
+    console.error('[Search] Failed to load index:', err);
+  }
+}
+
+function setSearchFilter(filter) {
+  currentSearchFilter = filter;
+  // Update button styles
+  ['all', 'memory', 'documents', 'tasks'].forEach(f => {
+    const btn = document.getElementById(`filter-${f}`);
+    if (btn) {
+      btn.className = f === filter 
+        ? 'px-2 py-1 text-xs bg-accent-blue rounded'
+        : 'px-2 py-1 text-xs bg-dark-700 rounded hover:bg-dark-600';
+    }
+  });
+  // Re-run search if there's a query
+  const query = document.getElementById('search-input')?.value;
+  if (query) performGlobalSearch();
+}
+
+function performGlobalSearch() {
+  const query = (document.getElementById('global-search')?.value || 
+                 document.getElementById('search-input')?.value || '').toLowerCase();
+  
+  if (!query) {
+    showTab('search');
+    return;
+  }
+  
+  showTab('search');
+  document.getElementById('search-input').value = query;
+  
+  const resultsContainer = document.getElementById('search-results');
+  
+  // Search across all documents
+  const results = searchIndex.documents?.filter(doc => {
+    // Apply type filter
+    if (currentSearchFilter !== 'all' && doc.type !== currentSearchFilter) return false;
+    
+    // Search in title, content, tags
+    const searchable = `${doc.title} ${doc.content} ${doc.tags?.join(' ') || ''}`.toLowerCase();
+    return searchable.includes(query);
+  }) || [];
+  
+  // Also search in activity log
+  const activityResults = AppState.data.activityLog.entries?.filter(entry => {
+    const searchable = `${entry.title} ${entry.description}`.toLowerCase();
+    return searchable.includes(query);
+  }) || [];
+  
+  if (results.length === 0 && activityResults.length === 0) {
+    resultsContainer.innerHTML = `
+      <div class="card rounded p-8 text-center text-gray-500">
+        No results found for "${query}".
+        <p class="text-sm mt-2">Try different keywords or clear filters.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  let html = '';
+  
+  // Document results
+  if (results.length > 0) {
+    html += `<div class="mb-4"><h3 class="text-sm font-semibold text-gray-400 mb-2">Documents & Memory (${results.length})</h3>`;
+    html += results.map(doc => `
+      <div class="card rounded p-3 mb-2 hover:bg-dark-700/50 transition cursor-pointer">
+        <div class="flex items-start gap-3">
+          <span class="text-lg">${getDocTypeIcon(doc.type)}</span>
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <span class="font-semibold">${highlightMatch(doc.title, query)}</span>
+              <span class="text-xs px-1.5 py-0.5 bg-dark-700 rounded">${doc.type}</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-1">${highlightMatch(doc.content.substring(0, 150), query)}${doc.content.length > 150 ? '...' : ''}</p>
+            <div class="flex gap-1 mt-2">
+              ${doc.tags?.map(tag => `<span class="text-xs px-1.5 py-0.5 bg-dark-700/50 rounded text-gray-500">#${tag}</span>`).join('') || ''}
+            </div>
+            <p class="text-xs text-gray-500 mt-1">${doc.path || ''} • ${formatTimeAgo(doc.timestamp)}</p>
+          </div>
+        </div>
+      </div>
+    `).join('');
+    html += '</div>';
+  }
+  
+  // Activity results
+  if (activityResults.length > 0) {
+    html += `<div><h3 class="text-sm font-semibold text-gray-400 mb-2">Activity Log (${activityResults.length})</h3>`;
+    html += activityResults.slice(0, 10).map(entry => `
+      <div class="card rounded p-3 mb-2">
+        <div class="flex items-start gap-3">
+          <span class="text-lg">${entry.icon || '🔹'}</span>
+          <div class="flex-1">
+            <div class="flex items-center gap-2">
+              <span class="font-semibold">${highlightMatch(entry.title, query)}</span>
+              <span class="text-xs px-1.5 py-0.5 rounded" style="background: ${AGENT_COLORS[entry.agent] || '#666'}33; color: ${AGENT_COLORS[entry.agent] || '#999'}">${entry.agent}</span>
+            </div>
+            <p class="text-sm text-gray-400 mt-1">${highlightMatch(entry.description, query)}</p>
+            <p class="text-xs text-gray-500 mt-1">${formatTimeAgo(entry.timestamp)}</p>
+          </div>
+        </div>
+      </div>
+    `).join('');
+    html += '</div>';
+  }
+  
+  resultsContainer.innerHTML = html;
+}
+
+function getDocTypeIcon(type) {
+  const icons = {
+    'memory': '🧠',
+    'document': '📄',
+    'task': '✅',
+    'note': '📝'
+  };
+  return icons[type] || '📄';
+}
+
+function highlightMatch(text, query) {
+  if (!text || !query) return text;
+  const regex = new RegExp(`(${query})`, 'gi');
+  return text.replace(regex, '<mark class="bg-yellow-500/30 text-yellow-200">$1</mark>');
+}

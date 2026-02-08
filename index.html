@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nox Work Tracker</title>
+  <title>Mission Control</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
@@ -37,8 +37,14 @@
   <header class="sticky top-0 z-50 bg-dark-900 border-b border-dark-700">
     <div class="max-w-7xl mx-auto px-4 py-3">
       <div class="flex items-center justify-between">
-        <h1 class="text-xl font-bold">⚡ Nox Work Tracker</h1>
+        <h1 class="text-xl font-bold">🚀 Mission Control</h1>
         <div class="flex items-center gap-4">
+          <!-- Global Search -->
+          <div class="relative">
+            <input type="text" id="global-search" placeholder="Search everything..." 
+              class="px-3 py-1 bg-dark-700 rounded border border-dark-600 text-sm w-64 focus:outline-none focus:border-accent-blue">
+            <button onclick="performGlobalSearch()" class="absolute right-1 top-1 px-2 py-0.5 text-xs bg-dark-600 rounded">🔍</button>
+          </div>
           <div id="live-indicator" class="flex items-center gap-2 text-sm">
             <span class="w-2 h-2 bg-accent-green rounded-full animate-pulse"></span>
             <span class="text-gray-400">LIVE</span>
@@ -50,7 +56,9 @@
     <!-- Tab Navigation -->
     <nav class="max-w-7xl mx-auto px-4">
       <div class="flex space-x-1 overflow-x-auto">
-        <button onclick="showTab('activity')" id="tab-btn-activity" class="tab-btn px-4 py-2 text-sm font-medium tab-active">📊 Live Activity</button>
+        <button onclick="showTab('activity')" id="tab-btn-activity" class="tab-btn px-4 py-2 text-sm font-medium tab-active">📊 Activity Feed</button>
+        <button onclick="showTab('calendar')" id="tab-btn-calendar" class="tab-btn px-4 py-2 text-sm font-medium">📅 Calendar</button>
+        <button onclick="showTab('search')" id="tab-btn-search" class="tab-btn px-4 py-2 text-sm font-medium">🔍 Search</button>
         <button onclick="showTab('audits')" id="tab-btn-audits" class="tab-btn px-4 py-2 text-sm font-medium">📋 Audits</button>
         <button onclick="showTab('ralph')" id="tab-btn-ralph" class="tab-btn px-4 py-2 text-sm font-medium">🔄 Ralph Chains</button>
         <button onclick="showTab('agents')" id="tab-btn-agents" class="tab-btn px-4 py-2 text-sm font-medium">👥 Agents</button>
@@ -84,6 +92,48 @@
       </div>
       <div id="activity-feed" class="activity-feed space-y-2">
         <div class="card rounded p-4 text-center text-gray-500">Loading activity feed...</div>
+      </div>
+    </div>
+
+    <!-- Calendar Tab -->
+    <div id="tab-calendar" class="tab-content hidden">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">📅 Calendar - Weekly View</h2>
+        <div class="flex gap-2">
+          <button onclick="changeWeek(-1)" class="px-3 py-1 bg-dark-700 rounded hover:bg-dark-600">← Prev</button>
+          <span id="calendar-week-label" class="px-3 py-1 text-sm">This Week</span>
+          <button onclick="changeWeek(1)" class="px-3 py-1 bg-dark-700 rounded hover:bg-dark-600">Next →</button>
+        </div>
+      </div>
+      <div id="calendar-grid" class="grid grid-cols-7 gap-2">
+        <!-- Days will be populated by JS -->
+      </div>
+      <div id="calendar-events" class="mt-4 space-y-2">
+        <div class="card rounded p-4 text-center text-gray-500">Loading scheduled tasks...</div>
+      </div>
+    </div>
+
+    <!-- Search Tab -->
+    <div id="tab-search" class="tab-content hidden">
+      <div class="mb-4">
+        <h2 class="text-xl font-semibold mb-2">🔍 Global Search</h2>
+        <div class="flex gap-2">
+          <input type="text" id="search-input" placeholder="Search memory, documents, tasks..."
+            class="flex-1 px-3 py-2 bg-dark-700 rounded border border-dark-600 focus:outline-none focus:border-accent-blue"
+          >
+          <button onclick="performGlobalSearch()" class="px-4 py-2 bg-accent-blue rounded hover:bg-blue-600">Search</button>
+        </div>
+        <div class="flex gap-2 mt-2">
+          <button onclick="setSearchFilter('all')" id="filter-all" class="px-2 py-1 text-xs bg-accent-blue rounded">All</button>
+          <button onclick="setSearchFilter('memory')" id="filter-memory" class="px-2 py-1 text-xs bg-dark-700 rounded">Memory</button>
+          <button onclick="setSearchFilter('documents')" id="filter-documents" class="px-2 py-1 text-xs bg-dark-700 rounded">Documents</button>
+          <button onclick="setSearchFilter('tasks')" id="filter-tasks" class="px-2 py-1 text-xs bg-dark-700 rounded">Tasks</button>
+        </div>
+      </div>
+      <div id="search-results" class="space-y-3">
+        <div class="card rounded p-8 text-center text-gray-500">
+          Enter a search term above to find memory, documents, and tasks.
+        </div>
       </div>
     </div>
 

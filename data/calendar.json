@@ -1,0 +1,64 @@
+{
+  "scheduledTasks": [
+    {
+      "id": "task-001",
+      "title": "YouTube Outlier Research - Morning",
+      "description": "Find 30 outlier videos from ZMDE Gaming and StevenSongIRL channels",
+      "type": "cron",
+      "schedule": "0 7 * * *",
+      "nextRun": "2026-02-08T07:00:00Z",
+      "status": "scheduled",
+      "category": "content-research"
+    },
+    {
+      "id": "task-002",
+      "title": "YouTube Outlier Research - Evening",
+      "description": "Find 30 outlier videos from ZMDE Gaming and StevenSongIRL channels",
+      "type": "cron",
+      "schedule": "0 18 * * *",
+      "nextRun": "2026-02-08T18:00:00Z",
+      "status": "scheduled",
+      "category": "content-research"
+    },
+    {
+      "id": "task-003",
+      "title": "Morning Brief Generation",
+      "description": "Generate morning briefing with trending topics and opportunities",
+      "type": "cron",
+      "schedule": "0 8 * * *",
+      "nextRun": "2026-02-08T08:00:00Z",
+      "status": "scheduled",
+      "category": "intelligence"
+    },
+    {
+      "id": "task-004",
+      "title": "Dashboard Data Sync",
+      "description": "Sync all dashboard data to GitHub repository",
+      "type": "manual",
+      "nextRun": null,
+      "status": "pending",
+      "category": "maintenance"
+    },
+    {
+      "id": "task-005",
+      "title": "Work Tracker Activity Log",
+      "description": "Log recent agent activity to work tracker",
+      "type": "manual",
+      "nextRun": null,
+      "status": "pending",
+      "category": "maintenance"
+    }
+  ],
+  "recurring": [
+    {
+      "title": "Heartbeat Check",
+      "frequency": "Every 20 minutes",
+      "description": "Nox agent heartbeat with proactive work"
+    },
+    {
+      "title": "Activity Monitoring",
+      "frequency": "Continuous",
+      "description": "Real-time tracking of all agent actions"
+    }
+  ]
+}

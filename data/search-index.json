@@ -1,0 +1,51 @@
+{
+  "indexVersion": "1.0",
+  "lastUpdated": "2026-02-08T04:50:00Z",
+  "documents": [
+    {
+      "id": "doc-001",
+      "type": "memory",
+      "title": "Dashboard Requirements",
+      "content": "Build browser-based dashboard hosted on GitHub Pages with 7 tabs: Dashboard, YouTube, New Business, Investments, Tools, Research, Audits",
+      "path": "REQUIREMENTS-DASHBOARD.md",
+      "tags": ["dashboard", "requirements", "github"],
+      "timestamp": "2026-02-07T23:00:00Z"
+    },
+    {
+      "id": "doc-002",
+      "type": "memory",
+      "title": "Work Tracker Requirements",
+      "content": "Build work tracker to monitor all agent activity 24/7 with 5 tabs: Live Activity, Audit Reports, Ralph Chains, Agents, Settings",
+      "path": "REQUIREMENTS-WORK-TRACKER.md",
+      "tags": ["work-tracker", "requirements", "monitoring"],
+      "timestamp": "2026-02-07T23:00:00Z"
+    },
+    {
+      "id": "doc-003",
+      "type": "task",
+      "title": "YouTube Outlier Research",
+      "content": "Research YouTube outliers from ZMDE Gaming and StevenSongIRL channels using viewstats.com Pro Tools",
+      "status": "scheduled",
+      "tags": ["youtube", "research", "content"],
+      "timestamp": "2026-02-07T23:30:00Z"
+    },
+    {
+      "id": "doc-004",
+      "type": "document",
+      "title": "Railway Account Token",
+      "content": "Account token for Railway deployment: 4e630a73-8ec9-4fbc-990d-de15e0233b07",
+      "path": "~/Desktop/Nox AI Credentials.md",
+      "tags": ["credentials", "railway", "deployment"],
+      "timestamp": "2026-02-07T23:10:00Z"
+    },
+    {
+      "id": "doc-005",
+      "type": "task",
+      "title": "Morning Brief Widget",
+      "content": "Added Morning Brief widget to Dashboard showing high-priority opportunities, YouTube outliers, audit grades, watchlist, and research updates",
+      "status": "completed",
+      "tags": ["dashboard", "feature", "ui"],
+      "timestamp": "2026-02-07T23:45:00Z"
+    }
+  ]
+}
