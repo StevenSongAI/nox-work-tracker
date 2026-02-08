@@ -1,6 +1,17 @@
 {
   "entries": [
     {
+      "id": "act-031",
+      "timestamp": "2026-02-08T21:00:00Z",
+      "agent": "nox",
+      "icon": "🔧",
+      "type": "ui_fix",
+      "title": "Content Briefs Clickable + Tools GitHub URLs",
+      "description": "Fixed content briefs to open detail modals on click. Updated all tools to use GitHub Pages URLs (nox-dashboard, work-tracker) or web URLs (claude.ai, cursor.com) instead of local file paths.",
+      "grade": 90,
+      "status": "completed"
+    },
+    {
       "id": "act-030",
       "timestamp": "2026-02-08T20:48:00Z",
       "agent": "nox",
