@@ -2,6 +2,50 @@
   "entries": [
     {
       "id": "act-001",
+      "timestamp": "2026-02-08T12:30:00Z",
+      "agent": "nox",
+      "icon": "📊",
+      "type": "dashboard_update",
+      "title": "Dashboard Research Queue Created",
+      "description": "Added competitor channel research tasks for viewstats analysis",
+      "grade": 75,
+      "status": "completed"
+    },
+    {
+      "id": "act-002",
+      "timestamp": "2026-02-08T12:15:00Z",
+      "agent": "nox",
+      "icon": "🎨",
+      "type": "asset_creation",
+      "title": "macOS Icons Processed",
+      "description": "Created 3 app icons (1024px) for macOS applications",
+      "grade": 80,
+      "status": "completed"
+    },
+    {
+      "id": "act-003",
+      "timestamp": "2026-02-08T12:00:00Z",
+      "agent": "nox",
+      "icon": "🎬",
+      "type": "content_briefs",
+      "title": "5 Content Briefs Generated",
+      "description": "Created video concepts from competitor channel analysis (RogersPets, CreatureLab, etc.)",
+      "grade": 82,
+      "status": "completed"
+    },
+    {
+      "id": "act-004",
+      "timestamp": "2026-02-08T07:18:00Z",
+      "agent": "nox",
+      "icon": "🔧",
+      "type": "dashboard_fix",
+      "title": "Fixed Investment & Audit Data",
+      "description": "Removed fake stock prices, added real X.com research data, populated 5 real audits",
+      "grade": 85,
+      "status": "completed"
+    },
+    {
+      "id": "act-005",
       "timestamp": "2026-02-08T07:05:00Z",
       "agent": "nox",
       "icon": "🎬",
@@ -12,18 +56,18 @@
       "status": "completed"
     },
     {
-      "id": "act-002",
+      "id": "act-006",
       "timestamp": "2026-02-08T06:30:00Z",
       "agent": "nox",
       "icon": "🔧",
-      "type": "dashboard_fix",
-      "title": "Fixed YouTube Tools Integration",
+      "type": "dashboard_feature",
+      "title": "YouTube Tools Integration",
       "description": "Added competitor tracker, outlier research section, content briefs, tool launcher",
       "grade": 85,
       "status": "completed"
     },
     {
-      "id": "act-003",
+      "id": "act-007",
       "timestamp": "2026-02-08T05:45:00Z",
       "agent": "nox",
       "icon": "🔄",
@@ -34,7 +78,7 @@
       "status": "completed"
     },
     {
-      "id": "act-004",
+      "id": "act-008",
       "timestamp": "2026-02-08T05:15:00Z",
       "agent": "nox",
       "icon": "🚀",
@@ -44,31 +88,44 @@
       "status": "completed"
     },
     {
-      "id": "act-005",
-      "timestamp": "2026-02-08T04:00:00Z",
-      "agent": "nox",
-      "icon": "⏰",
-      "type": "cron_setup",
-      "title": "Set up YouTube Research Cron",
-      "description": "Created 7AM and 6PM daily cron jobs for outlier research",
+      "id": "act-009",
+      "timestamp": "2026-02-07T22:00:00Z",
+      "agent": "health",
+      "icon": "💓",
+      "type": "heartbeat",
+      "title": "Health Agent Check-In",
+      "description": "Monitoring health data sources for new research opportunities",
       "status": "active"
+    },
+    {
+      "id": "act-010",
+      "timestamp": "2026-02-07T20:00:00Z",
+      "agent": "fun",
+      "icon": "🎮",
+      "type": "discovery",
+      "title": "Fun Agent Discovery Queue",
+      "description": "Queued gaming and entertainment content for review",
+      "status": "pending"
     }
   ],
   "agents": {
     "nox": {
-      "lastActive": "2026-02-08T07:05:00Z",
-      "totalActions": 5,
-      "avgGrade": 92
+      "lastActive": "2026-02-08T12:30:00Z",
+      "totalActions": 8,
+      "avgGrade": 88,
+      "status": "active"
     },
     "health": {
-      "lastActive": null,
-      "totalActions": 0,
-      "avgGrade": 0
+      "lastActive": "2026-02-07T22:00:00Z",
+      "totalActions": 1,
+      "avgGrade": 0,
+      "status": "idle"
     },
     "fun": {
-      "lastActive": null,
-      "totalActions": 0,
-      "avgGrade": 0
+      "lastActive": "2026-02-07T20:00:00Z",
+      "totalActions": 1,
+      "avgGrade": 0,
+      "status": "idle"
     }
   }
 }
