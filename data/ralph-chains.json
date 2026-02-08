@@ -1,3 +1,27 @@
 {
-  "chains": []
+  "chains": [
+    {
+      "id": "chain-001",
+      "name": "Dashboard QA Loop",
+      "status": "completed",
+      "startedAt": "2026-02-07T19:57:00Z",
+      "completedAt": "2026-02-07T21:54:00Z",
+      "iterations": 12,
+      "defectsFound": 3,
+      "defectsFixed": 3,
+      "finalGrade": "APPROVED"
+    },
+    {
+      "id": "chain-002", 
+      "name": "Work Tracker QA Loop",
+      "status": "completed",
+      "startedAt": "2026-02-07T21:00:00Z",
+      "completedAt": "2026-02-07T22:00:00Z",
+      "iterations": 5,
+      "defectsFound": 1,
+      "defectsFixed": 0,
+      "notes": "Known limitation: chokidar watcher fails in packaged app",
+      "finalGrade": "APPROVED_WITH_WORKAROUND"
+    }
+  ]
 }

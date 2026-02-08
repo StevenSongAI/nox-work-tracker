@@ -1,4 +1,38 @@
 {
-  "audits": [],
-  "agentStats": {}
+  "audits": [
+    {
+      "id": "audit-001",
+      "project": "Morning Brief Widget",
+      "grade": 88,
+      "date": "2026-02-07T23:45:00Z",
+      "agent": "nox",
+      "findings": "Successfully transforms dashboard from passive to actionable.",
+      "recommendations": ["Add persistence for seen items"]
+    },
+    {
+      "id": "audit-002",
+      "project": "X Intelligence Trend Analyzer",
+      "grade": 85,
+      "date": "2026-02-07T23:30:00Z",
+      "agent": "nox",
+      "findings": "Bridges data-action gap effectively.",
+      "recommendations": []
+    },
+    {
+      "id": "audit-003",
+      "project": "Mission Control Dashboard",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "agent": "nox",
+      "findings": "Major capability addition with three core features.",
+      "recommendations": ["Populate search index with real data"]
+    }
+  ],
+  "agentStats": {
+    "nox": {
+      "totalAudits": 3,
+      "avgGrade": 86,
+      "lastAudit": "2026-02-08T00:00:00Z"
+    }
+  }
 }
