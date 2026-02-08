@@ -1,6 +1,17 @@
 {
   "entries": [
     {
+      "id": "act-043",
+      "timestamp": "2026-02-08T22:10:00Z",
+      "agent": "nox",
+      "icon": "⚙️",
+      "type": "system_config",
+      "title": "YouTube Cron Updated with Browser Protocol",
+      "description": "Added AGENTS.md browser protocol to YouTube Research cron. Proper sequence: shell command → profile='chrome' → get tab ID → interact. NOT profile='openclaw' (requires extension icon click).",
+      "grade": 90,
+      "status": "completed"
+    },
+    {
       "id": "act-042",
       "timestamp": "2026-02-08T22:05:00Z",
       "agent": "nox",
