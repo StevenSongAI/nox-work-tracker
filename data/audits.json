@@ -1,125 +1,619 @@
 {
   "audits": [
     {
-      "id": "audit-001",
+      "id": "audit-ARCHIVE_DEFECTS_FOUND",
       "agent": "nox",
-      "project": "YouTube Outlier Research",
-      "grade": 98,
-      "date": "2026-02-08T07:05:00Z",
-      "summary": "Exceptional research with real channel analysis and pattern recognition",
-      "fullReport": "Agent conducted real research on ZMDE Gaming and StevenSongIRL, identified genuine outlier patterns (up to 41x subscriber count), extracted actionable insights, and properly structured data for dashboard.",
-      "feedback": "This is exactly the kind of proactive, research-driven work that makes the dashboard indispensable",
-      "category": "proactive-work"
+      "project": "Archive Defects Found",
+      "grade": 45,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from ARCHIVE_DEFECTS_FOUND.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/ARCHIVE_DEFECTS_FOUND.md"
     },
     {
-      "id": "audit-002",
+      "id": "audit-ARCHIVE_DISPROVED",
       "agent": "nox",
-      "project": "Dashboard Ralph-Loops QA",
-      "grade": 94,
-      "date": "2026-02-08T05:45:00Z",
-      "summary": "Completed 5-batch QA cycle with thorough defect identification",
-      "fullReport": "Batch 1: Core Architecture - 10 defects found, 6 fixed. Batch 2-5: Data rendering, filters, charts, responsive design all tested.",
-      "feedback": "Good systematic approach to QA",
-      "category": "ralph-chain"
+      "project": "Archive Disproved",
+      "grade": 30,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from ARCHIVE_DISPROVED.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/ARCHIVE_DISPROVED.md"
     },
     {
-      "id": "audit-003",
+      "id": "audit-ARCHIVE_FIXES_VERIFICATION_v28",
       "agent": "nox",
-      "project": "Morning Brief Widget",
-      "grade": 88,
-      "date": "2026-02-07T23:45:00Z",
-      "summary": "Successfully transforms dashboard from passive to actionable",
-      "fullReport": "Clean implementation with proper data filtering. Generates actionable brief items from 5 categories.",
-      "feedback": "88% - Genuinely useful addition. Could add persistence for seen items.",
-      "category": "proactive-work"
+      "project": "Archive Fixes Verification V28",
+      "grade": 95,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from ARCHIVE_FIXES_VERIFICATION_v28.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/ARCHIVE_FIXES_VERIFICATION_v28.md"
     },
     {
-      "id": "audit-004",
+      "id": "audit-ARCHIVE_HEARTBEAT_AUDITER_RALPH_1225",
       "agent": "nox",
-      "project": "X Intelligence Trend Analyzer",
-      "grade": 85,
-      "date": "2026-02-07T23:30:00Z",
-      "summary": "Bridges data-action gap with actionable briefings",
-      "fullReport": "Tool transforms static intelligence data into actionable outputs. Generates morning briefings and alerts.",
-      "feedback": "85% - Genuinely useful. Add live X.com API when available.",
-      "category": "proactive-work"
+      "project": "Archive Heartbeat Auditer Ralph 1225",
+      "grade": 92,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from ARCHIVE_HEARTBEAT_AUDITER_RALPH_1225.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/ARCHIVE_HEARTBEAT_AUDITER_RALPH_1225.md"
     },
     {
-      "id": "audit-005",
+      "id": "audit-ARCHIVE_PHASE2_IMPLEMENTATION_PROOF",
       "agent": "nox",
-      "project": "Mission Control Dashboard",
+      "project": "Archive Phase2 Implementation Proof",
       "grade": 85,
       "date": "2026-02-08T00:00:00Z",
-      "summary": "Major capability addition with 3 core features",
-      "fullReport": "Activity feed, calendar view, global search all implemented. Clean state management.",
-      "feedback": "85% - Transforms work tracking. Populate search index with real data.",
-      "category": "proactive-work"
+      "summary": "Audit from ARCHIVE_PHASE2_IMPLEMENTATION_PROOF.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/ARCHIVE_PHASE2_IMPLEMENTATION_PROOF.md"
     },
     {
-      "id": "audit-006",
+      "id": "audit-ARCHIVE_RED_TEAM_BRIEF",
       "agent": "nox",
-      "project": "Research Queue Creation",
-      "grade": 88,
-      "date": "2026-02-08T12:30:00Z",
-      "summary": "Well-structured research queue for competitor analysis",
-      "fullReport": "3 competitor channels queued with priorities, clear instructions for viewstats research, actionable format for next browser session.",
-      "feedback": "88% - Prevents task loss and maintains workflow continuity.",
-      "category": "proactive-work"
+      "project": "Archive Red Team Brief",
+      "grade": 65,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from ARCHIVE_RED_TEAM_BRIEF.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/ARCHIVE_RED_TEAM_BRIEF.md"
     },
     {
-      "id": "audit-007",
+      "id": "audit-ARCHIVE_RED_TEAM_REPORT",
       "agent": "nox",
-      "project": "Dashboard Fixes Batch",
+      "project": "Archive Red Team Report",
+      "grade": 58,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from ARCHIVE_RED_TEAM_REPORT.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/ARCHIVE_RED_TEAM_REPORT.md"
+    },
+    {
+      "id": "audit-ARCHIVE_REQUIREMENTS_GAP_ANALYSIS",
+      "agent": "nox",
+      "project": "Archive Requirements Gap Analysis",
+      "grade": 65,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from ARCHIVE_REQUIREMENTS_GAP_ANALYSIS.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/ARCHIVE_REQUIREMENTS_GAP_ANALYSIS.md"
+    },
+    {
+      "id": "audit-ARCHIVE_defect-analysis",
+      "agent": "nox",
+      "project": "Archive Defect-Analysis",
+      "grade": 55,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from ARCHIVE_defect-analysis.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/ARCHIVE_defect-analysis.md"
+    },
+    {
+      "id": "audit-ARCHIVE_v30-test-verification",
+      "agent": "nox",
+      "project": "Archive V30-Test-Verification",
+      "grade": 90,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from ARCHIVE_v30-test-verification.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/ARCHIVE_v30-test-verification.md"
+    },
+    {
+      "id": "audit-BUILDER_v1_REPORT",
+      "agent": "nox",
+      "project": "Builder V1 Report",
       "grade": 85,
-      "date": "2026-02-08T07:18:00Z",
-      "summary": "Fixed investment data, audits, YouTube competitor queue",
-      "fullReport": "Removed fake stock prices, added real X.com research data, populated real audits, fixed YouTube section.",
-      "feedback": "85% - Quick response to user feedback, good fixes.",
-      "category": "proactive-work"
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from BUILDER_v1_REPORT.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/BUILDER_v1_REPORT.md"
+    },
+    {
+      "id": "audit-CONSOLIDATION_AUDIT",
+      "agent": "nox",
+      "project": "Consolidation Audit",
+      "grade": 65,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from CONSOLIDATION_AUDIT.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/CONSOLIDATION_AUDIT.md"
+    },
+    {
+      "id": "audit-CONTENT_PIPELINE_ENHANCEMENT_AUDIT",
+      "agent": "nox",
+      "project": "Content Pipeline Enhancement Audit",
+      "grade": 35,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from CONTENT_PIPELINE_ENHANCEMENT_AUDIT.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/CONTENT_PIPELINE_ENHANCEMENT_AUDIT.md"
+    },
+    {
+      "id": "audit-FINAL_CONSOLIDATION_GRADE",
+      "agent": "nox",
+      "project": "Final Consolidation Grade",
+      "grade": 90,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from FINAL_CONSOLIDATION_GRADE.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/FINAL_CONSOLIDATION_GRADE.md"
+    },
+    {
+      "id": "audit-HEARTBEAT_AUDITER_RALPH_1225",
+      "agent": "nox",
+      "project": "Heartbeat Auditer Ralph 1225",
+      "grade": 92,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from HEARTBEAT_AUDITER_RALPH_1225.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/HEARTBEAT_AUDITER_RALPH_1225.md"
+    },
+    {
+      "id": "audit-RED_TEAM_REPORT",
+      "agent": "nox",
+      "project": "Red Team Report",
+      "grade": 58,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from RED_TEAM_REPORT.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/RED_TEAM_REPORT.md"
+    },
+    {
+      "id": "audit-RED_TEAM_v1_REPORT",
+      "agent": "nox",
+      "project": "Red Team V1 Report",
+      "grade": 78,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from RED_TEAM_v1_REPORT.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/RED_TEAM_v1_REPORT.md"
+    },
+    {
+      "id": "audit-RED_TEAM_v2_REPORT",
+      "agent": "nox",
+      "project": "Red Team V2 Report",
+      "grade": 100,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from RED_TEAM_v2_REPORT.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/RED_TEAM_v2_REPORT.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT",
+      "agent": "nox",
+      "project": "Value Audit",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_1210",
+      "agent": "nox",
+      "project": "Value Audit 1210",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_1210.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_1210.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_AGENTS_MD_RULE_2026-02-05",
+      "agent": "nox",
+      "project": "Value Audit Agents Md Rule 2026-02-05",
+      "grade": 55,
+      "date": "2026-02-05T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_AGENTS_MD_RULE_2026-02-05.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_AGENTS_MD_RULE_2026-02-05.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_Batch4_QA_Test_2026-02-07",
+      "agent": "nox",
+      "project": "Value Audit Batch4 Qa Test 2026-02-07",
+      "grade": 45,
+      "date": "2026-02-07T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_Batch4_QA_Test_2026-02-07.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_Batch4_QA_Test_2026-02-07.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_Business_Focus_2026-02-05",
+      "agent": "nox",
+      "project": "Value Audit Business Focus 2026-02-05",
+      "grade": 85,
+      "date": "2026-02-05T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_Business_Focus_2026-02-05.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_Business_Focus_2026-02-05.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_COMPETITORS",
+      "agent": "nox",
+      "project": "Value Audit Competitors",
+      "grade": 90,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_COMPETITORS.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_COMPETITORS.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_COMPLETE_REORG_2026-02-07",
+      "agent": "nox",
+      "project": "Value Audit Complete Reorg 2026-02-07",
+      "grade": 85,
+      "date": "2026-02-07T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_COMPLETE_REORG_2026-02-07.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_COMPLETE_REORG_2026-02-07.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_ContentCalendar",
+      "agent": "nox",
+      "project": "Value Audit Contentcalendar",
+      "grade": 88,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_ContentCalendar.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_ContentCalendar.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_ContentStrategyTracker",
+      "agent": "nox",
+      "project": "Value Audit Contentstrategytracker",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_ContentStrategyTracker.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_ContentStrategyTracker.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_DailyStandup",
+      "agent": "nox",
+      "project": "Value Audit Dailystandup",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_DailyStandup.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_DailyStandup.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_Diagnostic_2026-02-06",
+      "agent": "nox",
+      "project": "Value Audit Diagnostic 2026-02-06",
+      "grade": 85,
+      "date": "2026-02-06T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_Diagnostic_2026-02-06.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_Diagnostic_2026-02-06.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_ICLOUD_FIX",
+      "agent": "nox",
+      "project": "Value Audit Icloud Fix",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_ICLOUD_FIX.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_ICLOUD_FIX.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_IdeasInboxImprovement",
+      "agent": "nox",
+      "project": "Value Audit Ideasinboximprovement",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_IdeasInboxImprovement.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_IdeasInboxImprovement.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_Intel_Pipeline_2026-02-05",
+      "agent": "nox",
+      "project": "Value Audit Intel Pipeline 2026-02-05",
+      "grade": 35,
+      "date": "2026-02-05T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_Intel_Pipeline_2026-02-05.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_Intel_Pipeline_2026-02-05.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_Iteration_Tracker_2026-02-05",
+      "agent": "nox",
+      "project": "Value Audit Iteration Tracker 2026-02-05",
+      "grade": 90,
+      "date": "2026-02-05T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_Iteration_Tracker_2026-02-05.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_Iteration_Tracker_2026-02-05.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_MARKET_INTEL",
+      "agent": "nox",
+      "project": "Value Audit Market Intel",
+      "grade": 78,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_MARKET_INTEL.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_MARKET_INTEL.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_MainREADME",
+      "agent": "nox",
+      "project": "Value Audit Mainreadme",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_MainREADME.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_MainREADME.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_Mobile_Responsive_2026-02-06",
+      "agent": "nox",
+      "project": "Value Audit Mobile Responsive 2026-02-06",
+      "grade": 92,
+      "date": "2026-02-06T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_Mobile_Responsive_2026-02-06.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_Mobile_Responsive_2026-02-06.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_ORGANIZATION",
+      "agent": "nox",
+      "project": "Value Audit Organization",
+      "grade": 75,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_ORGANIZATION.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_ORGANIZATION.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_OpenAI_Enterprise_2026-02-06",
+      "agent": "nox",
+      "project": "Value Audit Openai Enterprise 2026-02-06",
+      "grade": 85,
+      "date": "2026-02-06T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_OpenAI_Enterprise_2026-02-06.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_OpenAI_Enterprise_2026-02-06.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_OpenAI_Playbook_2026-02-06",
+      "agent": "nox",
+      "project": "Value Audit Openai Playbook 2026-02-06",
+      "grade": 85,
+      "date": "2026-02-06T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_OpenAI_Playbook_2026-02-06.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_OpenAI_Playbook_2026-02-06.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_OpportunityEvaluator",
+      "agent": "nox",
+      "project": "Value Audit Opportunityevaluator",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_OpportunityEvaluator.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_OpportunityEvaluator.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_PROACTIVE",
+      "agent": "nox",
+      "project": "Value Audit Proactive",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_PROACTIVE.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_PROACTIVE.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_Phased_Workflow_2026-02-06",
+      "agent": "nox",
+      "project": "Value Audit Phased Workflow 2026-02-06",
+      "grade": 15,
+      "date": "2026-02-06T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_Phased_Workflow_2026-02-06.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_Phased_Workflow_2026-02-06.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_Phased_Workflow_V2_2026-02-06",
+      "agent": "nox",
+      "project": "Value Audit Phased Workflow V2 2026-02-06",
+      "grade": 62,
+      "date": "2026-02-06T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_Phased_Workflow_V2_2026-02-06.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_Phased_Workflow_V2_2026-02-06.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_QA_LOW_GRADE_TEST",
+      "agent": "nox",
+      "project": "Value Audit Qa Low Grade Test",
+      "grade": 45,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_QA_LOW_GRADE_TEST.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_QA_LOW_GRADE_TEST.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_README_Update2",
+      "agent": "nox",
+      "project": "Value Audit Readme Update2",
+      "grade": 94,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_README_Update2.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_README_Update2.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_ScriptStructure",
+      "agent": "nox",
+      "project": "Value Audit Scriptstructure",
+      "grade": 92,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_ScriptStructure.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_ScriptStructure.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_Spawn_Helper_2026-02-05",
+      "agent": "nox",
+      "project": "Value Audit Spawn Helper 2026-02-05",
+      "grade": 45,
+      "date": "2026-02-05T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_Spawn_Helper_2026-02-05.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_Spawn_Helper_2026-02-05.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_Spawn_Helper_V3_2026-02-05",
+      "agent": "nox",
+      "project": "Value Audit Spawn Helper V3 2026-02-05",
+      "grade": 70,
+      "date": "2026-02-05T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_Spawn_Helper_V3_2026-02-05.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_Spawn_Helper_V3_2026-02-05.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_TAM",
+      "agent": "nox",
+      "project": "Value Audit Tam",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_TAM.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_TAM.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_TRENDS",
+      "agent": "nox",
+      "project": "Value Audit Trends",
+      "grade": 72,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_TRENDS.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_TRENDS.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_TRENDS_V2",
+      "agent": "nox",
+      "project": "Value Audit Trends V2",
+      "grade": 76,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_TRENDS_V2.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_TRENDS_V2.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_ThumbnailIdeator",
+      "agent": "nox",
+      "project": "Value Audit Thumbnailideator",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_ThumbnailIdeator.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_ThumbnailIdeator.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_VideoIdeasBank",
+      "agent": "nox",
+      "project": "Value Audit Videoideasbank",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_VideoIdeasBank.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_VideoIdeasBank.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_WORK_TRACKER_2026-02-07",
+      "agent": "nox",
+      "project": "Value Audit Work Tracker 2026-02-07",
+      "grade": 85,
+      "date": "2026-02-07T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_WORK_TRACKER_2026-02-07.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_WORK_TRACKER_2026-02-07.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_WeeklyContentReview",
+      "agent": "nox",
+      "project": "Value Audit Weeklycontentreview",
+      "grade": 88,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_WeeklyContentReview.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_WeeklyContentReview.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_Work_Data_Update_2026-02-06",
+      "agent": "nox",
+      "project": "Value Audit Work Data Update 2026-02-06",
+      "grade": 85,
+      "date": "2026-02-06T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_Work_Data_Update_2026-02-06.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_Work_Data_Update_2026-02-06.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_X_Intel_Algorithm_Trainable_2026-02-05",
+      "agent": "nox",
+      "project": "Value Audit X Intel Algorithm Trainable 2026-02-05",
+      "grade": 85,
+      "date": "2026-02-05T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_X_Intel_Algorithm_Trainable_2026-02-05.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_X_Intel_Algorithm_Trainable_2026-02-05.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_X_Intel_Kling3_2026-02-06",
+      "agent": "nox",
+      "project": "Value Audit X Intel Kling3 2026-02-06",
+      "grade": 85,
+      "date": "2026-02-06T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_X_Intel_Kling3_2026-02-06.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_X_Intel_Kling3_2026-02-06.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_X_Intel_Meta_Vibes_2026-02-05",
+      "agent": "nox",
+      "project": "Value Audit X Intel Meta Vibes 2026-02-05",
+      "grade": 85,
+      "date": "2026-02-05T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_X_Intel_Meta_Vibes_2026-02-05.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_X_Intel_Meta_Vibes_2026-02-05.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_YT_AI_Toolkit_2026-02-06",
+      "agent": "nox",
+      "project": "Value Audit Yt Ai Toolkit 2026-02-06",
+      "grade": 85,
+      "date": "2026-02-06T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_YT_AI_Toolkit_2026-02-06.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_YT_AI_Toolkit_2026-02-06.md"
+    },
+    {
+      "id": "audit-VALUE_AUDIT_YouTubeProductionHub",
+      "agent": "nox",
+      "project": "Value Audit Youtubeproductionhub",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VALUE_AUDIT_YouTubeProductionHub.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VALUE_AUDIT_YouTubeProductionHub.md"
+    },
+    {
+      "id": "audit-VIDEO_PRODUCTION_BOARD_AUDIT",
+      "agent": "nox",
+      "project": "Video Production Board Audit",
+      "grade": 35,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from VIDEO_PRODUCTION_BOARD_AUDIT.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/VIDEO_PRODUCTION_BOARD_AUDIT.md"
+    },
+    {
+      "id": "audit-api-integration",
+      "agent": "nox",
+      "project": "Api-Integration",
+      "grade": 92,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from api-integration.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/api-integration.md"
+    },
+    {
+      "id": "audit-authentication-system",
+      "agent": "nox",
+      "project": "Authentication-System",
+      "grade": 45,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from authentication-system.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/authentication-system.md"
+    },
+    {
+      "id": "audit-dashboard-frontend",
+      "agent": "nox",
+      "project": "Dashboard-Frontend",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from dashboard-frontend.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/dashboard-frontend.md"
+    },
+    {
+      "id": "audit-test-audit-work-tracker_2026-02-07",
+      "agent": "nox",
+      "project": "Test-Audit-Work-Tracker 2026-02-07",
+      "grade": 95,
+      "date": "2026-02-07T00:00:00Z",
+      "summary": "Audit from test-audit-work-tracker_2026-02-07.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/test-audit-work-tracker_2026-02-07.md"
+    },
+    {
+      "id": "audit-test-worktracker-1770474418",
+      "agent": "nox",
+      "project": "Test-Worktracker-1770474418",
+      "grade": 85,
+      "date": "2026-02-08T00:00:00Z",
+      "summary": "Audit from test-worktracker-1770474418.md",
+      "sourceFile": "~/Desktop/Nox Builds/Audits/test-worktracker-1770474418.md"
     }
   ],
+  "totalAvailable": 67,
   "agentStats": {
     "nox": {
-      "totalAudits": 7,
-      "avgGrade": 88,
-      "lastAudit": "2026-02-08T12:30:00Z",
-      "trend": "improving",
-      "auditFolder": "~/Desktop/Nox Builds/nox-dashboard-repo/audits/"
-    },
-    "health": {
-      "totalAudits": 0,
-      "avgGrade": 0,
-      "lastAudit": null,
+      "totalAudits": 67,
+      "avgGrade": 76,
+      "lastAudit": "2026-02-08T12:00:00Z",
       "trend": "stable",
-      "auditFolder": "~/Desktop/Nox Builds/Health Agent/Audits/"
-    },
-    "fun": {
-      "totalAudits": 0,
-      "avgGrade": 0,
-      "lastAudit": null,
-      "trend": "stable",
-      "auditFolder": "~/Desktop/Nox Builds/Fun Agent/Audits/"
-    },
-    "sage": {
-      "totalAudits": 0,
-      "avgGrade": 0,
-      "lastAudit": null,
-      "trend": "stable",
-      "auditFolder": "~/Desktop/Nox Builds/Sage Builds/Audits/"
-    },
-    "joy": {
-      "totalAudits": 0,
-      "avgGrade": 0,
-      "lastAudit": null,
-      "trend": "stable",
-      "auditFolder": "~/Desktop/Nox Builds/Joy Plans/Audits/"
+      "auditFolder": "~/Desktop/Nox Builds/Audits/"
     }
   },
-  "auditFolders": {
-    "nox": "~/Desktop/Nox Builds/nox-dashboard-repo/audits/",
-    "health": "~/Desktop/Nox Builds/Health Agent/Audits/",
-    "fun": "~/Desktop/Nox Builds/Fun Agent/Audits/",
-    "sage": "~/Desktop/Nox Builds/Sage Builds/Audits/",
-    "joy": "~/Desktop/Nox Builds/Joy Plans/Audits/"
-  }
+  "scanTimestamp": "2026-02-08T07:37:33.350476",
+  "autoScanEnabled": true
 }
