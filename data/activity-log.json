@@ -1,6 +1,47 @@
 {
   "entries": [
     {
+      "timestamp": "2026-02-09T03:00:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-026",
+            "title": "What if Pokemon had more Evolution Stages? Fuecoco | Crocalor | Skeledirge",
+            "outlierScore": 676,
+            "channel": "sinpoke",
+            "niche": "Gaming/Pokémon/Evolution"
+          },
+          {
+            "id": "yt-viewstats-027",
+            "title": "HOW TO TRANSFER PETS FROM PET SIM X TO PET SIM 99",
+            "outlierScore": 471,
+            "channel": "evanlandchannel",
+            "niche": "Pet Simulation/Roblox"
+          },
+          {
+            "id": "yt-viewstats-028",
+            "title": "Evolution Of Titanus Shimo | Life Cycle",
+            "outlierScore": 37.9,
+            "channel": "worldinnumbers3d",
+            "niche": "Kaiju/Creature Evolution"
+          }
+        ],
+        "totalOutliersInDatabase": 28,
+        "researchMethod": "viewstats.com Pro Outliers tool",
+        "searchQueries": [
+          "creature evolution",
+          "pet simulation",
+          "AI creature"
+        ],
+        "insightsAdded": 2,
+        "source": "cron:a9c6cabd-aacd-4303-82b1-bc4487f0a5ac"
+      },
+      "agent": "nox",
+      "session": "cron-youtube-outlier-research-hourly"
+    },
+    {
       "timestamp": "2026-02-09T02:10:00Z",
       "type": "youtube_research",
       "description": "Added 3 new outlier videos from viewstats.com research",
