@@ -1,6 +1,45 @@
 {
   "entries": [
     {
+      "timestamp": "2026-02-09T06:00:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-058",
+            "title": "Training our BABY DRAGON in Minecraft!",
+            "outlierScore": 2.9,
+            "channel": "tycer",
+            "niche": "Minecraft/Dragon Training"
+          },
+          {
+            "id": "yt-viewstats-059",
+            "title": "The Graboids from Tremors Evolution Explored",
+            "outlierScore": 2.9,
+            "channel": "roanokegaming",
+            "niche": "Creature Lore/Evolution"
+          },
+          {
+            "id": "yt-viewstats-060",
+            "title": "Aibi Pocket Pet From LivingAI",
+            "outlierScore": 139,
+            "channel": "outsider238",
+            "niche": "AI/Physical Pet Tech"
+          }
+        ],
+        "source": "viewstats.com/pro/outliers",
+        "searchTerms": [
+          "pet dragon",
+          "creature evolution",
+          "AI pet"
+        ],
+        "totalOutliers": 60
+      },
+      "agent": "nox",
+      "session": "cron-youtube-outlier-research"
+    },
+    {
       "timestamp": "2026-02-09T08:00:00Z",
       "type": "youtube_research",
       "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
