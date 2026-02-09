@@ -1,6 +1,87 @@
 {
   "entries": [
     {
+      "timestamp": "2026-02-09T17:00:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 9 new outlier videos from viewstats.com research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-073",
+            "title": "How I BECAME A DRAGON in Minecraft!",
+            "outlierScore": 72.1,
+            "channel": "littlelizardgaming",
+            "niche": "Minecraft/Dragon Transformation"
+          },
+          {
+            "id": "yt-viewstats-074",
+            "title": "I Got a Pet Dinosaur (kinda)",
+            "outlierScore": 3.0,
+            "channel": "terragreen1",
+            "niche": "Pet/Dinosaur"
+          },
+          {
+            "id": "yt-viewstats-075",
+            "title": "Playing Minecraft as a HELPFUL Dragon!",
+            "outlierScore": 23.8,
+            "channel": "mighty_friends",
+            "niche": "Minecraft/Dragon Roleplay"
+          },
+          {
+            "id": "yt-viewstats-076",
+            "title": "HOW TO TAME DRAGON In Taming.io using Golden Slingshot",
+            "outlierScore": 16.2,
+            "channel": "fortish",
+            "niche": "Gaming/Tutorial"
+          },
+          {
+            "id": "yt-viewstats-077",
+            "title": "The Ultimate Battle Compilation | Monster Bugs Wars",
+            "outlierScore": 24.9,
+            "channel": "monsterbugwarstv",
+            "niche": "Nature/Creature Battle"
+          },
+          {
+            "id": "yt-viewstats-078",
+            "title": "Taking Out An Alien Hive Mind | Battle: Los Angeles | Creature Features",
+            "outlierScore": 31.0,
+            "channel": "creaturefeaturesclips",
+            "niche": "Sci-Fi/Creature Features"
+          },
+          {
+            "id": "yt-viewstats-079",
+            "title": "US Army Faces The Dragons | Dragon Wars | Creature Features",
+            "outlierScore": 15.9,
+            "channel": "creaturefeaturesclips",
+            "niche": "Military/Dragon Battle"
+          },
+          {
+            "id": "yt-viewstats-080",
+            "title": "Kaiju Monster Battle | Who Is The Winner - Animal Revolt Battle Simulator",
+            "outlierScore": 13.8,
+            "channel": "battlexsimulator",
+            "niche": "Kaiju/Battle Simulation"
+          },
+          {
+            "id": "yt-viewstats-081",
+            "title": "Pulse Racing Moments | Monster Hunter (2020) | Creature Features",
+            "outlierScore": 77.1,
+            "channel": "creaturefeaturesclips",
+            "niche": "Movie/Creature Action"
+          }
+        ],
+        "source": "viewstats.com/pro/outliers",
+        "searchTerms": [
+          "dragon pet",
+          "creature battle",
+          "AI creature evolution"
+        ],
+        "totalOutliers": 81
+      },
+      "agent": "nox",
+      "session": "cron-a9c6cabd-aacd-4303-82b1-bc4487f0a5ac"
+    },
+    {
       "timestamp": "2026-02-09T15:00:00Z",
       "type": "youtube_research",
       "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
