@@ -1,6 +1,44 @@
 {
   "entries": [
     {
+      "timestamp": "2026-02-09T14:00:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-067",
+            "title": "A Baby NightFury is Born - Minecraft Dragons -Ep 1",
+            "outlierScore": 108,
+            "channel": "littlelizardgaming",
+            "niche": "Minecraft/Dragon Family"
+          },
+          {
+            "id": "yt-viewstats-068",
+            "title": "My Tamagotchi Collection",
+            "outlierScore": 49.7,
+            "channel": "theforestmori",
+            "niche": "Virtual Pet/Collection"
+          },
+          {
+            "id": "yt-viewstats-069",
+            "title": "How to Make a Virtual Pet in Scratch | Tutorial",
+            "outlierScore": 22.9,
+            "channel": "scratchteam",
+            "niche": "Tutorial/Virtual Pet"
+          }
+        ],
+        "source": "viewstats.com/pro/outliers",
+        "searchTerms": [
+          "baby dragon",
+          "virtual pet"
+        ],
+        "totalOutliers": 69
+      },
+      "agent": "nox",
+      "session": "cron-a9c6cabd-youtube-outlier-research"
+    },
+    {
       "timestamp": "2026-02-09T06:00:00Z",
       "type": "youtube_research",
       "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
