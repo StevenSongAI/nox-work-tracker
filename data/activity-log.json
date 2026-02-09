@@ -7,7 +7,11 @@
       "details": {
         "videosVerified": 9,
         "newVideosAdded": 0,
-        "searchTerms": ["creature battle", "pet simulator", "dragon pet"],
+        "searchTerms": [
+          "creature battle",
+          "pet simulator",
+          "dragon pet"
+        ],
         "highestOutlierVerified": {
           "id": "yt-viewstats-081",
           "title": "Pulse Racing Moments | Monster Hunter (2020) | Creature Features",
@@ -35,7 +39,7 @@
           {
             "id": "yt-viewstats-074",
             "title": "I Got a Pet Dinosaur (kinda)",
-            "outlierScore": 3.0,
+            "outlierScore": 3,
             "channel": "terragreen1",
             "niche": "Pet/Dinosaur"
           },
@@ -63,7 +67,7 @@
           {
             "id": "yt-viewstats-078",
             "title": "Taking Out An Alien Hive Mind | Battle: Los Angeles | Creature Features",
-            "outlierScore": 31.0,
+            "outlierScore": 31,
             "channel": "creaturefeaturesclips",
             "niche": "Sci-Fi/Creature Features"
           },
@@ -1122,6 +1126,7 @@
       },
       "repo": "nox-dashboard",
       "commitHash": "0bbf8e4"
+    },
     {
       "timestamp": "2026-02-09T17:00:00Z",
       "type": "dashboard_development",
@@ -1188,10 +1193,27 @@
       "details": {
         "issue": "HTML tabs had both class='hidden' AND hidden boolean attribute",
         "fix": "showTab() now removes both class and attribute when showing tabs",
-        "filesModified": ["app.js"]
+        "filesModified": [
+          "app.js"
+        ]
       },
       "repo": "nox-dashboard",
       "commitHash": "912162e"
+    },
+    {
+      "id": "activity-1770667606986",
+      "timestamp": "2026-02-09T20:00:00Z",
+      "agent": "nox",
+      "type": "outlier_research",
+      "title": "YouTube Outlier Research - Hourly",
+      "description": "Found and added 4 new outlier videos from viewstats.com: (1) How I BECAME A DRAGON in Minecraft! - 72.1x outlier, (2) Playing Minecraft as a HELPFUL Dragon! - 23.8x outlier, (3) HOW TO TAME DRAGON In Taming.io - 16.2x outlier, (4) I Got a Pet Dinosaur (kinda) - 21.7M views",
+      "filesModified": [
+        "data/youtube.json",
+        "data/meta.json",
+        "data/state.json"
+      ],
+      "commitHash": "bd4f1a6",
+      "valueAdded": "high"
     }
   ],
   "agents": {
