@@ -867,6 +867,45 @@
       },
       "repo": "nox-dashboard",
       "commitHash": "b364ce2"
+    },
+    {
+      "timestamp": "2026-02-09T12:13:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-061",
+            "title": "King Of The Jungle VS King Of Water - Animal Revolt Battle Simulator",
+            "outlierScore": 292,
+            "channel": "arbschannel2501",
+            "niche": "Animal Battle Simulation"
+          },
+          {
+            "id": "yt-viewstats-062",
+            "title": "Monsters Size Comparison | 3d Animation Comparison",
+            "outlierScore": 84.9,
+            "channel": "globaldata1",
+            "niche": "Monster/Size Comparison"
+          },
+          {
+            "id": "yt-viewstats-063",
+            "title": "Evolution Of THE DEER MONSTER in Melon Playground",
+            "outlierScore": 28.2,
+            "channel": "melonsquadchannel",
+            "niche": "Sandbox Evolution"
+          }
+        ],
+        "source": "viewstats.com/pro/outliers",
+        "searchTerms": [
+          "animal simulation",
+          "monster evolution",
+          "virtual pet"
+        ],
+        "totalOutliers": 63
+      },
+      "repo": "nox-dashboard",
+      "commitHash": "3153bd0"
     }
   ],
   "agents": {
@@ -890,7 +929,7 @@
     }
   },
   "meta": {
-    "lastUpdated": "2026-02-09T04:04:46.194Z",
-    "totalEntries": 50
+    "lastUpdated": "2026-02-09T12:13:00Z",
+    "totalEntries": 51
   }
 }
