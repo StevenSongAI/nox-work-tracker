@@ -1,6 +1,39 @@
 {
   "entries": [
     {
+      "timestamp": "2026-02-09T20:05:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 2 new outlier videos from viewstats.com research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-082",
+            "title": "Dragon War - Chinese Dragon VS Western Dragon - Animal Revolt Battle Simulator",
+            "outlierScore": 53.9,
+            "channel": "arbschannel2501",
+            "niche": "Dragon/Battle Simulation"
+          },
+          {
+            "id": "yt-viewstats-083",
+            "title": "ROBLOX PET SIMULATOR X",
+            "outlierScore": 6.7,
+            "channel": "gravycatman",
+            "niche": "Pet Simulation/Roblox"
+          }
+        ],
+        "searchTerms": [
+          "creature evolution",
+          "dragon pet",
+          "pet simulator",
+          "AI creature"
+        ],
+        "duplicatesSkipped": 0,
+        "source": "viewstats.com/pro/outliers"
+      },
+      "agent": "nox",
+      "status": "completed"
+    },
+    {
       "timestamp": "2026-02-09T19:00:00Z",
       "type": "youtube_research",
       "description": "Hourly cron: Verified 9 existing outlier videos from viewstats.com - no new outliers found",
