@@ -1247,12 +1247,48 @@
       ],
       "commitHash": "bd4f1a6",
       "valueAdded": "high"
+    },
+    {
+      "timestamp": "2026-02-09T21:10:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-088",
+            "title": "How I BECAME A DRAGON in Minecraft!",
+            "outlierScore": 72.1,
+            "channel": "littlelizardgaming",
+            "niche": "Dragon/Minecraft Transformation"
+          },
+          {
+            "id": "yt-viewstats-089",
+            "title": "Dragon War - Chinese Dragon VS Western Dragon",
+            "outlierScore": 53.9,
+            "channel": "arbschannel2501",
+            "niche": "Dragon Battle Simulation"
+          },
+          {
+            "id": "yt-viewstats-090",
+            "title": "What if baby dragons existed?",
+            "outlierScore": 41.9,
+            "channel": "ambientdreamescapes",
+            "niche": "Dragon/Speculative Fiction"
+          }
+        ],
+        "searchTerms": ["AI creature", "dragon pet"],
+        "duplicatesSkipped": 0,
+        "source": "viewstats.com/pro/outliers"
+      },
+      "filesModified": ["data/youtube.json", "data/meta.json"],
+      "commitHash": "8f72182",
+      "valueAdded": "high"
     }
   ],
   "agents": {
     "nox": {
-      "lastActive": "2026-02-09T13:05:00Z",
-      "totalActions": 41,
+      "lastActive": "2026-02-09T21:10:00Z",
+      "totalActions": 42,
       "avgGrade": 88,
       "status": "active"
     },
