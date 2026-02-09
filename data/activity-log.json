@@ -1,6 +1,45 @@
 {
   "entries": [
     {
+      "timestamp": "2026-02-09T15:00:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-070",
+            "title": "A Baby NightFury is Born - Minecraft Dragons -Ep 1",
+            "outlierScore": 108,
+            "channel": "littlelizardgaming",
+            "niche": "Minecraft/Dragon Training"
+          },
+          {
+            "id": "yt-viewstats-071",
+            "title": "I Bought The VIRAL 15-in-1 Virtual Pet Box Bitzee",
+            "outlierScore": 26.7,
+            "channel": "ragingraccoongaming",
+            "niche": "Virtual Pet/Unboxing"
+          },
+          {
+            "id": "yt-viewstats-072",
+            "title": "Bone Island Evolution - All Common, Rare & Epic Monsters | My Singing Monsters",
+            "outlierScore": 85.8,
+            "channel": "musicalmonsters",
+            "niche": "Gaming/Creature Collection"
+          }
+        ],
+        "source": "viewstats.com/pro/outliers",
+        "searchTerms": [
+          "baby dragon",
+          "virtual pet",
+          "monster evolution"
+        ],
+        "totalOutliers": 72
+      },
+      "agent": "nox",
+      "session": "cron-a9c6cabd-aacd-4303-82b1-bc4487f0a5ac"
+    },
+    {
       "timestamp": "2026-02-09T14:00:00Z",
       "type": "youtube_research",
       "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
