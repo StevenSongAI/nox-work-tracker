@@ -1,6 +1,95 @@
 {
   "entries": [
     {
+      "timestamp": "2026-02-09T04:04:46.193Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 10 new outlier videos from viewstats.com research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-029",
+            "title": "Pet Story - Roblox",
+            "outlierScore": 64.2,
+            "channel": "ponchokings",
+            "niche": "Pet Simulation/Roblox"
+          },
+          {
+            "id": "yt-viewstats-030",
+            "title": "Pet Story Roblox Trailer",
+            "outlierScore": 45.3,
+            "channel": "ponchokings",
+            "niche": "Pet Simulation/Roblox"
+          },
+          {
+            "id": "yt-viewstats-031",
+            "title": "Pokemon Evolution Methods are Weird",
+            "outlierScore": 15.2,
+            "channel": "turtle-soup",
+            "niche": "Gaming/Pokémon/Evolution"
+          },
+          {
+            "id": "yt-viewstats-032",
+            "title": "Creature design: Three eras of paleoart in Monster Hunter",
+            "outlierScore": 4.4,
+            "channel": "unnaturalhistorychannel",
+            "niche": "Creature Design/Gaming"
+          },
+          {
+            "id": "yt-viewstats-033",
+            "title": "ALL AQUATIC CREATURES - Jurassic World Evolution 2",
+            "outlierScore": 14.2,
+            "channel": "gam1ngninja",
+            "niche": "Gaming/Creature Showcase"
+          },
+          {
+            "id": "yt-viewstats-034",
+            "title": "Evolution Of Titanus Tiamat | Life Cycle",
+            "outlierScore": 4.3,
+            "channel": "worldinnumbers3d",
+            "niche": "Kaiju/Creature Evolution"
+          },
+          {
+            "id": "yt-viewstats-035",
+            "title": "Every Type Of Zombie Ever | Creature Features",
+            "outlierScore": 6.5,
+            "channel": "creaturefeaturesclips",
+            "niche": "Horror/Creature Compilation"
+          },
+          {
+            "id": "yt-viewstats-036",
+            "title": "Evolution of Godzilla x Kong Kaiju!",
+            "outlierScore": 8.5,
+            "channel": "riotreacts",
+            "niche": "Kaiju/Evolution"
+          },
+          {
+            "id": "yt-viewstats-037",
+            "title": "All Pacific Rim Kaiju Monsters Evolution",
+            "outlierScore": 10.5,
+            "channel": "maxxivejumpo",
+            "niche": "Kaiju/Creature Evolution"
+          },
+          {
+            "id": "yt-viewstats-038",
+            "title": "What If Eeveelutions Evolved AGAIN?",
+            "outlierScore": 7.9,
+            "channel": "truegreen7",
+            "niche": "Gaming/Pokémon/Speculation"
+          }
+        ],
+        "keyInsights": [
+          "Narrative-driven pet content (64x outlier) outperforms traditional simulation",
+          "Life cycle format continues to dominate kaiju/creature niche",
+          "Compilation formats (ALL X, Every X Ever) consistently achieve 10x+ outliers",
+          "Speculative evolution content drives high engagement (2.58M views)"
+        ],
+        "dashboardRepo": "nox-dashboard-repo",
+        "commit": "d7c9c61"
+      },
+      "agent": "nox",
+      "automated": true
+    },
+    {
       "timestamp": "2026-02-09T03:00:00Z",
       "type": "youtube_research",
       "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
@@ -610,5 +699,9 @@
       "avgGrade": 0,
       "status": "idle"
     }
+  },
+  "meta": {
+    "lastUpdated": "2026-02-09T04:04:46.194Z",
+    "totalEntries": 50
   }
 }
