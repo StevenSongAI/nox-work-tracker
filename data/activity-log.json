@@ -1,6 +1,46 @@
 {
   "entries": [
     {
+      "timestamp": "2026-02-09T05:06:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-039",
+            "title": "Create Your Own Pokemon with A.I. - ComfyUI IPAdapter Workflow included",
+            "outlierScore": 36.6,
+            "channel": "fictions-ai",
+            "niche": "AI/Pokémon"
+          },
+          {
+            "id": "yt-viewstats-040",
+            "title": "Top 10 Most Amazing Creatures on Earth",
+            "outlierScore": 40.7,
+            "channel": "doublemuakyt",
+            "niche": "Nature/Creatures"
+          },
+          {
+            "id": "yt-viewstats-041",
+            "title": "How To Get EVERY HUGE PET In Pet Simulator 99!",
+            "outlierScore": 66.7,
+            "channel": "zedwinyt",
+            "niche": "Pet Simulation/Roblox"
+          }
+        ],
+        "keyInsights": [
+          "AI + Pokemon combination hits algorithm sweet spot (36.6x outlier)",
+          "Top 10 list format + creatures = 40.7x viral formula",
+          "Collection completion guides ('EVERY X') achieve 66.7x outliers",
+          "Tutorial content with downloadable workflows drives engagement"
+        ],
+        "dashboardRepo": "nox-dashboard-repo",
+        "commit": "18d4980"
+      },
+      "agent": "nox",
+      "automated": true
+    },
+    {
       "timestamp": "2026-02-09T04:04:46.193Z",
       "type": "youtube_research",
       "description": "Hourly cron: Added 10 new outlier videos from viewstats.com research",
