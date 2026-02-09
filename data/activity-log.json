@@ -1,6 +1,68 @@
 {
   "entries": [
     {
+      "timestamp": "2026-02-09T22:10:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 6 new outlier videos from viewstats.com research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-091",
+            "title": "We found a baby dragon!",
+            "outlierScore": 13,
+            "channel": "danicadecosto",
+            "niche": "Dragon/Discovery"
+          },
+          {
+            "id": "yt-viewstats-092",
+            "title": "Baby Cute Dogs And Cats Grow Up | Dragon Grows Up 2024 #5",
+            "outlierScore": 16.8,
+            "channel": "funnyanimalslchimedia",
+            "niche": "Dragon/Growth Compilation"
+          },
+          {
+            "id": "yt-viewstats-093",
+            "title": "I ADOPTED ALL THE PETS Avatar World",
+            "outlierScore": 13.5,
+            "channel": "catocat",
+            "niche": "Avatar World/Collection"
+          },
+          {
+            "id": "yt-viewstats-094",
+            "title": "Looking for Cat Friends - I Am Cat VR",
+            "outlierScore": 11.7,
+            "channel": "fudgygames",
+            "niche": "VR/Pet Simulation"
+          },
+          {
+            "id": "yt-viewstats-095",
+            "title": "ROBLOX STEAL A PET",
+            "outlierScore": 8.7,
+            "channel": "gravycatman",
+            "niche": "Roblox/Pet Simulation"
+          },
+          {
+            "id": "yt-viewstats-096",
+            "title": "Bitzee unboxing! The digital pet you can touch!",
+            "outlierScore": 21.7,
+            "channel": "lovepandabunny",
+            "niche": "Virtual Pet/Unboxing"
+          }
+        ],
+        "searchTerms": [
+          "creature evolution",
+          "AI pet",
+          "baby dragon",
+          "virtual pet"
+        ],
+        "duplicatesSkipped": 15,
+        "browserProtocol": "Chrome new window + openclaw profile",
+        "source": "viewstats.com/pro/outliers"
+      },
+      "agent": "nox",
+      "status": "completed"
+    },
+    {
       "timestamp": "2026-02-09T20:05:00Z",
       "type": "youtube_research",
       "description": "Hourly cron: Added 2 new outlier videos from viewstats.com research",
