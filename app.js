@@ -35,14 +35,14 @@ const AppState = {
 // ============================================
 const AGENT_COLORS = {
   nox: '#3B82F6',
-  health: '#10B981',
-  fun: '#8B5CF6'
+  sage: '#10B981',
+  joy: '#8B5CF6'
 };
 
 const AGENT_LABELS = {
   nox: 'Nox',
-  health: 'Health',
-  fun: 'Fun'
+  sage: 'Sage',
+  joy: 'Joy'
 };
 
 const TYPE_ICONS = {
