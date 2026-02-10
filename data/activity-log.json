@@ -1814,6 +1814,43 @@
       "details": {},
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-10T11:04:31.837853Z",
+      "type": "research",
+      "description": "YouTube Outlier Research - Added 3 new outlier videos from viewstats",
+      "details": {
+        "source": "viewstats.com/pro/outliers",
+        "search_terms": [
+          "creature",
+          "dragon",
+          "evolution"
+        ],
+        "videos_added": [
+          {
+            "id": "yt-viewstats-124",
+            "title": "Looks like a dragon",
+            "outlierScore": 263,
+            "niche": "Dragon/Short-form"
+          },
+          {
+            "id": "yt-viewstats-125",
+            "title": "FEED THE DRAGON",
+            "outlierScore": 36,
+            "niche": "Dragon/Pet Care"
+          },
+          {
+            "id": "yt-viewstats-126",
+            "title": "Started From an Egg And Became a Dragon",
+            "outlierScore": 29.4,
+            "niche": "Dragon/Evolution Gaming"
+          }
+        ],
+        "total_outliers_now": 116,
+        "commit": "a6bf2f5"
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
