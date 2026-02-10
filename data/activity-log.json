@@ -1982,6 +1982,16 @@
       "details": "Ready for Testing",
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-10T16:14:41.506355Z",
+      "type": "script_build",
+      "description": "Built higgsfield_automation_fixes: Fixed Higgsfield automation script: proper prompt selector (get_by_role textbox), aggressive overlay dismissal, robust file upload, image detection, and all UI element selectors",
+      "details": {
+        "script": "higgsfield_automation_fixes"
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
