@@ -1,6 +1,40 @@
 {
   "entries": [
     {
+      "timestamp": "2026-02-10T03:00:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 3 new outlier videos from viewstats.com - dragon evolution research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-097",
+            "title": "ARBS Dragon of Revolution Lava Dragon is fighting for evolution",
+            "outlierScore": 144,
+            "channel": "arbsdinosaur",
+            "niche": "Gaming/Dragon Evolution"
+          },
+          {
+            "id": "yt-viewstats-098",
+            "title": "Bakugan: Every Dragonoid Evolution",
+            "outlierScore": 372,
+            "channel": "aquosfrost",
+            "niche": "Gaming/Nostalgia Evolution"
+          },
+          {
+            "id": "yt-viewstats-099",
+            "title": "All DRAGONS in Hungry Dragon (New Update 2024)",
+            "outlierScore": 102,
+            "channel": "lyfpgamer",
+            "niche": "Gaming/Dragon Collection"
+          }
+        ],
+        "dashboardUpdated": true,
+        "commit": "1e661df"
+      },
+      "agent": "nox",
+      "session": "cron-youtube-research"
+    },
+    {
       "timestamp": "2026-02-10T07:00:00Z",
       "type": "youtube_research",
       "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
