@@ -1479,6 +1479,43 @@
       },
       "agent": "nox",
       "cronJobId": "a9c6cabd-aacd-4303-82b1-bc4487f0a5ac"
+    },
+    {
+      "timestamp": "2026-02-10T02:10:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research (creature game, virtual pet, dragon battle)",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-065",
+            "title": "Army Helicopters Attempt To Kill The Dragons | Dragon Wars | Creature Features",
+            "outlierScore": 1200,
+            "channel": "creaturefeaturesclips",
+            "niche": "Dragon/Creature Battle"
+          },
+          {
+            "id": "yt-viewstats-066",
+            "title": "Challenge Creepy Monster Lava + Monster Plant and Water - ARBS",
+            "outlierScore": 86.8,
+            "channel": "arbsgodzilla",
+            "niche": "Creature Battle Simulation"
+          },
+          {
+            "id": "yt-viewstats-067",
+            "title": "ROBLOX STEAL A PET",
+            "outlierScore": 8.7,
+            "channel": "gravycatman",
+            "niche": "Pet Simulation/Roblox"
+          }
+        ],
+        "source": "viewstats.com/pro/outliers",
+        "searchTerms": [
+          "creature game",
+          "virtual pet"
+        ]
+      },
+      "agent": "nox",
+      "cronJobId": "a9c6cabd-aacd-4303-82b1-bc4487f0a5ac"
     }
   ],
   "agents": {
