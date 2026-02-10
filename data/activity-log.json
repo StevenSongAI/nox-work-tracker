@@ -1851,6 +1851,46 @@
       },
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-10T12:04:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 3 new outlier videos from viewstats.com - creature evolution research",
+      "details": {
+        "source": "viewstats.com/pro/outliers",
+        "search_terms": [
+          "creature evolution",
+          "AI learns"
+        ],
+        "videos_added": [
+          {
+            "id": "yt-viewstats-127",
+            "title": "All Alien Creatures & Evolution Compilation | Maxxive Jumpo",
+            "outlierScore": 28,
+            "channel": "maxxivejumpo",
+            "niche": "Alien/Creature Evolution"
+          },
+          {
+            "id": "yt-viewstats-128",
+            "title": "Evolution Of Drownviper | Life Cycle",
+            "outlierScore": 3,
+            "channel": "worldinnumbers3d",
+            "niche": "Creature Evolution/Life Cycle"
+          },
+          {
+            "id": "yt-viewstats-129",
+            "title": "All Evolutionary Stages Of MonsterVerse Godzilla - 8 Forms EXPLAINED",
+            "outlierScore": 4.7,
+            "channel": "mindq4328",
+            "niche": "Kaiju/Evolution Analysis"
+          }
+        ],
+        "total_outliers_now": 129,
+        "dashboard_url": "https://stevensongai.github.io/nox-dashboard/",
+        "commit": "68f694e"
+      },
+      "agent": "nox",
+      "session": "cron:a9c6cabd-aacd-4303-82b1-bc4487f0a5ac"
     }
   ],
   "agents": {
@@ -1874,7 +1914,7 @@
     }
   },
   "meta": {
-    "lastUpdated": "2026-02-10T09:00:00Z",
-    "totalEntries": 80
+    "lastUpdated": "2026-02-10T12:04:00Z",
+    "totalEntries": 81
   }
 }
