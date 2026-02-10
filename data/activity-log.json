@@ -1716,29 +1716,104 @@
       "details": {
         "topic": "viewstats_outliers",
         "source": ""
-      },
+      }
+    },
     {
       "timestamp": "2026-02-10T09:00:00Z",
       "type": "youtube_research",
       "description": "Hourly cron: Added 11 new outlier videos from viewstats.com - AI creature evolution + pet simulation research",
       "details": {
         "videosAdded": [
-          {"id": "yt-viewstats-100", "title": "The AI Behind Animals", "outlierScore": 39.7, "channel": "alteregosocial", "niche": "AI/Educational"},
-          {"id": "yt-viewstats-101", "title": "34 Best Modded Creatures In Ark Ascended!", "outlierScore": 9.7, "channel": "onfire944", "niche": "Gaming/Creature Mods"},
-          {"id": "yt-viewstats-102", "title": "All Leviathans & All Creatures in Subnautica", "outlierScore": 1.0, "channel": "chemicalapes", "niche": "Gaming/Creature Showcase"},
-          {"id": "yt-viewstats-103", "title": "I Gave Minecraft Mobs Growth Cycles", "outlierScore": 19.7, "channel": "logdotzip", "niche": "Gaming/Creature Evolution"},
-          {"id": "yt-viewstats-104", "title": "Ark But I Turn Into Every Creature I Beat", "outlierScore": 49.3, "channel": "schwalbeyt", "niche": "Gaming/Creature Transformation"},
-          {"id": "yt-viewstats-105", "title": "ALL 9 New Creatures from Alien: Earth Revealed", "outlierScore": 3.4, "channel": "kroft_movies", "niche": "Sci-Fi/Creature Reveal"},
-          {"id": "yt-viewstats-106", "title": "Pet Shop Simulator - Announcement Trailer", "outlierScore": 7.8, "channel": "theplayway", "niche": "Pet Simulation"},
-          {"id": "yt-viewstats-107", "title": "Animal Shelter Simulator - Part 1", "outlierScore": 2.7, "channel": "tmartn2", "niche": "Pet Simulation/Shelter"},
-          {"id": "yt-viewstats-108", "title": "Cat Simulator : Kitty Craft", "outlierScore": 67.1, "channel": "hgames-artworks1768", "niche": "Cat Simulation"},
-          {"id": "yt-viewstats-109", "title": "Preparing for the NEW Dog - I Am Cat VR", "outlierScore": 3.6, "channel": "fudgyyyy", "niche": "VR/Pet Simulation"},
-          {"id": "yt-viewstats-110", "title": "Playing FULL RELEASE - I Am Cat VR (New Update)", "outlierScore": 6.5, "channel": "fudgyyyy", "niche": "VR/Pet Simulation"}
+          {
+            "id": "yt-viewstats-100",
+            "title": "The AI Behind Animals",
+            "outlierScore": 39.7,
+            "channel": "alteregosocial",
+            "niche": "AI/Educational"
+          },
+          {
+            "id": "yt-viewstats-101",
+            "title": "34 Best Modded Creatures In Ark Ascended!",
+            "outlierScore": 9.7,
+            "channel": "onfire944",
+            "niche": "Gaming/Creature Mods"
+          },
+          {
+            "id": "yt-viewstats-102",
+            "title": "All Leviathans & All Creatures in Subnautica",
+            "outlierScore": 1.0,
+            "channel": "chemicalapes",
+            "niche": "Gaming/Creature Showcase"
+          },
+          {
+            "id": "yt-viewstats-103",
+            "title": "I Gave Minecraft Mobs Growth Cycles",
+            "outlierScore": 19.7,
+            "channel": "logdotzip",
+            "niche": "Gaming/Creature Evolution"
+          },
+          {
+            "id": "yt-viewstats-104",
+            "title": "Ark But I Turn Into Every Creature I Beat",
+            "outlierScore": 49.3,
+            "channel": "schwalbeyt",
+            "niche": "Gaming/Creature Transformation"
+          },
+          {
+            "id": "yt-viewstats-105",
+            "title": "ALL 9 New Creatures from Alien: Earth Revealed",
+            "outlierScore": 3.4,
+            "channel": "kroft_movies",
+            "niche": "Sci-Fi/Creature Reveal"
+          },
+          {
+            "id": "yt-viewstats-106",
+            "title": "Pet Shop Simulator - Announcement Trailer",
+            "outlierScore": 7.8,
+            "channel": "theplayway",
+            "niche": "Pet Simulation"
+          },
+          {
+            "id": "yt-viewstats-107",
+            "title": "Animal Shelter Simulator - Part 1",
+            "outlierScore": 2.7,
+            "channel": "tmartn2",
+            "niche": "Pet Simulation/Shelter"
+          },
+          {
+            "id": "yt-viewstats-108",
+            "title": "Cat Simulator : Kitty Craft",
+            "outlierScore": 67.1,
+            "channel": "hgames-artworks1768",
+            "niche": "Cat Simulation"
+          },
+          {
+            "id": "yt-viewstats-109",
+            "title": "Preparing for the NEW Dog - I Am Cat VR",
+            "outlierScore": 3.6,
+            "channel": "fudgyyyy",
+            "niche": "VR/Pet Simulation"
+          },
+          {
+            "id": "yt-viewstats-110",
+            "title": "Playing FULL RELEASE - I Am Cat VR (New Update)",
+            "outlierScore": 6.5,
+            "channel": "fudgyyyy",
+            "niche": "VR/Pet Simulation"
+          }
         ],
         "source": "viewstats.com/pro/outliers"
       },
       "agent": "nox",
       "session": "cron:a9c6cabd-aacd-4303-82b1-bc4487f0a5ac"
+    },
+    {
+      "timestamp": "2026-02-10T10:07:51.996072Z",
+      "type": "activity",
+      "description": "viewstats_outlier_research Added 1 new outlier video from viewstats: 'I Made 10.000 A.I Fight...' by zuzelo (3.3x outlier, 144K views)",
+      "details": {},
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
