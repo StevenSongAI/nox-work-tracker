@@ -1534,6 +1534,17 @@
       "details": {},
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-10T04:05:12.664565Z",
+      "type": "research",
+      "description": "Research on minecraft-map-artists: Found 5 qualified leads for Ice Dragon video: BlockWorks, Builders Anonymous Discord, MC Builders Di",
+      "details": {
+        "topic": "minecraft-map-artists",
+        "source": ""
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
