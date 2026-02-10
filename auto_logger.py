@@ -5,7 +5,7 @@ Call this after EVERY task completion to log work automatically
 import json
 import os
 import subprocess
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Optional, List
 import sys
 
@@ -42,7 +42,7 @@ def log_activity(
         
         # Create new entry
         new_entry = {
-            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
             "type": activity_type,
             "description": description,
             "details": details or {},
@@ -57,7 +57,7 @@ def log_activity(
         with open(META_PATH, 'r') as f:
             meta = json.load(f)
         
-        meta["lastUpdated"] = datetime.utcnow().isoformat() + "Z"
+        meta["lastUpdated"] = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
         meta["totalActivities"] = len(data["entries"])
         
         # Save files
