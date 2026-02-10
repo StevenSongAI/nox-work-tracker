@@ -1,6 +1,40 @@
 {
   "entries": [
     {
+      "timestamp": "2026-02-10T07:00:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-121",
+            "title": "Fallout New Vegas Creature Tier List",
+            "outlierScore": 125,
+            "channel": "reapeeron",
+            "niche": "Gaming/Creature Tier List"
+          },
+          {
+            "id": "yt-viewstats-122",
+            "title": "Ark But I Turn Into Every Creature I Beat",
+            "outlierScore": 49.3,
+            "channel": "schwalbeyt",
+            "niche": "Gaming/Creature Transformation"
+          },
+          {
+            "id": "yt-viewstats-123",
+            "title": "THE ALIEN CREATURE | Hollywood Sci-Fi Action Full Movie",
+            "outlierScore": 322,
+            "channel": "veeoverseasfilms",
+            "niche": "Sci-Fi/Creature Feature"
+          }
+        ],
+        "dashboardUpdated": true,
+        "commit": "5d0a13b"
+      },
+      "agent": "nox",
+      "session": "cron-youtube-research"
+    },
+    {
       "timestamp": "2026-02-10T00:35:49.022Z",
       "type": "discord_verification",
       "description": "Used anti-captcha.com API to solve Discord hCaptcha challenge for map artist outreach",
