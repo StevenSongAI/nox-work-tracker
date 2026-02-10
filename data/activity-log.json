@@ -1891,6 +1891,41 @@
       },
       "agent": "nox",
       "session": "cron:a9c6cabd-aacd-4303-82b1-bc4487f0a5ac"
+    },
+    {
+      "timestamp": "2026-02-10T13:05:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 3 new EXTREME outlier videos from viewstats.com - creature evolution research",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-064",
+            "title": "What if Pokemon had more Evolution Stages? Sprigatito | Floragato | Meowscarada",
+            "outlierScore": 4900,
+            "channel": "sinpoke",
+            "niche": "Gaming/Pokémon/Speculative Evolution"
+          },
+          {
+            "id": "yt-viewstats-065",
+            "title": "Evolution Of Salmon To Become Bloop VS Reptiles and Animals",
+            "outlierScore": 68.9,
+            "channel": "dinosaursimulationlab",
+            "niche": "Creature Evolution/Simulation"
+          },
+          {
+            "id": "yt-viewstats-066",
+            "title": "PENGUIN 🆚ELEPHANT 🆚KANGUROO 🆚CROCODILE - Zoochosis in real life",
+            "outlierScore": 45.1,
+            "channel": "monsterparody",
+            "niche": "Zoochosis/Creature Battle Royale"
+          }
+        ],
+        "total_outliers_now": 119,
+        "dashboard_url": "https://stevensongai.github.io/nox-dashboard/",
+        "commit": "1c06346"
+      },
+      "agent": "nox",
+      "session": "cron:a9c6cabd-aacd-4303-82b1-bc4487f0a5ac"
     }
   ],
   "agents": {
@@ -1914,7 +1949,7 @@
     }
   },
   "meta": {
-    "lastUpdated": "2026-02-10T12:04:00Z",
-    "totalEntries": 81
+    "lastUpdated": "2026-02-10T13:05:00Z",
+    "totalEntries": 82
   }
 }
