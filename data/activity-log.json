@@ -1545,6 +1545,72 @@
       },
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-10T04:05:22.814756Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 8 new outlier videos from viewstats.com research",
+      "details": {
+        "source": "viewstats.com/pro/outliers",
+        "searches": [
+          "AI creature",
+          "dragon pet",
+          "creature evolution"
+        ],
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-104",
+            "title": "Alice vs. Nemesis | Resident Evil: Apocalypse",
+            "outlierScore": 86.6,
+            "niche": "Horror/Creature Battle"
+          },
+          {
+            "id": "yt-viewstats-105",
+            "title": "Zombified Dogs Chase After Jill | Resident Evil",
+            "outlierScore": 24.5,
+            "niche": "Horror/Creature Chase"
+          },
+          {
+            "id": "yt-viewstats-106",
+            "title": "The Strongest Flying Dragon Has EVOLVED!",
+            "outlierScore": 14.5,
+            "niche": "Dragon/Evolution Battle"
+          },
+          {
+            "id": "yt-viewstats-107",
+            "title": "He Found a Real Dragon and Now It Protects Him",
+            "outlierScore": 11.7,
+            "niche": "Dragon/Discovery Story"
+          },
+          {
+            "id": "yt-viewstats-108",
+            "title": "SUPER CUTE DRAGON & POP UP ANIMALS ASMR",
+            "outlierScore": 10.4,
+            "niche": "Dragon/ASMR"
+          },
+          {
+            "id": "yt-viewstats-109",
+            "title": "Baby Cute Dogs And Cats Grow Up | Dragon Grows Up",
+            "outlierScore": 10.2,
+            "niche": "Dragon/Growth Compilation"
+          },
+          {
+            "id": "yt-viewstats-110",
+            "title": "Brainrot Evolution in Roblox",
+            "outlierScore": 9.2,
+            "niche": "Roblox/Evolution"
+          },
+          {
+            "id": "yt-viewstats-111",
+            "title": "WITH CUTE DRAGON ASMR",
+            "outlierScore": 8.9,
+            "niche": "Dragon/ASMR"
+          }
+        ],
+        "totalOutliersInDashboard": 114
+      },
+      "agent": "nox",
+      "session": "cron"
     }
   ],
   "agents": {
