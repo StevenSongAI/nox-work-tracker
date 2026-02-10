@@ -1934,6 +1934,35 @@
       "details": "In Progress",
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-10T14:58:37.081907Z",
+      "type": "research",
+      "description": "YouTube Outlier Research - Added 3 new outlier videos from viewstats",
+      "details": {
+        "videos_added": 3,
+        "videos": [
+          {
+            "title": "How I BECAME A DRAGON in Minecraft!",
+            "outlierScore": 72.1,
+            "channel": "littlelizardgaming"
+          },
+          {
+            "title": "Dragon War - Chinese Dragon VS Western Dragon",
+            "outlierScore": 53.9,
+            "channel": "arbschannel2501"
+          },
+          {
+            "title": "Brainrot Evolution in Roblox",
+            "outlierScore": 9.2,
+            "channel": "tussyplays"
+          }
+        ],
+        "source": "viewstats.com/pro/outliers",
+        "cron_job": true
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
