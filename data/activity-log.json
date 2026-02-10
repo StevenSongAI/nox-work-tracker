@@ -1441,6 +1441,44 @@
       },
       "agent": "nox",
       "cronJobId": "a9c6cabd-aacd-4303-82b1-bc4487f0a5ac"
+    },
+    {
+      "timestamp": "2026-02-10T01:05:00Z",
+      "type": "youtube_research",
+      "description": "Hourly cron: Added 3 new outlier videos from viewstats.com research (Pokemon evolution, creature evolution)",
+      "details": {
+        "videosAdded": [
+          {
+            "id": "yt-viewstats-101",
+            "title": "What if Pokemon had more Evolution Stages? Sprigatito | Floragato | Meowscarada",
+            "outlierScore": 7600,
+            "channel": "sinpoke",
+            "niche": "Gaming/Pokémon/Evolution"
+          },
+          {
+            "id": "yt-viewstats-102",
+            "title": "I Got a Pet Dragon (Steven's Video Update)",
+            "outlierScore": 11.4,
+            "channel": "stevensongirl",
+            "niche": "Pet Simulation/Dragon"
+          },
+          {
+            "id": "yt-viewstats-103",
+            "title": "Evolution Of Salmon To Become Bloop VS Reptiles and Animals",
+            "outlierScore": 68.9,
+            "channel": "dinosaursimulationlab",
+            "niche": "Creature Evolution/Battle"
+          }
+        ],
+        "source": "viewstats.com/pro/outliers",
+        "searchTerms": [
+          "creature evolution",
+          "dragon pet",
+          "AI creature"
+        ]
+      },
+      "agent": "nox",
+      "cronJobId": "a9c6cabd-aacd-4303-82b1-bc4487f0a5ac"
     }
   ],
   "agents": {
