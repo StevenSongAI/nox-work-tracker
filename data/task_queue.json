@@ -1,0 +1,21 @@
+{
+  "tasks": {
+    "task_20260210_025303_0": {
+      "id": "task_20260210_025303_0",
+      "title": "Test Higgsfield automation",
+      "description": "QA test the full script with dry run",
+      "priority": "high",
+      "status": "pending",
+      "created_at": "2026-02-10T02:53:03.189654Z",
+      "started_at": null,
+      "completed_at": null,
+      "agent": "nox",
+      "tags": [
+        "automation",
+        "testing"
+      ],
+      "estimated_time": null
+    }
+  },
+  "last_updated": "2026-02-10T02:53:03.189691Z"
+}
