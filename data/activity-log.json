@@ -2022,6 +2022,16 @@
       },
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-11T15:16:17.521768Z",
+      "type": "script_build",
+      "description": "Built higgsfield_sequential_fix: Fixed Higgsfield script to submit prompts sequentially (1 at a time with 3s delay) to keep unlimited mode active - prevents toggling off unlimited",
+      "details": {
+        "script": "higgsfield_sequential_fix"
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
