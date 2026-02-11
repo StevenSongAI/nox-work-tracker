@@ -2002,6 +2002,16 @@
       },
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-11T15:09:37.754462Z",
+      "type": "script_build",
+      "description": "Built hot_vs_cold_voiceover: Analyzed Grox video transcript and wrote matching comedic voiceover script (~6,800 words)",
+      "details": {
+        "script": "hot_vs_cold_voiceover"
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
