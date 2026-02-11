@@ -2012,6 +2012,16 @@
       },
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-11T15:12:23.468983Z",
+      "type": "script_build",
+      "description": "Built higgsfield_batch_generation: Updated Higgsfield script to batch processing: 8 images at a time (4 if limit hit), 4-8x performance improvement",
+      "details": {
+        "script": "higgsfield_batch_generation"
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
