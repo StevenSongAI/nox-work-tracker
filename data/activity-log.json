@@ -2105,6 +2105,16 @@
       "details": {},
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-11T20:47:05.873315Z",
+      "type": "script_build",
+      "description": "Built minecraft_scraper_rewrite: Rewrote Minecraft scrapers - split browser (heartbeat) vs non-browser (cron), proper protocol documented",
+      "details": {
+        "script": "minecraft_scraper_rewrite"
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
