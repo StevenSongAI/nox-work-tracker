@@ -1992,6 +1992,16 @@
       },
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-11T15:01:19.099687Z",
+      "type": "script_build",
+      "description": "Built higgsfield_adaptive_generation: Built adaptive Higgsfield generation script with queue polling (1-20+ min waits)",
+      "details": {
+        "script": "higgsfield_adaptive_generation"
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
