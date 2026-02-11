@@ -2051,6 +2051,17 @@
       "details": {},
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-11T17:33:11.115376Z",
+      "type": "research",
+      "description": "Research on seedream_2_storyboard: Research note: SeeDream 2 storyboard video generation - potential to reduce editor workload",
+      "details": {
+        "topic": "seedream_2_storyboard",
+        "source": ""
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
