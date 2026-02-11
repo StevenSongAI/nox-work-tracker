@@ -175,7 +175,8 @@ def scan_for_new_work():
     
     new_activities = []
     
-    # Check each git repo for new commits
+    # 1. Check git repos for new commits
+    print("  📂 Scanning git repositories...")
     for repo_path in REPOS_TO_MONITOR:
         repo_name = Path(repo_path).name
         last_commit = SEEN_COMMITS.get(repo_name)
@@ -190,11 +191,30 @@ def scan_for_new_work():
             for commit in reversed(commits):  # Process oldest first
                 activity = commit_to_activity(commit)
                 new_activities.append(activity)
-                print(f"  ✅ Tracked: [{activity['agent'].upper()}] {activity['description'][:60]}...")
+                print(f"     ✅ Git: [{activity['agent'].upper()}] {activity['description'][:60]}...")
     
-    # Parse session transcripts (future enhancement)
-    # session_activities = parse_session_transcripts()
-    # new_activities.extend(session_activities)
+    # 2. Check OpenClaw session transcripts for activity
+    print("  📝 Scanning OpenClaw sessions...")
+    try:
+        import session_monitor
+        session_count = session_monitor.main()
+        
+        # Load session activities if any were found
+        session_file = TRACKER_DIR / ".session_activities.json"
+        if session_file.exists():
+            with open(session_file, 'r') as f:
+                session_activities = json.load(f)
+            
+            new_activities.extend(session_activities)
+            print(f"     ✅ Sessions: Found {len(session_activities)} activities")
+            
+            # Clean up temp file
+            session_file.unlink()
+        else:
+            print(f"     ℹ️  No new session activities")
+    
+    except Exception as e:
+        print(f"     ⚠️  Session monitoring failed: {e}")
     
     return new_activities
 
