@@ -13,8 +13,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 import time
 
-# Session transcript directory
-SESSIONS_DIR = Path("/Users/stevenai/.openclaw/agents/main/sessions")
+# Session transcript directories - scan ALL agents
+AGENT_DIRS = [
+    Path("/Users/stevenai/.openclaw/agents/main/sessions"),
+    Path("/Users/stevenai/.openclaw/agents/nox/sessions"),
+    Path("/Users/stevenai/.openclaw/agents/sage/sessions"),
+    Path("/Users/stevenai/.openclaw/agents/joy/sessions"),
+]
 
 # Track last timestamp we saw in each session (not just "processed" flag)
 SESSION_TIMESTAMPS = {}
@@ -208,36 +213,43 @@ def scan_sessions():
     
     new_activities = []
     
-    # Get all .jsonl files in sessions directory
-    session_files = list(SESSIONS_DIR.glob("*.jsonl"))
-    
-    for session_file in session_files:
-        session_id = session_file.stem
-        
-        # Get last timestamp we saw for this session
-        last_seen_timestamp = SESSION_TIMESTAMPS.get(session_id, 0)
-        
-        # Check file modification time - skip if file hasn't changed since last check
-        file_mtime = session_file.stat().st_mtime * 1000  # Convert to ms
-        if file_mtime <= last_seen_timestamp:
+    # Scan ALL agent directories
+    for sessions_dir in AGENT_DIRS:
+        if not sessions_dir.exists():
             continue
+            
+        agent_name = sessions_dir.parent.name  # Extract agent name from path
         
-        # Skip if file is too old (>7 days) AND we've already processed it
-        file_age_days = (time.time() - session_file.stat().st_mtime) / 86400
-        if file_age_days > 7 and last_seen_timestamp > 0:
-            continue
+        # Get all .jsonl files in sessions directory
+        session_files = list(sessions_dir.glob("*.jsonl"))
         
-        # Parse session for new activity
-        print(f"  📝 Scanning session: {session_id[:12]}...")
-        activities, latest_timestamp = parse_session_transcript(session_file, last_seen_timestamp)
-        
-        if activities:
-            print(f"     ✅ Found {len(activities)} new activities")
-            new_activities.extend(activities)
-        
-        # Update last-seen timestamp for this session
-        if latest_timestamp > last_seen_timestamp:
-            SESSION_TIMESTAMPS[session_id] = latest_timestamp
+        for session_file in session_files:
+            session_id = f"{agent_name}:{session_file.stem}"  # Prefix with agent name
+            
+            # Get last timestamp we saw for this session
+            last_seen_timestamp = SESSION_TIMESTAMPS.get(session_id, 0)
+            
+            # Check file modification time - skip if file hasn't changed since last check
+            file_mtime = session_file.stat().st_mtime * 1000  # Convert to ms
+            if file_mtime <= last_seen_timestamp:
+                continue
+            
+            # Skip if file is too old (>7 days) AND we've already processed it
+            file_age_days = (time.time() - session_file.stat().st_mtime) / 86400
+            if file_age_days > 7 and last_seen_timestamp > 0:
+                continue
+            
+            # Parse session for new activity
+            print(f"  📝 Scanning {agent_name}: {session_file.stem[:12]}...")
+            activities, latest_timestamp = parse_session_transcript(session_file, last_seen_timestamp)
+            
+            if activities:
+                print(f"     ✅ Found {len(activities)} new activities")
+                new_activities.extend(activities)
+            
+            # Update last-seen timestamp for this session
+            if latest_timestamp > last_seen_timestamp:
+                SESSION_TIMESTAMPS[session_id] = latest_timestamp
     
     return new_activities
 
@@ -261,7 +273,7 @@ def main():
     global SESSION_TIMESTAMPS
     
     print("🔍 SESSION ACTIVITY MONITOR")
-    print(f"   Sessions dir: {SESSIONS_DIR}")
+    print(f"   Scanning agents: main, nox, sage, joy")
     print("=" * 60)
     
     # Load session timestamps cache
