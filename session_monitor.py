@@ -306,12 +306,43 @@ def main():
         # Convert to log format
         log_entries = [convert_to_log_entry(a) for a in activities]
         
-        # Save to temporary file for auto_tracker to pick up
-        output_file = Path("/Users/stevenai/Desktop/Nox Builds/nox-work-tracker-repo/.session_activities.json")
-        with open(output_file, 'w') as f:
-            json.dump(log_entries, f, indent=2)
+        # Load existing activity log
+        log_file = Path(__file__).parent / "data" / "activity-log.json"
+        with open(log_file, 'r') as f:
+            log_data = json.load(f)
         
-        print(f"💾 Saved to {output_file}")
+        # Add new entries
+        log_data['entries'].extend(log_entries)
+        
+        # Sort by timestamp
+        log_data['entries'].sort(key=lambda x: x['timestamp'])
+        
+        # Update total count
+        log_data['totalEntries'] = len(log_data['entries'])
+        
+        # Save back
+        with open(log_file, 'w') as f:
+            json.dump(log_data, f, indent=2)
+        
+        print(f"💾 Updated activity-log.json ({len(log_entries)} new entries)")
+        
+        # Git commit and push
+        import subprocess
+        repo_dir = Path(__file__).parent
+        try:
+            subprocess.run(['git', 'add', 'data/activity-log.json', '.processed_sessions.json'], 
+                          cwd=repo_dir, check=True, capture_output=True)
+            
+            commit_msg = f"[auto] Session monitor: {len(log_entries)} new activities"
+            subprocess.run(['git', 'commit', '-m', commit_msg], 
+                          cwd=repo_dir, check=True, capture_output=True)
+            
+            subprocess.run(['git', 'push', 'origin', 'main'], 
+                          cwd=repo_dir, check=True, capture_output=True)
+            
+            print(f"✅ Committed and pushed to GitHub")
+        except subprocess.CalledProcessError as e:
+            print(f"⚠️  Git error: {e}")
     else:
         print("ℹ️  No new activities found")
     
