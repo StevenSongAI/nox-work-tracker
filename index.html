@@ -145,7 +145,8 @@
     async function loadData() {
       try {
         const response = await fetch('data/activity-log.json?t=' + Date.now());
-        activities = await response.json();
+        const data = await response.json();
+        activities = data.entries || [];
         renderActivities();
         renderStats();
       } catch (error) {
@@ -204,9 +205,9 @@
             <div class="flex items-start justify-between">
               <div class="flex-1">
                 <div class="flex items-center gap-2 mb-1">
-                  <span class="${agentColor} font-bold text-sm">${activity.agent.toUpperCase()}</span>
+                  <span class="${agentColor} font-bold text-sm">${(activity.agent || 'unknown').toUpperCase()}</span>
                   <span class="text-xs text-gray-500">${timeStr}</span>
-                  <span class="text-xs text-gray-600">${activity.project}</span>
+                  ${activity.project ? `<span class="text-xs text-gray-600">${activity.project}</span>` : ''}
                 </div>
                 <div class="flex items-start gap-2">
                   <span>${typeIcon}</span>
