@@ -58,10 +58,15 @@ def parse_session_transcript(session_file, last_seen_timestamp=0):
                 except:
                     continue
                 
-                # Get entry timestamp (handle both int and string timestamps)
+                # Get entry timestamp (handle both int and ISO string timestamps)
                 entry_timestamp = entry.get('timestamp', 0)
                 try:
-                    entry_timestamp = float(entry_timestamp) if entry_timestamp else 0
+                    if isinstance(entry_timestamp, str):
+                        # Parse ISO 8601 timestamp to Unix timestamp in ms
+                        dt = datetime.fromisoformat(entry_timestamp.replace('Z', '+00:00'))
+                        entry_timestamp = dt.timestamp() * 1000
+                    else:
+                        entry_timestamp = float(entry_timestamp) if entry_timestamp else 0
                 except (ValueError, TypeError):
                     entry_timestamp = 0
                 
@@ -83,8 +88,10 @@ def parse_session_transcript(session_file, last_seen_timestamp=0):
                         agent = "joy"
                 
                 # Look for assistant messages with tool calls
-                if entry.get('role') == 'assistant':
-                    content = entry.get('content', [])
+                # Handle both direct role or nested in message object
+                message = entry.get('message', entry)
+                if message.get('role') == 'assistant':
+                    content = message.get('content', [])
                     
                     for item in content:
                         if isinstance(item, dict) and item.get('type') == 'toolCall':
@@ -256,7 +263,17 @@ def scan_sessions():
 def convert_to_log_entry(activity):
     """Convert session activity to work log format."""
     timestamp_ms = activity.get('timestamp', time.time() * 1000)
-    timestamp_iso = datetime.fromtimestamp(timestamp_ms / 1000, tz=timezone.utc).isoformat()
+    
+    # Handle both numeric and ISO string timestamps
+    if isinstance(timestamp_ms, str):
+        # Already ISO format, use as-is
+        timestamp_iso = timestamp_ms
+        # Extract ms for ID
+        dt = datetime.fromisoformat(timestamp_ms.replace('Z', '+00:00'))
+        timestamp_ms = int(dt.timestamp() * 1000)
+    else:
+        # Convert numeric ms to ISO
+        timestamp_iso = datetime.fromtimestamp(timestamp_ms / 1000, tz=timezone.utc).isoformat()
     
     return {
         'id': f"session-{int(timestamp_ms)}",
