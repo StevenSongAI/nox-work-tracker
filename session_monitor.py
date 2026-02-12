@@ -2,6 +2,9 @@
 """
 Session Activity Monitor - Tracks OpenClaw agent activity from session transcripts
 Monitors: tool calls, subagent spawns, file operations, browser automation, etc.
+
+FIXED: Now tracks last-seen timestamp per session instead of marking entire sessions as "processed"
+This allows continuous monitoring of ongoing long-running sessions.
 """
 
 import json
@@ -13,25 +16,31 @@ import time
 # Session transcript directory
 SESSIONS_DIR = Path("/Users/stevenai/.openclaw/agents/main/sessions")
 
-# Track which sessions we've already processed
-PROCESSED_SESSIONS = set()
+# Track last timestamp we saw in each session (not just "processed" flag)
+SESSION_TIMESTAMPS = {}
 SESSIONS_CACHE_FILE = Path("/Users/stevenai/Desktop/Nox Builds/nox-work-tracker-repo/.processed_sessions.json")
 
-def load_processed_sessions():
-    """Load set of session IDs we've already processed."""
+def load_session_timestamps():
+    """Load last-seen timestamp for each session."""
     if SESSIONS_CACHE_FILE.exists():
         with open(SESSIONS_CACHE_FILE, 'r') as f:
-            return set(json.load(f))
-    return set()
+            data = json.load(f)
+            # Handle old format (list) vs new format (dict)
+            if isinstance(data, list):
+                # Convert old format to new: assume all old sessions are fully processed
+                return {session_id: float('inf') for session_id in data}
+            return data
+    return {}
 
-def save_processed_sessions():
-    """Save processed session IDs."""
+def save_session_timestamps():
+    """Save last-seen timestamps for each session."""
     with open(SESSIONS_CACHE_FILE, 'w') as f:
-        json.dump(list(PROCESSED_SESSIONS), f, indent=2)
+        json.dump(SESSION_TIMESTAMPS, f, indent=2)
 
-def parse_session_transcript(session_file):
-    """Parse a session transcript and extract activities."""
+def parse_session_transcript(session_file, last_seen_timestamp=0):
+    """Parse a session transcript and extract activities AFTER last_seen_timestamp."""
     activities = []
+    latest_timestamp = last_seen_timestamp
     
     try:
         with open(session_file, 'r') as f:
@@ -43,6 +52,21 @@ def parse_session_transcript(session_file):
                     entry = json.loads(line)
                 except:
                     continue
+                
+                # Get entry timestamp (handle both int and string timestamps)
+                entry_timestamp = entry.get('timestamp', 0)
+                try:
+                    entry_timestamp = float(entry_timestamp) if entry_timestamp else 0
+                except (ValueError, TypeError):
+                    entry_timestamp = 0
+                
+                # Skip if we've already processed this entry
+                if entry_timestamp <= last_seen_timestamp:
+                    continue
+                
+                # Track latest timestamp we've seen
+                if entry_timestamp > latest_timestamp:
+                    latest_timestamp = entry_timestamp
                 
                 # Extract agent from session label or content
                 agent = "nox"  # Default
@@ -77,13 +101,13 @@ def parse_session_transcript(session_file):
                                     'type': 'subagent_spawn',
                                     'agent': agent,
                                     'description': f"Spawned subagent for background task",
-                                    'timestamp': entry.get('timestamp', time.time() * 1000)
+                                    'timestamp': entry_timestamp
                                 })
     
     except Exception as e:
         print(f"  ⚠️  Error parsing {session_file.name}: {e}")
     
-    return activities
+    return activities, latest_timestamp
 
 def classify_tool_activity(tool_name, tool_args, agent, entry):
     """Classify a tool call into an activity type."""
@@ -114,7 +138,7 @@ def classify_tool_activity(tool_name, tool_args, agent, entry):
     elif tool_name == 'exec':
         command = tool_args.get('command', '')
         # Skip trivial commands
-        if command in ['echo', 'ls', 'cat', 'pwd']:
+        if any(cmd in command for cmd in ['echo', 'ls', 'cat', 'pwd', 'sleep']):
             return None
         
         # Detect script execution
@@ -178,9 +202,9 @@ def classify_tool_activity(tool_name, tool_args, agent, entry):
     
     return None
 
-def scan_new_sessions():
-    """Scan for new session files and extract activities."""
-    global PROCESSED_SESSIONS
+def scan_sessions():
+    """Scan session files for new activities since last check."""
+    global SESSION_TIMESTAMPS
     
     new_activities = []
     
@@ -190,26 +214,30 @@ def scan_new_sessions():
     for session_file in session_files:
         session_id = session_file.stem
         
-        # Skip if already processed
-        if session_id in PROCESSED_SESSIONS:
+        # Get last timestamp we saw for this session
+        last_seen_timestamp = SESSION_TIMESTAMPS.get(session_id, 0)
+        
+        # Check file modification time - skip if file hasn't changed since last check
+        file_mtime = session_file.stat().st_mtime * 1000  # Convert to ms
+        if file_mtime <= last_seen_timestamp:
             continue
         
-        # Skip if file is too old (>7 days)
+        # Skip if file is too old (>7 days) AND we've already processed it
         file_age_days = (time.time() - session_file.stat().st_mtime) / 86400
-        if file_age_days > 7:
-            PROCESSED_SESSIONS.add(session_id)
+        if file_age_days > 7 and last_seen_timestamp > 0:
             continue
         
-        # Parse session
-        print(f"  📝 Parsing session: {session_id}")
-        activities = parse_session_transcript(session_file)
+        # Parse session for new activity
+        print(f"  📝 Scanning session: {session_id[:12]}...")
+        activities, latest_timestamp = parse_session_transcript(session_file, last_seen_timestamp)
         
         if activities:
-            print(f"     Found {len(activities)} activities")
+            print(f"     ✅ Found {len(activities)} new activities")
             new_activities.extend(activities)
         
-        # Mark as processed
-        PROCESSED_SESSIONS.add(session_id)
+        # Update last-seen timestamp for this session
+        if latest_timestamp > last_seen_timestamp:
+            SESSION_TIMESTAMPS[session_id] = latest_timestamp
     
     return new_activities
 
@@ -230,18 +258,18 @@ def convert_to_log_entry(activity):
 
 def main():
     """Main entry point for session monitoring."""
-    global PROCESSED_SESSIONS
+    global SESSION_TIMESTAMPS
     
     print("🔍 SESSION ACTIVITY MONITOR")
     print(f"   Sessions dir: {SESSIONS_DIR}")
     print("=" * 60)
     
-    # Load processed sessions cache
-    PROCESSED_SESSIONS = load_processed_sessions()
-    print(f"📋 Previously processed: {len(PROCESSED_SESSIONS)} sessions")
+    # Load session timestamps cache
+    SESSION_TIMESTAMPS = load_session_timestamps()
+    print(f"📋 Tracking {len(SESSION_TIMESTAMPS)} sessions")
     
     # Scan for new activities
-    activities = scan_new_sessions()
+    activities = scan_sessions()
     
     if activities:
         print(f"\n✅ Found {len(activities)} new activities from sessions")
@@ -249,7 +277,7 @@ def main():
         # Convert to log format
         log_entries = [convert_to_log_entry(a) for a in activities]
         
-        # Save to temporary file for git_monitor to pick up
+        # Save to temporary file for auto_tracker to pick up
         output_file = Path("/Users/stevenai/Desktop/Nox Builds/nox-work-tracker-repo/.session_activities.json")
         with open(output_file, 'w') as f:
             json.dump(log_entries, f, indent=2)
@@ -258,8 +286,8 @@ def main():
     else:
         print("ℹ️  No new activities found")
     
-    # Save processed sessions cache
-    save_processed_sessions()
+    # Save session timestamps cache
+    save_session_timestamps()
     
     print("✅ Session scan complete\n")
     return len(activities)
