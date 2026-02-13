@@ -18190,6 +18190,16 @@
       },
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-13T14:01:06.128229Z",
+      "type": "script_build",
+      "description": "Built x_intelligence_scraper: 9 AM scrape: 58 tweets from 10 queries",
+      "details": {
+        "script": "x_intelligence_scraper"
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
