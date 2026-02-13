@@ -18127,6 +18127,15 @@
       "source": "session_monitor"
     },
     {
+      "id": "session-1770987605087",
+      "timestamp": "2026-02-13T13:00:05.087Z",
+      "agent": "nox",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd ~/Desktop/Nox\\ Builds/nox-scrapers && source venv/bin/act",
+      "source": "session_monitor"
+    },
+    {
       "timestamp": "2026-02-13T13:00:49.269545Z",
       "type": "script_build",
       "description": "Built viewstats_scraper: 8 AM hourly scrape: 37 new outliers across 5 categories",
@@ -18135,6 +18144,24 @@
       },
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "id": "session-1770987664231",
+      "timestamp": "2026-02-13T13:01:04.231Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: MiniMax M2.5 API model name OpenRouter provider endpoint",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1770987668974",
+      "timestamp": "2026-02-13T13:01:08.974Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://openrouter.ai/minimax/minimax-m2.5",
+      "source": "session_monitor"
     }
   ],
   "agents": {
@@ -18161,5 +18188,5 @@
     "lastUpdated": "2026-02-10T13:05:00Z",
     "totalEntries": 82
   },
-  "totalEntries": 1881
+  "totalEntries": 1885
 }
