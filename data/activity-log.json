@@ -18576,6 +18576,17 @@
       "project": "session_activity",
       "description": "Web research: https://economictimes.indiatimes.com/us/news/seedance-2-0-go",
       "source": "session_monitor"
+    },
+    {
+      "timestamp": "2026-02-13T17:02:43.384567Z",
+      "type": "research",
+      "description": "Research on seedance_2_research: Added Seedance 2.0 research note to dashboard - ByteDance major upgrade with multi-lens storytelling",
+      "details": {
+        "topic": "seedance_2_research",
+        "source": ""
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
