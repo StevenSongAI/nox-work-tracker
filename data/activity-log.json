@@ -18359,6 +18359,16 @@
       },
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-13T16:30:59.044869Z",
+      "type": "script_build",
+      "description": "Built youtube_scraper: 11:30 AM hourly scrape: 20 new videos, 7 queries",
+      "details": {
+        "script": "youtube_scraper"
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
