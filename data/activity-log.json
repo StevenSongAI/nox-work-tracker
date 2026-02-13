@@ -18237,6 +18237,16 @@
       },
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-13T14:15:39.834431Z",
+      "type": "script_build",
+      "description": "Built minecraft_artist_scraper: 9:15 AM scrape: 9 candidates from 5 queries",
+      "details": {
+        "script": "minecraft_artist_scraper"
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
