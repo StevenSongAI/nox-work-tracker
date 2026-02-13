@@ -18749,6 +18749,132 @@
       "project": "session_activity",
       "description": "Browser action: act",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003267638",
+      "timestamp": "2026-02-13T17:21:07.638Z",
+      "agent": "nox",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: ## TASK: Check Upwork job posting candidates\n\n## CRITICAL: T",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003281665",
+      "timestamp": "2026-02-13T17:21:21.665Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: tabs",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003288443",
+      "timestamp": "2026-02-13T17:21:28.443Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: tabs",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003290192",
+      "timestamp": "2026-02-13T17:21:30.192Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: status",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003292199",
+      "timestamp": "2026-02-13T17:21:32.199Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: start",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003294935",
+      "timestamp": "2026-02-13T17:21:34.935Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: open",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003305902",
+      "timestamp": "2026-02-13T17:21:45.902Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003309491",
+      "timestamp": "2026-02-13T17:21:49.491Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: navigate",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003321224",
+      "timestamp": "2026-02-13T17:22:01.224Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003326315",
+      "timestamp": "2026-02-13T17:22:06.315Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003329625",
+      "timestamp": "2026-02-13T17:22:09.625Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: navigate",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003339284",
+      "timestamp": "2026-02-13T17:22:19.284Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003348421",
+      "timestamp": "2026-02-13T17:22:28.421Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771003351345",
+      "timestamp": "2026-02-13T17:22:31.345Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
     }
   ],
   "agents": {
@@ -18775,5 +18901,5 @@
     "lastUpdated": "2026-02-10T13:05:00Z",
     "totalEntries": 82
   },
-  "totalEntries": 1949
+  "totalEntries": 1963
 }
