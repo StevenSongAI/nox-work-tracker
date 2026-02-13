@@ -19487,6 +19487,267 @@
       "project": "session_activity",
       "description": "Browser action: act",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006079195",
+      "timestamp": "2026-02-13T18:07:59.195Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: start",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006084088",
+      "timestamp": "2026-02-13T18:08:04.088Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: navigate",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006089606",
+      "timestamp": "2026-02-13T18:08:09.606Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006102427",
+      "timestamp": "2026-02-13T18:08:22.427Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006107053",
+      "timestamp": "2026-02-13T18:08:27.053Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006112651",
+      "timestamp": "2026-02-13T18:08:32.651Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006119124",
+      "timestamp": "2026-02-13T18:08:39.124Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006123903",
+      "timestamp": "2026-02-13T18:08:43.903Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006136070",
+      "timestamp": "2026-02-13T18:08:56.070Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: start",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006140994",
+      "timestamp": "2026-02-13T18:09:00.994Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: navigate",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006146557",
+      "timestamp": "2026-02-13T18:09:06.557Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006159522",
+      "timestamp": "2026-02-13T18:09:19.522Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006164736",
+      "timestamp": "2026-02-13T18:09:24.736Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006173495",
+      "timestamp": "2026-02-13T18:09:33.495Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006179037",
+      "timestamp": "2026-02-13T18:09:39.037Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006191177",
+      "timestamp": "2026-02-13T18:09:51.177Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: start",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006196605",
+      "timestamp": "2026-02-13T18:09:56.605Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: navigate",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006202345",
+      "timestamp": "2026-02-13T18:10:02.345Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006213487",
+      "timestamp": "2026-02-13T18:10:13.487Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006217817",
+      "timestamp": "2026-02-13T18:10:17.817Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006225960",
+      "timestamp": "2026-02-13T18:10:25.960Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006232051",
+      "timestamp": "2026-02-13T18:10:32.051Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006245477",
+      "timestamp": "2026-02-13T18:10:45.477Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: start",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006250171",
+      "timestamp": "2026-02-13T18:10:50.171Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: navigate",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006256054",
+      "timestamp": "2026-02-13T18:10:56.054Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006268521",
+      "timestamp": "2026-02-13T18:11:08.521Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006273973",
+      "timestamp": "2026-02-13T18:11:13.973Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006325432",
+      "timestamp": "2026-02-13T18:12:05.432Z",
+      "agent": "nox",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771006340283",
+      "timestamp": "2026-02-13T18:12:20.283Z",
+      "agent": "nox",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: runs",
+      "source": "session_monitor"
     }
   ],
   "agents": {
@@ -19513,5 +19774,5 @@
     "lastUpdated": "2026-02-10T13:05:00Z",
     "totalEntries": 82
   },
-  "totalEntries": 2031
+  "totalEntries": 2060
 }
