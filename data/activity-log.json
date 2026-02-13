@@ -20423,6 +20423,15 @@
       "project": "session_activity",
       "description": "Browser action: act",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1771011213987",
+      "timestamp": "2026-02-13T19:33:33.987Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: open",
+      "source": "session_monitor"
     }
   ],
   "agents": {
@@ -20449,5 +20458,5 @@
     "lastUpdated": "2026-02-10T13:05:00Z",
     "totalEntries": 82
   },
-  "totalEntries": 2135
+  "totalEntries": 2136
 }
