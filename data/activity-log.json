@@ -17365,6 +17365,16 @@
       "project": "session_activity",
       "description": "Executed script/command: cd ~/Desktop/Nox\\ Builds/minecraft-map-artists && source ven",
       "source": "session_monitor"
+    },
+    {
+      "timestamp": "2026-02-13T07:32:14.551539Z",
+      "type": "analysis",
+      "description": "Analysis of minecraft_artist_scraper: Overnight analysis: 0/7 X.com candidates qualified - all filtered out (spam, non-Minecraft artists).",
+      "details": {
+        "subject": "minecraft_artist_scraper"
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
