@@ -17347,6 +17347,24 @@
       "project": "session_activity",
       "description": "Spawned subagent: VALUE AUDIT - X.com Intelligence Analysis Review\n\n**USE THE ",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1770967827252",
+      "timestamp": "2026-02-13T07:30:27.252Z",
+      "agent": "nox",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1770967846801",
+      "timestamp": "2026-02-13T07:30:46.801Z",
+      "agent": "nox",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd ~/Desktop/Nox\\ Builds/minecraft-map-artists && source ven",
+      "source": "session_monitor"
     }
   ],
   "agents": {
@@ -17373,5 +17391,5 @@
     "lastUpdated": "2026-02-10T13:05:00Z",
     "totalEntries": 82
   },
-  "totalEntries": 1796
+  "totalEntries": 1798
 }
