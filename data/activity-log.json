@@ -20504,6 +20504,51 @@
       "project": "session_activity",
       "description": "Browser action: act",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1771012320176",
+      "timestamp": "2026-02-13T19:52:00.176Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: start",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771012327290",
+      "timestamp": "2026-02-13T19:52:07.290Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: open",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771012343617",
+      "timestamp": "2026-02-13T19:52:23.617Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771012355573",
+      "timestamp": "2026-02-13T19:52:35.573Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771012370860",
+      "timestamp": "2026-02-13T19:52:50.860Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
     }
   ],
   "agents": {
@@ -20530,5 +20575,5 @@
     "lastUpdated": "2026-02-10T13:05:00Z",
     "totalEntries": 82
   },
-  "totalEntries": 2144
+  "totalEntries": 2149
 }
