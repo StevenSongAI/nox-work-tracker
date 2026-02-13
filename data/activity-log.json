@@ -18239,6 +18239,24 @@
       "session": "main"
     },
     {
+      "id": "session-1770992105066",
+      "timestamp": "2026-02-13T14:15:05.066Z",
+      "agent": "nox",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd ~/Desktop/Nox\\ Builds/minecraft-map-artists && source ven",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1770992139796",
+      "timestamp": "2026-02-13T14:15:39.796Z",
+      "agent": "nox",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd ~/Desktop/Nox\\ Builds/nox-work-tracker-repo && python3 au",
+      "source": "session_monitor"
+    },
+    {
       "timestamp": "2026-02-13T14:15:39.834431Z",
       "type": "script_build",
       "description": "Built minecraft_artist_scraper: 9:15 AM scrape: 9 candidates from 5 queries",
@@ -18273,5 +18291,5 @@
     "lastUpdated": "2026-02-10T13:05:00Z",
     "totalEntries": 82
   },
-  "totalEntries": 1893
+  "totalEntries": 1896
 }
