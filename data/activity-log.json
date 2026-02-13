@@ -17889,6 +17889,16 @@
       "project": "session_activity",
       "description": "Spawned subagent: VALUE AUDIT \u2014 Dashboard Health Work Review\n\nReview completed",
       "source": "session_monitor"
+    },
+    {
+      "timestamp": "2026-02-13T12:05:35.309367Z",
+      "type": "script_build",
+      "description": "Built viewstats_scraper: 7 AM hourly scrape: 26 new outliers across 5 categories",
+      "details": {
+        "script": "viewstats_scraper"
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
