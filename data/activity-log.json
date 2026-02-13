@@ -18486,6 +18486,33 @@
       "project": "session_activity",
       "description": "Browser action: act",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1771000663230",
+      "timestamp": "2026-02-13T16:37:43.230Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771000669918",
+      "timestamp": "2026-02-13T16:37:49.918Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771000680884",
+      "timestamp": "2026-02-13T16:38:00.884Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
     }
   ],
   "agents": {
@@ -18512,5 +18539,5 @@
     "lastUpdated": "2026-02-10T13:05:00Z",
     "totalEntries": 82
   },
-  "totalEntries": 1920
+  "totalEntries": 1923
 }
