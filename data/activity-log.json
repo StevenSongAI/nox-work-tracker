@@ -17824,6 +17824,17 @@
       },
       "agent": "nox",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-13T11:34:15.360167Z",
+      "type": "research",
+      "description": "Research on minimax_m25_research: Added MiniMax M2.5 research note to dashboard + fixed broken research.json",
+      "details": {
+        "topic": "minimax_m25_research",
+        "source": ""
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
