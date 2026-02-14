@@ -52,6 +52,7 @@ const server = http.createServer((req, res) => {
 
   fs.readFile(filePath, (error, content) => {
     if (error) {
+      console.log(`DEBUG: Error reading file: ${error.code} - ${error.message}`);
       if (error.code === 'ENOENT') {
         res.writeHead(404, { 'Content-Type': 'text/html' });
         res.end('<h1>404 Not Found</h1>', 'utf-8');
@@ -60,6 +61,7 @@ const server = http.createServer((req, res) => {
         res.end('Sorry, check with the site admin for error: ' + error.code + ' ..\n');
       }
     } else {
+      console.log(`DEBUG: Successfully read file, size: ${content.length}`);
       res.writeHead(200, { 'Content-Type': contentType });
       res.end(content, 'utf-8');
     }
