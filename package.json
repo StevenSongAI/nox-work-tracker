@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Work tracker dashboard for Nox AI",
   "scripts": {
-    "start": "serve . -l $PORT"
+    "start": "serve . -l ${PORT:-3000}"
+  },
+  "dependencies": {
+    "serve": "^14.0.0"
   }
 }
