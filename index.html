@@ -149,6 +149,27 @@
   </main>
 
   <script>
+    // NUCLEAR CACHE BUST: Unregister all service workers on load
+    (async function nuclearCacheBust() {
+      if (!('serviceWorker' in navigator)) return;
+      
+      console.log('[NUCLEAR] Unregistering all service workers...');
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      for (const reg of registrations) {
+        console.log('[NUCLEAR] Unregistering:', reg.scope);
+        await reg.unregister();
+      }
+      
+      if (window.caches) {
+        const cacheNames = await caches.keys();
+        for (const name of cacheNames) {
+          console.log('[NUCLEAR] Deleting cache:', name);
+          await caches.delete(name);
+        }
+      }
+      console.log('[NUCLEAR] Cache bust complete');
+    })();
+
     let activities = [];
     let currentTab = 'all';
     let typeFilter = '';
@@ -169,7 +190,10 @@
     // Load Data
     async function loadData() {
       try {
-        const response = await fetch('data/activity-log.json?t=' + Date.now());
+        const response = await fetch('data/activity-log.json?t=' + Date.now(), {
+          cache: 'no-store',
+          headers: { 'Cache-Control': 'no-cache' }
+        });
         const data = await response.json();
         activities = data.entries || [];
         renderActivities();
