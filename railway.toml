@@ -1,8 +1,6 @@
 [build]
-builder = "nixpacks"
-buildCommand = "ls -la data/ && cat data/activity-log.json | head -5"
+builder = "dockerfile"
 watchPatterns = ["data/**", "*.json", "*.html", "*.js", "*.css"]
 
 [deploy]
-startCommand = "npm start"
 restartPolicyType = "on_failure"
