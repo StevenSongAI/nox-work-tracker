@@ -9,9 +9,25 @@ This allows continuous monitoring of ongoing long-running sessions.
 
 import json
 import os
+import logging
 from datetime import datetime, timezone
 from pathlib import Path
 import time
+
+# Setup logging to auto_tracker.log
+log_dir = Path("/Users/stevenai/Desktop/Nox Builds/nox-work-tracker-repo/logs")
+log_dir.mkdir(parents=True, exist_ok=True)
+log_file = log_dir / "auto_tracker.log"
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 # Session transcript directories - scan ALL agents
 AGENT_DIRS = [
@@ -56,8 +72,17 @@ def save_session_timestamps():
     with open(SESSIONS_CACHE_FILE, 'w') as f:
         json.dump(cleaned_timestamps, f, indent=2)
 
-def parse_session_transcript(session_file, last_seen_timestamp=0):
-    """Parse a session transcript and extract activities AFTER last_seen_timestamp."""
+def parse_session_transcript(session_file, agent_name, last_seen_timestamp=0):
+    """Parse a session transcript and extract activities AFTER last_seen_timestamp.
+    
+    Args:
+        session_file: Path to the session transcript file
+        agent_name: Name of the agent (main, nox, sage, joy) - REQUIRED
+        last_seen_timestamp: Timestamp of last processed entry (default 0)
+    
+    Returns:
+        tuple: (activities list, latest_timestamp)
+    """
     activities = []
     # Ensure last_seen_timestamp is numeric (not string from JSON)
     try:
@@ -90,21 +115,25 @@ def parse_session_transcript(session_file, last_seen_timestamp=0):
                     entry_timestamp = 0
                 
                 # Skip if we've already processed this entry
-                if entry_timestamp <= last_seen_timestamp:
+                # Ensure BOTH operands are float before comparison to avoid type errors
+                try:
+                    entry_ts = float(entry_timestamp) if entry_timestamp else 0
+                except (ValueError, TypeError):
+                    entry_ts = 0
+                try:
+                    last_ts = float(last_seen_timestamp) if last_seen_timestamp else 0
+                except (ValueError, TypeError):
+                    last_ts = 0
+                
+                if entry_ts <= last_ts:
                     continue
                 
                 # Track latest timestamp we've seen
                 if entry_timestamp > latest_timestamp:
                     latest_timestamp = entry_timestamp
                 
-                # Extract agent from session label or content
-                agent = "nox"  # Default
-                if 'label' in entry:
-                    label = entry['label'].lower()
-                    if 'sage' in label or 'health' in label:
-                        agent = "sage"
-                    elif 'joy' in label or 'fun' in label:
-                        agent = "joy"
+                # Use the agent_name passed from scan_sessions()
+                agent = agent_name
                 
                 # Look for assistant messages with tool calls
                 # Handle both direct role or nested in message object
@@ -136,6 +165,7 @@ def parse_session_transcript(session_file, last_seen_timestamp=0):
                                 })
     
     except Exception as e:
+        logger.error(f"Error parsing {session_file.name}: {e}")
         print(f"  ⚠️  Error parsing {session_file.name}: {e}")
     
     return activities, latest_timestamp
@@ -267,10 +297,24 @@ def scan_sessions():
             
             # Parse session for new activity
             print(f"  📝 Scanning {agent_name}: {session_file.stem[:12]}...")
-            activities, latest_timestamp = parse_session_transcript(session_file, last_seen_timestamp)
+            logger.info(f"Scanning session: agent={agent_name}, session={session_file.stem[:12]}")
+            
+            # Pass agent_name explicitly to ensure correct attribution
+            activities, latest_timestamp = parse_session_transcript(
+                session_file, 
+                agent_name=agent_name, 
+                last_seen_timestamp=last_seen_timestamp
+            )
             
             if activities:
-                print(f"     ✅ Found {len(activities)} new activities")
+                # Log activities by agent for debugging
+                agent_counts = {}
+                for act in activities:
+                    a = act.get('agent', 'unknown')
+                    agent_counts[a] = agent_counts.get(a, 0) + 1
+                
+                logger.info(f"Found {len(activities)} activities from {agent_name}: {agent_counts}")
+                print(f"     ✅ Found {len(activities)} new activities ({agent_counts})")
                 new_activities.extend(activities)
             
             # Update last-seen timestamp for this session
@@ -304,9 +348,33 @@ def convert_to_log_entry(activity):
         'source': 'session_monitor'
     }
 
+def load_meta():
+    """Load meta.json file."""
+    meta_file = Path(__file__).parent / "data" / "meta.json"
+    if meta_file.exists():
+        with open(meta_file, 'r') as f:
+            return json.load(f)
+    return {
+        "lastUpdated": datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
+        "syncStatus": "active",
+        "cacheBust": "v0000",
+        "totalActivities": 0,
+        "totalEntries": 0
+    }
+
+def save_meta(meta_data):
+    """Save meta.json file."""
+    meta_file = Path(__file__).parent / "data" / "meta.json"
+    with open(meta_file, 'w') as f:
+        json.dump(meta_data, f, indent=2)
+
 def main():
     """Main entry point for session monitoring."""
     global SESSION_TIMESTAMPS
+    
+    logger.info("=" * 60)
+    logger.info("SESSION ACTIVITY MONITOR STARTED")
+    logger.info("Scanning agents: main, nox, sage, joy")
     
     print("🔍 SESSION ACTIVITY MONITOR")
     print(f"   Scanning agents: main, nox, sage, joy")
@@ -314,16 +382,24 @@ def main():
     
     # Load session timestamps cache
     SESSION_TIMESTAMPS = load_session_timestamps()
+    logger.info(f"Loaded {len(SESSION_TIMESTAMPS)} session timestamps from cache")
     print(f"📋 Tracking {len(SESSION_TIMESTAMPS)} sessions")
     
+    # Load meta.json
+    meta_data = load_meta()
+    logger.info(f"Loaded meta.json: {meta_data.get('totalActivities', 0)} total activities")
+    
     # Scan for new activities
+    logger.info("Starting session scan...")
     activities = scan_sessions()
     
     if activities:
+        logger.info(f"Found {len(activities)} total new activities from all sessions")
         print(f"\n✅ Found {len(activities)} new activities from sessions")
         
         # Convert to log format
         log_entries = [convert_to_log_entry(a) for a in activities]
+        logger.info(f"Converted {len(log_entries)} activities to log entries")
         
         # Load existing activity log
         log_file = Path(__file__).parent / "data" / "activity-log.json"
@@ -331,6 +407,7 @@ def main():
             log_data = json.load(f)
         
         # Add new entries
+        initial_count = len(log_data['entries'])
         log_data['entries'].extend(log_entries)
         
         # Sort by timestamp
@@ -343,31 +420,53 @@ def main():
         with open(log_file, 'w') as f:
             json.dump(log_data, f, indent=2)
         
+        logger.info(f"Updated activity-log.json: {initial_count} → {log_data['totalEntries']} entries")
         print(f"💾 Updated activity-log.json ({len(log_entries)} new entries)")
+        
+        # Update meta.json with fresh timestamp and counts
+        now = datetime.now(timezone.utc)
+        timestamp_iso = now.isoformat().replace('+00:00', 'Z')
+        cache_bust = f"v{now.strftime('%m%d%H%M%S')}"
+        
+        meta_data['lastUpdated'] = timestamp_iso
+        meta_data['totalActivities'] = len(log_data['entries'])
+        meta_data['totalEntries'] = len(log_data['entries'])
+        meta_data['cacheBust'] = cache_bust
+        
+        save_meta(meta_data)
+        print(f"💾 Updated meta.json (timestamp: {timestamp_iso})")
         
         # Git commit and push
         import subprocess
         repo_dir = Path(__file__).parent
         try:
-            subprocess.run(['git', 'add', 'data/activity-log.json', '.processed_sessions.json'], 
+            logger.info("Starting git operations...")
+            subprocess.run(['git', 'add', 'data/activity-log.json', 'data/meta.json', '.processed_sessions.json'], 
                           cwd=repo_dir, check=True, capture_output=True)
+            logger.info("Git add completed")
             
             commit_msg = f"[auto] Session monitor: {len(log_entries)} new activities"
             subprocess.run(['git', 'commit', '-m', commit_msg], 
                           cwd=repo_dir, check=True, capture_output=True)
+            logger.info(f"Git commit completed: {commit_msg}")
             
             subprocess.run(['git', 'push', 'origin', 'main'], 
                           cwd=repo_dir, check=True, capture_output=True)
+            logger.info("Git push completed")
             
             print(f"✅ Committed and pushed to GitHub")
         except subprocess.CalledProcessError as e:
+            logger.error(f"Git error: {e}")
             print(f"⚠️  Git error: {e}")
     else:
+        logger.info("No new activities found")
         print("ℹ️  No new activities found")
     
     # Save session timestamps cache
     save_session_timestamps()
+    logger.info(f"Saved {len(SESSION_TIMESTAMPS)} session timestamps to cache")
     
+    logger.info("Session scan complete")
     print("✅ Session scan complete\n")
     return len(activities)
 

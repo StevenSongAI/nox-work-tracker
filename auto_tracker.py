@@ -19,6 +19,19 @@ ACTIVITY_LOG = TRACKER_DIR / "data" / "activity-log.json"
 META_FILE = TRACKER_DIR / "meta.json"
 STOP_FILE = TRACKER_DIR / "STOP_AUTO_TRACKER"
 
+import logging
+
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(TRACKER_DIR / "logs" / "auto_tracker.log"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
+
 # Session transcript paths for all 3 agents
 SESSIONS_DIR = Path("/Users/stevenai/.openclaw/agents/main/sessions")
 

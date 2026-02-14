@@ -16,11 +16,41 @@ META_PATH = os.path.join(WORK_TRACKER_PATH, "data", "meta.json")
 ROOT_META_PATH = os.path.join(WORK_TRACKER_PATH, "meta.json")
 
 
+def _detect_agent_from_session() -> str:
+    """
+    Auto-detect agent name from session path.
+    Pattern: ~/.openclaw/sessions/{agent}_{id}/
+    Defaults to 'main' if unable to detect.
+    """
+    try:
+        # Check if running in a session with identifiable path
+        cwd = os.getcwd()
+        if '.openclaw/sessions/' in cwd:
+            # Extract agent from path like: ~/.openclaw/sessions/nox_abc123/
+            parts = cwd.split('.openclaw/sessions/')
+            if len(parts) > 1:
+                session_part = parts[1].split('/')[0]
+                # Session format: {agent}_{id}
+                if '_' in session_part:
+                    agent = session_part.split('_')[0]
+                    return agent.lower()
+        
+        # Check environment variable
+        agent = os.environ.get('OPENCLAW_AGENT')
+        if agent:
+            return agent.lower()
+        
+        # Default to 'main' if no session detected
+        return 'main'
+    except Exception:
+        return 'main'
+
+
 def log_activity(
     activity_type: str,
     description: str,
     details: Optional[Dict] = None,
-    agent: str = "nox",
+    agent: str = None,
     auto_commit: bool = True
 ) -> bool:
     """
@@ -30,13 +60,20 @@ def log_activity(
         activity_type: Type of activity (e.g., 'script_build', 'research', 'analysis')
         description: Human-readable description of what was done
         details: Optional dict with additional details
-        agent: Agent name (default: 'nox')
+        agent: Agent name (auto-detected from session path if None)
         auto_commit: Whether to auto-commit and push (default: True)
     
     Returns:
         True if successful, False otherwise
     """
     try:
+        # Auto-detect agent from session path if not provided
+        if agent is None:
+            agent = _detect_agent_from_session()
+        
+        # Ensure agent is lowercase
+        agent = agent.lower() if agent else 'main'
+        
         # Read current activity log
         with open(ACTIVITY_LOG_PATH, 'r') as f:
             data = json.load(f)
@@ -75,10 +112,16 @@ def log_activity(
                     root_meta = json.load(f)
                 root_meta["lastUpdated"] = meta["lastUpdated"]
                 root_meta["totalActivities"] = meta["totalActivities"]
-                # Also bump cacheBust if present
+                # Also bump cacheBust if present (handle non-numeric suffixes like "v0316-forced")
                 if "cacheBust" in root_meta:
-                    version_num = int(root_meta["cacheBust"].replace("v", "")) + 1
-                    root_meta["cacheBust"] = f"v{version_num:04d}"
+                    try:
+                        cache_str = root_meta["cacheBust"].replace("v", "").split("-")[0]
+                        version_num = int(cache_str) + 1
+                        root_meta["cacheBust"] = f"v{version_num:04d}"
+                    except ValueError:
+                        # If parsing fails, use timestamp-based version
+                        from datetime import datetime
+                        root_meta["cacheBust"] = f"v{datetime.now().strftime('%m%d%H%M')}"
                 with open(ROOT_META_PATH, 'w') as f:
                     json.dump(root_meta, f, indent=2)
             except Exception as e:
