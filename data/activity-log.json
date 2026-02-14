@@ -22340,6 +22340,15 @@
       "project": "session_activity",
       "description": "Edited file: openclaw.json",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1771043073958",
+      "timestamp": "2026-02-14T04:24:33.958Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://docs.openclaw.ai/cli/agents",
+      "source": "session_monitor"
     }
   ],
   "agents": {
@@ -22366,5 +22375,5 @@
     "lastUpdated": "2026-02-10T13:05:00Z",
     "totalEntries": 82
   },
-  "totalEntries": 2348
+  "totalEntries": 2349
 }
