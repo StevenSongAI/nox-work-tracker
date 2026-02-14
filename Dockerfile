@@ -2,11 +2,9 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy all files
+# Cache bust: 2026-02-14-23-30
 COPY . .
 
-# Expose port
 EXPOSE 3000
 
-# Start the server
 CMD ["node", "server.js"]
