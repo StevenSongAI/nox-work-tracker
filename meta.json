@@ -1,11 +1,12 @@
 {
-  "lastUpdated": "2026-02-14T19:42:15.263835Z",
-  "totalActivities": 9688,
-  "cacheBust": "v0314",
+  "lastUpdated": "2026-02-14T21:05:00.000000Z",
+  "totalActivities": 15795,
+  "cacheBust": "v0316-forced",
   "trackedAgents": [
     "nox",
     "sage",
-    "joy"
+    "joy",
+    "main"
   ],
   "autoTracking": true
 }
