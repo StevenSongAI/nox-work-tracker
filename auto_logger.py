@@ -13,6 +13,7 @@ import sys
 WORK_TRACKER_PATH = "/Users/stevenai/Desktop/Nox Builds/nox-work-tracker-repo"
 ACTIVITY_LOG_PATH = os.path.join(WORK_TRACKER_PATH, "data", "activity-log.json")
 META_PATH = os.path.join(WORK_TRACKER_PATH, "data", "meta.json")
+ROOT_META_PATH = os.path.join(WORK_TRACKER_PATH, "meta.json")
 
 
 def log_activity(
@@ -66,6 +67,22 @@ def log_activity(
         
         with open(META_PATH, 'w') as f:
             json.dump(meta, f, indent=2)
+        
+        # Also update root meta.json if it exists (keep both in sync)
+        if os.path.exists(ROOT_META_PATH):
+            try:
+                with open(ROOT_META_PATH, 'r') as f:
+                    root_meta = json.load(f)
+                root_meta["lastUpdated"] = meta["lastUpdated"]
+                root_meta["totalActivities"] = meta["totalActivities"]
+                # Also bump cacheBust if present
+                if "cacheBust" in root_meta:
+                    version_num = int(root_meta["cacheBust"].replace("v", "")) + 1
+                    root_meta["cacheBust"] = f"v{version_num:04d}"
+                with open(ROOT_META_PATH, 'w') as f:
+                    json.dump(root_meta, f, indent=2)
+            except Exception as e:
+                print(f"   ⚠️ Could not update root meta.json: {e}")
         
         print(f"✅ Activity logged: {activity_type}")
         print(f"   Description: {description[:60]}...")
