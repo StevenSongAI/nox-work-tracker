@@ -340,7 +340,7 @@ function renderActivityTab() {
               ${entry.status ? `<span class="text-xs ${statusColor}">● ${entry.status}</span>` : ''}
               ${duration ? `<span class="text-xs text-gray-500">⏱️ ${duration}</span>` : ''}
             </div>
-            <p class="text-sm mt-1 text-gray-200">${escapeHtml(entry.action)}</p>
+            <p class="text-sm mt-1 text-gray-200">${escapeHtml(entry.action || entry.title || entry.description || 'No description')}</p>
           </div>
         </div>
         <div id="activity-details-${entry.id}" class="hidden mt-3 pt-3 border-t border-dark-700">
@@ -443,7 +443,7 @@ function renderAgentTab(agentKey, agentName) {
               ${entry.status ? `<span class="text-xs ${statusColor}">● ${entry.status}</span>` : ''}
               ${duration ? `<span class="text-xs text-gray-500">⏱️ ${duration}</span>` : ''}
             </div>
-            <p class="text-sm mt-1 text-gray-200">${escapeHtml(entry.action)}</p>
+            <p class="text-sm mt-1 text-gray-200">${escapeHtml(entry.action || entry.title || entry.description || 'No description')}</p>
           </div>
         </div>
       </div>
@@ -990,7 +990,7 @@ function renderAgentDetail(agentId) {
           ${agent.recentActivity.slice(0, 20).map(activity => `
             <div class="text-sm py-2 border-b border-dark-700 last:border-0">
               <span class="text-gray-500 text-xs">${formatDateTime(activity.timestamp)}</span>
-              <p class="text-gray-300 mt-0.5">${escapeHtml(activity.action)}</p>
+              <p class="text-gray-300 mt-0.5">${escapeHtml(activity.action || activity.title || activity.description || 'No description')}</p>
             </div>
           `).join('')}
         </div>
