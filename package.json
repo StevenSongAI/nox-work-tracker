@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "Work tracker dashboard for Nox AI",
   "scripts": {
-    "start": "python3 -m http.server 80"
+    "start": "npx serve -s . -l tcp://0.0.0.0:$PORT"
   }
 }
