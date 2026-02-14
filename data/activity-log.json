@@ -23876,6 +23876,33 @@
       "project": "session_activity",
       "description": "Web research: https://x.com/steipete/status/2022537029171519493",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1771075598079",
+      "timestamp": "2026-02-14T13:26:38.079Z",
+      "agent": "nox",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd ~/Desktop/Nox\\ Builds/x-business-intelligence && source v",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771075653378",
+      "timestamp": "2026-02-14T13:27:33.378Z",
+      "agent": "nox",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd ~/Desktop/Nox\\ Builds/x-business-intelligence && source v",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771075661225",
+      "timestamp": "2026-02-14T13:27:41.225Z",
+      "agent": "nox",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd ~/Desktop/Nox\\ Builds/x-business-intelligence && source v",
+      "source": "session_monitor"
     }
   ],
   "agents": {
@@ -23902,5 +23929,5 @@
     "lastUpdated": "2026-02-10T13:05:00Z",
     "totalEntries": 82
   },
-  "totalEntries": 2518
+  "totalEntries": 2521
 }
