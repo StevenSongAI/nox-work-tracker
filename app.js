@@ -80,7 +80,7 @@ const DATA_URLS = {
 // ============================================
 // CACHE CONTROL & VERSIONING
 // ============================================
-const CACHE_VERSION = '2026-02-14-v3-forced';
+const CACHE_VERSION = 'v4-nuclear';
 const CACHE_KEY = 'workTracker_cacheVersion';
 const LAST_REFRESH_KEY = 'workTracker_lastRefresh';
 

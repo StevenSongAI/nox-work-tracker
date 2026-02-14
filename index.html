@@ -7,7 +7,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="cache-version" content="2026-02-14-v3-forced">
+  <meta name="cache-version" content="v4-nuclear">
   <title>Work Tracker - Auto</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -28,12 +28,11 @@
   <!-- Cache-busting check: Force reload if this is cached HTML -->
   <script>
     (function() {
-      const EXPECTED_CACHE_VERSION = 'v3-forced';
+      const EXPECTED_CACHE_VERSION = 'v4-nuclear';
       const urlParams = new URLSearchParams(window.location.search);
       
-      // If no cache-busting param in URL, check if we need to force reload
-      if (!urlParams.has('_cb')) {
-        // Add cache-busting param and reload
+      // If no cache-busting param in URL, force reload
+      if (!urlParams.has('_cb') || !urlParams.get('_cb').includes('v4')) {
         urlParams.set('_cb', EXPECTED_CACHE_VERSION + '-' + Date.now());
         const newUrl = window.location.pathname + '?' + urlParams.toString();
         console.log('[Cache] Force reloading with cache-bust:', newUrl);
