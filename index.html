@@ -137,6 +137,7 @@
     let activities = [];
     let currentTab = 'all';
     let typeFilter = '';
+    let chartInstances = {};
 
     // Tab Management
     function showTab(tabName) {
@@ -232,6 +233,14 @@
 
     // Render Stats
     function renderStats() {
+      // Destroy existing charts to prevent canvas reuse errors
+      if (chartInstances.agents) {
+        chartInstances.agents.destroy();
+      }
+      if (chartInstances.types) {
+        chartInstances.types.destroy();
+      }
+
       // Total
       document.getElementById('stat-total').textContent = activities.length;
 
@@ -254,7 +263,7 @@
       });
 
       const ctxAgents = document.getElementById('chart-agents').getContext('2d');
-      new Chart(ctxAgents, {
+      chartInstances.agents = new Chart(ctxAgents, {
         type: 'doughnut',
         data: {
           labels: Object.keys(agentCounts),
@@ -275,7 +284,7 @@
       });
 
       const ctxTypes = document.getElementById('chart-types').getContext('2d');
-      new Chart(ctxTypes, {
+      chartInstances.types = new Chart(ctxTypes, {
         type: 'bar',
         data: {
           labels: Object.keys(typeCounts),
