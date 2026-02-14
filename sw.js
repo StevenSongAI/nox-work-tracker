@@ -3,7 +3,7 @@
 // Prevents stale JSON data by bypassing cache for API calls
 // ============================================
 
-const CACHE_NAME = 'worktracker-v2025-03-06-v2';
+const CACHE_NAME = 'worktracker-v2026-02-14-v1';
 
 // Files to cache (static assets only - NOT JSON data)
 const STATIC_ASSETS = [
