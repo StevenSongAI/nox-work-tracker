@@ -31,11 +31,13 @@ const mimeTypes = {
 
 const server = http.createServer((req, res) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  console.log(`DEBUG: __dirname = ${__dirname}`);
+  console.log(`DEBUG: Files in __dirname:`, fs.readdirSync(__dirname));
   
   // Health check endpoint
   if (req.url === '/health') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ status: 'ok', time: new Date().toISOString() }));
+    res.end(JSON.stringify({ status: 'ok', time: new Date().toISOString(), dir: __dirname }));
     return;
   }
   
@@ -43,6 +45,7 @@ const server = http.createServer((req, res) => {
   if (filePath === path.join(__dirname, '/')) {
     filePath = path.join(__dirname, 'index.html');
   }
+  console.log(`DEBUG: filePath = ${filePath}`);
 
   const extname = String(path.extname(filePath)).toLowerCase();
   const contentType = mimeTypes[extname] || 'application/octet-stream';
