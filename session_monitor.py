@@ -34,17 +34,36 @@ def load_session_timestamps():
             if isinstance(data, list):
                 # Convert old format to new: assume all old sessions are fully processed
                 return {session_id: float('inf') for session_id in data}
-            return data
+            # Ensure all values are numeric floats
+            result = {}
+            for session_id, timestamp in data.items():
+                try:
+                    result[session_id] = float(timestamp) if timestamp else 0
+                except (ValueError, TypeError):
+                    result[session_id] = 0
+            return result
     return {}
 
 def save_session_timestamps():
     """Save last-seen timestamps for each session."""
+    # Ensure all timestamps are numeric before saving
+    cleaned_timestamps = {}
+    for session_id, timestamp in SESSION_TIMESTAMPS.items():
+        try:
+            cleaned_timestamps[session_id] = float(timestamp) if timestamp else 0
+        except (ValueError, TypeError):
+            cleaned_timestamps[session_id] = 0
     with open(SESSIONS_CACHE_FILE, 'w') as f:
-        json.dump(SESSION_TIMESTAMPS, f, indent=2)
+        json.dump(cleaned_timestamps, f, indent=2)
 
 def parse_session_transcript(session_file, last_seen_timestamp=0):
     """Parse a session transcript and extract activities AFTER last_seen_timestamp."""
     activities = []
+    # Ensure last_seen_timestamp is numeric (not string from JSON)
+    try:
+        last_seen_timestamp = float(last_seen_timestamp) if last_seen_timestamp else 0
+    except (ValueError, TypeError):
+        last_seen_timestamp = 0
     latest_timestamp = last_seen_timestamp
     
     try:

@@ -39,14 +39,21 @@ def load_activity_log():
     """Load existing activity log."""
     if ACTIVITY_LOG.exists():
         with open(ACTIVITY_LOG, 'r') as f:
-            return json.load(f)
+            data = json.load(f)
+            # Handle dict format {"entries": [...]} or list format [...]
+            if isinstance(data, dict) and 'entries' in data:
+                return data['entries']
+            elif isinstance(data, list):
+                return data
+            else:
+                return []
     return []
 
 def save_activity_log(activities):
     """Save activity log and update meta."""
-    # Save activities
+    # Save activities in dict format with entries key
     with open(ACTIVITY_LOG, 'w') as f:
-        json.dump(activities, f, indent=2)
+        json.dump({"entries": activities}, f, indent=2)
     
     # Update meta
     meta = {
