@@ -4,6 +4,13 @@ const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 
+// Ensure data directory exists
+const dataDir = path.join(__dirname, 'data');
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+  console.log('Created data directory');
+}
+
 const mimeTypes = {
   '.html': 'text/html',
   '.js': 'text/javascript',
@@ -24,6 +31,13 @@ const mimeTypes = {
 
 const server = http.createServer((req, res) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  
+  // Health check endpoint
+  if (req.url === '/health') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ status: 'ok', time: new Date().toISOString() }));
+    return;
+  }
   
   let filePath = '.' + req.url;
   if (filePath === './') {
@@ -51,4 +65,10 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running at http://0.0.0.0:${PORT}/`);
+  console.log(`Health check available at http://0.0.0.0:${PORT}/health`);
+});
+
+// Handle errors
+server.on('error', (err) => {
+  console.error('Server error:', err);
 });
