@@ -1,6 +1,8 @@
 [build]
-builder = "dockerfile"
+builder = "nixpacks"
+buildCommand = "echo 'Cache bust: $(date)' && ls -la data/"
 watchPatterns = ["data/**", "*.json", "*.html", "*.js", "*.css"]
 
 [deploy]
+startCommand = "npm start"
 restartPolicyType = "on_failure"
