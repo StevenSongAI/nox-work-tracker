@@ -1,6 +1,16 @@
 {
   "entries": [
     {
+      "id": "act-railway-fix-001",
+      "timestamp": "2026-02-14T18:00:00Z",
+      "agent": "nox",
+      "icon": "\ud83d\ude80",
+      "type": "deployment",
+      "title": "Railway Clean Deployment Forced",
+      "description": "Forced full clean deployment to resolve stale data issue. Upload size should now reflect full 2.6MB data file.",
+      "status": "completed"
+    },
+    {
       "id": "act-001",
       "timestamp": "2026-02-07T20:00:00Z",
       "agent": "fun",
@@ -84062,5 +84072,5 @@
       "source": "session_monitor"
     }
   ],
-  "totalEntries": 9200
-}// Railway deployment trigger: 2026-02-14T17:56:43Z
+  "totalEntries": 9201
+}
