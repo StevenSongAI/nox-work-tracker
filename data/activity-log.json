@@ -86887,7 +86887,340 @@
       "project": "session_activity",
       "description": "Browser action: open",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094751924",
+      "timestamp": "2026-02-14T18:45:51.924Z",
+      "agent": "nox",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: app.js",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094757317",
+      "timestamp": "2026-02-14T18:45:57.317Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094760355",
+      "timestamp": "2026-02-14T18:46:00.355Z",
+      "agent": "nox",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: app.js",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094766338",
+      "timestamp": "2026-02-14T18:46:06.338Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://celebrated-commitment-production-5926.up.railway.app",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094779549",
+      "timestamp": "2026-02-14T18:46:19.549Z",
+      "agent": "nox",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: app.js",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094781850",
+      "timestamp": "2026-02-14T18:46:21.850Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://celebrated-commitment-production-5926.up.railway.app",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094830095",
+      "timestamp": "2026-02-14T18:47:10.095Z",
+      "agent": "nox",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: app.js",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094842513",
+      "timestamp": "2026-02-14T18:47:22.513Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: open",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094860771",
+      "timestamp": "2026-02-14T18:47:40.771Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094867298",
+      "timestamp": "2026-02-14T18:47:47.298Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: console",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094867717",
+      "timestamp": "2026-02-14T18:47:47.717Z",
+      "agent": "nox",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: app.js",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094873219",
+      "timestamp": "2026-02-14T18:47:53.219Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: close",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094966095",
+      "timestamp": "2026-02-14T18:49:26.095Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: navigate",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094969658",
+      "timestamp": "2026-02-14T18:49:29.658Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094973921",
+      "timestamp": "2026-02-14T18:49:33.921Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: open",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094981608",
+      "timestamp": "2026-02-14T18:49:41.608Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094985193",
+      "timestamp": "2026-02-14T18:49:45.193Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: navigate",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094994730",
+      "timestamp": "2026-02-14T18:49:54.730Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771094997577",
+      "timestamp": "2026-02-14T18:49:57.577Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: navigate",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095005878",
+      "timestamp": "2026-02-14T18:50:05.878Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: screenshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095010885",
+      "timestamp": "2026-02-14T18:50:10.885Z",
+      "agent": "nox",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: X.COM INTELLIGENCE GATHERING - Proactive Dashboard Feed\n\n**C",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095011726",
+      "timestamp": "2026-02-14T18:50:11.726Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: console",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095016108",
+      "timestamp": "2026-02-14T18:50:16.108Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: navigate",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095025617",
+      "timestamp": "2026-02-14T18:50:25.617Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: Kling AI video generation news February 2025",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095025617",
+      "timestamp": "2026-02-14T18:50:25.617Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: Runway AI video generation updates February 2025",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095025617",
+      "timestamp": "2026-02-14T18:50:25.617Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: Pika Labs AI video news 2025",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095025617",
+      "timestamp": "2026-02-14T18:50:25.617Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: Seedance ByteDance AI video generation 2025",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095025617",
+      "timestamp": "2026-02-14T18:50:25.617Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: YouTube viral content trends February 2025",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095025617",
+      "timestamp": "2026-02-14T18:50:25.617Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: AI video tools business opportunities 2025",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095026472",
+      "timestamp": "2026-02-14T18:50:26.472Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: console",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095030732",
+      "timestamp": "2026-02-14T18:50:30.732Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: screenshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095033884",
+      "timestamp": "2026-02-14T18:50:33.884Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://www.cnbc.com/2026/02/14/new-china-ai-models-alibaba-",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095033884",
+      "timestamp": "2026-02-14T18:50:33.884Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://www.chinatalk.media/p/seedance-kling-and-the-chinese",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095033884",
+      "timestamp": "2026-02-14T18:50:33.884Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://www.cined.com/viral-ai-fight-between-tom-cruise-and-",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095033884",
+      "timestamp": "2026-02-14T18:50:33.884Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://www.nxcode.io/resources/news/seedance-2-0-complete-g",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095037344",
+      "timestamp": "2026-02-14T18:50:37.344Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771095041342",
+      "timestamp": "2026-02-14T18:50:41.342Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 9514
+  "totalEntries": 9551
 }
