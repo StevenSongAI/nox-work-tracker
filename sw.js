@@ -3,48 +3,46 @@
 // Prevents stale JSON data by bypassing cache for API calls
 // ============================================
 
-const CACHE_NAME = 'worktracker-v2026-02-14-v1';
+const CACHE_NAME = 'worktracker-v2026-02-14-v3-forced';
 
-// Files to cache (static assets only - NOT JSON data)
+// Files to cache (static assets only - NOT JSON data, NOT HTML)
 const STATIC_ASSETS = [
-  '/nox-work-tracker/',
-  '/nox-work-tracker/index.html',
   '/nox-work-tracker/app.js',
   'https://cdn.tailwindcss.com',
   'https://cdn.jsdelivr.net/npm/chart.js'
 ];
 
-// Install: Pre-cache static assets
+// Install: Skip waiting immediately to activate new SW
 self.addEventListener('install', (event) => {
-  console.log('[SW] Installing...');
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(STATIC_ASSETS))
-      .then(() => self.skipWaiting())
-  );
+  console.log('[SW] Installing v3-forced...');
+  self.skipWaiting();
 });
 
-// Activate: Clean up old caches
+// Activate: Clean up ALL old caches immediately
 self.addEventListener('activate', (event) => {
-  console.log('[SW] Activating...');
+  console.log('[SW] Activating v3-forced - clearing all old caches...');
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames
-          .filter((name) => name !== CACHE_NAME)
-          .map((name) => caches.delete(name))
+        cacheNames.map((name) => {
+          console.log('[SW] Deleting old cache:', name);
+          return caches.delete(name);
+        })
       );
-    }).then(() => self.clients.claim())
+    }).then(() => {
+      console.log('[SW] Claiming all clients...');
+      return self.clients.claim();
+    })
   );
 });
 
-// Fetch: Network-first for JSON, cache-first for static assets
+// Fetch: Network-first for JSON and HTML, cache-first for static assets
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
   
-  // NEVER cache JSON data files - always fetch fresh
-  if (url.pathname.endsWith('.json')) {
+  // NEVER cache JSON data files OR HTML pages - always fetch fresh
+  if (url.pathname.endsWith('.json') || url.pathname.endsWith('.html') || url.pathname === '/nox-work-tracker/' || url.pathname === '/nox-work-tracker') {
     event.respondWith(
       fetch(request, { cache: 'no-store' })
         .catch(() => caches.match(request))
