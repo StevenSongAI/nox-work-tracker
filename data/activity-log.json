@@ -23068,6 +23068,14 @@
       "project": "session_activity",
       "description": "Spawned subagent: VALUE AUDIT - Dashboard Update Review\n\n**USE THE TEMPLATE:**",
       "source": "session_monitor"
+    },
+    {
+      "timestamp": "2026-02-14T09:16:24.066849Z",
+      "type": "fix",
+      "description": "nox-dashboard Fixed duplicate note ID (note-052 \u2192 note-055) in research.json per auditor finding",
+      "details": {},
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "agents": {
