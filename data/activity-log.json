@@ -23822,6 +23822,60 @@
       "project": "session_activity",
       "description": "Browser action: close",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1771075295597",
+      "timestamp": "2026-02-14T13:21:35.597Z",
+      "agent": "nox",
+      "type": "file_write",
+      "project": "session_activity",
+      "description": "Created/updated file: test_x_auth.py",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771075304705",
+      "timestamp": "2026-02-14T13:21:44.705Z",
+      "agent": "nox",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd ~/Desktop/Nox\\ Builds/x-business-intelligence && source v",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771075339736",
+      "timestamp": "2026-02-14T13:22:19.736Z",
+      "agent": "nox",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: scrape_x_intelligence.py",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771075347979",
+      "timestamp": "2026-02-14T13:22:27.979Z",
+      "agent": "nox",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd ~/Desktop/Nox\\ Builds/x-business-intelligence && source v",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771075464137",
+      "timestamp": "2026-02-14T13:24:24.137Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://x.com/steipete/status/2022516951809945850",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771075464137",
+      "timestamp": "2026-02-14T13:24:24.137Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://x.com/steipete/status/2022537029171519493",
+      "source": "session_monitor"
     }
   ],
   "agents": {
@@ -23848,5 +23902,5 @@
     "lastUpdated": "2026-02-10T13:05:00Z",
     "totalEntries": 82
   },
-  "totalEntries": 2512
+  "totalEntries": 2518
 }
