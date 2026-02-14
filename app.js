@@ -85,21 +85,28 @@ const CACHE_KEY = 'workTracker_cacheVersion';
 const LAST_REFRESH_KEY = 'workTracker_lastRefresh';
 
 // Clear all browser caches and reload
-function clearAllCaches() {
+async function clearAllCaches() {
   console.log('[Cache] Clearing all caches...');
   
   // Clear localStorage cache tracking
   localStorage.removeItem(CACHE_KEY);
   localStorage.removeItem(LAST_REFRESH_KEY);
   
+  // Clear service worker caches
+  await clearServiceWorkerCaches();
+  
   // Clear session cache if available
   if (window.caches) {
-    caches.keys().then(cacheNames => {
-      cacheNames.forEach(cacheName => {
-        caches.delete(cacheName);
-        console.log(`[Cache] Deleted cache: ${cacheName}`);
-      });
-    });
+    const cacheNames = await caches.keys();
+    await Promise.all(cacheNames.map(cacheName => caches.delete(cacheName)));
+    console.log(`[Cache] Deleted ${cacheNames.length} caches`);
+  }
+  
+  // Unregister service workers
+  if ('serviceWorker' in navigator) {
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    await Promise.all(registrations.map(reg => reg.unregister()));
+    console.log(`[Cache] Unregistered ${registrations.length} service workers`);
   }
   
   // Force reload with cache-busting
@@ -163,11 +170,11 @@ async function loadAllData() {
   
   try {
     const [activityRes, auditsRes, ralphRes, agentsRes, metaRes] = await Promise.all([
-      fetch(DATA_URLS.activity + cacheBust).catch(() => ({ json: () => ({ entries: [] }) })),
-      fetch(DATA_URLS.audits + cacheBust).catch(() => ({ json: () => ({ audits: [], agentStats: {} }) })),
-      fetch(DATA_URLS.ralphChains + cacheBust).catch(() => ({ json: () => ({ chains: [] }) })),
-      fetch(DATA_URLS.agents + cacheBust).catch(() => ({ json: () => ({ agents: [] }) })),
-      fetch(DATA_URLS.meta + cacheBust).catch(() => ({ json: () => ({ lastUpdated: null, syncStatus: 'offline' }) }))
+      fetchWithRetry(DATA_URLS.activity + cacheBust).catch(() => ({ json: () => ({ entries: [] }) })),
+      fetchWithRetry(DATA_URLS.audits + cacheBust).catch(() => ({ json: () => ({ audits: [], agentStats: {} }) })),
+      fetchWithRetry(DATA_URLS.ralphChains + cacheBust).catch(() => ({ json: () => ({ chains: [] }) })),
+      fetchWithRetry(DATA_URLS.agents + cacheBust).catch(() => ({ json: () => ({ agents: [] }) })),
+      fetchWithRetry(DATA_URLS.meta + cacheBust).catch(() => ({ json: () => ({ lastUpdated: null, syncStatus: 'offline' }) }))
     ]);
 
     AppState.data.activityLog = await activityRes.json();
@@ -190,7 +197,9 @@ async function loadAllData() {
     });
 
     updateLastRefreshTime();
+    updateFreshnessIndicator();
     renderCurrentTab();
+    startFreshnessMonitoring();
     
     // Check for stale data after rendering
     if (detectStaleData(AppState.data.activityLog.entries)) {
@@ -1465,6 +1474,141 @@ function highlightMatch(text, query) {
 }
 
 // ============================================
+// ENHANCED FETCH WITH RETRY & TIMEOUT
+// ============================================
+
+const FETCH_TIMEOUT = 10000; // 10 second timeout
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 1000; // Start with 1 second
+
+// Fetch with timeout and retry logic
+async function fetchWithRetry(url, options = {}, retries = MAX_RETRIES) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
+  
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+      cache: 'no-store' // Always bypass browser cache
+    });
+    clearTimeout(timeoutId);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    return response;
+  } catch (error) {
+    clearTimeout(timeoutId);
+    
+    if (retries > 0) {
+      const delay = RETRY_DELAY * (MAX_RETRIES - retries + 1);
+      console.log(`[Fetch] Retrying ${url} in ${delay}ms (${retries} retries left)`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      return fetchWithRetry(url, options, retries - 1);
+    }
+    
+    throw error;
+  }
+}
+
+// ============================================
+// DATA FRESHNESS MONITORING
+// ============================================
+
+let dataFreshnessInterval = null;
+
+// Update visual freshness indicator
+function updateFreshnessIndicator() {
+  const indicator = document.getElementById('freshness-indicator');
+  const lastUpdated = AppState.data.meta?.lastUpdated;
+  
+  if (!indicator || !lastUpdated) return;
+  
+  const lastUpdateTime = new Date(lastUpdated);
+  const now = new Date();
+  const minutesSinceUpdate = Math.floor((now - lastUpdateTime) / (1000 * 60));
+  
+  let freshnessClass = 'text-green-400';
+  let freshnessText = 'Fresh';
+  
+  if (minutesSinceUpdate > 60) {
+    freshnessClass = 'text-red-400';
+    freshnessText = `${Math.floor(minutesSinceUpdate / 60)}h ago`;
+  } else if (minutesSinceUpdate > 5) {
+    freshnessClass = 'text-yellow-400';
+    freshnessText = `${minutesSinceUpdate}m ago`;
+  }
+  
+  indicator.innerHTML = `<span class="${freshnessClass} text-xs">● ${freshnessText}</span>`;
+  indicator.title = `Last updated: ${lastUpdateTime.toLocaleString()}`;
+}
+
+// Start freshness monitoring
+function startFreshnessMonitoring() {
+  if (dataFreshnessInterval) clearInterval(dataFreshnessInterval);
+  
+  // Update every 30 seconds
+  dataFreshnessInterval = setInterval(() => {
+    updateFreshnessIndicator();
+    
+    // Auto-refresh if data is stale (> 1 hour old)
+    const lastUpdated = AppState.data.meta?.lastUpdated;
+    if (lastUpdated) {
+      const hoursSinceUpdate = (Date.now() - new Date(lastUpdated)) / (1000 * 60 * 60);
+      if (hoursSinceUpdate > 1 && AppState.settings.autoRefresh) {
+        console.log('[Freshness] Data is stale, triggering auto-refresh');
+        refreshData();
+      }
+    }
+  }, 30000);
+}
+
+// ============================================
+// SERVICE WORKER REGISTRATION
+// ============================================
+
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then((registration) => {
+        console.log('[SW] Registered:', registration.scope);
+        
+        // Listen for updates
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              console.log('[SW] New version available, reloading...');
+              window.location.reload();
+            }
+          });
+        });
+      })
+      .catch((error) => {
+        console.warn('[SW] Registration failed:', error);
+      });
+  }
+}
+
+// Clear service worker caches
+async function clearServiceWorkerCaches() {
+  if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+    const messageChannel = new MessageChannel();
+    navigator.serviceWorker.controller.postMessage('CLEAR_CACHES', [messageChannel.port2]);
+    return new Promise((resolve) => {
+      messageChannel.port1.onmessage = (event) => {
+        if (event.data === 'CACHES_CLEARED') {
+          console.log('[SW] Caches cleared');
+          resolve();
+        }
+      };
+    });
+  }
+}
+
+// ============================================
 // REAL-TIME AUDIT SCANNER & AUTO-REFRESH
 // ============================================
 
@@ -1556,6 +1700,9 @@ async function scanAuditsFolder() {
 document.addEventListener('DOMContentLoaded', () => {
   console.log(`[WorkTracker] Initializing... Cache version: ${CACHE_VERSION}`);
   
+  // Register service worker for enhanced cache control
+  registerServiceWorker();
+  
   // Check if cache version changed (new deployment)
   const cacheVersionChanged = checkCacheVersion();
   if (cacheVersionChanged) {
@@ -1575,6 +1722,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
       scanAuditsFolder();
+      // Refresh data when tab becomes visible after being hidden
+      refreshData();
     }
   });
   
@@ -1584,6 +1733,14 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       console.log('[Cache] Hard reload triggered via keyboard');
       clearAllCaches();
+    }
+  });
+  
+  // Page visibility change - refresh data when returning to page
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      console.log('[Visibility] Page visible, refreshing data');
+      refreshData();
     }
   });
 });
