@@ -2,14 +2,11 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy all files including data/ directory
+# Copy all files
 COPY . .
 
-# Install serve package globally
-RUN npm install -g serve
-
-# Expose port 3000
+# Expose port
 EXPOSE 3000
 
-# Serve the app - shell form for env var expansion
-CMD serve . -l ${PORT:-3000}
+# Start the server
+CMD ["node", "server.js"]
