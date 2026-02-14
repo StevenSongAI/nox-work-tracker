@@ -1,0 +1,6 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "python3 -m http.server 80"
+restartPolicyType = "on_failure"
