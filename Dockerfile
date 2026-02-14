@@ -11,5 +11,5 @@ RUN npm install -g serve
 # Expose port 3000
 EXPOSE 3000
 
-# Serve the app using npm start
-CMD ["npm", "start"]
+# Serve the app - shell form for env var expansion
+CMD serve . -l ${PORT:-3000}
