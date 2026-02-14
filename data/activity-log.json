@@ -80319,7 +80319,331 @@
       "project": "session_activity",
       "description": "Browser action: snapshot",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081799373",
+      "timestamp": "2026-02-14T15:09:59.373Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081806675",
+      "timestamp": "2026-02-14T15:10:06.675Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081814402",
+      "timestamp": "2026-02-14T15:10:14.402Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081821326",
+      "timestamp": "2026-02-14T15:10:21.326Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081829056",
+      "timestamp": "2026-02-14T15:10:29.056Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081831518",
+      "timestamp": "2026-02-14T15:10:31.518Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: open",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081841116",
+      "timestamp": "2026-02-14T15:10:41.116Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: close",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081845845",
+      "timestamp": "2026-02-14T15:10:45.845Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081849248",
+      "timestamp": "2026-02-14T15:10:49.248Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: open",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081853200",
+      "timestamp": "2026-02-14T15:10:53.200Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: navigate",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081856750",
+      "timestamp": "2026-02-14T15:10:56.750Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081866523",
+      "timestamp": "2026-02-14T15:11:06.523Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081868554",
+      "timestamp": "2026-02-14T15:11:08.554Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081873927",
+      "timestamp": "2026-02-14T15:11:13.927Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081877355",
+      "timestamp": "2026-02-14T15:11:17.355Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: navigate",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081884046",
+      "timestamp": "2026-02-14T15:11:24.046Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081885385",
+      "timestamp": "2026-02-14T15:11:25.385Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: start",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081889557",
+      "timestamp": "2026-02-14T15:11:29.557Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: open",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081891256",
+      "timestamp": "2026-02-14T15:11:31.256Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081897815",
+      "timestamp": "2026-02-14T15:11:37.815Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081905297",
+      "timestamp": "2026-02-14T15:11:45.297Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081908092",
+      "timestamp": "2026-02-14T15:11:48.092Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081913101",
+      "timestamp": "2026-02-14T15:11:53.101Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081920331",
+      "timestamp": "2026-02-14T15:12:00.331Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081923922",
+      "timestamp": "2026-02-14T15:12:03.922Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081926042",
+      "timestamp": "2026-02-14T15:12:06.042Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081931783",
+      "timestamp": "2026-02-14T15:12:11.783Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081937817",
+      "timestamp": "2026-02-14T15:12:17.817Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081939595",
+      "timestamp": "2026-02-14T15:12:19.595Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: close",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081949319",
+      "timestamp": "2026-02-14T15:12:29.319Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081959980",
+      "timestamp": "2026-02-14T15:12:39.980Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081978673",
+      "timestamp": "2026-02-14T15:12:58.673Z",
+      "agent": "nox",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: config.json",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771081994942",
+      "timestamp": "2026-02-14T15:13:14.942Z",
+      "agent": "nox",
+      "type": "file_write",
+      "project": "session_activity",
+      "description": "Created/updated file: config.json",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771082019056",
+      "timestamp": "2026-02-14T15:13:39.056Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771082048017",
+      "timestamp": "2026-02-14T15:14:08.017Z",
+      "agent": "nox",
+      "type": "file_write",
+      "project": "session_activity",
+      "description": "Created/updated file: config.json",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771082059130",
+      "timestamp": "2026-02-14T15:14:19.130Z",
+      "agent": "nox",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: app.js",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 8785
+  "totalEntries": 8821
 }
