@@ -41,7 +41,7 @@ const server = http.createServer((req, res) => {
     return;
   }
   
-  let filePath = path.join(__dirname, req.url);
+  let filePath = path.join(__dirname, req.url.split('?')[0]);
   if (filePath === path.join(__dirname, '/')) {
     filePath = path.join(__dirname, 'index.html');
   }
