@@ -23687,6 +23687,105 @@
       "project": "session_activity",
       "description": "Executed script/command: cd ~/.openclaw/cron && python3 -c \"\nimport json\n\nwith open('",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1771074829488",
+      "timestamp": "2026-02-14T13:13:49.488Z",
+      "agent": "nox",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: VALUE AUDIT \u2014 Dashboard Health Work Review\n\nReview completed",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771074837074",
+      "timestamp": "2026-02-14T13:13:57.074Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: open",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771074837074",
+      "timestamp": "2026-02-14T13:13:57.074Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: open",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771074837074",
+      "timestamp": "2026-02-14T13:13:57.074Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: open",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771074843388",
+      "timestamp": "2026-02-14T13:14:03.388Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771074843388",
+      "timestamp": "2026-02-14T13:14:03.388Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771074843388",
+      "timestamp": "2026-02-14T13:14:03.388Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771074849181",
+      "timestamp": "2026-02-14T13:14:09.181Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://health-dashboard-production-e219.up.railway.app/api/",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771074849181",
+      "timestamp": "2026-02-14T13:14:09.181Z",
+      "agent": "nox",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://health-dashboard-production-e219.up.railway.app/api/",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771074849181",
+      "timestamp": "2026-02-14T13:14:09.181Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: act",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1771074862546",
+      "timestamp": "2026-02-14T13:14:22.546Z",
+      "agent": "nox",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: snapshot",
+      "source": "session_monitor"
     }
   ],
   "agents": {
@@ -23713,5 +23812,5 @@
     "lastUpdated": "2026-02-10T13:05:00Z",
     "totalEntries": 82
   },
-  "totalEntries": 2497
+  "totalEntries": 2508
 }
