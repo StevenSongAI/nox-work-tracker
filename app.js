@@ -83,13 +83,16 @@ const DATA_URLS = {
 async function loadAllData() {
   console.log('[WorkTracker] Loading all data...');
   
+  // Cache-busting timestamp to force fresh data load
+  const cacheBust = `?_=${Date.now()}`;
+  
   try {
     const [activityRes, auditsRes, ralphRes, agentsRes, metaRes] = await Promise.all([
-      fetch(DATA_URLS.activity).catch(() => ({ json: () => ({ entries: [] }) })),
-      fetch(DATA_URLS.audits).catch(() => ({ json: () => ({ audits: [], agentStats: {} }) })),
-      fetch(DATA_URLS.ralphChains).catch(() => ({ json: () => ({ chains: [] }) })),
-      fetch(DATA_URLS.agents).catch(() => ({ json: () => ({ agents: [] }) })),
-      fetch(DATA_URLS.meta).catch(() => ({ json: () => ({ lastUpdated: null, syncStatus: 'offline' }) }))
+      fetch(DATA_URLS.activity + cacheBust).catch(() => ({ json: () => ({ entries: [] }) })),
+      fetch(DATA_URLS.audits + cacheBust).catch(() => ({ json: () => ({ audits: [], agentStats: {} }) })),
+      fetch(DATA_URLS.ralphChains + cacheBust).catch(() => ({ json: () => ({ chains: [] }) })),
+      fetch(DATA_URLS.agents + cacheBust).catch(() => ({ json: () => ({ agents: [] }) })),
+      fetch(DATA_URLS.meta + cacheBust).catch(() => ({ json: () => ({ lastUpdated: null, syncStatus: 'offline' }) }))
     ]);
 
     AppState.data.activityLog = await activityRes.json();
