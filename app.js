@@ -78,6 +78,81 @@ const DATA_URLS = {
 };
 
 // ============================================
+// CACHE CONTROL & VERSIONING
+// ============================================
+const CACHE_VERSION = '2025-03-06-v2';
+const CACHE_KEY = 'workTracker_cacheVersion';
+const LAST_REFRESH_KEY = 'workTracker_lastRefresh';
+
+// Clear all browser caches and reload
+function clearAllCaches() {
+  console.log('[Cache] Clearing all caches...');
+  
+  // Clear localStorage cache tracking
+  localStorage.removeItem(CACHE_KEY);
+  localStorage.removeItem(LAST_REFRESH_KEY);
+  
+  // Clear session cache if available
+  if (window.caches) {
+    caches.keys().then(cacheNames => {
+      cacheNames.forEach(cacheName => {
+        caches.delete(cacheName);
+        console.log(`[Cache] Deleted cache: ${cacheName}`);
+      });
+    });
+  }
+  
+  // Force reload with cache-busting
+  window.location.reload(true);
+}
+
+// Check if cache version has changed (indicates new deployment)
+function checkCacheVersion() {
+  const storedVersion = localStorage.getItem(CACHE_KEY);
+  
+  if (storedVersion !== CACHE_VERSION) {
+    console.log(`[Cache] Version mismatch: stored=${storedVersion}, current=${CACHE_VERSION}`);
+    localStorage.setItem(CACHE_KEY, CACHE_VERSION);
+    return true; // Version changed
+  }
+  return false;
+}
+
+// Detect stale data by comparing last activity timestamp
+function detectStaleData(currentActivities) {
+  const now = new Date();
+  const lastActivity = currentActivities.length > 0 
+    ? new Date(currentActivities[0].timestamp) 
+    : null;
+  
+  if (lastActivity) {
+    const hoursSinceActivity = (now - lastActivity) / (1000 * 60 * 60);
+    
+    // If no activity in last 12 hours, might be stale (during active work periods)
+    // This is a heuristic - adjust based on expected activity patterns
+    if (hoursSinceActivity > 12) {
+      console.warn(`[Cache] Possible stale data: Last activity ${hoursSinceActivity.toFixed(1)} hours ago`);
+      return true;
+    }
+  }
+  
+  return false;
+}
+
+// Show stale data warning banner
+function showStaleDataWarning() {
+  const warning = document.createElement('div');
+  warning.id = 'stale-data-warning';
+  warning.className = 'fixed top-0 left-0 right-0 bg-yellow-600 text-white text-center py-2 px-4 z-50';
+  warning.innerHTML = `
+    <span>⚠️ Data may be stale. </span>
+    <button onclick="clearAllCaches()" class="underline font-bold">Clear Cache & Refresh</button>
+    <button onclick="this.parentElement.remove()" class="ml-4 text-sm">✕</button>
+  `;
+  document.body.prepend(warning);
+}
+
+// ============================================
 // DATA LOADING
 // ============================================
 async function loadAllData() {
@@ -116,6 +191,11 @@ async function loadAllData() {
 
     updateLastRefreshTime();
     renderCurrentTab();
+    
+    // Check for stale data after rendering
+    if (detectStaleData(AppState.data.activityLog.entries)) {
+      showStaleDataWarning();
+    }
     
     // Load calendar and search data
     loadCalendarData();
@@ -1143,7 +1223,8 @@ let calendarData = { scheduledTasks: [], recurring: [] };
 
 async function loadCalendarData() {
   try {
-    const response = await fetch('data/calendar.json');
+    const cacheBust = `?t=${Date.now()}`;
+    const response = await fetch('data/calendar.json' + cacheBust);
     calendarData = await response.json();
     renderCalendar();
   } catch (err) {
@@ -1253,7 +1334,8 @@ let currentSearchFilter = 'all';
 
 async function loadSearchIndex() {
   try {
-    const response = await fetch('data/search-index.json');
+    const cacheBust = `?t=${Date.now()}`;
+    const response = await fetch('data/search-index.json' + cacheBust);
     searchIndex = await response.json();
   } catch (err) {
     console.error('[Search] Failed to load index:', err);
@@ -1472,6 +1554,14 @@ async function scanAuditsFolder() {
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', () => {
+  console.log(`[WorkTracker] Initializing... Cache version: ${CACHE_VERSION}`);
+  
+  // Check if cache version changed (new deployment)
+  const cacheVersionChanged = checkCacheVersion();
+  if (cacheVersionChanged) {
+    console.log('[Cache] New version detected, cache cleared');
+  }
+  
   initAutoRefresh();
   
   // Start auto-refresh if enabled (default: true, 30s)
@@ -1485,6 +1575,15 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
       scanAuditsFolder();
+    }
+  });
+  
+  // Keyboard shortcut: Ctrl/Cmd+Shift+R to clear cache and hard reload
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'R') {
+      e.preventDefault();
+      console.log('[Cache] Hard reload triggered via keyboard');
+      clearAllCaches();
     }
   });
 });
