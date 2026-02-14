@@ -23534,6 +23534,15 @@
       "project": "session_activity",
       "description": "Web research: https://github.com/openclaw/openclaw/issues/15326",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1771073666039",
+      "timestamp": "2026-02-14T12:54:26.039Z",
+      "agent": "nox",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
     }
   ],
   "agents": {
@@ -23560,5 +23569,5 @@
     "lastUpdated": "2026-02-10T13:05:00Z",
     "totalEntries": 82
   },
-  "totalEntries": 2480
+  "totalEntries": 2481
 }
