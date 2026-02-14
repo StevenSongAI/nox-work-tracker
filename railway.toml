@@ -1,5 +1,6 @@
 [build]
 builder = "nixpacks"
+watchPatterns = ["data/**", "*.json", "*.html", "*.js", "*.css"]
 
 [deploy]
 startCommand = "npm start"
