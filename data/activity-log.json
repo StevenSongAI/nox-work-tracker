@@ -81779,6 +81779,16 @@
       "project": "session_activity",
       "description": "Edited file: meta.json",
       "source": "session_monitor"
+    },
+    {
+      "timestamp": "2026-02-14T16:10:37.761719Z",
+      "type": "script_build",
+      "description": "Built research_intelligence: Added research note-058: Seedance 2.0 + Hollywood AI Piracy Battle analysis",
+      "details": {
+        "script": "research_intelligence"
+      },
+      "agent": "nox",
+      "session": "main"
     }
   ],
   "totalEntries": 8947
