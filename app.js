@@ -1566,30 +1566,36 @@ function startFreshnessMonitoring() {
 }
 
 // ============================================
-// SERVICE WORKER REGISTRATION
+// SERVICE WORKER REGISTRATION - NUCLEAR OPTION
 // ============================================
 
-function registerServiceWorker() {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
-      .then((registration) => {
-        console.log('[SW] Registered:', registration.scope);
-        
-        // Listen for updates
-        registration.addEventListener('updatefound', () => {
-          const newWorker = registration.installing;
-          newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              console.log('[SW] New version available, reloading...');
-              window.location.reload();
-            }
-          });
-        });
-      })
-      .catch((error) => {
-        console.warn('[SW] Registration failed:', error);
-      });
+async function registerServiceWorker() {
+  if (!('serviceWorker' in navigator)) return;
+  
+  // NUCLEAR: Unregister ALL existing service workers first
+  const registrations = await navigator.serviceWorker.getRegistrations();
+  for (const reg of registrations) {
+    console.log('[SW] Unregistering old service worker:', reg.scope);
+    await reg.unregister();
   }
+  
+  // Clear all caches
+  if (window.caches) {
+    const cacheNames = await caches.keys();
+    for (const name of cacheNames) {
+      console.log('[SW] Deleting cache:', name);
+      await caches.delete(name);
+    }
+  }
+  
+  // Register fresh service worker
+  navigator.serviceWorker.register('sw.js?v4-nuclear')
+    .then((registration) => {
+      console.log('[SW] Registered fresh:', registration.scope);
+    })
+    .catch((error) => {
+      console.warn('[SW] Registration failed:', error);
+    });
 }
 
 // Clear service worker caches
