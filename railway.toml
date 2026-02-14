@@ -2,5 +2,5 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "python3 -m http.server 80"
+startCommand = "npx serve -s . -p 80"
 restartPolicyType = "on_failure"
