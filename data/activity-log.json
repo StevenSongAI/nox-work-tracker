@@ -16,6 +16,23 @@
       "verified": true,
       "agent": "main",
       "session": "main"
+    },
+    {
+      "timestamp": "2026-02-15T18:14:28.235850Z",
+      "category": "youtube",
+      "type": "script_build",
+      "title": "test_script",
+      "content": "Script build: test_script",
+      "source": "auto-logger",
+      "confidence": 80,
+      "metadata": {
+        "git_commit": "60f586b4",
+        "script_name": "test_script",
+        "auto_logged": true
+      },
+      "verified": true,
+      "agent": "main",
+      "session": "main"
     }
   ]
 }
