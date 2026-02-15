@@ -11,10 +11,15 @@ from datetime import datetime, timezone
 from typing import Dict, Optional, List
 import sys
 
-# Import API logger - uses dashboard API with git fallback
+# DEFECT-001 FIX: ImportError with diagnostics logging
+api_logger = None
 try:
-    import api_logger
-except ImportError:
+    import api_logger as _api_logger
+    api_logger = _api_logger
+except ImportError as e:
+    import_error_msg = str(e)
+    print(f"⚠️  api_logger import failed: {import_error_msg}")
+    print(f"   Falling back to git-based logging only.")
     api_logger = None
 
 # Constants
@@ -68,27 +73,66 @@ def _get_git_hash() -> str:
         return "unknown"
 
 
+def _ensure_data_file_exists():
+    """DEFECT-003 FIX: Ensure activity-log.json exists with proper structure."""
+    data_dir = os.path.dirname(ACTIVITY_LOG_PATH)
+    
+    # Ensure data directory exists
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir, exist_ok=True)
+        print(f"   📁 Created data directory: {data_dir}")
+    
+    # Ensure activity-log.json exists
+    if not os.path.exists(ACTIVITY_LOG_PATH):
+        initial_data = {"entries": []}
+        with open(ACTIVITY_LOG_PATH, 'w') as f:
+            json.dump(initial_data, f, indent=2)
+        print(f"   📄 Created activity-log.json")
+        return True
+    
+    return False
+
+
 def _fallback_git_log(activity_type: str, title: str, description: str, **kwargs) -> bool:
     """Fallback to git-based logging when API fails."""
     try:
         print(f"   🔄 Falling back to git logging...")
         
-        # Read current activity log
+        # DEFECT-003 FIX: Ensure file exists before reading
+        _ensure_data_file_exists()
+        
+        # Read current activity log (now guaranteed to exist)
         with open(ACTIVITY_LOG_PATH, 'r') as f:
             data = json.load(f)
         
-        # Create new entry
+        # DEFECT-006 FIX: Standardized entry format matching API structure
         new_entry = {
             "timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+            "category": kwargs.get('category', 'youtube'),
             "type": activity_type,
-            "description": f"{title}: {description}",
-            "details": kwargs,
+            "title": title,
+            "content": description,
+            "source": kwargs.get('source', 'auto-logger'),
+            "confidence": kwargs.get('confidence', 80),
+            "metadata": kwargs,
+            "verified": True,
             "agent": _detect_agent_from_session(),
             "session": "main"
         }
         
         # Add to entries
+        if "entries" not in data:
+            data["entries"] = []
         data["entries"].append(new_entry)
+        
+        # Ensure meta.json exists
+        if not os.path.exists(META_PATH):
+            meta = {
+                "lastUpdated": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+                "totalActivities": 0
+            }
+            with open(META_PATH, 'w') as f:
+                json.dump(meta, f, indent=2)
         
         # Read and update meta
         with open(META_PATH, 'r') as f:
@@ -126,6 +170,9 @@ def _fallback_git_log(activity_type: str, title: str, description: str, **kwargs
         # Commit to git
         return _git_commit_and_push(activity_type, description)
         
+    except FileNotFoundError as e:
+        print(f"❌ FileNotFoundError in fallback logging: {e}")
+        return False
     except Exception as e:
         print(f"❌ Fallback git logging failed: {e}")
         return False
@@ -206,7 +253,8 @@ def log_activity(
     # Try API first if available
     if api_logger is not None:
         try:
-            result = api_logger.create_entry(
+            # DEFECT-002 FIX: Check success boolean from create_entry
+            success, result = api_logger.create_entry(
                 category='youtube',
                 type=activity_type,
                 title=f'{activity_type}: {description[:50]}',
@@ -214,7 +262,7 @@ def log_activity(
                 metadata=metadata
             )
             
-            if result:
+            if success:
                 print(f"✅ Activity logged to dashboard: {activity_type}")
                 print(f"   Description: {description[:60]}...")
                 return True
@@ -241,9 +289,16 @@ def log_script_build(script_name: str, description: str, **kwargs):
     # Try API first
     if api_logger is not None:
         try:
-            result = api_logger.log_script_build(script_name, description, metadata)
+            # DEFECT-002 FIX: Check success boolean from create_entry
+            success, result = api_logger.create_entry(
+                category='youtube',
+                type='script_build',
+                title=f'Script: {script_name}',
+                content=description,
+                metadata=metadata
+            )
             
-            if result:
+            if success:
                 print(f"✅ Script build logged to dashboard: {script_name}")
                 return result
             else:
@@ -270,9 +325,16 @@ def log_research(topic: str, findings: str, source: str = "", **kwargs):
     # Try API first
     if api_logger is not None:
         try:
-            result = api_logger.log_research(topic, findings, metadata)
+            # DEFECT-002 FIX: Check success boolean from create_entry
+            success, result = api_logger.create_entry(
+                category='youtube',
+                type='research_note',
+                title=f'Research: {topic}',
+                content=findings,
+                metadata=metadata
+            )
             
-            if result:
+            if success:
                 print(f"✅ Research logged to dashboard: {topic}")
                 return result
             else:
@@ -298,9 +360,16 @@ def log_analysis(subject: str, result: str, **kwargs):
     # Try API first
     if api_logger is not None:
         try:
-            api_result = api_logger.log_analysis(subject, result, metadata)
+            # DEFECT-002 FIX: Check success boolean from create_entry
+            success, api_result = api_logger.create_entry(
+                category='business',
+                type='analysis',
+                title=f'Analysis: {subject}',
+                content=result,
+                metadata=metadata
+            )
             
-            if api_result:
+            if success:
                 print(f"✅ Analysis logged to dashboard: {subject}")
                 return api_result
             else:
@@ -328,7 +397,8 @@ def log_cron_completion(cron_name: str, result: str, **kwargs):
     # Try API first
     if api_logger is not None:
         try:
-            api_result = api_logger.create_entry(
+            # DEFECT-002 FIX: Check success boolean from create_entry
+            success, api_result = api_logger.create_entry(
                 category='business',
                 type='cron_completion',
                 title=f'Cron: {cron_name}',
@@ -336,7 +406,7 @@ def log_cron_completion(cron_name: str, result: str, **kwargs):
                 metadata=metadata
             )
             
-            if api_result:
+            if success:
                 print(f"✅ Cron completion logged to dashboard: {cron_name}")
                 return api_result
             else:
@@ -365,7 +435,8 @@ def log_dashboard_update(tab: str, items_added: int, description: str, **kwargs)
     # Try API first
     if api_logger is not None:
         try:
-            api_result = api_logger.create_entry(
+            # DEFECT-002 FIX: Check success boolean from create_entry
+            success, api_result = api_logger.create_entry(
                 category='youtube',
                 type='dashboard_update',
                 title=f'Dashboard Update: {tab}',
@@ -373,7 +444,7 @@ def log_dashboard_update(tab: str, items_added: int, description: str, **kwargs)
                 metadata=metadata
             )
             
-            if api_result:
+            if success:
                 print(f"✅ Dashboard update logged to dashboard: {tab}")
                 return api_result
             else:
@@ -387,22 +458,48 @@ def log_dashboard_update(tab: str, items_added: int, description: str, **kwargs)
 
 # If run directly, show usage
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python auto_logger.py <type> <description>")
+    # DEFECT-007 FIX: Handle missing description gracefully
+    if len(sys.argv) < 2:
+        print("Usage: python auto_logger.py <type> [args...]")
         print("\nConvenience commands:")
-        print("  python auto_logger.py script <script_name> <description>")
-        print("  python auto_logger.py research <topic> <findings>")
-        print("  python auto_logger.py analysis <subject> <result>")
+        print("  python auto_logger.py script <script_name> [description]")
+        print("  python auto_logger.py research <topic> [findings]")
+        print("  python auto_logger.py analysis <subject> [result]")
+        print("  python auto_logger.py <activity_type> <description>")
         sys.exit(1)
     
     log_type = sys.argv[1]
-    description = " ".join(sys.argv[2:])
     
+    # DEFECT-007 FIX: Handle missing arguments for all command types
     if log_type == "script":
-        log_script_build(sys.argv[2], " ".join(sys.argv[3:]))
+        if len(sys.argv) < 3:
+            print("❌ Error: script_name is required")
+            print("Usage: python auto_logger.py script <script_name> [description]")
+            sys.exit(1)
+        script_name = sys.argv[2]
+        description = " ".join(sys.argv[3:]) if len(sys.argv) > 3 else f"Script build: {script_name}"
+        log_script_build(script_name, description)
     elif log_type == "research":
-        log_research(sys.argv[2], " ".join(sys.argv[3:]))
+        if len(sys.argv) < 3:
+            print("❌ Error: topic is required")
+            print("Usage: python auto_logger.py research <topic> [findings]")
+            sys.exit(1)
+        topic = sys.argv[2]
+        findings = " ".join(sys.argv[3:]) if len(sys.argv) > 3 else f"Research on {topic}"
+        log_research(topic, findings)
     elif log_type == "analysis":
-        log_analysis(sys.argv[2], " ".join(sys.argv[3:]))
+        if len(sys.argv) < 3:
+            print("❌ Error: subject is required")
+            print("Usage: python auto_logger.py analysis <subject> [result]")
+            sys.exit(1)
+        subject = sys.argv[2]
+        result = " ".join(sys.argv[3:]) if len(sys.argv) > 3 else f"Analysis of {subject}"
+        log_analysis(subject, result)
     else:
+        # Generic activity logging
+        if len(sys.argv) < 3:
+            print(f"❌ Error: description is required for activity type '{log_type}'")
+            print(f"Usage: python auto_logger.py {log_type} <description>")
+            sys.exit(1)
+        description = " ".join(sys.argv[2:])
         log_activity(activity_type=log_type, description=description)
