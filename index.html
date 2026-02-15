@@ -3,68 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Cache-busting meta tags to prevent stale data -->
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <meta name="cache-version" content="v4-nuclear">
   <title>Work Tracker - Auto</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body { background: #0a0a0f; color: #e2e8f0; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; }
-    .tab-active { border-bottom: 2px solid #3B82F6; color: #3B82F6; }
-    .card { background: #141420; border: 1px solid #1e1e30; }
+    body { background: #0a0a0f; color: #e2e8f0; font-family: system-ui, -apple-system, sans-serif; }
+    .card { background: #141420; border: 1px solid #1e1e30; border-radius: 8px; }
     .agent-nox { color: #3B82F6; }
     .agent-sage { color: #10B981; }
     .agent-joy { color: #8B5CF6; }
-    .type-feature { color: #10B981; }
-    .type-bug_fix { color: #EF4444; }
-    .type-improvement { color: #3B82F6; }
-    .type-research { color: #F59E0B; }
+    .tab-active { border-bottom: 2px solid #3B82F6; color: #3B82F6; }
+    .activity-item { transition: background 0.15s; }
+    .activity-item:hover { background: #1a1a2e; }
+    /* Virtual scrolling container */
+    #activity-feed { height: 600px; overflow-y: auto; position: relative; }
+    .loading-spinner { animation: spin 1s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   </style>
 </head>
 <body class="min-h-screen">
-  <!-- Cache-busting check: Force reload if this is cached HTML -->
-  <script>
-    (function() {
-      const EXPECTED_CACHE_VERSION = 'v4-nuclear';
-      const urlParams = new URLSearchParams(window.location.search);
-      
-      // If no cache-busting param in URL, force reload
-      if (!urlParams.has('_cb') || !urlParams.get('_cb').includes('v4')) {
-        urlParams.set('_cb', EXPECTED_CACHE_VERSION + '-' + Date.now());
-        const newUrl = window.location.pathname + '?' + urlParams.toString();
-        console.log('[Cache] Force reloading with cache-bust:', newUrl);
-        window.location.replace(newUrl);
-      }
-    })();
-  </script>
-  <!-- Header -->
-  <header class="sticky top-0 z-50 bg-dark-900 border-b border-dark-700">
+  <header class="sticky top-0 z-50 bg-gray-900 border-b border-gray-800">
     <div class="max-w-7xl mx-auto px-4 py-3">
       <div class="flex items-center justify-between">
         <div>
           <h1 class="text-xl font-bold">🔨 Work Tracker</h1>
           <p class="text-xs text-gray-500">Auto-tracking: Nox, Sage, Joy</p>
         </div>
-        <div class="flex items-center gap-4">
-          <div id="live-indicator" class="flex items-center gap-2 text-sm">
-            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-            <span class="text-gray-400">AUTO</span>
-          </div>
-          <div id="freshness-indicator" class="hidden sm:flex" title="Data freshness">
-            <span class="text-green-400 text-xs">● Fresh</span>
-          </div>
-          <button onclick="clearAllCaches()" class="px-3 py-1 bg-red-900/50 hover:bg-red-800 text-red-200 rounded text-sm" title="Clear cache & hard reload">🗑️ Cache</button>
-          <button onclick="refreshData()" class="px-3 py-1 bg-dark-700 rounded text-sm hover:bg-dark-600">🔄</button>
+        <div class="flex items-center gap-3">
+          <span id="activity-count" class="text-xs text-gray-400">Loading...</span>
+          <button onclick="refreshData()" class="px-3 py-1 bg-gray-800 rounded text-sm hover:bg-gray-700">🔄 Refresh</button>
+          <button onclick="runCleanup()" class="px-3 py-1 bg-red-900/50 text-red-200 rounded text-sm hover:bg-red-800">🧹 Cleanup</button>
         </div>
       </div>
     </div>
-    <!-- Tab Navigation -->
     <nav class="max-w-7xl mx-auto px-4">
       <div class="flex space-x-1">
-        <button onclick="showTab('all')" id="tab-btn-all" class="tab-btn px-4 py-2 text-sm tab-active">📊 All Activity</button>
+        <button onclick="showTab('all')" id="tab-btn-all" class="tab-btn px-4 py-2 text-sm tab-active">📊 All</button>
         <button onclick="showTab('nox')" id="tab-btn-nox" class="tab-btn px-4 py-2 text-sm">⚡ Nox</button>
         <button onclick="showTab('sage')" id="tab-btn-sage" class="tab-btn px-4 py-2 text-sm">🌿 Sage</button>
         <button onclick="showTab('joy')" id="tab-btn-joy" class="tab-btn px-4 py-2 text-sm">✨ Joy</button>
@@ -73,75 +47,55 @@
     </nav>
   </header>
 
-  <!-- Main Content -->
   <main class="max-w-7xl mx-auto px-4 py-6">
-    <!-- Activity Feed (All Agents) -->
+    <!-- Activity Feed -->
     <div id="tab-all" class="tab-content">
       <div class="mb-4 flex items-center justify-between">
-        <h2 class="text-xl font-semibold">Live Activity Feed</h2>
-        <select id="type-filter" onchange="filterActivities()" class="px-3 py-1 bg-dark-700 rounded border border-dark-600 text-sm">
+        <h2 class="text-lg font-semibold">Recent Activity</h2>
+        <select id="type-filter" onchange="loadActivities()" class="px-3 py-1 bg-gray-800 rounded border border-gray-700 text-sm">
           <option value="">All Types</option>
-          <option value="feature">🟢 Feature</option>
-          <option value="bug_fix">🔴 Bug Fix</option>
-          <option value="improvement">🔵 Improvement</option>
-          <option value="research">🟠 Research</option>
-          <option value="documentation">📄 Documentation</option>
+          <option value="feature">✨ Feature</option>
+          <option value="bug_fix">🐛 Bug Fix</option>
+          <option value="improvement">⚡ Improvement</option>
+          <option value="research">🔍 Research</option>
+          <option value="documentation">📝 Documentation</option>
           <option value="refactor">♻️ Refactor</option>
         </select>
       </div>
-      <div id="activity-feed-all" class="space-y-2">
-        <div class="card rounded p-4 text-center text-gray-500">Loading...</div>
+      <div id="activity-feed" class="card">
+        <div class="p-4 text-center text-gray-500">Loading...</div>
+      </div>
+      <div class="mt-4 flex items-center justify-between">
+        <button onclick="prevPage()" id="prev-btn" class="px-4 py-2 bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50" disabled>← Previous</button>
+        <span id="page-info" class="text-sm text-gray-400">Page 1</span>
+        <button onclick="nextPage()" id="next-btn" class="px-4 py-2 bg-gray-800 rounded hover:bg-gray-700 disabled:opacity-50" disabled>Next →</button>
       </div>
     </div>
 
-    <!-- Nox Activity -->
-    <div id="tab-nox" class="tab-content hidden">
-      <h2 class="text-xl font-semibold mb-4 agent-nox">⚡ Nox Activity</h2>
-      <div id="activity-feed-nox" class="space-y-2">
-        <div class="card rounded p-4 text-center text-gray-500">Loading...</div>
-      </div>
-    </div>
-
-    <!-- Sage Activity -->
-    <div id="tab-sage" class="tab-content hidden">
-      <h2 class="text-xl font-semibold mb-4 agent-sage">🌿 Sage Activity</h2>
-      <div id="activity-feed-sage" class="space-y-2">
-        <div class="card rounded p-4 text-center text-gray-500">Loading...</div>
-      </div>
-    </div>
-
-    <!-- Joy Activity -->
-    <div id="tab-joy" class="tab-content hidden">
-      <h2 class="text-xl font-semibold mb-4 agent-joy">✨ Joy Activity</h2>
-      <div id="activity-feed-joy" class="space-y-2">
-        <div class="card rounded p-4 text-center text-gray-500">Loading...</div>
-      </div>
-    </div>
-
-    <!-- Stats -->
+    <!-- Stats Tab -->
     <div id="tab-stats" class="tab-content hidden">
-      <h2 class="text-xl font-semibold mb-4">📈 Statistics</h2>
+      <h2 class="text-lg font-semibold mb-4">📈 Statistics</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div class="card rounded p-4">
+        <div class="card p-4">
           <h3 class="text-sm text-gray-400 mb-2">Total Activities</h3>
-          <p id="stat-total" class="text-3xl font-bold">0</p>
+          <p id="stat-total" class="text-3xl font-bold">-</p>
         </div>
-        <div class="card rounded p-4">
+        <div class="card p-4">
           <h3 class="text-sm text-gray-400 mb-2">Today</h3>
-          <p id="stat-today" class="text-3xl font-bold">0</p>
+          <p id="stat-today" class="text-3xl font-bold">-</p>
         </div>
-        <div class="card rounded p-4">
+        <div class="card p-4">
           <h3 class="text-sm text-gray-400 mb-2">This Week</h3>
-          <p id="stat-week" class="text-3xl font-bold">0</p>
+          <p id="stat-week" class="text-3xl font-bold">-</p>
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="card rounded p-4">
-          <h3 class="text-sm text-gray-400 mb-4">Activities by Agent</h3>
+        <div class="card p-4">
+          <h3 class="text-sm text-gray-400 mb-4">By Agent</h3>
           <canvas id="chart-agents"></canvas>
         </div>
-        <div class="card rounded p-4">
-          <h3 class="text-sm text-gray-400 mb-4">Activities by Type</h3>
+        <div class="card p-4">
+          <h3 class="text-sm text-gray-400 mb-4">By Type</h3>
           <canvas id="chart-types"></canvas>
         </div>
       </div>
@@ -149,210 +103,207 @@
   </main>
 
   <script>
-    // NUCLEAR CACHE BUST: Unregister all service workers on load
-    (async function nuclearCacheBust() {
-      if (!('serviceWorker' in navigator)) return;
-      
-      console.log('[NUCLEAR] Unregistering all service workers...');
-      const registrations = await navigator.serviceWorker.getRegistrations();
-      for (const reg of registrations) {
-        console.log('[NUCLEAR] Unregistering:', reg.scope);
-        await reg.unregister();
-      }
-      
-      if (window.caches) {
-        const cacheNames = await caches.keys();
-        for (const name of cacheNames) {
-          console.log('[NUCLEAR] Deleting cache:', name);
-          await caches.delete(name);
-        }
-      }
-      console.log('[NUCLEAR] Cache bust complete');
-    })();
-
-    let activities = [];
+    // State
     let currentTab = 'all';
-    let typeFilter = '';
+    let currentPage = 0;
+    let pageSize = 100;
+    let totalActivities = 0;
     let chartInstances = {};
 
-    // Tab Management
-    function showTab(tabName) {
+    // Tab switching
+    function showTab(tab) {
+      currentTab = tab;
+      currentPage = 0;
+      
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('tab-active'));
       
-      document.getElementById('tab-' + tabName).classList.remove('hidden');
-      document.getElementById('tab-btn-' + tabName).classList.add('tab-active');
+      if (tab === 'stats') {
+        document.getElementById('tab-stats').classList.remove('hidden');
+        loadStats();
+      } else {
+        document.getElementById('tab-all').classList.remove('hidden');
+        loadActivities();
+      }
       
-      currentTab = tabName;
-      renderActivities();
+      document.getElementById(`tab-btn-${tab}`).classList.add('tab-active');
     }
 
-    // Load Data
-    async function loadData() {
+    // Load activities with pagination
+    async function loadActivities() {
+      const feed = document.getElementById('activity-feed');
+      feed.innerHTML = '<div class="p-4 text-center text-gray-500">Loading...</div>';
+      
+      const typeFilter = document.getElementById('type-filter').value;
+      const agentFilter = currentTab === 'all' ? '' : currentTab;
+      
       try {
-        const response = await fetch('data/activity-log.json?t=' + Date.now(), {
-          cache: 'no-store',
-          headers: { 'Cache-Control': 'no-cache' }
-        });
-        const data = await response.json();
-        activities = data.entries || [];
-        renderActivities();
-        renderStats();
-      } catch (error) {
-        console.error('Failed to load activities:', error);
+        const url = `/api/activities?limit=${pageSize}&offset=${currentPage * pageSize}` +
+                    (agentFilter ? `&agent=${agentFilter}` : '') +
+                    (typeFilter ? `&type=${typeFilter}` : '');
+        
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        totalActivities = data.total || 0;
+        renderActivities(data.entries || []);
+        updatePagination();
+        
+        document.getElementById('activity-count').textContent = 
+          `${data.entries?.length || 0} of ${totalActivities} activities`;
+      } catch (err) {
+        console.error('Failed to load:', err);
+        feed.innerHTML = '<div class="p-4 text-center text-red-400">Failed to load</div>';
       }
     }
 
-    // Filter Activities
-    function filterActivities() {
-      typeFilter = document.getElementById('type-filter').value;
-      renderActivities();
-    }
-
-    // Render Activities
-    function renderActivities() {
-      let filtered = activities;
-
-      // Filter by type
-      if (typeFilter) {
-        filtered = filtered.filter(a => a.type === typeFilter);
-      }
-
-      // Filter by agent (tab)
-      if (currentTab !== 'all' && currentTab !== 'stats') {
-        filtered = filtered.filter(a => a.agent === currentTab);
-      }
-
-      // Render to appropriate feed
-      const feedId = currentTab === 'all' || currentTab === 'stats' ? 'activity-feed-all' : `activity-feed-${currentTab}`;
-      const feedEl = document.getElementById(feedId);
+    // Render activities (virtualized - only visible items)
+    function renderActivities(entries) {
+      const feed = document.getElementById('activity-feed');
       
-      if (filtered.length === 0) {
-        feedEl.innerHTML = '<div class="card rounded p-4 text-center text-gray-500">No activities found</div>';
+      if (entries.length === 0) {
+        feed.innerHTML = '<div class="p-4 text-center text-gray-500">No activities</div>';
         return;
       }
-
-      feedEl.innerHTML = filtered.map(activity => {
-        const timestamp = new Date(activity.timestamp);
-        const timeStr = timestamp.toLocaleString('en-US', { 
-          month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' 
+      
+      const html = entries.map((a, i) => {
+        const time = new Date(a.timestamp).toLocaleString('en-US', { 
+          month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
         });
-        
-        const agentColor = activity.agent === 'nox' ? 'agent-nox' : 
-                          activity.agent === 'sage' ? 'agent-sage' : 
-                          activity.agent === 'joy' ? 'agent-joy' : '';
-        
-        const typeIcon = activity.type === 'feature' ? '🟢' :
-                        activity.type === 'bug_fix' ? '🔴' :
-                        activity.type === 'improvement' ? '🔵' :
-                        activity.type === 'research' ? '🟠' :
-                        activity.type === 'documentation' ? '📄' :
-                        activity.type === 'refactor' ? '♻️' : '⚪';
+        const agentColor = a.agent === 'nox' ? 'agent-nox' : 
+                          a.agent === 'sage' ? 'agent-sage' : 
+                          a.agent === 'joy' ? 'agent-joy' : '';
         
         return `
-          <div class="card rounded p-3 hover:bg-dark-700 transition-colors">
+          <div class="activity-item p-3 border-b border-gray-800 ${i % 2 === 0 ? 'bg-gray-900/30' : ''}">
             <div class="flex items-start justify-between">
-              <div class="flex-1">
+              <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-2 mb-1">
-                  <span class="${agentColor} font-bold text-sm">${(activity.agent || 'unknown').toUpperCase()}</span>
-                  <span class="text-xs text-gray-500">${timeStr}</span>
-                  ${activity.project ? `<span class="text-xs text-gray-600">${activity.project}</span>` : ''}
+                  <span class="${agentColor} font-bold text-xs">${(a.agent || 'unknown').toUpperCase()}</span>
+                  <span class="text-xs text-gray-500">${time}</span>
+                  ${a.project ? `<span class="text-xs text-gray-600">${a.project}</span>` : ''}
                 </div>
-                <div class="flex items-start gap-2">
-                  <span>${typeIcon}</span>
-                  <p class="text-sm text-gray-300">${activity.description}</p>
-                </div>
+                <p class="text-sm text-gray-300 truncate">${a.description || a.title || 'No description'}</p>
               </div>
-              ${activity.commit_hash ? `<span class="text-xs text-gray-600 ml-2">${activity.commit_hash}</span>` : ''}
+              ${a.commit_hash ? `<span class="text-xs text-gray-600 ml-2">${a.commit_hash.substring(0, 7)}</span>` : ''}
             </div>
           </div>
         `;
       }).join('');
+      
+      feed.innerHTML = html;
     }
 
-    // Render Stats
-    function renderStats() {
-      // Destroy existing charts to prevent canvas reuse errors
-      if (chartInstances.agents) {
-        chartInstances.agents.destroy();
+    // Update pagination buttons
+    function updatePagination() {
+      const maxPage = Math.ceil(totalActivities / pageSize) - 1;
+      document.getElementById('prev-btn').disabled = currentPage <= 0;
+      document.getElementById('next-btn').disabled = currentPage >= maxPage;
+      document.getElementById('page-info').textContent = `Page ${currentPage + 1} of ${maxPage + 1 || 1}`;
+    }
+
+    function prevPage() {
+      if (currentPage > 0) {
+        currentPage--;
+        loadActivities();
       }
-      if (chartInstances.types) {
-        chartInstances.types.destroy();
+    }
+
+    function nextPage() {
+      const maxPage = Math.ceil(totalActivities / pageSize) - 1;
+      if (currentPage < maxPage) {
+        currentPage++;
+        loadActivities();
       }
+    }
 
-      // Total
-      document.getElementById('stat-total').textContent = activities.length;
+    // Load stats
+    async function loadStats() {
+      try {
+        const res = await fetch('/api/stats');
+        const stats = await res.json();
+        
+        document.getElementById('stat-total').textContent = stats.total || 0;
+        document.getElementById('stat-today').textContent = stats.today || 0;
+        document.getElementById('stat-week').textContent = stats.thisWeek || 0;
+        
+        renderCharts(stats);
+      } catch (err) {
+        console.error('Failed to load stats:', err);
+      }
+    }
 
-      // Today
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const todayActivities = activities.filter(a => new Date(a.timestamp) >= today);
-      document.getElementById('stat-today').textContent = todayActivities.length;
-
-      // This Week
-      const weekAgo = new Date();
-      weekAgo.setDate(weekAgo.getDate() - 7);
-      const weekActivities = activities.filter(a => new Date(a.timestamp) >= weekAgo);
-      document.getElementById('stat-week').textContent = weekActivities.length;
-
-      // Agent Chart
-      const agentCounts = {};
-      activities.forEach(a => {
-        agentCounts[a.agent] = (agentCounts[a.agent] || 0) + 1;
-      });
-
-      const ctxAgents = document.getElementById('chart-agents').getContext('2d');
-      chartInstances.agents = new Chart(ctxAgents, {
-        type: 'doughnut',
-        data: {
-          labels: Object.keys(agentCounts),
-          datasets: [{
-            data: Object.values(agentCounts),
-            backgroundColor: ['#3B82F6', '#10B981', '#8B5CF6']
-          }]
-        },
-        options: {
-          plugins: { legend: { labels: { color: '#e2e8f0' } } }
-        }
-      });
-
-      // Type Chart
-      const typeCounts = {};
-      activities.forEach(a => {
-        typeCounts[a.type] = (typeCounts[a.type] || 0) + 1;
-      });
-
-      const ctxTypes = document.getElementById('chart-types').getContext('2d');
-      chartInstances.types = new Chart(ctxTypes, {
-        type: 'bar',
-        data: {
-          labels: Object.keys(typeCounts),
-          datasets: [{
-            label: 'Activities',
-            data: Object.values(typeCounts),
-            backgroundColor: '#3B82F6'
-          }]
-        },
-        options: {
-          plugins: { legend: { labels: { color: '#e2e8f0' } } },
-          scales: {
-            y: { ticks: { color: '#e2e8f0' } },
-            x: { ticks: { color: '#e2e8f0' } }
+    // Render charts
+    function renderCharts(stats) {
+      // Destroy existing charts
+      if (chartInstances.agents) chartInstances.agents.destroy();
+      if (chartInstances.types) chartInstances.types.destroy();
+      
+      // Agent chart
+      const agentCtx = document.getElementById('chart-agents')?.getContext('2d');
+      if (agentCtx && stats.byAgent) {
+        chartInstances.agents = new Chart(agentCtx, {
+          type: 'doughnut',
+          data: {
+            labels: Object.keys(stats.byAgent),
+            datasets: [{
+              data: Object.values(stats.byAgent),
+              backgroundColor: ['#3B82F6', '#10B981', '#8B5CF6', '#F59E0B']
+            }]
+          },
+          options: { plugins: { legend: { labels: { color: '#e2e8f0' } } } }
+        });
+      }
+      
+      // Type chart
+      const typeCtx = document.getElementById('chart-types')?.getContext('2d');
+      if (typeCtx && stats.byType) {
+        chartInstances.types = new Chart(typeCtx, {
+          type: 'bar',
+          data: {
+            labels: Object.keys(stats.byType),
+            datasets: [{
+              label: 'Activities',
+              data: Object.values(stats.byType),
+              backgroundColor: '#3B82F6'
+            }]
+          },
+          options: {
+            plugins: { legend: { labels: { color: '#e2e8f0' } } },
+            scales: {
+              y: { ticks: { color: '#e2e8f0' } },
+              x: { ticks: { color: '#e2e8f0' } }
+            }
           }
-        }
-      });
+        });
+      }
     }
 
-    // Refresh Data
+    // Refresh data
     function refreshData() {
-      loadData();
+      if (currentTab === 'stats') {
+        loadStats();
+      } else {
+        loadActivities();
+      }
     }
 
-    // Auto-refresh every 2 minutes
-    setInterval(loadData, 120000);
+    // Run cleanup
+    async function runCleanup() {
+      if (!confirm('Remove activities older than 7 days?')) return;
+      
+      try {
+        const res = await fetch('/api/cleanup', { method: 'POST' });
+        const result = await res.json();
+        alert(`Removed ${result.removed} old activities. ${result.remaining} remaining.`);
+        refreshData();
+      } catch (err) {
+        alert('Cleanup failed');
+      }
+    }
 
     // Initial load
-    loadData();
+    loadActivities();
   </script>
 </body>
 </html>
