@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-17T02:00:00-05:00",
+  "lastUpdated": "2026-02-18T02:00:00-05:00",
   "outlierVideos": [
     {
       "score": 345,
@@ -28,16 +28,44 @@
         "relevance": "High engagement in creature/animal discovery niche",
         "applicability": "Discovery format works for evolution/simulation reveals"
       }
+    },
+    {
+      "score": 160,
+      "title": "Cat Has Existential Crisis",
+      "channel": "45",
+      "views": "51K",
+      "source": "viewstats",
+      "addedAt": "2026-02-18T02:00:00-05:00",
+      "viralMechanics": {
+        "hook": "Absurdist AI concept + relatable pet humor",
+        "format": "Short-form existential comedy",
+        "relevance": "AI-generated content performing well in animal niche",
+        "applicability": "Anthropomorphized creature content with AI twist"
+      }
+    },
+    {
+      "score": 119,
+      "title": "DPC 2023 WEU Spring Tour Division I",
+      "channel": "09:06:56",
+      "views": "81K",
+      "source": "viewstats",
+      "addedAt": "2026-02-18T02:00:00-05:00",
+      "viralMechanics": {
+        "hook": "Esports tournament content with established fanbase",
+        "format": "Competitive gaming highlights",
+        "relevance": "Gaming content maintains consistent engagement",
+        "applicability": "Tournament/event format for simulation/gaming content"
+      }
     }
   ],
   "stats": {
     "totalAnalyzed": 51,
     "viewStatsOutliers": 31,
     "youtubeSearchResults": 20,
-    "addedToDashboard": 2,
+    "addedToDashboard": 4,
     "filteredOut": {
-      "lowScore": 12,
-      "irrelevantNiche": 15,
+      "lowScore": 23,
+      "irrelevantNiche": 19,
       "missingData": 20,
       "excludedChannels": 2
     }
