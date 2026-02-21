@@ -138,19 +138,33 @@
       const agentFilter = currentTab === 'all' ? '' : currentTab;
       
       try {
-        const url = `/api/activities?limit=${pageSize}&offset=${currentPage * pageSize}` +
-                    (agentFilter ? `&agent=${agentFilter}` : '') +
-                    (typeFilter ? `&type=${typeFilter}` : '');
+        // Load from static JSON for GitHub Pages (no server API)
+        const res = await fetch('data/activity-log.json?t=' + Date.now());
+        const fullData = await res.json();
         
-        const res = await fetch(url);
-        const data = await res.json();
+        // Filter by agent and type if needed
+        let entries = fullData.entries || [];
+        if (agentFilter) {
+          entries = entries.filter(e => e.agent === agentFilter);
+        }
+        if (typeFilter) {
+          entries = entries.filter(e => e.type === typeFilter);
+        }
         
-        totalActivities = data.total || 0;
-        renderActivities(data.entries || []);
+        // Sort by timestamp descending
+        entries.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        
+        totalActivities = entries.length;
+        
+        // Paginate
+        const start = currentPage * pageSize;
+        const paginatedEntries = entries.slice(start, start + pageSize);
+        
+        renderActivities(paginatedEntries);
         updatePagination();
         
         document.getElementById('activity-count').textContent = 
-          `${data.entries?.length || 0} of ${totalActivities} activities`;
+          `${paginatedEntries.length} of ${totalActivities} activities`;
       } catch (err) {
         console.error('Failed to load:', err);
         feed.innerHTML = '<div class="p-4 text-center text-red-400">Failed to load</div>';
