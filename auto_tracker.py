@@ -267,8 +267,8 @@ def sync_state_from_session_activity():
     agent_map = {"main": "nox", "sage": "sage", "joy": "joy"}
 
     for agent_dir, agent_name in agent_map.items():
-        pattern = f"{sessions_base}/{agent_dir}/sessions/**/messages.json"
-        files = glob.glob(pattern, recursive=True)
+        pattern = f"{sessions_base}/{agent_dir}/sessions/*.jsonl"
+        files = glob.glob(pattern)
         if not files:
             continue
         newest = max(files, key=os.path.getmtime)
