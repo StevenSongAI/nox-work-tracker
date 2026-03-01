@@ -188,11 +188,10 @@
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('tab-active'));
       
-      if (tab === 'office') { loadOfficeState(); }
-      if (tab === 'stats') {
+      if (tab === 'office') { document.getElementById('tab-office').classList.remove('hidden'); loadOfficeState(); } else if (tab === 'stats') {
         document.getElementById('tab-stats').classList.remove('hidden');
         loadStats();
-      } else {
+      } else if (tab !== 'office') {
         document.getElementById('tab-all').classList.remove('hidden');
         loadActivities();
       }
