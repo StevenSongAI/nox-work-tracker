@@ -50048,7 +50048,43 @@
       "project": "session_activity",
       "description": "Executed script/command: grep -n \"Invalid duration\\|valid.*dur\\|duration.*valid\\|10s\\",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1772396924461",
+      "timestamp": "2026-03-01T20:28:44.461Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: sed -n '1985,1998p' \"/Users/stevenai/Desktop/Nox Builds/2-He",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772396938043",
+      "timestamp": "2026-03-01T20:28:58.043Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd \"/Users/stevenai/Desktop/Nox Builds/2-Headed Dragon Proje",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772397004041",
+      "timestamp": "2026-03-01T20:30:04.041Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772397008923",
+      "timestamp": "2026-03-01T20:30:08.923Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 5561
+  "totalEntries": 5565
 }
