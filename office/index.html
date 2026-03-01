@@ -2141,6 +2141,57 @@
 
         // Start game
         initGame();
-    </script>
+    
+    // Activity-based agent state sync — polls work tracker activities
+    const ACTIVITY_STATE_INTERVAL = 15000; // 15 seconds
+    const ACTIVITY_IDLE_THRESHOLD = 300000; // 5 minutes in ms
+    const AGENT_NAME_MAP = {main: 'Nox', sage: 'Sage', joy: 'Joy'};
+    
+    async function syncAgentStatesFromActivities() {
+      try {
+        const res = await fetch('/api/activities?limit=20');
+        const data = await res.json();
+        const entries = data.entries || data || [];
+        const now = Date.now();
+        
+        // Find most recent activity per agent
+        const agentLatest = {};
+        for (const entry of entries) {
+          const agent = entry.agent || 'main';
+          const ts = new Date(entry.timestamp).getTime();
+          if (!agentLatest[agent] || ts > agentLatest[agent].ts) {
+            agentLatest[agent] = { ts, desc: entry.description || '' };
+          }
+        }
+        
+        // Push state for each known agent
+        for (const [agentKey, agentName] of Object.entries(AGENT_NAME_MAP)) {
+          const latest = agentLatest[agentKey];
+          const isActive = latest && (now - latest.ts) < ACTIVITY_IDLE_THRESHOLD;
+          const state = isActive ? 'executing' : 'idle';
+          const detail = isActive ? latest.desc.slice(0, 50) : 'Standing by';
+          
+          // Update via API
+          fetch('/api/agent-states', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              name: agentName,
+              emoji: agentKey === 'main' ? '⚡' : agentKey === 'sage' ? '🌿' : '✨',
+              state: state,
+              detail: detail
+            })
+          }).catch(() => {});
+        }
+      } catch (e) {
+        // Silent fail — dont break the office
+      }
+    }
+    
+    // Start activity sync loop
+    setInterval(syncAgentStatesFromActivities, ACTIVITY_STATE_INTERVAL);
+    syncAgentStatesFromActivities(); // run immediately
+
+</script>
 </body>
 </html>
