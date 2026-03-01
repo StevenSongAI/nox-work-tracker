@@ -1,14 +1,10 @@
 {
-  "lastUpdated": "2026-02-18T07:30:55.455456Z",
-  "syncStatus": "active",
-  "cacheBust": "v214223664",
-  "totalActivities": 26478,
-  "totalEntries": 16470,
+  "lastUpdated": "2026-03-01T12:57:47.114485+00:00",
+  "totalActivities": 2724,
   "trackedAgents": [
     "nox",
     "sage",
-    "joy",
-    "main"
+    "joy"
   ],
   "autoTracking": true
 }
