@@ -17,6 +17,11 @@
     .activity-item:hover { background: #1a1a2e; }
     /* Virtual scrolling container */
     #activity-feed { height: 600px; overflow-y: auto; position: relative; }
+
+    @media (max-width: 768px) {
+      .office-frame-container, .office-frame-container iframe { height: 780px !important; }
+    }
+
     .loading-spinner { animation: spin 1s linear infinite; }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   </style>
@@ -52,7 +57,7 @@
     <!-- Activity Feed -->
     <div id="tab-all" class="tab-content">
       <!-- Pixel Office embedded on homepage -->
-      <div class="card mb-6 overflow-hidden" style="height:1560px; position:relative;">
+      <div class="card mb-6 overflow-hidden office-frame-container" style="height:1560px; position:relative;">
         <iframe 
           src="/office?embed=1" 
           width="100%" 
