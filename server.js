@@ -282,6 +282,86 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+
+  // Pixel Office: serve static files from /office/
+  if (pathname.startsWith('/office')) {
+    const officeFile = pathname === '/office' || pathname === '/office/' ? '/office/index.html' : pathname;
+    const filePath = path.join(__dirname, officeFile);
+    const extname = String(path.extname(filePath)).toLowerCase();
+    const contentType = mimeTypes[extname] || 'application/octet-stream';
+    fs.readFile(filePath, (err, content) => {
+      if (err) { res.writeHead(404); res.end('Not found'); return; }
+      res.writeHead(200, {'Content-Type': contentType});
+      res.end(content);
+    });
+    return;
+  }
+
+  // Pixel Office: /status — main agent state (Nox)
+  if (pathname === '/status' && req.method === 'GET') {
+    const statesFile = path.join(__dirname, 'data', 'agent-states.json');
+    try {
+      const states = JSON.parse(fs.readFileSync(statesFile, 'utf8'));
+      const nox = states.find(a => a.name === 'Nox') || {state:'idle',detail:'',progress:0};
+      res.writeHead(200, {'Content-Type':'application/json','Access-Control-Allow-Origin':'*'});
+      res.end(JSON.stringify({state:nox.state,detail:nox.detail,progress:nox.progress||0,updated_at:nox.updated_at}));
+    } catch(e) { res.writeHead(200); res.end(JSON.stringify({state:'idle',detail:'',progress:0})); }
+    return;
+  }
+
+  // Pixel Office: /agents — guest agents (Sage, Joy)
+  if (pathname.startsWith('/agents') && req.method === 'GET') {
+    const statesFile = path.join(__dirname, 'data', 'agent-states.json');
+    try {
+      const states = JSON.parse(fs.readFileSync(statesFile, 'utf8'));
+      const guests = states.filter(a => a.name !== 'Nox').map((a,i) => ({
+        agentId: 'agent_' + a.name.toLowerCase(),
+        name: a.name,
+        state: a.state,
+        detail: a.detail,
+        authStatus: 'approved',
+        updated_at: a.updated_at
+      }));
+      res.writeHead(200, {'Content-Type':'application/json','Access-Control-Allow-Origin':'*'});
+      res.end(JSON.stringify(guests));
+    } catch(e) { res.writeHead(200); res.end(JSON.stringify([])); }
+    return;
+  }
+
+  // Pixel Office: /set_state — update Nox state
+  if (pathname === '/set_state' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        const statesFile = path.join(__dirname, 'data', 'agent-states.json');
+        let states = JSON.parse(fs.readFileSync(statesFile, 'utf8'));
+        const update = JSON.parse(body);
+        const idx = states.findIndex(a => a.name === 'Nox');
+        const entry = {name:'Nox',emoji:'⚡',state:update.state,detail:update.detail||'',progress:update.progress||0,updated_at:new Date().toISOString()};
+        if (idx >= 0) states[idx] = entry; else states.push(entry);
+        fs.writeFileSync(statesFile, JSON.stringify(states, null, 2));
+        res.writeHead(200); res.end(JSON.stringify({ok:true}));
+      } catch(e) { res.writeHead(500); res.end(JSON.stringify({ok:false})); }
+    });
+    return;
+  }
+
+  // Pixel Office: /yesterday-memo
+  if (pathname === '/yesterday-memo' && req.method === 'GET') {
+    const yesterday = new Date(); yesterday.setDate(yesterday.getDate()-1);
+    const dateStr = yesterday.toISOString().split('T')[0];
+    const memFile = `/Users/stevenai/.openclaw/workspace-nox/memory/${dateStr}.md`;
+    try {
+      const text = fs.readFileSync(memFile, 'utf8').slice(0, 500);
+      res.writeHead(200, {'Content-Type':'application/json'}); 
+      res.end(JSON.stringify({success:true,date:dateStr,memo:text}));
+    } catch(e) { 
+      res.writeHead(200); res.end(JSON.stringify({success:false,memo:'No memo available'})); 
+    }
+    return;
+  }
+
   // Static files
   let filePath = path.join(__dirname, pathname);
   if (pathname === '/') {
