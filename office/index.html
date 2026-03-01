@@ -7,7 +7,7 @@
     <style>
         @font-face {
             font-family: 'ArkPixel';
-            src: url('/static/fonts/ark-pixel-12px-proportional-zh_cn.ttf.woff2') format('woff2');
+            src: url('/office/fonts/ark-pixel-12px-proportional-zh_cn.ttf.woff2') format('woff2');
             font-weight: normal;
             font-style: normal;
         }
@@ -219,7 +219,7 @@
         #memo-panel {
             width: 400px;
             height: 300px;
-            background-image: url('/static/memo-bg.png');
+            background-image: url('/office/memo-bg.png');
             background-size: cover;
             background-position: center;
             border: 3px solid #e94560;
@@ -1268,54 +1268,54 @@
 
             // cache-busting to avoid stale background on client/CDN
             // use smaller/new map version provided by user
-            this.load.image('office_bg', '/static/office_bg_small' + (supportsWebP ? '.webp' : '.png') + '?v={{VERSION_TIMESTAMP}}');
-            this.load.spritesheet('star_idle', '/static/star-idle-spritesheet' + getExt('star-idle-spritesheet.png'), { frameWidth: 128, frameHeight: 128 });
-            this.load.spritesheet('star_researching', '/static/star-researching-spritesheet' + getExt('star-researching-spritesheet.png'), { frameWidth: 128, frameHeight: 105 });
+            this.load.image('office_bg', '/office/office_bg_small' + (supportsWebP ? '.webp' : '.png') + '?v=20260301');
+            this.load.spritesheet('star_idle', '/office/star-idle-spritesheet' + getExt('star-idle-spritesheet.png'), { frameWidth: 128, frameHeight: 128 });
+            this.load.spritesheet('star_researching', '/office/star-researching-spritesheet' + getExt('star-researching-spritesheet.png'), { frameWidth: 128, frameHeight: 105 });
 
             // Furniture
-            this.load.image('sofa_idle', '/static/sofa-idle' + getExt('sofa-idle.png'));
-            this.load.spritesheet('sofa_busy', '/static/sofa-busy-spritesheet' + getExt('sofa-busy-spritesheet.png'), { frameWidth: 256, frameHeight: 256 });
+            this.load.image('sofa_idle', '/office/sofa-idle' + getExt('sofa-idle.png'));
+            this.load.spritesheet('sofa_busy', '/office/sofa-busy-spritesheet' + getExt('sofa-busy-spritesheet.png'), { frameWidth: 256, frameHeight: 256 });
 
             // Decor
-            this.load.spritesheet('plants', '/static/plants-spritesheet' + getExt('plants-spritesheet.png'), { frameWidth: 160, frameHeight: 160 });
-            this.load.spritesheet('posters', '/static/posters-spritesheet' + getExt('posters-spritesheet.png'), { frameWidth: 160, frameHeight: 160 });
-            this.load.spritesheet('coffee_machine', '/static/coffee-machine-spritesheet' + getExt('coffee-machine-spritesheet.png'), { frameWidth: 230, frameHeight: 230 });
-            this.load.spritesheet('serverroom', '/static/serverroom-spritesheet' + getExt('serverroom-spritesheet.png'), { frameWidth: 180, frameHeight: 251 });
+            this.load.spritesheet('plants', '/office/plants-spritesheet' + getExt('plants-spritesheet.png'), { frameWidth: 160, frameHeight: 160 });
+            this.load.spritesheet('posters', '/office/posters-spritesheet' + getExt('posters-spritesheet.png'), { frameWidth: 160, frameHeight: 160 });
+            this.load.spritesheet('coffee_machine', '/office/coffee-machine-spritesheet' + getExt('coffee-machine-spritesheet.png'), { frameWidth: 230, frameHeight: 230 });
+            this.load.spritesheet('serverroom', '/office/serverroom-spritesheet' + getExt('serverroom-spritesheet.png'), { frameWidth: 180, frameHeight: 251 });
 
             // Error / bug animation: 180x180, 96 frames (repacked grid)
-            this.load.spritesheet('error_bug', '/static/error-bug-spritesheet-grid' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 180, frameHeight: 180 });
+            this.load.spritesheet('error_bug', '/office/error-bug-spritesheet-grid' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 180, frameHeight: 180 });
 
             // Cat spritesheet: 160x160, 4x4=16 cats
-            this.load.spritesheet('cats', '/static/cats-spritesheet' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 160, frameHeight: 160 });
+            this.load.spritesheet('cats', '/office/cats-spritesheet' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 160, frameHeight: 160 });
 
             // Desk
-            this.load.image('desk', '/static/desk' + getExt('desk.png'));
+            this.load.image('desk', '/office/desk' + getExt('desk.png'));
 
             // Star working animation: repacked to grid to avoid WebGL max texture size limits
             // NOTE: prefer WebP for size, PNG fallback
-            this.load.spritesheet('star_working', '/static/star-working-spritesheet-grid' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 230, frameHeight: 144 });
+            this.load.spritesheet('star_working', '/office/star-working-spritesheet-grid' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 230, frameHeight: 144 });
 
             // Sync state animation (256x256, 53 frames)
-            this.load.spritesheet('sync_anim', '/static/sync-animation-spritesheet-grid' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 256, frameHeight: 256 });
+            this.load.spritesheet('sync_anim', '/office/sync-animation-spritesheet-grid' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 256, frameHeight: 256 });
 
             // Memo background image
-            this.load.image('memo_bg', '/static/memo-bg' + (supportsWebP ? '.webp' : '.png'));
+            this.load.image('memo_bg', '/office/memo-bg' + (supportsWebP ? '.webp' : '.png'));
             // New desk image (v2) - force transparent PNG
-            this.load.image('desk_v2', '/static/desk-v2.png');
+            this.load.image('desk_v2', '/office/desk-v2.png');
             // Flower spritesheet (65x65, 16 frames)
-            this.load.spritesheet('flowers', '/static/flowers-spritesheet' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 65, frameHeight: 65 });
+            this.load.spritesheet('flowers', '/office/flowers-spritesheet' + (supportsWebP ? '.webp' : '.png'), { frameWidth: 65, frameHeight: 65 });
 
             // Guest/Demo agent sprites
-            this.load.image('guestagent1', '/static/guestagent1.webp?v={{VERSION_TIMESTAMP}}');
-            this.load.image('guestagent2', '/static/guestagent2.webp?v={{VERSION_TIMESTAMP}}');
-            this.load.spritesheet('guest_anim_1', '/static/guest_anim_1.webp?v={{VERSION_TIMESTAMP}}', { frameWidth: 32, frameHeight: 32 });
-            this.load.spritesheet('guest_anim_2', '/static/guest_anim_2.webp?v={{VERSION_TIMESTAMP}}', { frameWidth: 32, frameHeight: 32 });
-            this.load.spritesheet('guest_anim_3', '/static/guest_anim_3.webp?v={{VERSION_TIMESTAMP}}', { frameWidth: 32, frameHeight: 32 });
-            this.load.spritesheet('guest_anim_4', '/static/guest_anim_4.webp?v={{VERSION_TIMESTAMP}}', { frameWidth: 32, frameHeight: 32 });
-            this.load.spritesheet('guest_anim_5', '/static/guest_anim_5.webp?v={{VERSION_TIMESTAMP}}', { frameWidth: 32, frameHeight: 32 });
-            this.load.spritesheet('guest_anim_6', '/static/guest_anim_6.webp?v={{VERSION_TIMESTAMP}}', { frameWidth: 32, frameHeight: 32 });
-            this.load.image('demo_nika', '/static/demo_nika.webp?v={{VERSION_TIMESTAMP}}');
-            this.load.image('demo_mercury', '/static/demo_mercury.webp?v={{VERSION_TIMESTAMP}}');
+            this.load.image('guestagent1', '/office/guestagent1.webp?v=20260301');
+            this.load.image('guestagent2', '/office/guestagent2.webp?v=20260301');
+            this.load.spritesheet('guest_anim_1', '/office/guest_anim_1.webp?v=20260301', { frameWidth: 32, frameHeight: 32 });
+            this.load.spritesheet('guest_anim_2', '/office/guest_anim_2.webp?v=20260301', { frameWidth: 32, frameHeight: 32 });
+            this.load.spritesheet('guest_anim_3', '/office/guest_anim_3.webp?v=20260301', { frameWidth: 32, frameHeight: 32 });
+            this.load.spritesheet('guest_anim_4', '/office/guest_anim_4.webp?v=20260301', { frameWidth: 32, frameHeight: 32 });
+            this.load.spritesheet('guest_anim_5', '/office/guest_anim_5.webp?v=20260301', { frameWidth: 32, frameHeight: 32 });
+            this.load.spritesheet('guest_anim_6', '/office/guest_anim_6.webp?v=20260301', { frameWidth: 32, frameHeight: 32 });
+            this.load.image('demo_nika', '/office/demo_nika.webp?v=20260301');
+            this.load.image('demo_mercury', '/office/demo_mercury.webp?v=20260301');
         }
 
         function create() {
