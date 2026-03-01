@@ -259,8 +259,11 @@ def deduplicate_activities(activities):
     return deduped
 
 
+# Track last seen mtime per agent to detect NEW writes only
+AGENT_LAST_MTIME = {"nox": 0.0, "sage": 0.0, "joy": 0.0}
+
 def sync_state_from_session_activity():
-    """Push working state if any agent session file was modified in last 90 seconds."""
+    """Push working state only when session file actually changes (new message written)."""
     import os, glob, time
     now = time.time()
     sessions_base = "/Users/stevenai/.openclaw/agents"
@@ -273,12 +276,14 @@ def sync_state_from_session_activity():
             continue
         newest = max(files, key=os.path.getmtime)
         mtime = os.path.getmtime(newest)
-        age = now - mtime
-        if age < 90:  # modified in last 90 seconds = actively working
-            if AGENT_LAST_ACTIVE[agent_name] == 0:  # only push if not already marked active
-                AGENT_LAST_ACTIVE[agent_name] = now
-                push_agent_state(agent_name, "executing", "Active session")
+
+        if mtime > AGENT_LAST_MTIME[agent_name]:
+            # File was written since last check = actively working
+            AGENT_LAST_MTIME[agent_name] = mtime
+            AGENT_LAST_ACTIVE[agent_name] = now
+            push_agent_state(agent_name, "executing", "Active session")
         elif AGENT_LAST_ACTIVE[agent_name] > 0 and (now - AGENT_LAST_ACTIVE[agent_name]) > IDLE_THRESHOLD:
+            # No new writes for IDLE_THRESHOLD seconds = idle
             AGENT_LAST_ACTIVE[agent_name] = 0
             push_agent_state(agent_name, "idle", "Standing by")
 
