@@ -370,7 +370,7 @@ def main():
         
         # Sleep for 5 minutes
         print(f"💤 Sleeping for 5 minutes...")
-        time.sleep(300)  # 5 minutes
+        time.sleep(20)  # 20 seconds — fast state sync
 
 if __name__ == "__main__":
     main()
