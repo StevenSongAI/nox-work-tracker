@@ -382,14 +382,22 @@
             }
         }
     
-    /* Embed mode: hide bottom panels, show only the game canvas */
-    body.embed-mode #bottom-panels {
+    /* Embed mode: hide everything except the game canvas */
+    body.embed-mode #bottom-panels,
+    body.embed-mode #status-text,
+    body.embed-mode #coords-toggle,
+    body.embed-mode #pan-toggle,
+    body.embed-mode #coords-overlay {
       display: none !important;
     }
     body.embed-mode {
       overflow: hidden;
       margin: 0;
       padding: 0;
+      background: #0f1117;
+    }
+    body.embed-mode #game-container canvas {
+      display: block;
     }
 
   </style>

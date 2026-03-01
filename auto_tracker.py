@@ -258,8 +258,33 @@ def deduplicate_activities(activities):
     
     return deduped
 
+
+def sync_state_from_session_activity():
+    """Push working state if any agent session file was modified in last 90 seconds."""
+    import os, glob, time
+    now = time.time()
+    sessions_base = "/Users/stevenai/.openclaw/agents"
+    agent_map = {"main": "nox", "sage": "sage", "joy": "joy"}
+
+    for agent_dir, agent_name in agent_map.items():
+        pattern = f"{sessions_base}/{agent_dir}/sessions/**/messages.json"
+        files = glob.glob(pattern, recursive=True)
+        if not files:
+            continue
+        newest = max(files, key=os.path.getmtime)
+        mtime = os.path.getmtime(newest)
+        age = now - mtime
+        if age < 90:  # modified in last 90 seconds = actively working
+            if AGENT_LAST_ACTIVE[agent_name] == 0:  # only push if not already marked active
+                AGENT_LAST_ACTIVE[agent_name] = now
+                push_agent_state(agent_name, "executing", "Active session")
+        elif AGENT_LAST_ACTIVE[agent_name] > 0 and (now - AGENT_LAST_ACTIVE[agent_name]) > IDLE_THRESHOLD:
+            AGENT_LAST_ACTIVE[agent_name] = 0
+            push_agent_state(agent_name, "idle", "Standing by")
+
 def run_monitoring_cycle():
     """Run one monitoring cycle - check for new work."""
+    sync_state_from_session_activity()
     print("=" * 60)
     print("🔍 AUTO WORK TRACKER - Scanning for new activity")
     print(f"⏰ {datetime.now(timezone.utc).isoformat()}")
