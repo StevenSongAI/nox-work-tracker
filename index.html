@@ -51,6 +51,17 @@
   <main class="max-w-7xl mx-auto px-4 py-6">
     <!-- Activity Feed -->
     <div id="tab-all" class="tab-content">
+      <!-- Pixel Office embedded on homepage -->
+      <div class="card mb-6 overflow-hidden" style="height:420px; position:relative;">
+        <iframe 
+          src="/office" 
+          width="100%" 
+          height="420px"
+          frameborder="0"
+          style="display:block; border-radius:8px;"
+          id="office-homepage-iframe"
+        ></iframe>
+      </div>
       <div class="mb-4 flex items-center justify-between">
         <h2 class="text-lg font-semibold">Recent Activity</h2>
         <select id="type-filter" onchange="loadActivities()" class="px-3 py-1 bg-gray-800 rounded border border-gray-700 text-sm">
