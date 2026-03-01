@@ -50030,7 +50030,25 @@
       "project": "session_activity",
       "description": "Cron management: update",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1772396910068",
+      "timestamp": "2026-03-01T20:28:30.068Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd \"/Users/stevenai/Desktop/Nox Builds/2-Headed Dragon Proje",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772396915270",
+      "timestamp": "2026-03-01T20:28:35.270Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: grep -n \"Invalid duration\\|valid.*dur\\|duration.*valid\\|10s\\",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 5559
+  "totalEntries": 5561
 }
