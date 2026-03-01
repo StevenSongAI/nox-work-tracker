@@ -383,17 +383,13 @@
         }
     
     /* Embed mode: hide bottom panels, show only the game canvas */
-    body.embed-mode .bottom-panels,
-    body.embed-mode #status-panel,
-    body.embed-mode #memo-panel,
-    body.embed-mode #visitors-panel,
-    body.embed-mode .panel-row,
-    body.embed-mode [class*="grid-cols"] {
+    body.embed-mode #bottom-panels {
       display: none !important;
     }
     body.embed-mode {
-      background: transparent;
       overflow: hidden;
+      margin: 0;
+      padding: 0;
     }
 
   </style>
