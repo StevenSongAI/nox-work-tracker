@@ -50561,7 +50561,115 @@
       "project": "session_activity",
       "description": "Web research: Kling AI official API documentation v3 image-to-video multi-",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1772385515485",
+      "timestamp": "2026-03-01T17:18:35.485Z",
+      "agent": "main",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://github.com/aself101/kling-api",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772385524808",
+      "timestamp": "2026-03-01T17:18:44.808Z",
+      "agent": "main",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://raw.githubusercontent.com/aself101/kling-api/main/do",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772385535903",
+      "timestamp": "2026-03-01T17:18:55.903Z",
+      "agent": "main",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: Kling AI API v3 model \"kling-v3\" multi-shot storyboard video",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772385544368",
+      "timestamp": "2026-03-01T17:19:04.368Z",
+      "agent": "main",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: Kling API \"multi_shot\" OR \"multishot\" OR \"storyboard\" endpoi",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772385553471",
+      "timestamp": "2026-03-01T17:19:13.471Z",
+      "agent": "main",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://blog.fal.ai/kling-3-0-prompting-guide/",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772385718929",
+      "timestamp": "2026-03-01T17:21:58.929Z",
+      "agent": "main",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: Kling 3.0 API duration options 15 seconds \"duration\" \"3\" \"5\"",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772385728083",
+      "timestamp": "2026-03-01T17:22:08.083Z",
+      "agent": "main",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: Kling AI \"JSON prompt\" OR \"JSON prompting\" video generation ",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772385732750",
+      "timestamp": "2026-03-01T17:22:12.750Z",
+      "agent": "main",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://www.imagine.art/blogs/json-prompting-for-ai-video-ge",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772385738769",
+      "timestamp": "2026-03-01T17:22:18.769Z",
+      "agent": "main",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://docs.kie.ai/market/kling/kling-3.0",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772385746696",
+      "timestamp": "2026-03-01T17:22:26.696Z",
+      "agent": "main",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: Kling AI API credit cost per video generation v3 1080p pro p",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772385752277",
+      "timestamp": "2026-03-01T17:22:32.277Z",
+      "agent": "main",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://klingai.com/global/dev/pricing",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772385757208",
+      "timestamp": "2026-03-01T17:22:37.208Z",
+      "agent": "main",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://aitoolanalysis.com/kling-ai-pricing/",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 5618
+  "totalEntries": 5630
 }
