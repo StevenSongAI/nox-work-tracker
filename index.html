@@ -4,7 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Work Tracker - Auto</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com">
+    // Pixel Office tab - fetch all agent states
+    const STATE_LABELS = {idle:'💤 Idle', writing:'✍️ Working', researching:'🔍 Researching', executing:'⚡ Executing', syncing:'🔄 Syncing', error:'🐛 Bug Zone'};
+    const STATE_COLORS = {idle:'text-gray-400', writing:'text-blue-400', researching:'text-yellow-400', executing:'text-green-400', syncing:'text-purple-400', error:'text-red-400'};
+    const STATE_BG = {idle:'bg-gray-800', writing:'bg-blue-900/40', researching:'bg-yellow-900/40', executing:'bg-green-900/40', syncing:'bg-purple-900/40', error:'bg-red-900/40'};
+    function timeSince(date) {
+      const s = Math.floor((new Date() - date) / 1000);
+      if (s < 60) return 'just now';
+      if (s < 3600) return Math.floor(s/60) + 'm ago';
+      if (s < 86400) return Math.floor(s/3600) + 'h ago';
+      return Math.floor(s/86400) + 'd ago';
+    }
+    async function loadOfficeState() {
+      try {
+        const res = await fetch('/api/agent-states');
+        const agents = await res.json();
+        const container = document.getElementById('agent-office-cards');
+        container.innerHTML = agents.map(a => {
+          const ago = a.updated_at ? timeSince(new Date(a.updated_at)) : '';
+          return `<div class="rounded-lg p-4 ${STATE_BG[a.state] || 'bg-gray-800'} border border-gray-700">
+            <div class="text-2xl mb-2">${a.emoji || '🤖'}</div>
+            <div class="font-bold text-base mb-1">${a.name}</div>
+            <div class="${STATE_COLORS[a.state] || 'text-gray-400'} font-medium">${STATE_LABELS[a.state] || a.state}</div>
+            <div class="text-xs text-gray-400 mt-1">${a.detail || ''}</div>
+            <div class="text-xs text-gray-600 mt-2">${ago}</div>
+          </div>`;
+        }).join('');
+      } catch(e) {
+        document.getElementById('agent-office-cards').innerHTML = '<p class="text-red-400 text-sm">Failed to load agent states</p>';
+      }
+    }
+      // Fetch guest agents (Sage, Joy)
+      try {
+        const res = await fetch('http://127.0.0.1:19234/agents');
+        const agents = await res.json();
+        const list = Array.isArray(agents) ? agents : (agents.agents || []);
+        const sage = list.find(a => a.name === 'Sage');
+        const joy = list.find(a => a.name === 'Joy');
+        if (sage) {
+          document.getElementById('sage-state').textContent = STATE_LABELS[sage.state] || sage.state;
+          document.getElementById('sage-detail').textContent = sage.detail || '';
+        }
+        if (joy) {
+          document.getElementById('joy-state').textContent = STATE_LABELS[joy.state] || joy.state;
+          document.getElementById('joy-detail').textContent = joy.detail || '';
+        }
+      } catch(e) {}
+    }
+
+    </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body { background: #0a0a0f; color: #e2e8f0; font-family: system-ui, -apple-system, sans-serif; }
@@ -43,6 +92,7 @@
         <button onclick="showTab('sage')" id="tab-btn-sage" class="tab-btn px-4 py-2 text-sm">🌿 Sage</button>
         <button onclick="showTab('joy')" id="tab-btn-joy" class="tab-btn px-4 py-2 text-sm">✨ Joy</button>
         <button onclick="showTab('stats')" id="tab-btn-stats" class="tab-btn px-4 py-2 text-sm">📈 Stats</button>
+        <button onclick="showTab('office')" id="tab-btn-office" class="tab-btn px-4 py-2 text-sm">🏢 Pixel Office</button>
       </div>
     </nav>
   </header>
@@ -100,6 +150,53 @@
         </div>
       </div>
     </div>
+  
+    <!-- Pixel Office Tab -->
+    <div id="tab-office" class="tab-content hidden">
+      <div class="card p-4 mb-4">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h2 class="font-bold text-lg">🏢 Agent Pixel Office</h2>
+            <p class="text-xs text-gray-400">Live status — what each agent is doing right now</p>
+          </div>
+          <button onclick="loadOfficeState()" class="px-3 py-1 bg-gray-800 rounded text-sm hover:bg-gray-700">🔄 Refresh</button>
+        </div>
+        <div id="agent-office-cards" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2"></div>
+      </div>
+    </div>
+        <iframe 
+          id="pixel-office-frame"
+          src="http://127.0.0.1:19234/" 
+          width="100%" 
+          height="680px" 
+          frameborder="0"
+          style="border-radius:8px; background:#0a0a0f;"
+          onload="document.getElementById('office-status').textContent = '✅ Live'"
+          onerror="document.getElementById('office-status').textContent = '❌ Offline'"
+        ></iframe>
+      </div>
+      <div class="card p-4">
+        <h3 class="font-semibold mb-2 text-sm">Agent States</h3>
+        <div id="agent-states" class="grid grid-cols-3 gap-3 text-sm">
+          <div class="bg-gray-900 rounded p-3">
+            <div class="font-bold agent-nox mb-1">⚡ Nox</div>
+            <div id="nox-state">Loading...</div>
+            <div id="nox-detail" class="text-xs text-gray-400 mt-1"></div>
+          </div>
+          <div class="bg-gray-900 rounded p-3">
+            <div class="font-bold agent-sage mb-1">🌿 Sage</div>
+            <div id="sage-state" class="text-gray-500">—</div>
+            <div id="sage-detail" class="text-xs text-gray-400 mt-1"></div>
+          </div>
+          <div class="bg-gray-900 rounded p-3">
+            <div class="font-bold agent-joy mb-1">✨ Joy</div>
+            <div id="joy-state" class="text-gray-500">—</div>
+            <div id="joy-detail" class="text-xs text-gray-400 mt-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <script>
@@ -118,6 +215,7 @@
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('tab-active'));
       
+      if (tab === 'office') { loadOfficeState(); }
       if (tab === 'stats') {
         document.getElementById('tab-stats').classList.remove('hidden');
         loadStats();

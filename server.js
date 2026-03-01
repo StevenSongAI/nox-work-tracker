@@ -244,6 +244,44 @@ const server = http.createServer((req, res) => {
     return;
   }
   
+
+  // Agent pixel office states
+  if (pathname === '/api/agent-states' && req.method === 'GET') {
+    const statesFile = path.join(__dirname, 'data', 'agent-states.json');
+    try {
+      const data = JSON.parse(fs.readFileSync(statesFile, 'utf8'));
+      res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+      res.end(JSON.stringify(data));
+    } catch(e) {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify([]));
+    }
+    return;
+  }
+
+  if (pathname === '/api/agent-states' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        const statesFile = path.join(__dirname, 'data', 'agent-states.json');
+        let states = [];
+        try { states = JSON.parse(fs.readFileSync(statesFile, 'utf8')); } catch(e) {}
+        const update = JSON.parse(body);
+        const idx = states.findIndex(a => a.name === update.name);
+        update.updated_at = new Date().toISOString();
+        if (idx >= 0) states[idx] = update;
+        else states.push(update);
+        fs.writeFileSync(statesFile, JSON.stringify(states, null, 2));
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: true }));
+      } catch(e) {
+        res.writeHead(500); res.end(JSON.stringify({ ok: false }));
+      }
+    });
+    return;
+  }
+
   // Static files
   let filePath = path.join(__dirname, pathname);
   if (pathname === '/') {
