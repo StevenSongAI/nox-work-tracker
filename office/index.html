@@ -2113,8 +2113,8 @@
 
             // Slightly larger on mobile to avoid blur
             const isTouch = IS_TOUCH_DEVICE;
-            const fontSize = isTouch ? 14 : 12;
-            const bg = game.add.rectangle(anchorX, bubbleY, text.length * 10 + 20, 28, 0xffffff, 0.95);
+            const fontSize = isTouch ? 20 : 12;
+            const bg = game.add.rectangle(anchorX, bubbleY, text.length * (isTouch ? 13 : 10) + 24, isTouch ? 36 : 28, 0xffffff, 0.95);
             bg.setStrokeStyle(2, 0x000000);
             const txt = game.add.text(anchorX, bubbleY, text, { fontFamily: 'ArkPixel, monospace', fontSize: fontSize + 'px', fill: '#000', align: 'center' }).setOrigin(0.5);
             bubble = game.add.container(0, 0, [bg, txt]);
@@ -2131,7 +2131,7 @@
             const anchorY = window.catSprite.y - 60;
             const bg = game.add.rectangle(anchorX, anchorY, text.length * 10 + 20, 24, 0xfffbeb, 0.95);
             bg.setStrokeStyle(2, 0xd4a574);
-            const txt = game.add.text(anchorX, anchorY, text, { fontFamily: 'ArkPixel, monospace', fontSize: '11px', fill: '#8b6914', align: 'center' }).setOrigin(0.5);
+            const txt = game.add.text(anchorX, anchorY, text, { fontFamily: 'ArkPixel, monospace', fontSize: isTouch ? '16px' : '11px', fill: '#8b6914', align: 'center' }).setOrigin(0.5);
             window.catBubble = game.add.container(0, 0, [bg, txt]);
             window.catBubble.setDepth(2100); // top layer above cat
             setTimeout(() => { if (window.catBubble) { window.catBubble.destroy(); window.catBubble = null; } }, 4000);
