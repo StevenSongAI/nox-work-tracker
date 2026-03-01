@@ -238,6 +238,14 @@ def scan_for_new_work():
     
     return new_activities
 
+def check_idle_agents():
+    """Push idle state for agents inactive > threshold."""
+    now = time.time()
+    for agent, last_active in AGENT_LAST_ACTIVE.items():
+        if last_active > 0 and (now - last_active) > IDLE_THRESHOLD:
+            AGENT_LAST_ACTIVE[agent] = 0
+            push_agent_state(agent, "idle", "Standing by")
+
 def deduplicate_activities(activities):
     """Remove duplicate entries based on ID."""
     seen_ids = set()
@@ -277,6 +285,9 @@ def run_monitoring_cycle():
         # Save
         save_activity_log(activities)
         
+        # Sync pixel office states
+        sync_states_from_activities(new_activities)
+
         # Commit and push
         try:
             subprocess.run(['git', '-C', str(TRACKER_DIR), 'add', '.'], timeout=5)
@@ -338,3 +349,51 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# ─── Pixel Office State Sync ───────────────────────────────────────────────
+import urllib.request
+
+RAILWAY_URL = "https://nox-work-tracker-production.up.railway.app/api/agent-states"
+
+AGENT_LAST_ACTIVE = {"nox": 0, "sage": 0, "joy": 0}
+IDLE_THRESHOLD = 300  # 5 minutes of no activity → idle
+
+AGENT_EMOJI = {"nox": "⚡", "sage": "🌿", "joy": "✨"}
+
+def push_agent_state(agent, state, detail=""):
+    """Push agent state to pixel office via Railway API."""
+    try:
+        payload = json.dumps({
+            "name": agent.capitalize(),
+            "emoji": AGENT_EMOJI.get(agent, "🤖"),
+            "state": state,
+            "detail": detail[:60]
+        }).encode()
+        req = urllib.request.Request(
+            RAILWAY_URL,
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST"
+        )
+        urllib.request.urlopen(req, timeout=5)
+        logger.info(f"State push: {agent} → {state} ({detail})")
+    except Exception as e:
+        logger.warning(f"State push failed for {agent}: {e}")
+
+def sync_states_from_activities(new_activities):
+    """After detecting new activity, push working state; idle if nothing recent."""
+    now = time.time()
+    
+    # Mark agents as working based on new commits
+    for activity in new_activities:
+        agent = activity.get("agent", "nox")
+        AGENT_LAST_ACTIVE[agent] = now
+        desc = activity.get("description", "")[:50]
+        push_agent_state(agent, "executing", desc)
+    
+    # Check for agents that have gone idle (no activity for IDLE_THRESHOLD)
+    for agent, last_active in AGENT_LAST_ACTIVE.items():
+        if last_active > 0 and (now - last_active) > IDLE_THRESHOLD:
+            AGENT_LAST_ACTIVE[agent] = 0
+            push_agent_state(agent, "idle", "Standing by")
