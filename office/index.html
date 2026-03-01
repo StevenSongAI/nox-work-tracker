@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star 的像素办公室</title>
+    <title>Nox's Pixel Office</title>
     <style>
         @font-face {
             font-family: 'ArkPixel';
@@ -299,7 +299,7 @@
 
             #game-container {
                 width: 100vw;
-                height: 66.666vh; /* 办公室占 2/3 屏幕高度 */
+                height: 66.666vh; /* Office占 2/3 屏幕高度 */
                 max-width: 100vw;
                 max-height: 66.666vh;
                 border-width: 0;
@@ -386,7 +386,7 @@
 <body>
     <!-- 加载遮罩 -->
     <div id="loading-overlay">
-        <div id="loading-text">正在加载 Star 的像素办公室...</div>
+        <div id="loading-text">Loading Nox's Pixel Office...</div>
         <div id="loading-progress-container">
             <div id="loading-progress-bar"></div>
         </div>
@@ -398,44 +398,44 @@
     <div id="bottom-panels">
         <!-- Memo 面板 -->
         <div id="memo-panel">
-            <div id="memo-title">— 昨 日 小 记 —</div>
+            <div id="memo-title">— Yesterday —</div>
             <div id="memo-date"></div>
             <div class="memo-decoration">─ ─ ─ ─ ─</div>
             <div id="memo-content">
-                <div id="memo-placeholder">加载中...</div>
+                <div id="memo-placeholder">Loading...</div>
             </div>
             <div class="memo-decoration">─ ─ ─ ─ ─</div>
         </div>
         
         <!-- 状态控制栏 -->
         <div id="control-bar">
-            <div id="control-bar-title">Star 状态</div>
+            <div id="control-bar-title">Agent Status</div>
             <div id="control-buttons">
-                <button onclick="setState('idle','待命')">待命</button>
-                <button onclick="setState('writing','工作中')">工作</button>
-                <button onclick="setState('syncing','同步中')">同步</button>
-                <button onclick="setState('error','报警中')">报警</button>
+                <button onclick="setState('idle','Idle')">Idle</button>
+                <button onclick="setState('writing','Working')">Working</button>
+                <button onclick="setState('syncing','Syncing')">Syncing</button>
+                <button onclick="setState('error','Error')">Error</button>
             </div>
         </div>
 
         <!-- Guest Agent 名单面板（右下角） -->
         <div id="guest-agent-panel">
-            <div id="guest-agent-panel-title">— 访 客 列 表 —</div>
+            <div id="guest-agent-panel-title">— Visitors —</div>
             <div id="guest-agent-list">
-                <div style="color:#9ca3af;font-size:12px;text-align:center;padding:20px 0;">正在加载访客...</div>
+                <div style="color:#9ca3af;font-size:12px;text-align:center;padding:20px 0;">Loading visitors...</div>
             </div>
         </div>
     </div>
     
-    <div id="status-text">加载中...</div>
+    <div id="status-text">Loading...</div>
     <div id="coords-overlay" style="display:none; position:fixed; pointer-events:none; background:rgba(0,0,0,0.85); color:#fff; font-family:ArkPixel,monospace; font-size:14px; padding:8px 12px; border-radius:4px; z-index:99999;">
         <div id="coords-display">X: 0 | Y: 0</div>
     </div>
     <button id="coords-toggle" style="position:fixed; top:calc(env(safe-area-inset-top, 0px) + 12px); right:12px; z-index:999999; padding:8px 10px; font-family:ArkPixel,monospace; font-size:13px; cursor:pointer; border:2px solid #333; border-radius:5px; background:#333; color:#fff;">
-        显示坐标
+        Show Coords
     </button>
     <button id="pan-toggle" style="position:fixed; top:calc(env(safe-area-inset-top, 0px) + 12px); left:12px; z-index:999999; padding:8px 10px; font-family:ArkPixel,monospace; font-size:13px; cursor:pointer; border:2px solid #333; border-radius:5px; background:#333; color:#fff;">
-        移动视野
+        Pan View
     </button>
 
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
@@ -482,7 +482,7 @@
             height: 720,
             parent: 'game-container',
             pixelArt: true,
-            // 桌面端保持 FIT；手机端改 RESIZE，让办公室区域真正吃满分配到的高度。
+            // 桌面端保持 FIT；手机端改 RESIZE，让Office区域真正吃满分配到的高度。
             scale: {
                 mode: IS_TOUCH_DEVICE ? Phaser.Scale.RESIZE : Phaser.Scale.FIT,
                 autoCenter: Phaser.Scale.CENTER_BOTH,
@@ -510,11 +510,11 @@
                     memoDate.textContent = data.date || '';
                     memoContent.innerHTML = data.memo.replace(/\n/g, '<br>');
                 } else {
-                    memoContent.innerHTML = '<div id="memo-placeholder">暂无昨日日记</div>';
+                    memoContent.innerHTML = '<div id="memo-placeholder">No diary yet</div>';
                 }
             } catch (e) {
-                console.error('加载 memo 失败:', e);
-                memoContent.innerHTML = '<div id="memo-placeholder">加载失败</div>';
+                console.error('Failed to load memo:', e);
+                memoContent.innerHTML = '<div id="memo-placeholder">Load failed</div>';
             }
         }
 
@@ -526,7 +526,7 @@
                 loadingProgressBar.style.width = percent + '%';
             }
             if (loadingText) {
-                loadingText.textContent = `正在加载 Star 的像素办公室... ${percent}%`;
+                loadingText.textContent = `Loading Nox's Pixel Office... ${percent}%`;
             }
         }
 
@@ -553,79 +553,79 @@
         // 懒加载逻辑已取消（体验优先：装饰首屏直接出现）
 
         const STATES = {
-            idle: { name: '待命', area: 'breakroom' },
-            writing: { name: '整理文档', area: 'writing' },
-            researching: { name: '搜索信息', area: 'researching' },
-            executing: { name: '执行任务', area: 'writing' },
-            syncing: { name: '同步备份', area: 'writing' },
-            error: { name: '出错了', area: 'error' }
+            idle: { name: 'Idle', area: 'breakroom' },
+            writing: { name: 'Working', area: 'writing' },
+            researching: { name: 'Researching', area: 'researching' },
+            executing: { name: 'Executing', area: 'writing' },
+            syncing: { name: 'Syncing', area: 'writing' },
+            error: { name: 'Error', area: 'error' }
         };
 
         const BUBBLE_TEXTS = {
             idle: [
-                '待命中：耳朵竖起来了',
-                '我在这儿，随时可以开工',
-                '先把桌面收拾干净再说',
-                '呼——给大脑放个风',
-                '今天也要优雅地高效',
-                '等待，是为了更准确的一击',
-                '咖啡还热，灵感也还在',
-                '我在后台给你加 Buff',
-                '状态：静心 / 充电',
-                '小猫说：慢一点也没关系'
+                'Idle: ears perked',
+                'Here, ready to work',
+                'Cleaning up the desk first',
+                'Taking a brain break',
+                'Staying efficient today',
+                'Waiting for the right moment',
+                'Coffee hot, ideas flowing',
+                'Running buffs in the background',
+                'Status: resting / recharging',
+                'The cat says: slow down, it's fine'
             ],
-            // writing / researching / executing 都视为“工作”
+            // writing / researching / executing 都视为“Working”
             writing: [
-                '进入专注模式：勿扰',
-                '先把关键路径跑通',
-                '我来把复杂变简单',
-                '把 bug 关进笼子里',
-                '写到一半，先保存',
-                '把每一步都做成可回滚',
-                '今天的进度，明天的底气',
-                '先收敛，再发散',
-                '让系统变得更可解释',
-                '稳住，我们能赢'
+                'Focus mode: do not disturb',
+                'Get the critical path working first',
+                'Making complexity simple',
+                'Caging the bug',
+                'Save halfway through',
+                'Making every step reversible',
+                'Today's progress, tomorrow's confidence',
+                'Converge first, then diverge',
+                'Making the system more explainable',
+                'Hold steady, we've got this'
             ],
             researching: [
-                '我在挖证据链',
-                '让我把信息熬成结论',
-                '找到了：关键在这里',
-                '先把变量控制住',
-                '我在查：它为什么会这样',
-                '把直觉写成验证',
-                '先定位，再优化',
-                '别急，先画因果图'
+                'Digging through the evidence',
+                'Distilling info into conclusions',
+                'Found it: the key is here',
+                'Get the variables under control',
+                'Investigating: why did this happen',
+                'Turning intuition into verification',
+                'Locate first, then optimize',
+                'Slow down, map the causality first'
             ],
             executing: [
-                '执行中：不要眨眼',
-                '把任务切成小块逐个击破',
-                '开始跑 pipeline',
-                '一键推进：走你',
-                '让结果自己说话',
-                '先做最小可行，再做最美版本'
+                'Executing: don\'t blink',
+                'Breaking tasks into chunks, one by one',
+                'Running the pipeline',
+                'One click: let\'s go',
+                'Letting the results speak',
+                'MVP first, polish later'
             ],
             syncing: [
-                '同步中：把今天锁进云里',
-                '备份不是仪式，是安全感',
-                '写入中…别断电',
-                '把变更交给时间戳',
-                '云端对齐：咔哒',
-                '同步完成前先别乱动',
-                '把未来的自己从灾难里救出来',
-                '多一份备份，少一份后悔'
+                'Syncing: locking today into the cloud',
+                'Backups aren\'t ritual, they\'re peace of mind',
+                'Writing... don\'t cut the power',
+                'Handing changes to the timestamp',
+                'Cloud sync: click',
+                'Hold still until sync completes',
+                'Saving future-me from disaster',
+                'More backups, fewer regrets'
             ],
             error: [
-                '警报响了：先别慌',
-                '我闻到 bug 的味道了',
-                '先复现，再谈修复',
+                'Alert triggered: stay calm',
+                'I can smell a bug',
+                'Reproduce first, then fix',
                 '把日志给我，我会说人话',
                 '错误不是敌人，是线索',
                 '把影响面圈起来',
                 '先止血，再手术',
                 '我在：马上定位根因',
                 '别怕，这种我见多了',
-                '报警中：让问题自己现形'
+                'Error中：让问题自己现形'
             ],
             cat: [
                 '喵~',
@@ -633,7 +633,7 @@
                 '尾巴摇一摇',
                 '晒太阳最开心',
                 '有人来看我啦',
-                '我是这个办公室的吉祥物',
+                'I\'m the office mascot',
                 '伸个懒腰',
                 '今天的罐罐准备好了吗',
                 '呼噜呼噜',
@@ -667,7 +667,7 @@
         let lastSeenGuestIds = new Set(); // 用于检测新加入的访客，触发欢迎气泡
         let guestWelcomeInitialized = false;
 
-        // 状态控制栏函数（用于测试）
+        // State control functions (for testing)
         function setState(state, detail) {
             fetch('/set_state', {
                 method: 'POST',
@@ -676,7 +676,7 @@
             }).then(() => fetchStatus());
         }
 
-        // Guest Agent 离开房间
+        // Guest Agent Leave
         function removeGuestSpriteByName(name) {
             const target = guestAgents.find(a => (a.name || '') === name);
             if (target && guestSprites[target.agentId]) {
@@ -708,14 +708,14 @@
                         delete guestBubbles[agentId];
                     }
                     fetchGuestAgents();
-                    alert((name || agentId) + ' 已离开房间');
+                    alert((name || agentId) + ' 已Leave');
                 } else {
                     // demo agent 没在后端也允许本地隐藏
                     if (DEMO_MODE && (name === '尼卡' || name === '水星')) {
                         hiddenDemoNames.add(name);
                         removeGuestSpriteByName(name);
                         renderGuestAgentList();
-                        alert(name + ' 已离开房间（demo）');
+                        alert(name + ' 已Leave（demo）');
                         return;
                     }
                     alert('离开失败：' + (data.msg || '未知错误'));
@@ -763,7 +763,7 @@
             if (!DEMO_MODE) return;
             if (!Array.isArray(window.__demoVisitors) || window.__demoVisitors.length === 0) {
                 window.__demoVisitors = [
-                    { agentId: 'demo_nika', name: '尼卡', authStatus: 'approved', state: 'writing', bubbleText: '我在工作中', isDemo: true, updated_at: new Date().toISOString() },
+                    { agentId: 'demo_nika', name: '尼卡', authStatus: 'approved', state: 'writing', bubbleText: '我在Working中', isDemo: true, updated_at: new Date().toISOString() },
                     { agentId: 'demo_mercury', name: '水星', authStatus: 'approved', state: 'idle', bubbleText: '我去休息区躺一下', isDemo: true, updated_at: new Date().toISOString() }
                 ];
             }
@@ -796,22 +796,22 @@
                     approved: '已授权',
                     pending: '待授权',
                     rejected: '已拒绝',
-                    offline: '离线'
+                    offline: 'Offline'
                 };
                 const stateMap = {
-                    idle: '待命',
-                    writing: '工作',
+                    idle: 'Idle',
+                    writing: 'Working',
                     researching: '调研',
                     executing: '执行',
-                    syncing: '同步',
-                    error: '报警'
+                    syncing: 'Syncing',
+                    error: 'Error'
                 };
 
                 const statusText = statusMap[authStatus] || authStatus;
                 const stateText = stateMap[state] || state;
                 const subtitle = `${statusText} · ${stateText}`;
 
-                const pendingActions = `<button onclick="alert('交换 skill 功能开发中')">交换skill</button><button class="leave-btn" onclick="leaveGuestAgent('${agent.agentId}','${name}')">离开房间</button>`;
+                const pendingActions = `<button onclick="alert('交换 skill 功能开发中')">Swap</button><button class="leave-btn" onclick="leaveGuestAgent('${agent.agentId}','${name}')">Leave</button>`;
 
                 return `
                   <div class="guest-agent-item" data-name="${name}">
@@ -830,7 +830,7 @@
         function getAreaRect(area) {
             // 区域坐标（海辛提供，左上-右下；这里的 x/y 作为 sprite 底部锚点坐标来用）
             // 休息区域范围（511,262）（841,621）
-            // 工作区域范围（190,526）（380,683）
+            // Working区域范围（190,526）（380,683）
             // error 区域范围（932,275）（1109,327）
             const rects = {
                 breakroom: { x1: 511, y1: 262, x2: 841, y2: 621 },
@@ -1035,12 +1035,12 @@
                 : null;
 
             const statusThoughtsMap = {
-                idle: ['我在休息区待命', '先放松一下，等下一步任务', '我在休息充电中'],
-                writing: ['我在工作区处理任务', '正在整理文档与执行中', '工作区专注推进中'],
-                researching: ['我在调研模式，搜集信息', '正在查资料和验证线索', '研究中，稍后同步结论'],
-                executing: ['执行中，正在跑流程', '我在工作区推进任务', '正在把计划落地执行'],
-                syncing: ['同步中，马上更新状态', '正在同步进度到系统', '数据同步中请稍候'],
-                error: ['我在 bug 区排查问题', '检测到异常，正在修复', '报警中，先定位再处理']
+                idle: ['我在休息区Idle', '先放松一下，等下一步任务', '我在休息充电中'],
+                writing: ['我在Working区处理任务', '正在整理文档与Executing', 'Working区专注推进中'],
+                researching: ['我在调研模式，搜集信息', '正在查资料和验证线索', 'Researching，稍后Syncing结论'],
+                executing: ['Executing，正在跑流程', '我在Working区推进任务', '正在把计划落地执行'],
+                syncing: ['Syncing中，马上更新状态', '正在Syncing进度到系统', '数据Syncing中请稍候'],
+                error: ['我在 bug 区排查问题', '检测到异常，正在修复', 'Error中，先定位再处理']
             };
             const agentState = (guestAgents.find(a => a.agentId === id) || {}).state || 'idle';
             const thoughts = statusThoughtsMap[agentState] || statusThoughtsMap.idle;
@@ -1088,11 +1088,11 @@
             const states = ['idle', 'writing', 'researching', 'executing', 'syncing', 'error'];
             const bubbleTextMap = {
                 idle: '我去休息区躺一下',
-                writing: '我在工作中',
+                writing: '我在Working中',
                 researching: '我在调研中',
                 executing: '我在执行任务',
-                syncing: '我在同步状态',
-                error: '出错了！我去报警区'
+                syncing: '我在Syncing状态',
+                error: '出错了！我去Error区'
             };
 
             // 确保两位 demo 角色不会总是同一个状态（增加可观测性）
@@ -1199,7 +1199,7 @@
                                     // 临时更换 bubble 文案
                                     const oldTexts = BUBBLE_TEXTS.writing;
                                     BUBBLE_TEXTS.writing = [
-                                        `欢迎 ${newAgent.name} 来到办公室～`,
+                                        `欢迎 ${newAgent.name} 来到Office～`,
                                         `Hi ${newAgent.name}，一起开工吧`,
                                         `${newAgent.name} 已加入，欢迎！`
                                     ];
@@ -1380,12 +1380,12 @@
                 sofa.anims.play('sofa_busy', true);
             }
 
-            // 加像素风小牌匾：海辛小龙虾的办公室
+            // 加像素风小牌匾：Nox的Office
             const plaqueX = config.width / 2;
             const plaqueY = config.height - 36;
             const plaqueBg = game.add.rectangle(plaqueX, plaqueY, 420, 44, 0x5d4037);
             plaqueBg.setStrokeStyle(3, 0x3e2723);
-            const plaqueText = game.add.text(plaqueX, plaqueY, '海辛小龙虾的办公室', {
+            const plaqueText = game.add.text(plaqueX, plaqueY, 'Nox的Office', {
                 fontFamily: 'ArkPixel, monospace',
                 fontSize: '18px',
                 fill: '#ffd700',
@@ -1560,11 +1560,11 @@
             coordsToggle.addEventListener('click', () => {
                 showCoords = !showCoords;
                 coordsOverlay.style.display = showCoords ? 'block' : 'none';
-                coordsToggle.textContent = showCoords ? '隐藏坐标' : '显示坐标';
+                coordsToggle.textContent = showCoords ? '隐藏坐标' : 'Show Coords';
                 coordsToggle.style.background = showCoords ? '#e94560' : '#333';
             });
 
-            // 允许手机端“拖动/滑动”来移动视野（本质：移动 Phaser Camera）
+            // 允许手机端“拖动/滑动”来Pan View（本质：移动 Phaser Camera）
             // iPhone 等触屏设备默认开启；桌面端默认关闭（可手动开）。
             const panToggle = document.getElementById('pan-toggle');
             const isTouchDevice = IS_TOUCH_DEVICE;
@@ -1589,7 +1589,7 @@
                 camera.scrollY = clamp(camera.scrollY, 0, maxScrollY());
             }
 
-            // 手机上：锁定“办公室画布高度 = 2/3 区域高度”，
+            // 手机上：锁定“Office画布高度 = 2/3 区域高度”，
             // 让世界坐标在竖向恰好看满（不需要上下拖），只保留横向拖动浏览左右。
             // 记录初始是否已手动平移（避免 resize 时把用户拖好的位置重置）
             let hasManuallyPanned = false;
@@ -1633,7 +1633,7 @@
             function setPanEnabled(on) {
                 panEnabled = on;
                 if (panToggle) {
-                    panToggle.textContent = on ? '锁定视野' : '移动视野';
+                    panToggle.textContent = on ? '锁定视野' : 'Pan View';
                     panToggle.style.background = on ? '#e94560' : '#333';
                 }
                 game.input.setDefaultCursor(on ? 'grab' : 'default');
@@ -1675,7 +1675,7 @@
                     }
 
                     if (touchPan.lock === 'x') {
-                        // 横向拖动交给办公室视野；阻止浏览器默认滚动
+                        // 横向拖动交给Office视野；阻止浏览器默认滚动
                         e.preventDefault();
                         hasManuallyPanned = true;
                         camera.scrollX = clamp(touchPan.sx - dx, 0, maxScrollX());
@@ -1707,7 +1707,7 @@
                 const dx = pointer.x - panStart.x;
                 const dy = pointer.y - panStart.y;
 
-                // 手机端优先“横向拖动看办公室”，纵向手势留给页面滚动看下方面板。
+                // 手机端优先“横向拖动看Office”，纵向手势留给页面滚动看下方面板。
                 if (isTouchDevice && Math.abs(dy) > Math.abs(dx)) {
                     return;
                 }

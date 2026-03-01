@@ -82,7 +82,7 @@ function updateLoadingProgress() {
     loadingProgressBar.style.width = percent + '%';
   }
   if (loadingText) {
-    loadingText.textContent = `正在加载 Star 的像素办公室... ${percent}%`;
+    loadingText.textContent = `正在加载 Star 的Pixel Office... ${percent}%`;
   }
 }
 
@@ -100,11 +100,11 @@ function hideLoadingOverlay() {
 }
 
 const STATES = {
-  idle: { name: '待命', area: 'breakroom' },
+  idle: { name: 'Idle', area: 'breakroom' },
   writing: { name: '整理文档', area: 'writing' },
   researching: { name: '搜索信息', area: 'researching' },
-  executing: { name: '执行任务', area: 'writing' },
-  syncing: { name: '同步备份', area: 'writing' },
+  executing: { name: 'Executing', area: 'writing' },
+  syncing: { name: 'Syncing', area: 'writing' },
   error: { name: '出错了', area: 'error' }
 };
 
@@ -361,7 +361,7 @@ function create() {
   const plaqueY = LAYOUT.plaque.y;
   const plaqueBg = game.add.rectangle(plaqueX, plaqueY, LAYOUT.plaque.width, LAYOUT.plaque.height, 0x5d4037);
   plaqueBg.setStrokeStyle(3, 0x3e2723);
-  const plaqueText = game.add.text(plaqueX, plaqueY, '海辛小龙虾的办公室', {
+  const plaqueText = game.add.text(plaqueX, plaqueY, 'Nox's Office', {
     fontFamily: 'ArkPixel, monospace',
     fontSize: '18px',
     fill: '#ffd700',
@@ -428,7 +428,7 @@ function create() {
   coffeeMachine.setDepth(LAYOUT.furniture.coffeeMachine.depth);
   coffeeMachine.anims.play('coffee_machine', true);
 
-  // === 服务器区（来自 LAYOUT）===
+  // === Server Room（来自 LAYOUT）===
   this.anims.create({
     key: 'serverroom_on',
     frames: this.anims.generateFrameNumbers('serverroom', { start: 0, end: 39 }),
@@ -929,7 +929,7 @@ function renderAgent(agent) {
   const bodyColor = AGENT_COLORS[agentId] || AGENT_COLORS.default;
   const nameColor = NAME_TAG_COLORS[authStatus] || NAME_TAG_COLORS.default;
 
-  // 透明度（离线/待批准/拒绝时变半透明）
+  // 透明度（Offline/待批准/拒绝时变半透明）
   let alpha = 1;
   if (authStatus === 'pending') alpha = 0.7;
   if (authStatus === 'rejected') alpha = 0.4;
