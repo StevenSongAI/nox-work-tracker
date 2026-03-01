@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nox's Pixel Office</title>
+    <title>Nox office Pixel Office</title>
     <style>
         @font-face {
             font-family: 'ArkPixel';
@@ -386,7 +386,7 @@
 <body>
     <!-- Loading overlay -->
     <div id="loading-overlay">
-        <div id="loading-text">Loading Nox's Pixel Office...</div>
+        <div id="loading-text">Loading Nox office Pixel Office...</div>
         <div id="loading-progress-container">
             <div id="loading-progress-bar"></div>
         </div>
@@ -526,7 +526,7 @@
                 loadingProgressBar.style.width = percent + '%';
             }
             if (loadingText) {
-                loadingText.textContent = `Loading Nox's Pixel Office... ${percent}%`;
+                loadingText.textContent = `Loading Nox office Pixel Office... ${percent}%`;
             }
         }
 
@@ -572,7 +572,7 @@
                 'Coffee hot, ideas flowing',
                 'Running buffs in the background',
                 'Status: resting / recharging',
-                'The cat says: slow down, it's fine'
+                'The cat says: slow down, its fine'
             ],
             // writing / researching / executing all map to Working
             writing: [
@@ -582,10 +582,10 @@
                 'Caging the bug',
                 'Save halfway through',
                 'Making every step reversible',
-                'Today's progress, tomorrow's confidence',
+                'Today progress, tomorrow confidence',
                 'Converge first, then diverge',
                 'Making the system more explainable',
-                'Hold steady, we've got this'
+                'Hold steady, weve got this'
             ],
             researching: [
                 'Digging through the evidence',
@@ -598,17 +598,17 @@
                 'Slow down, map the causality first'
             ],
             executing: [
-                'Executing: don\'t blink',
+                'Executing: dont blink',
                 'Breaking tasks into chunks, one by one',
                 'Running the pipeline',
-                'One click: let\'s go',
+                'One click: lets go',
                 'Letting the results speak',
                 'MVP first, polish later'
             ],
             syncing: [
                 'Syncing: locking today into the cloud',
                 'Backups aren\'t ritual, they\'re peace of mind',
-                'Writing... don\'t cut the power',
+                'Writing... dont cut the power',
                 'Handing changes to the timestamp',
                 'Cloud sync: click',
                 'Hold still until sync completes',
@@ -619,12 +619,12 @@
                 'Alert triggered: stay calm',
                 'I can smell a bug',
                 'Reproduce first, then fix',
-                'Give me the logs, I'll decode them',
-                'Errors aren't enemies, they're clues',
+                'Give me the logs, Ill decode them',
+                'Errors arent enemies, theyre clues',
                 'Scope the blast radius',
                 'Stop the bleeding first, then operate',
                 'On it: finding root cause now',
-                'Don't worry, seen this before',
+                'Dont worry, seen this before',
                 'Error mode: letting the bug reveal itself'
             ],
             cat: [
@@ -633,9 +633,9 @@
                 'Tail wag',
                 'Sunbathing is the best',
                 'Someone came to see me!',
-                'I\'m the office mascot',
+                'Im the office mascot',
                 'Stretching out',
-                'Is today's can ready?',
+                'Is todays can ready?',
                 'Purr purr',
                 'Best view from this spot'
             ]
@@ -1095,7 +1095,7 @@
                 error: 'Error! Heading to the bug zone'
             };
 
-            // Ensure two demo characters don't always share the same state
+            // Ensure two demo characters dont always share the same state
             const pickJs = (exclude) => {
                 let s = states[Math.floor(Math.random() * states.length)];
                 let tries = 0;
@@ -1200,7 +1200,7 @@
                                     const oldTexts = BUBBLE_TEXTS.writing;
                                     BUBBLE_TEXTS.writing = [
                                         `Welcome ${newAgent.name} to the office~`,
-                                        `Hi ${newAgent.name}, let's get to work`,
+                                        `Hi ${newAgent.name}, lets get to work`,
                                         `${newAgent.name} joined — welcome!`
                                     ];
                                     showBubble();
@@ -1380,7 +1380,7 @@
                 sofa.anims.play('sofa_busy', true);
             }
 
-            // Add pixel sign: Nox's Office
+            // Add pixel sign: Nox office Office
             const plaqueX = config.width / 2;
             const plaqueY = config.height - 36;
             const plaqueBg = game.add.rectangle(plaqueX, plaqueY, 420, 44, 0x5d4037);
@@ -1680,7 +1680,7 @@
                         hasManuallyPanned = true;
                         camera.scrollX = clamp(touchPan.sx - dx, 0, maxScrollX());
                     }
-                    // lock===y: don't prevent default, let page scroll vertically
+                    // lock===y: dont prevent default, let page scroll vertically
                 }, { passive: false });
 
                 const clearTouchPan = () => { touchPan = null; };
@@ -1863,7 +1863,7 @@
                 .then(data => {
                     const nextState = normalizeState(data.state);
                     const stateInfo = STATES[nextState] || STATES.idle;
-                    // If we're mid-transition, don't restart the path every poll
+                    // If were mid-transition, dont restart the path every poll
                     const changed = (pendingDesiredState === null) && (nextState !== currentState);
                     const nextLine = '[' + stateInfo.name + '] ' + (data.detail || '...');
                     if (changed) {
