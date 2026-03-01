@@ -2142,5 +2142,47 @@
         // Start game
         initGame();
     </script>
+
+<script>
+// Activity-based agent state sync — bridges /api/activities to /api/agent-states
+(function() {
+  const SYNC_INTERVAL = 15000;
+  const IDLE_THRESHOLD = 300000; // 5 min
+  const AGENTS = {main: 'Nox', sage: 'Sage', joy: 'Joy'};
+
+  async function syncStates() {
+    try {
+      const res = await fetch('/api/activities?limit=50');
+      const data = await res.json();
+      const entries = data.entries || [];
+      const now = Date.now();
+      const latest = {};
+      for (const e of entries) {
+        const key = (e.agent || 'main').toLowerCase();
+        const ts = new Date(e.timestamp).getTime();
+        if (!latest[key] || ts > latest[key].ts) {
+          latest[key] = {ts, desc: (e.description || '').slice(0, 50)};
+        }
+      }
+      for (const [key, name] of Object.entries(AGENTS)) {
+        const info = latest[key];
+        const active = info && (now - info.ts) < IDLE_THRESHOLD;
+        await fetch('/api/agent-states', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            name: name,
+            emoji: key === 'main' ? '⚡' : key === 'sage' ? '🌿' : '✨',
+            state: active ? 'executing' : 'idle',
+            detail: active ? info.desc : 'Standing by'
+          })
+        });
+      }
+    } catch(e) { console.warn('[sync]', e); }
+  }
+  setInterval(syncStates, SYNC_INTERVAL);
+  syncStates();
+})();
+</script>
 </body>
 </html>
