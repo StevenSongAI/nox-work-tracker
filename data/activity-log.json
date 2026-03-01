@@ -50084,7 +50084,70 @@
       "project": "session_activity",
       "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1772397238375",
+      "timestamp": "2026-03-01T20:33:58.375Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd \"/Users/stevenai/Desktop/Nox Builds/2-Headed Dragon Proje",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772397241112",
+      "timestamp": "2026-03-01T20:34:01.112Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/2-Headed Dragon ",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772397243928",
+      "timestamp": "2026-03-01T20:34:03.928Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd \"/Users/stevenai/Desktop/Nox Builds/2-Headed Dragon Proje",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772397414416",
+      "timestamp": "2026-03-01T20:36:54.416Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: grep -n \"single.shot\\|multi.shot\\|multishot\\|SINGLE\\|MULTI\\|",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772397416936",
+      "timestamp": "2026-03-01T20:36:56.936Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: sed -n '1620,1680p' \"/Users/stevenai/Desktop/Nox Builds/2-He",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772397419564",
+      "timestamp": "2026-03-01T20:36:59.564Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: sed -n '831,900p' \"/Users/stevenai/Desktop/Nox Builds/2-Head",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772397422281",
+      "timestamp": "2026-03-01T20:37:02.281Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: sed -n '550,650p' \"/Users/stevenai/Desktop/Nox Builds/2-Head",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 5565
+  "totalEntries": 5572
 }
