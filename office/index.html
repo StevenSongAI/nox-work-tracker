@@ -1885,14 +1885,20 @@
         }
 
         function fetchStatus() {
-            fetch('/status')
+            fetch('/api/agent-states')
                 .then(response => response.json())
                 .then(data => {
-                    const nextState = normalizeState(data.state);
+                    // /api/agent-states returns array of agent states
+                    let agentState = data;
+                    if (Array.isArray(data)) {
+                        // Find Nox (or default to first)
+                        agentState = data.find(a => a.name === 'Nox') || data[0] || {};
+                    }
+                    const nextState = normalizeState(agentState.state);
                     const stateInfo = STATES[nextState] || STATES.idle;
                     // If were mid-transition, dont restart the path every poll
                     const changed = (pendingDesiredState === null) && (nextState !== currentState);
-                    const nextLine = '[' + stateInfo.name + '] ' + (data.detail || '...');
+                    const nextLine = '[' + stateInfo.name + '] ' + (agentState.detail || '...');
                     if (changed) {
                         typewriterTarget = nextLine;
                         typewriterText = '';
@@ -2088,7 +2094,10 @@
         }
 
         function showBubble() {
-            if (bubble) { bubble.destroy(); bubble = null; }
+            // DOM overlay for crisp mobile text
+            const old = document.querySelector('.dom-bubble');
+            if (old) old.remove();
+
             const texts = BUBBLE_TEXTS[currentState] || BUBBLE_TEXTS.idle;
             if (currentState === 'idle') return;
 
@@ -2106,19 +2115,24 @@
             }
 
             const text = texts[Math.floor(Math.random() * texts.length)];
-            const bubbleY = anchorY - 70;
 
-            // Large font so text stays readable when Phaser camera zooms out on mobile
-            const fontSize = IS_TOUCH_DEVICE ? 28 : 12;
-            const charW = IS_TOUCH_DEVICE ? 16 : 10;
-            const padX = IS_TOUCH_DEVICE ? 32 : 20;
-            const boxH = IS_TOUCH_DEVICE ? 44 : 28;
-            const bg = game.add.rectangle(anchorX, bubbleY, text.length * charW + padX, boxH, 0xffffff, 0.95);
-            bg.setStrokeStyle(IS_TOUCH_DEVICE ? 3 : 2, 0x000000);
-            const txt = game.add.text(anchorX, bubbleY, text, { fontFamily: 'ArkPixel, monospace', fontSize: fontSize + 'px', fill: '#000', align: 'center' }).setOrigin(0.5);
-            bubble = game.add.container(0, 0, [bg, txt]);
-            bubble.setDepth(1200);
-            setTimeout(() => { if (bubble) { bubble.destroy(); bubble = null; } }, 3000);
+            // Convert Phaser world to screen coords
+            const cam = game.cameras.main;
+            const canvas = game.canvas;
+            const rect = canvas.getBoundingClientRect();
+            const zoom = cam.zoom;
+            const sx = (anchorX - cam.scrollX) * zoom * (rect.width / canvas.width);
+            const sy = ((anchorY - 70) - cam.scrollY) * zoom * (rect.height / canvas.height);
+
+            const el = document.createElement('div');
+            el.className = 'dom-bubble';
+            el.textContent = text;
+            el.style.left = (rect.left + sx) + 'px';
+            el.style.top = (rect.top + sy) + 'px';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 3000);
+
+            if (bubble) { bubble.destroy(); bubble = null; }
         }
 
         function showCatBubble() {
