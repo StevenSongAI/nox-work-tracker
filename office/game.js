@@ -45,8 +45,13 @@ const config = {
   height: LAYOUT.game.height,
   parent: 'game-container',
   pixelArt: true,
+  resolution: window.devicePixelRatio || 1,
   physics: { default: 'arcade', arcade: { gravity: { y: 0 }, debug: false } },
-  scene: { preload: preload, create: create, update: update }
+  scene: { preload: preload, create: create, update: update },
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH
+  }
 };
 
 let totalAssets = 0;

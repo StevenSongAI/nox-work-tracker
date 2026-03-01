@@ -402,32 +402,6 @@
 
   </style>
 
-<style>
-  #bubble-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 100;
-  }
-  .dom-bubble {
-    position: absolute;
-    background: rgba(255,255,255,0.95);
-    border: 2px solid #000;
-    border-radius: 8px;
-    padding: 4px 12px;
-    font-family: 'ArkPixel', monospace;
-    font-size: 14px;
-    color: #000;
-    white-space: nowrap;
-    transform: translate(-50%, -100%);
-    animation: bubbleFadeIn 0.2s ease-out;
-    pointer-events: none;
-  }
-  @keyframes bubbleFadeIn {
-    from { opacity: 0; transform: translate(-50%, -90%); }
-    to { opacity: 1; transform: translate(-50%, -100%); }
-  }
-</style>
 
 </head>
 <body>
@@ -445,7 +419,7 @@
         </div>
     </div>
     
-    <div id="game-container" style="position:relative"><div id="bubble-overlay"></div></div>
+    <div id="game-container" style="position:relative"></div>
     
     <!-- Bottom panel container -->
     <div id="bottom-panels">
@@ -2114,13 +2088,7 @@
         }
 
         function showBubble() {
-            // DOM-based bubble overlay — renders crisp on mobile
-            const overlay = document.getElementById('bubble-overlay');
-            if (!overlay) return;
-            // Remove existing bubble
-            const old = overlay.querySelector('.dom-bubble');
-            if (old) old.remove();
-
+            if (bubble) { bubble.destroy(); bubble = null; }
             const texts = BUBBLE_TEXTS[currentState] || BUBBLE_TEXTS.idle;
             if (currentState === 'idle') return;
 
@@ -2138,19 +2106,19 @@
             }
 
             const text = texts[Math.floor(Math.random() * texts.length)];
-            // Convert Phaser coords to percentage of canvas
-            const canvas = document.querySelector('#game-container canvas');
-            if (!canvas) return;
-            const pctX = (anchorX / 1280) * 100;
-            const pctY = ((anchorY - 70) / 720) * 100;
+            const bubbleY = anchorY - 70;
 
-            const el = document.createElement('div');
-            el.className = 'dom-bubble';
-            el.textContent = text;
-            el.style.left = pctX + '%';
-            el.style.top = pctY + '%';
-            overlay.appendChild(el);
-            setTimeout(() => { if (el.parentNode) el.remove(); }, 3000);
+            // Large font so text stays readable when Phaser camera zooms out on mobile
+            const fontSize = IS_TOUCH_DEVICE ? 28 : 12;
+            const charW = IS_TOUCH_DEVICE ? 16 : 10;
+            const padX = IS_TOUCH_DEVICE ? 32 : 20;
+            const boxH = IS_TOUCH_DEVICE ? 44 : 28;
+            const bg = game.add.rectangle(anchorX, bubbleY, text.length * charW + padX, boxH, 0xffffff, 0.95);
+            bg.setStrokeStyle(IS_TOUCH_DEVICE ? 3 : 2, 0x000000);
+            const txt = game.add.text(anchorX, bubbleY, text, { fontFamily: 'ArkPixel, monospace', fontSize: fontSize + 'px', fill: '#000', align: 'center' }).setOrigin(0.5);
+            bubble = game.add.container(0, 0, [bg, txt]);
+            bubble.setDepth(1200);
+            setTimeout(() => { if (bubble) { bubble.destroy(); bubble = null; } }, 3000);
         }
 
         function showCatBubble() {
