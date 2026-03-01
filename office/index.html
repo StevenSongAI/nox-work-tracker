@@ -382,6 +382,33 @@
             }
         }
     
+    /* DOM bubble overlay (crisp text on mobile, positioned over canvas) */
+    #bubble-layer {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 10;
+    }
+    .dom-bubble {
+      position: absolute;
+      transform: translate(-50%, -100%);
+      background: rgba(255,255,255,0.95);
+      border: 2px solid #000;
+      border-radius: 8px;
+      padding: 4px 12px;
+      font-family: 'ArkPixel', 'Courier New', monospace;
+      font-size: 14px;
+      color: #000;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .dom-bubble.cat-bubble {
+      background: rgba(255,251,235,0.95);
+      border-color: #d4a574;
+      color: #8b6914;
+    }
+
     /* Embed mode: hide everything except the game canvas */
     body.embed-mode #bottom-panels,
     body.embed-mode #status-text,
@@ -419,7 +446,9 @@
         </div>
     </div>
     
-    <div id="game-container" style="position:relative"></div>
+    <div id="game-container" style="position:relative">
+        <div id="bubble-layer"></div>
+    </div>
     
     <!-- Bottom panel container -->
     <div id="bottom-panels">
@@ -694,6 +723,45 @@
         let lastSeenGuestIds = new Set(); // Detect new visitors to trigger welcome bubble
         let guestWelcomeInitialized = false;
 
+        // === DOM bubble helpers (crisp text over canvas) ===
+        function worldToScreen(worldX, worldY) {
+            if (!game || !game.cameras) return { x: 0, y: 0 };
+            const camera = game.cameras.main;
+            const vx = (worldX - camera.scrollX) * camera.zoom;
+            const vy = (worldY - camera.scrollY) * camera.zoom;
+            const canvas = game.canvas;
+            const scaleX = canvas.clientWidth / camera.width;
+            const scaleY = canvas.clientHeight / camera.height;
+            return { x: vx * scaleX, y: vy * scaleY };
+        }
+
+        function removeDomBubble(el) {
+            if (el && el.parentNode) el.parentNode.removeChild(el);
+        }
+
+        function showDomBubble(worldX, worldY, text, opts) {
+            opts = opts || {};
+            var layer = document.getElementById('bubble-layer');
+            if (!layer) return null;
+            var pos = worldToScreen(worldX, worldY);
+            var el = document.createElement('div');
+            el.className = 'dom-bubble' + (opts.className ? ' ' + opts.className : '');
+            el.textContent = text;
+            el.style.left = pos.x + 'px';
+            el.style.top = pos.y + 'px';
+            layer.appendChild(el);
+            var duration = opts.duration || 3000;
+            setTimeout(function() { removeDomBubble(el); }, duration);
+            return el;
+        }
+
+        function updateDomBubblePos(el, worldX, worldY) {
+            if (!el || !el.parentNode) return;
+            var pos = worldToScreen(worldX, worldY);
+            el.style.left = pos.x + 'px';
+            el.style.top = pos.y + 'px';
+        }
+
         // State control functions
         function setState(state, detail) {
             fetch('/set_state', {
@@ -712,7 +780,7 @@
                 delete guestSprites[target.agentId];
             }
             if (target && guestBubbles[target.agentId]) {
-                guestBubbles[target.agentId].destroy();
+                removeDomBubble(guestBubbles[target.agentId]);
                 delete guestBubbles[target.agentId];
             }
         }
@@ -731,7 +799,7 @@
                         delete guestSprites[agentId];
                     }
                     if (agentId && guestBubbles[agentId]) {
-                        guestBubbles[agentId].destroy();
+                        removeDomBubble(guestBubbles[agentId]);
                         delete guestBubbles[agentId];
                     }
                     fetchGuestAgents();
@@ -1036,7 +1104,7 @@
                     guestSprites[id].nameText.destroy();
                     delete guestSprites[id];
                     if (guestBubbles[id]) {
-                        guestBubbles[id].destroy();
+                        removeDomBubble(guestBubbles[id]);
                         delete guestBubbles[id];
                     }
                     if (guestTweens[id]) {
@@ -1073,33 +1141,17 @@
             const thoughts = statusThoughtsMap[agentState] || statusThoughtsMap.idle;
             const text = (demoVisitor && demoVisitor.bubbleText) ? demoVisitor.bubbleText : thoughts[Math.floor(Math.random() * thoughts.length)];
 
-            if (guestBubbles[id]) {
-                guestBubbles[id].destroy();
-                delete guestBubbles[id];
-            }
+            removeDomBubble(guestBubbles[id]);
+            delete guestBubbles[id];
 
             const bx = g.sprite.x;
-            // Bubble position: demo keeps original logic; real visitors above name tag
             const isDemoGuest = (demoVisitor && demoVisitor.isDemo) || (id === 'demo_nika' || id === 'demo_mercury');
             const nameH = (g.nameText && g.nameText.height) ? g.nameText.height : 16;
             const by = isDemoGuest ? (g.sprite.y - 90) : ((g.nameText ? g.nameText.y : (g.sprite.y - 150)) - (nameH / 2) - 22);
-            const fontSize = IS_TOUCH_DEVICE ? 14 : 12;
-            const bg = game.add.rectangle(bx, by, text.length * 10 + 24, 28, 0xffffff, 0.95);
-            bg.setStrokeStyle(2, 0x000000);
-            const txt = game.add.text(bx, by, text, { fontFamily: 'ArkPixel, monospace', fontSize: fontSize + 'px', fill: '#000' }).setOrigin(0.5);
-            const bubble = game.add.container(0, 0, [bg, txt]);
-            bubble.setDepth(2700);
-            guestBubbles[id] = bubble;
 
-            // Bubble follows sprite anchor (stays attached during demo tween)
-            bubble.__followAgentId = id;
-
-            setTimeout(() => {
-                if (guestBubbles[id]) {
-                    guestBubbles[id].destroy();
-                    delete guestBubbles[id];
-                }
-            }, 3200);
+            guestBubbles[id] = showDomBubble(bx, by, text, { duration: 3200 });
+            // Tag for follow updates
+            if (guestBubbles[id]) guestBubbles[id].__followAgentId = id;
         }
 
         function maybeRandomizeDemoVisitors() {
@@ -1162,30 +1214,15 @@
                         const prev = prevById[agent.agentId];
                         const changed = !prev || prev.state !== agent.state;
                         if (changed) {
-                            // Show bubble directly
+                            // Show DOM bubble directly
                             if (guestSprites[agent.agentId]) {
                                 const g = guestSprites[agent.agentId];
                                 const text = agent.bubbleText || '';
-                                if (guestBubbles[agent.agentId]) {
-                                    guestBubbles[agent.agentId].destroy();
-                                    delete guestBubbles[agent.agentId];
-                                }
-                                const bx = g.sprite.x;
-                                const by = g.sprite.y - 90;
-                                const fontSize = IS_TOUCH_DEVICE ? 14 : 12;
-                                const bg = game.add.rectangle(bx, by, text.length * 10 + 24, 28, 0xffffff, 0.95);
-                                bg.setStrokeStyle(2, 0x000000);
-                                const txt = game.add.text(bx, by, text, { fontFamily: 'ArkPixel, monospace', fontSize: fontSize + 'px', fill: '#000' }).setOrigin(0.5);
-                                const bubble = game.add.container(0, 0, [bg, txt]);
-                                bubble.setDepth(2700);
-                                bubble.__followAgentId = agent.agentId;
-                                guestBubbles[agent.agentId] = bubble;
-                                setTimeout(() => {
-                                    if (guestBubbles[agent.agentId]) {
-                                        guestBubbles[agent.agentId].destroy();
-                                        delete guestBubbles[agent.agentId];
-                                    }
-                                }, 3200);
+                                removeDomBubble(guestBubbles[agent.agentId]);
+                                delete guestBubbles[agent.agentId];
+                                const el = showDomBubble(g.sprite.x, g.sprite.y - 90, text, { duration: 3200 });
+                                if (el) el.__followAgentId = agent.agentId;
+                                guestBubbles[agent.agentId] = el;
                             }
                         }
                     });
@@ -1853,22 +1890,17 @@
             // Guest random thought bubble
             maybeShowGuestBubble(time);
 
-            // Demo smooth move: bubble follows sprite anchor each frame
+            // DOM bubble follow: update position for bubbles attached to moving sprites
             try {
                 Object.keys(guestBubbles).forEach(id => {
-                    const b = guestBubbles[id];
+                    const el = guestBubbles[id];
                     const g = guestSprites[id];
-                    if (!b || !g) return;
-                    if (b.__followAgentId !== id) return;
-                    b.x = 0;
-                    b.y = 0;
-                    // children[0]=bg, children[1]=text
-                    const bx = g.sprite.x;
+                    if (!el || !el.parentNode || !g) return;
+                    if (el.__followAgentId !== id) return;
                     const isDemoGuest = (id === 'demo_nika' || id === 'demo_mercury');
                     const nameH = (g.nameText && g.nameText.height) ? g.nameText.height : 16;
                     const by = isDemoGuest ? (g.sprite.y - 90) : ((g.nameText ? g.nameText.y : (g.sprite.y - 150)) - (nameH / 2) - 22);
-                    if (b.list && b.list[0]) { b.list[0].x = bx; b.list[0].y = by; }
-                    if (b.list && b.list[1]) { b.list[1].x = bx; b.list[1].y = by; }
+                    updateDomBubblePos(el, g.sprite.x, by);
                 });
             } catch (e) {}
 
@@ -2094,10 +2126,7 @@
         }
 
         function showBubble() {
-            // DOM overlay for crisp mobile text
-            const old = document.querySelector('.dom-bubble');
-            if (old) old.remove();
-
+            removeDomBubble(bubble); bubble = null;
             const texts = BUBBLE_TEXTS[currentState] || BUBBLE_TEXTS.idle;
             if (currentState === 'idle') return;
 
@@ -2115,39 +2144,17 @@
             }
 
             const text = texts[Math.floor(Math.random() * texts.length)];
-
-            // Convert Phaser world to screen coords
-            const cam = game.cameras.main;
-            const canvas = game.canvas;
-            const rect = canvas.getBoundingClientRect();
-            const zoom = cam.zoom;
-            const sx = (anchorX - cam.scrollX) * zoom * (rect.width / canvas.width);
-            const sy = ((anchorY - 70) - cam.scrollY) * zoom * (rect.height / canvas.height);
-
-            const el = document.createElement('div');
-            el.className = 'dom-bubble';
-            el.textContent = text;
-            el.style.left = (rect.left + sx) + 'px';
-            el.style.top = (rect.top + sy) + 'px';
-            document.body.appendChild(el);
-            setTimeout(() => el.remove(), 3000);
-
-            if (bubble) { bubble.destroy(); bubble = null; }
+            bubble = showDomBubble(anchorX, anchorY - 70, text, { duration: 3000 });
         }
 
         function showCatBubble() {
             if (!window.catSprite) return;
-            if (window.catBubble) { window.catBubble.destroy(); window.catBubble = null; }
+            removeDomBubble(window.catBubble); window.catBubble = null;
             const texts = BUBBLE_TEXTS.cat || ['Meow~', 'Purrrr...'];
             const text = texts[Math.floor(Math.random() * texts.length)];
-            const anchorX = window.catSprite.x;
-            const anchorY = window.catSprite.y - 60;
-            const bg = game.add.rectangle(anchorX, anchorY, text.length * 10 + 20, 24, 0xfffbeb, 0.95);
-            bg.setStrokeStyle(2, 0xd4a574);
-            const txt = game.add.text(anchorX, anchorY, text, { fontFamily: 'ArkPixel, monospace', fontSize: isTouch ? '16px' : '11px', fill: '#8b6914', align: 'center' }).setOrigin(0.5);
-            window.catBubble = game.add.container(0, 0, [bg, txt]);
-            window.catBubble.setDepth(2100); // top layer above cat
-            setTimeout(() => { if (window.catBubble) { window.catBubble.destroy(); window.catBubble = null; } }, 4000);
+            window.catBubble = showDomBubble(window.catSprite.x, window.catSprite.y - 60, text, {
+                className: 'cat-bubble', duration: 4000
+            });
         }
 
         // Fake agent bubble logic removed, all from real /agents data
@@ -2159,48 +2166,70 @@
     const ACTIVITY_STATE_INTERVAL = 15000; // 15 seconds
     const ACTIVITY_IDLE_THRESHOLD = 300000; // 5 minutes in ms
     const AGENT_NAME_MAP = {main: 'Nox', sage: 'Sage', joy: 'Joy'};
-    
+    const AGENT_EMOJI_MAP = {main: '⚡', sage: '🌿', joy: '✨'};
+
+    // Map activity type to office state
+    function activityTypeToState(type) {
+      if (!type) return 'executing';
+      const t = type.toLowerCase();
+      if (t === 'research' || t === 'web_research' || t === 'search') return 'researching';
+      if (t === 'sync' || t === 'git' || t === 'deploy') return 'syncing';
+      if (t === 'error' || t === 'fix' || t === 'debug') return 'error';
+      if (t === 'writing' || t === 'edit' || t === 'document') return 'writing';
+      return 'executing';
+    }
+
     async function syncAgentStatesFromActivities() {
       try {
-        const res = await fetch('/api/activities?limit=20');
+        const res = await fetch('/api/activities?limit=100');
+        if (!res.ok) {
+          console.warn('[sync] /api/activities returned', res.status);
+          return;
+        }
         const data = await res.json();
         const entries = data.entries || data || [];
         const now = Date.now();
-        
-        // Find most recent activity per agent
+
+        // Find most recent activity per agent (normalize key to lowercase)
         const agentLatest = {};
         for (const entry of entries) {
-          const agent = entry.agent || 'main';
+          const agent = (entry.agent || 'main').toLowerCase();
           const ts = new Date(entry.timestamp).getTime();
           if (!agentLatest[agent] || ts > agentLatest[agent].ts) {
-            agentLatest[agent] = { ts, desc: entry.description || '' };
+            agentLatest[agent] = { ts, desc: entry.description || '', type: entry.type || '' };
           }
         }
-        
-        // Push state for each known agent
+
+        // Push state for each known agent sequentially to avoid file race
         for (const [agentKey, agentName] of Object.entries(AGENT_NAME_MAP)) {
           const latest = agentLatest[agentKey];
           const isActive = latest && (now - latest.ts) < ACTIVITY_IDLE_THRESHOLD;
-          const state = isActive ? 'executing' : 'idle';
+          const state = isActive ? activityTypeToState(latest.type) : 'idle';
           const detail = isActive ? latest.desc.slice(0, 50) : 'Standing by';
-          
-          // Update via API
-          fetch('/api/agent-states', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              name: agentName,
-              emoji: agentKey === 'main' ? '⚡' : agentKey === 'sage' ? '🌿' : '✨',
-              state: state,
-              detail: detail
-            })
-          }).catch(() => {});
+
+          try {
+            const postRes = await fetch('/api/agent-states', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                name: agentName,
+                emoji: AGENT_EMOJI_MAP[agentKey] || '✨',
+                state: state,
+                detail: detail
+              })
+            });
+            if (!postRes.ok) {
+              console.warn('[sync] POST agent-states failed for', agentName, postRes.status);
+            }
+          } catch (postErr) {
+            console.warn('[sync] POST agent-states error for', agentName, postErr);
+          }
         }
       } catch (e) {
-        // Silent fail — dont break the office
+        console.warn('[sync] syncAgentStatesFromActivities error:', e);
       }
     }
-    
+
     // Start activity sync loop
     setInterval(syncAgentStatesFromActivities, ACTIVITY_STATE_INTERVAL);
     syncAgentStatesFromActivities(); // run immediately
