@@ -5,46 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Work Tracker - Auto</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-  </script><html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Work Tracker - Auto</title>
-  <script src="https://cdn.tailwindcss.com">
-    // Pixel Office tab - fetch all agent states
-    const STATE_LABELS = {idle:'💤 Idle', writing:'✍️ Working', researching:'🔍 Researching', executing:'⚡ Executing', syncing:'🔄 Syncing', error:'🐛 Bug Zone'};
-    const STATE_COLORS = {idle:'text-gray-400', writing:'text-blue-400', researching:'text-yellow-400', executing:'text-green-400', syncing:'text-purple-400', error:'text-red-400'};
-    const STATE_BG = {idle:'bg-gray-800', writing:'bg-blue-900/40', researching:'bg-yellow-900/40', executing:'bg-green-900/40', syncing:'bg-purple-900/40', error:'bg-red-900/40'};
-    function timeSince(date) {
-      const s = Math.floor((new Date() - date) / 1000);
-      if (s < 60) return 'just now';
-      if (s < 3600) return Math.floor(s/60) + 'm ago';
-      if (s < 86400) return Math.floor(s/3600) + 'h ago';
-      return Math.floor(s/86400) + 'd ago';
-    }
-    async function loadOfficeState() {
-      try {
-        const res = await fetch('/api/agent-states');
-        const agents = await res.json();
-        const container = document.getElementById('agent-office-cards');
-        container.innerHTML = agents.map(a => {
-          const ago = a.updated_at ? timeSince(new Date(a.updated_at)) : '';
-          return `<div class="rounded-lg p-4 ${STATE_BG[a.state] || 'bg-gray-800'} border border-gray-700">
-            <div class="text-2xl mb-2">${a.emoji || '🤖'}</div>
-            <div class="font-bold text-base mb-1">${a.name}</div>
-            <div class="${STATE_COLORS[a.state] || 'text-gray-400'} font-medium">${STATE_LABELS[a.state] || a.state}</div>
-            <div class="text-xs text-gray-400 mt-1">${a.detail || ''}</div>
-            <div class="text-xs text-gray-600 mt-2">${ago}</div>
-          </div>`;
-        }).join('');
-      } catch(e) {
-        document.getElementById('agent-office-cards').innerHTML = '<p class="text-red-400 text-sm">Failed to load agent states</p>';
-      }
-    }
-
-
-    </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body { background: #0a0a0f; color: #e2e8f0; font-family: system-ui, -apple-system, sans-serif; }
@@ -155,11 +115,6 @@
         <div id="agent-office-cards" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2"></div>
       </div>
     </div>
-        <div id="agent-office-cards" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
-          <p class="text-gray-500 text-sm col-span-3">Loading agent states...</p>
-        </div>
-      </div>
-    </div>
 
   </main>
 
@@ -179,10 +134,13 @@
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('tab-active'));
       
-      if (tab === 'office') { document.getElementById('tab-office').classList.remove('hidden'); loadOfficeState(); } else if (tab === 'stats') {
+      if (tab === 'office') {
+        document.getElementById('tab-office').classList.remove('hidden');
+        loadOfficeState();
+      } else if (tab === 'stats') {
         document.getElementById('tab-stats').classList.remove('hidden');
         loadStats();
-      } else if (tab !== 'office') {
+      } else {
         document.getElementById('tab-all').classList.remove('hidden');
         loadActivities();
       }
@@ -379,6 +337,37 @@
 
     // Initial load
     loadActivities();
-  </script>
+  
+    const STATE_LABELS = {idle:'💤 Idle', writing:'✍️ Working', researching:'🔍 Researching', executing:'⚡ Executing', syncing:'🔄 Syncing', error:'🐛 Bug Zone'};
+    const STATE_BG = {idle:'bg-gray-800/60', writing:'bg-blue-900/40', researching:'bg-yellow-900/40', executing:'bg-green-900/40', syncing:'bg-purple-900/40', error:'bg-red-900/40'};
+    const STATE_COLOR = {idle:'text-gray-300', writing:'text-blue-300', researching:'text-yellow-300', executing:'text-green-300', syncing:'text-purple-300', error:'text-red-300'};
+
+    function timeSince(dateStr) {
+      const s = Math.floor((new Date() - new Date(dateStr)) / 1000);
+      if (s < 60) return 'just now';
+      if (s < 3600) return Math.floor(s/60) + 'm ago';
+      if (s < 86400) return Math.floor(s/3600) + 'h ago';
+      return Math.floor(s/86400) + 'd ago';
+    }
+
+    async function loadOfficeState() {
+      const container = document.getElementById('agent-office-cards');
+      try {
+        const res = await fetch('/api/agent-states');
+        const agents = await res.json();
+        container.innerHTML = agents.map(a => `
+          <div class="rounded-lg p-4 border border-gray-700 ${STATE_BG[a.state] || 'bg-gray-800'}">
+            <div class="text-3xl mb-2">${a.emoji || '🤖'}</div>
+            <div class="font-bold text-base mb-1">${a.name}</div>
+            <div class="font-medium ${STATE_COLOR[a.state] || 'text-gray-300'}">${STATE_LABELS[a.state] || a.state}</div>
+            <div class="text-xs text-gray-400 mt-1">${a.detail || ''}</div>
+            <div class="text-xs text-gray-600 mt-2">${a.updated_at ? timeSince(a.updated_at) : ''}</div>
+          </div>`).join('');
+      } catch(e) {
+        container.innerHTML = '<p class="text-red-400 text-sm col-span-3">Failed to load: ' + e.message + '</p>';
+      }
+    }
+
+    </script>
 </body>
 </html>
