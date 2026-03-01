@@ -45,13 +45,8 @@ const config = {
   height: LAYOUT.game.height,
   parent: 'game-container',
   pixelArt: true,
-  resolution: window.devicePixelRatio || 1,
   physics: { default: 'arcade', arcade: { gravity: { y: 0 }, debug: false } },
-  scene: { preload: preload, create: create, update: update },
-  scale: {
-    mode: Phaser.Scale.FIT,
-    autoCenter: Phaser.Scale.CENTER_BOTH
-  }
+  scene: { preload: preload, create: create, update: update }
 };
 
 let totalAssets = 0;
@@ -841,60 +836,8 @@ function moveStar(time) {
   }
 }
 
-// === DOM bubble helpers (crisp text over canvas, readable on mobile) ===
-function ensureBubbleLayer() {
-  if (document.getElementById('bubble-layer')) return;
-  var container = document.getElementById('game-container');
-  if (!container) return;
-  container.style.position = 'relative';
-  var layer = document.createElement('div');
-  layer.id = 'bubble-layer';
-  layer.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:10;';
-  container.appendChild(layer);
-
-  // Inject bubble CSS if not already present
-  if (!document.getElementById('dom-bubble-style')) {
-    var style = document.createElement('style');
-    style.id = 'dom-bubble-style';
-    style.textContent = '.dom-bubble{position:absolute;transform:translate(-50%,-100%);background:rgba(255,255,255,0.95);border:2px solid #000;border-radius:8px;padding:4px 12px;font-family:ArkPixel,\"Courier New\",monospace;font-size:14px;color:#000;white-space:nowrap;pointer-events:none;}.dom-bubble.cat-bubble{background:rgba(255,251,235,0.95);border-color:#d4a574;color:#8b6914;}';
-    document.head.appendChild(style);
-  }
-}
-
-function worldToScreen(worldX, worldY) {
-  if (!game || !game.cameras) return { x: 0, y: 0 };
-  var camera = game.cameras.main;
-  var vx = (worldX - camera.scrollX) * camera.zoom;
-  var vy = (worldY - camera.scrollY) * camera.zoom;
-  var canvas = game.canvas;
-  var scaleX = canvas.clientWidth / camera.width;
-  var scaleY = canvas.clientHeight / camera.height;
-  return { x: vx * scaleX, y: vy * scaleY };
-}
-
-function removeDomBubble(el) {
-  if (el && el.parentNode) el.parentNode.removeChild(el);
-}
-
-function showDomBubble(worldX, worldY, text, opts) {
-  opts = opts || {};
-  ensureBubbleLayer();
-  var layer = document.getElementById('bubble-layer');
-  if (!layer) return null;
-  var pos = worldToScreen(worldX, worldY);
-  var el = document.createElement('div');
-  el.className = 'dom-bubble' + (opts.className ? ' ' + opts.className : '');
-  el.textContent = text;
-  el.style.left = pos.x + 'px';
-  el.style.top = pos.y + 'px';
-  layer.appendChild(el);
-  var duration = opts.duration || 3000;
-  setTimeout(function() { removeDomBubble(el); }, duration);
-  return el;
-}
-
 function showBubble() {
-  removeDomBubble(bubble); bubble = null;
+  if (bubble) { bubble.destroy(); bubble = null; }
   const texts = BUBBLE_TEXTS[currentState] || BUBBLE_TEXTS.idle;
   if (currentState === 'idle') return;
 
@@ -912,17 +855,28 @@ function showBubble() {
   }
 
   const text = texts[Math.floor(Math.random() * texts.length)];
-  bubble = showDomBubble(anchorX, anchorY - 70, text, { duration: 3000 });
+  const bubbleY = anchorY - 70;
+  const bg = game.add.rectangle(anchorX, bubbleY, text.length * 10 + 20, 28, 0xffffff, 0.95);
+  bg.setStrokeStyle(2, 0x000000);
+  const txt = game.add.text(anchorX, bubbleY, text, { fontFamily: 'ArkPixel, monospace', fontSize: '12px', fill: '#000', align: 'center' }).setOrigin(0.5);
+  bubble = game.add.container(0, 0, [bg, txt]);
+  bubble.setDepth(1200);
+  setTimeout(() => { if (bubble) { bubble.destroy(); bubble = null; } }, 3000);
 }
 
 function showCatBubble() {
   if (!window.catSprite) return;
-  removeDomBubble(window.catBubble); window.catBubble = null;
+  if (window.catBubble) { window.catBubble.destroy(); window.catBubble = null; }
   const texts = BUBBLE_TEXTS.cat || ['喵~', '咕噜咕噜…'];
   const text = texts[Math.floor(Math.random() * texts.length)];
-  window.catBubble = showDomBubble(window.catSprite.x, window.catSprite.y - 60, text, {
-    className: 'cat-bubble', duration: 4000
-  });
+  const anchorX = window.catSprite.x;
+  const anchorY = window.catSprite.y - 60;
+  const bg = game.add.rectangle(anchorX, anchorY, text.length * 10 + 20, 24, 0xfffbeb, 0.95);
+  bg.setStrokeStyle(2, 0xd4a574);
+  const txt = game.add.text(anchorX, anchorY, text, { fontFamily: 'ArkPixel, monospace', fontSize: '11px', fill: '#8b6914', align: 'center' }).setOrigin(0.5);
+  window.catBubble = game.add.container(0, 0, [bg, txt]);
+  window.catBubble.setDepth(2100);
+  setTimeout(() => { if (window.catBubble) { window.catBubble.destroy(); window.catBubble = null; } }, 4000);
 }
 
 function fetchAgents() {
