@@ -381,9 +381,30 @@
                 padding: 6px 8px !important;
             }
         }
-    </style>
+    
+    /* Embed mode: hide bottom panels, show only the game canvas */
+    body.embed-mode .bottom-panels,
+    body.embed-mode #status-panel,
+    body.embed-mode #memo-panel,
+    body.embed-mode #visitors-panel,
+    body.embed-mode .panel-row,
+    body.embed-mode [class*="grid-cols"] {
+      display: none !important;
+    }
+    body.embed-mode {
+      background: transparent;
+      overflow: hidden;
+    }
+
+  </style>
 </head>
 <body>
+<script>
+    // Embed mode: hide bottom panels if ?embed=1
+    if (new URLSearchParams(window.location.search).get('embed') === '1') {
+      document.body.classList.add('embed-mode');
+    }
+</script>
     <!-- Loading overlay -->
     <div id="loading-overlay">
         <div id="loading-text">Loading Nox office Pixel Office...</div>
