@@ -1,114 +1,6 @@
 {
   "entries": [
     {
-      "id": "session-1771881969574",
-      "timestamp": "2026-02-23T21:26:09.574Z",
-      "agent": "main",
-      "type": "web_research",
-      "project": "session_activity",
-      "description": "Web research: https://www.youtube.com/watch?v=fgtTTpaCsd8",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771881969574",
-      "timestamp": "2026-02-23T21:26:09.574Z",
-      "agent": "main",
-      "type": "web_research",
-      "project": "session_activity",
-      "description": "Web research: https://www.youtube.com/watch?v=fgtTTpaCsd8",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771881977784",
-      "timestamp": "2026-02-23T21:26:17.784Z",
-      "agent": "main",
-      "type": "web_research",
-      "project": "session_activity",
-      "description": "Web research: \"I Got Six Pok\u00e9mon In Real Life\" youtube channel name subscr",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771881977784",
-      "timestamp": "2026-02-23T21:26:17.784Z",
-      "agent": "main",
-      "type": "web_research",
-      "project": "session_activity",
-      "description": "Web research: \"I Got Six Pok\u00e9mon In Real Life\" youtube channel name subscr",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771881982344",
-      "timestamp": "2026-02-23T21:26:22.344Z",
-      "agent": "main",
-      "type": "web_research",
-      "project": "session_activity",
-      "description": "Web research: site:youtube.com \"fgtTTpaCsd8\" channel",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771881982344",
-      "timestamp": "2026-02-23T21:26:22.344Z",
-      "agent": "main",
-      "type": "web_research",
-      "project": "session_activity",
-      "description": "Web research: site:youtube.com \"fgtTTpaCsd8\" channel",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771881987438",
-      "timestamp": "2026-02-23T21:26:27.438Z",
-      "agent": "main",
-      "type": "web_research",
-      "project": "session_activity",
-      "description": "Web research: \"I Got Six Pok\u00e9mon In Real Life\" youtube \"simulate Pok\u00e9mon\" ",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771881987438",
-      "timestamp": "2026-02-23T21:26:27.438Z",
-      "agent": "main",
-      "type": "web_research",
-      "project": "session_activity",
-      "description": "Web research: \"I Got Six Pok\u00e9mon In Real Life\" youtube \"simulate Pok\u00e9mon\" ",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771881995704",
-      "timestamp": "2026-02-23T21:26:35.704Z",
-      "agent": "main",
-      "type": "web_research",
-      "project": "session_activity",
-      "description": "Web research: https://www.youtube.com/watch?v=fgtTTpaCsd8",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771881995704",
-      "timestamp": "2026-02-23T21:26:35.704Z",
-      "agent": "main",
-      "type": "web_research",
-      "project": "session_activity",
-      "description": "Web research: https://www.youtube.com/watch?v=fgtTTpaCsd8",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771882000903",
-      "timestamp": "2026-02-23T21:26:40.903Z",
-      "agent": "main",
-      "type": "web_research",
-      "project": "session_activity",
-      "description": "Web research: https://www.youtube.com/oembed?url=https://www.youtube.com/w",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771882000903",
-      "timestamp": "2026-02-23T21:26:40.903Z",
-      "agent": "main",
-      "type": "web_research",
-      "project": "session_activity",
-      "description": "Web research: https://www.youtube.com/oembed?url=https://www.youtube.com/w",
-      "source": "session_monitor"
-    },
-    {
       "id": "session-1771902177169",
       "timestamp": "2026-02-24T03:02:57.169Z",
       "agent": "main",
@@ -41338,8 +41230,8 @@
       "source": "session_monitor"
     },
     {
-      "id": "session-1772485205080",
-      "timestamp": "2026-03-02T21:00:05.080Z",
+      "id": "session-1772488802958",
+      "timestamp": "2026-03-02T22:00:02.958Z",
       "agent": "joy",
       "type": "script_execution",
       "project": "session_activity",
@@ -41347,26 +41239,8 @@
       "source": "session_monitor"
     },
     {
-      "id": "session-1772485219276",
-      "timestamp": "2026-03-02T21:00:19.276Z",
-      "agent": "joy",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1772487003546",
-      "timestamp": "2026-03-02T21:30:03.546Z",
-      "agent": "joy",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1772487012435",
-      "timestamp": "2026-03-02T21:30:12.435Z",
+      "id": "session-1772488810912",
+      "timestamp": "2026-03-02T22:00:10.912Z",
       "agent": "joy",
       "type": "script_execution",
       "project": "session_activity",
@@ -41374,5 +41248,5 @@
       "source": "session_monitor"
     }
   ],
-  "totalEntries": 4597
+  "totalEntries": 4583
 }
