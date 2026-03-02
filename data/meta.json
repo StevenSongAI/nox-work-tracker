@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2026-03-02T00:39:22.902672Z",
+  "lastUpdated": "2026-03-02T01:04:24.844803Z",
   "syncStatus": "active",
-  "cacheBust": "v0302003922",
-  "totalActivities": 5463,
-  "totalEntries": 5463,
+  "cacheBust": "v0302010424",
+  "totalActivities": 5374,
+  "totalEntries": 5374,
   "trackedAgents": [
     "nox",
     "sage",
