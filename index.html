@@ -19,19 +19,7 @@
     #activity-feed { height: 600px; overflow-y: auto; position: relative; }
 
     @media (max-width: 768px) {
-      /* Pixel Office embed: aspect-ratio keeps iframe sized to game canvas, no empty space */
-      .office-frame-container {
-        position: relative;
-        aspect-ratio: 16 / 9;
-        height: auto !important;
-      }
-      .office-frame-container iframe {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100% !important;
-        height: 100% !important;
-        border: 0;
-      }
+      .office-frame-container, .office-frame-container iframe { height: 780px !important; }
     }
 
     .loading-spinner { animation: spin 1s linear infinite; }
@@ -69,10 +57,13 @@
     <!-- Activity Feed -->
     <div id="tab-all" class="tab-content">
       <!-- Pixel Office embedded on homepage -->
-      <div class="card mb-6 overflow-hidden office-frame-container">
-        <iframe
-          src="/office?embed=1"
+      <div class="card mb-6 overflow-hidden office-frame-container" style="height:1560px; position:relative;">
+        <iframe 
+          src="/office?embed=1" 
+          width="100%" 
+          height="1560px"
           frameborder="0"
+          style="display:block; border-radius:8px;"
           id="office-homepage-iframe"
         ></iframe>
       </div>
