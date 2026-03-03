@@ -27,7 +27,8 @@ const AppState = {
   },
   currentTab: 'activity',
   charts: {},
-  autoRefreshTimer: null
+  autoRefreshTimer: null,
+  seenActivityIds: new Set()  // tracks which entry IDs have already been rendered
 };
 
 // ============================================
@@ -326,9 +327,10 @@ function renderActivityTab() {
     const time = formatTime(entry.timestamp);
     const statusColor = getStatusColor(entry.status);
     const duration = entry.duration_ms ? formatDuration(entry.duration_ms) : '';
+    const isNew = !AppState.seenActivityIds.has(entry.id);
     
     html += `
-      <div class="card rounded p-3 hover:bg-dark-800 transition-colors cursor-pointer" 
+      <div class="card rounded p-3 hover:bg-dark-800 transition-colors cursor-pointer${isNew ? ' new-activity-entry' : ''}" 
            onclick="toggleActivityDetails('${entry.id}')">
         <div class="flex items-start gap-3">
           <span class="text-lg select-none" title="${TYPE_LABELS[entry.type] || entry.type}">${icon}</span>
@@ -363,6 +365,9 @@ function renderActivityTab() {
   `;
   
   container.innerHTML = html;
+
+  // Mark all rendered entries as seen (for new-entry animation tracking)
+  AppState.data.activityLog.entries.forEach(e => AppState.seenActivityIds.add(e.id));
 }
 
 function toggleActivityDetails(entryId) {

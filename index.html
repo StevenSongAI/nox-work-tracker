@@ -14,6 +14,14 @@
     .agent-joy { color: #8B5CF6; }
     .tab-active { border-bottom: 2px solid #3B82F6; color: #3B82F6; }
     .activity-item { transition: background 0.15s; }
+    @keyframes newEntryPulse {
+      0%   { background-color: rgba(139, 92, 246, 0.25); box-shadow: 0 0 0 1px rgba(139,92,246,0.5); }
+      60%  { background-color: rgba(139, 92, 246, 0.10); box-shadow: 0 0 0 1px rgba(139,92,246,0.2); }
+      100% { background-color: transparent; box-shadow: none; }
+    }
+    .new-activity-entry {
+      animation: newEntryPulse 2.5s ease-out forwards;
+    }
     .activity-item:hover { background: #1a1a2e; }
     /* Virtual scrolling container */
     #activity-feed { height: 600px; overflow-y: auto; position: relative; }
