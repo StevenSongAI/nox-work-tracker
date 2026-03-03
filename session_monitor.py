@@ -436,7 +436,27 @@ def main():
         save_meta(meta_data)
         print(f"💾 Updated meta.json (timestamp: {timestamp_iso})")
         
-        # Git commit and push
+        # POST each new entry directly to Railway API for instant real-time update
+        # (bypasses git → Railway redeploy pipeline which takes 1-3 minutes)
+        import urllib.request, urllib.error
+        RAILWAY_API = "https://nox-work-tracker-production.up.railway.app/api/activities"
+        posted, failed = 0, 0
+        for entry in log_entries:
+            try:
+                payload = json.dumps(entry).encode()
+                req = urllib.request.Request(
+                    RAILWAY_API, data=payload,
+                    headers={"Content-Type": "application/json"}, method="POST"
+                )
+                urllib.request.urlopen(req, timeout=5)
+                posted += 1
+            except Exception as e:
+                failed += 1
+                logger.warning(f"Railway POST failed for entry {entry.get('id')}: {e}")
+        logger.info(f"Railway API: posted {posted}, failed {failed}")
+        print(f"🚀 Railway API: {posted} entries posted live ({failed} failed)")
+
+        # Git commit and push (background backup — keeps history, not on hot path)
         import subprocess
         repo_dir = Path(__file__).parent
         try:
@@ -454,7 +474,7 @@ def main():
                           cwd=repo_dir, check=True, capture_output=True)
             logger.info("Git push completed")
             
-            print(f"✅ Committed and pushed to GitHub")
+            print(f"✅ Committed and pushed to GitHub (backup)")
         except subprocess.CalledProcessError as e:
             logger.error(f"Git error: {e}")
             print(f"⚠️  Git error: {e}")
