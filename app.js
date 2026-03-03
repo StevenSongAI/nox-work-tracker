@@ -435,9 +435,10 @@ function renderAgentTab(agentKey, agentName) {
     const time = formatTime(entry.timestamp);
     const statusColor = getStatusColor(entry.status);
     const duration = entry.duration_ms ? formatDuration(entry.duration_ms) : '';
+    const isNew = !AppState.seenActivityIds.has(entry.id);
 
     html += `
-      <div class="card rounded p-3 hover:bg-dark-800 transition-colors">
+      <div class="card rounded p-3 hover:bg-dark-800 transition-colors${isNew ? ' new-activity-entry' : ''}">
         <div class="flex items-start gap-3">
           <span class="text-lg select-none" title="${TYPE_LABELS[entry.type] || entry.type}">${icon}</span>
           <div class="flex-1 min-w-0">
@@ -456,6 +457,9 @@ function renderAgentTab(agentKey, agentName) {
   });
 
   container.innerHTML = html;
+
+  // Mark all rendered entries as seen (for new-entry animation)
+  entries.forEach(e => AppState.seenActivityIds.add(e.id));
 }
 
 // ============================================
