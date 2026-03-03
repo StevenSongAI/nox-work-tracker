@@ -379,8 +379,6 @@ def main():
         print(f"💤 Sleeping for 5 minutes...")
         time.sleep(20)  # 20 seconds — fast state sync
 
-if __name__ == "__main__":
-    main()
 
 
 # ─── Pixel Office State Sync ───────────────────────────────────────────────
@@ -429,3 +427,7 @@ def sync_states_from_activities(new_activities):
         if last_active > 0 and (now - last_active) > IDLE_THRESHOLD:
             AGENT_LAST_ACTIVE[agent] = 0
             push_agent_state(agent, "idle", "Standing by")
+
+
+if __name__ == "__main__":
+    main()
