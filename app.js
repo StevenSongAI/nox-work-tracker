@@ -186,6 +186,12 @@ async function loadAllData() {
 
     // Ensure arrays exist
     AppState.data.activityLog.entries = AppState.data.activityLog.entries || [];
+
+    // On first load (seenActivityIds empty), mark all existing entries as seen
+    // so only genuinely new entries (arriving after page load) get the pulse animation
+    if (AppState.seenActivityIds.size === 0) {
+      AppState.data.activityLog.entries.forEach(e => AppState.seenActivityIds.add(e.id));
+    }
     AppState.data.audits.audits = AppState.data.audits.audits || [];
     AppState.data.ralphChains.chains = AppState.data.ralphChains.chains || [];
     AppState.data.agents.agents = AppState.data.agents.agents || [];

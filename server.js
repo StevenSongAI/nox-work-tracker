@@ -4,6 +4,7 @@ const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(__dirname, 'data', 'activity-log.json');
+const META_FILE = path.join(__dirname, 'data', 'meta.json');
 
 // Ensure data directory exists
 const dataDir = path.join(__dirname, 'data');
@@ -63,6 +64,22 @@ function addActivity(entry) {
   
   activities.unshift(entry); // Add to beginning
   saveActivities();
+  
+  // Update meta.json so smartPoll detects the change immediately
+  try {
+    const now = new Date();
+    const meta = fs.existsSync(META_FILE)
+      ? JSON.parse(fs.readFileSync(META_FILE, 'utf8'))
+      : {};
+    meta.lastUpdated = now.toISOString();
+    meta.cacheBust = `v${now.toISOString().replace(/\D/g,'').slice(0,14)}`;
+    meta.totalActivities = activities.length;
+    meta.totalEntries = activities.length;
+    fs.writeFileSync(META_FILE, JSON.stringify(meta, null, 2));
+  } catch (e) {
+    console.warn('meta.json update failed:', e.message);
+  }
+
   return true;
 }
 
