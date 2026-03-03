@@ -1,51 +1,6 @@
 {
   "entries": [
     {
-      "id": "session-1771916814984",
-      "timestamp": "2026-02-24T07:06:54.984Z",
-      "agent": "main",
-      "type": "file_write",
-      "project": "session_activity",
-      "description": "Created/updated file: outliers-latest.json",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771916814984",
-      "timestamp": "2026-02-24T07:06:54.984Z",
-      "agent": "main",
-      "type": "file_write",
-      "project": "session_activity",
-      "description": "Created/updated file: outliers-latest.json",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771917382385",
-      "timestamp": "2026-02-24T07:16:22.385Z",
-      "agent": "main",
-      "type": "file_write",
-      "project": "session_activity",
-      "description": "Created/updated file: x-intel-latest.json",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771917382385",
-      "timestamp": "2026-02-24T07:16:22.385Z",
-      "agent": "main",
-      "type": "file_write",
-      "project": "session_activity",
-      "description": "Created/updated file: x-intel-latest.json",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1771918298376",
-      "timestamp": "2026-02-24T07:31:38.376Z",
-      "agent": "main",
-      "type": "file_write",
-      "project": "session_activity",
-      "description": "Created/updated file: x-intel-latest.json",
-      "source": "session_monitor"
-    },
-    {
       "id": "session-1771934475248",
       "timestamp": "2026-02-24T12:01:15.248Z",
       "agent": "sage",
@@ -40780,86 +40735,32 @@
       "source": "session_monitor"
     },
     {
-      "id": "session-1772517602425",
-      "timestamp": "2026-03-03T06:00:02.425Z",
-      "agent": "joy",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1772517616893",
-      "timestamp": "2026-03-03T06:00:16.893Z",
-      "agent": "joy",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1772519425432",
-      "timestamp": "2026-03-03T06:30:25.432Z",
-      "agent": "joy",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1772519432736",
-      "timestamp": "2026-03-03T06:30:32.736Z",
-      "agent": "joy",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1772521202768",
-      "timestamp": "2026-03-03T07:00:02.768Z",
-      "agent": "joy",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1772521207951",
-      "timestamp": "2026-03-03T07:00:07.951Z",
-      "agent": "joy",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1772523002790",
-      "timestamp": "2026-03-03T07:30:02.790Z",
-      "agent": "joy",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1772523007719",
-      "timestamp": "2026-03-03T07:30:07.719Z",
-      "agent": "joy",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1772523919999",
-      "timestamp": "2026-03-03T07:45:19.999Z",
+      "id": "session-1772524802733",
+      "timestamp": "2026-03-03T08:00:02.733Z",
       "agent": "main",
       "type": "script_execution",
       "project": "session_activity",
-      "description": "Executed script/command: cd ~/Desktop/Nox\\ Builds/nox-scrapers && python3 title_patte",
+      "description": "Executed script/command: python3 /Users/stevenai/.openclaw/workspace-nox/overnight_an",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772524813411",
+      "timestamp": "2026-03-03T08:00:13.411Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1772524826751",
+      "timestamp": "2026-03-03T08:00:26.751Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
       "source": "session_monitor"
     }
   ],
-  "totalEntries": 4540
+  "totalEntries": 4529
 }
