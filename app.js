@@ -1108,6 +1108,25 @@ function initSettings() {
   });
 }
 
+// Last known meta timestamp — used to detect changes without fetching full data
+let _lastKnownUpdated = null;
+
+async function smartPoll() {
+  // Fetch only meta.json (~1KB) to check if data changed
+  try {
+    const res = await fetch(`data/meta.json?_=${Date.now()}`);
+    const meta = await res.json();
+    const latestUpdated = meta.lastUpdated || meta.cacheBust || null;
+    if (latestUpdated && latestUpdated !== _lastKnownUpdated) {
+      _lastKnownUpdated = latestUpdated;
+      // Data actually changed — do a full refresh
+      loadAllData();
+    }
+  } catch (e) {
+    // Silent fail — no connection spike on error
+  }
+}
+
 function setupAutoRefresh() {
   if (AppState.autoRefreshTimer) {
     clearInterval(AppState.autoRefreshTimer);
@@ -1115,9 +1134,8 @@ function setupAutoRefresh() {
   }
   
   if (AppState.settings.autoRefresh) {
-    AppState.autoRefreshTimer = setInterval(() => {
-      refreshData();
-    }, AppState.settings.refreshInterval * 1000);
+    // Poll meta.json every 5s (cheap ~1KB check), only full-fetch when data changed
+    AppState.autoRefreshTimer = setInterval(smartPoll, AppState.settings.refreshInterval * 1000);
   }
 }
 
