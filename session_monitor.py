@@ -456,28 +456,26 @@ def main():
         logger.info(f"Railway API: posted {posted}, failed {failed}")
         print(f"🚀 Railway API: {posted} entries posted live ({failed} failed)")
 
-        # Git commit and push (background backup — keeps history, not on hot path)
-        import subprocess
-        repo_dir = Path(__file__).parent
-        try:
-            logger.info("Starting git operations...")
-            subprocess.run(['git', 'add', 'data/activity-log.json', 'data/meta.json', '.processed_sessions.json'], 
-                          cwd=repo_dir, check=True, capture_output=True)
-            logger.info("Git add completed")
-            
-            commit_msg = f"[auto] Session monitor: {len(log_entries)} new activities"
-            subprocess.run(['git', 'commit', '-m', commit_msg], 
-                          cwd=repo_dir, check=True, capture_output=True)
-            logger.info(f"Git commit completed: {commit_msg}")
-            
-            subprocess.run(['git', 'push', 'origin', 'main'], 
-                          cwd=repo_dir, check=True, capture_output=True)
-            logger.info("Git push completed")
-            
-            print(f"✅ Committed and pushed to GitHub (backup)")
-        except subprocess.CalledProcessError as e:
-            logger.error(f"Git error: {e}")
-            print(f"⚠️  Git error: {e}")
+        # Git commit and push — only if not called from auto_tracker (avoid double push + blocking)
+        import subprocess, os
+        if not os.environ.get('SKIP_GIT_PUSH'):
+            repo_dir = Path(__file__).parent
+            try:
+                logger.info("Starting git operations...")
+                subprocess.run(['git', 'add', 'data/activity-log.json', 'data/meta.json', '.processed_sessions.json'], 
+                              cwd=repo_dir, check=True, capture_output=True)
+                commit_msg = f"[auto] Session monitor: {len(log_entries)} new activities"
+                subprocess.run(['git', 'commit', '-m', commit_msg], 
+                              cwd=repo_dir, check=True, capture_output=True)
+                subprocess.run(['git', 'push', 'origin', 'main'], 
+                              cwd=repo_dir, check=True, capture_output=True)
+                logger.info("Git push completed")
+                print(f"✅ Committed and pushed to GitHub (backup)")
+            except subprocess.CalledProcessError as e:
+                logger.error(f"Git error: {e}")
+                print(f"⚠️  Git error: {e}")
+        else:
+            logger.info("Git push skipped (called from auto_tracker — it handles push)")
     else:
         logger.info("No new activities found")
         print("ℹ️  No new activities found")

@@ -216,8 +216,10 @@ def scan_for_new_work():
     # 2. Check OpenClaw session transcripts for activity
     print("  📝 Scanning OpenClaw sessions...")
     try:
-        import session_monitor
+        import os, session_monitor
+        os.environ['SKIP_GIT_PUSH'] = '1'  # auto_tracker handles git, skip in session_monitor
         session_count = session_monitor.main()
+        os.environ.pop('SKIP_GIT_PUSH', None)
         
         # Load session activities if any were found
         session_file = TRACKER_DIR / ".session_activities.json"
