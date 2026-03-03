@@ -465,10 +465,103 @@ def main():
     # Save session timestamps cache
     save_session_timestamps()
     logger.info(f"Saved {len(SESSION_TIMESTAMPS)} session timestamps to cache")
-    
+
+    # Auto-sync pixel office state from activity log
+    # No manual scripts — state is derived from recent activity detection
+    sync_pixel_office_state(activities)
+
     logger.info("Session scan complete")
     print("✅ Session scan complete\n")
     return len(activities)
+
+
+def sync_pixel_office_state(new_activities):
+    """
+    Auto-update pixel office agent positions based on activity log.
+    - Agent has new activity this run  → state = 'writing' (at desk)
+    - Agent has no recent activity (>15 min) → state = 'idle' (breakroom)
+    No manual state.py scripts needed.
+    """
+    import urllib.request
+    import urllib.error
+
+    API_URL = "https://nox-work-tracker-production.up.railway.app/api/agent-states"
+    ACTIVITY_WINDOW_SECONDS = 15 * 60  # 15 minutes
+
+    AGENT_NAME_MAP = {
+        'main': 'Nox',
+        'nox':  'Nox',
+        'sage': 'Sage',
+        'joy':  'Joy',
+    }
+    AGENT_EMOJI = {
+        'Nox': '⚡',
+        'Sage': '🌿',
+        'Joy': '✨',
+    }
+
+    # Agents that have new activity this run
+    active_this_run = set()
+    for a in (new_activities or []):
+        raw = (a.get('agent') or '').lower()
+        name = AGENT_NAME_MAP.get(raw)
+        if name:
+            active_this_run.add(name)
+
+    # Check activity-log.json for recent activity per agent
+    log_file = Path(__file__).parent / "data" / "activity-log.json"
+    recent_agents = set()
+    try:
+        with open(log_file) as f:
+            log_data = json.load(f)
+        now_ts = datetime.now(timezone.utc).timestamp()
+        for entry in log_data.get('entries', []):
+            try:
+                ts = datetime.fromisoformat(entry['timestamp'].replace('Z', '+00:00')).timestamp()
+                if now_ts - ts <= ACTIVITY_WINDOW_SECONDS:
+                    raw = (entry.get('agent') or '').lower()
+                    name = AGENT_NAME_MAP.get(raw)
+                    if name:
+                        recent_agents.add(name)
+            except Exception:
+                continue
+    except Exception as e:
+        logger.warning(f"Could not read activity log for pixel office sync: {e}")
+        return
+
+    # Fetch current states to avoid unnecessary writes
+    try:
+        with urllib.request.urlopen(API_URL, timeout=5) as resp:
+            current_states = {s['name']: s.get('state', 'idle') for s in json.loads(resp.read())}
+    except Exception:
+        current_states = {}
+
+    # Determine desired state for each known agent
+    for agent_name in ('Nox', 'Sage', 'Joy'):
+        desired = 'writing' if agent_name in recent_agents else 'idle'
+        detail  = 'Recently active' if desired == 'writing' else 'Standing by'
+        current = current_states.get(agent_name, 'idle')
+
+        if desired == current:
+            continue  # No change needed
+
+        payload = json.dumps({
+            'name':   agent_name,
+            'emoji':  AGENT_EMOJI.get(agent_name, ''),
+            'state':  desired,
+            'detail': detail,
+        }).encode()
+        try:
+            req = urllib.request.Request(
+                API_URL, data=payload,
+                headers={'Content-Type': 'application/json'}, method='POST'
+            )
+            urllib.request.urlopen(req, timeout=5)
+            logger.info(f"Pixel office: {agent_name} → {desired}")
+            print(f"🏢 Pixel office: {agent_name} → {desired} ({detail})")
+        except urllib.error.URLError as e:
+            logger.warning(f"Pixel office sync failed for {agent_name}: {e}")
+
 
 if __name__ == "__main__":
     main()
