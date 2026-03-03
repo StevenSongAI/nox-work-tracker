@@ -276,7 +276,14 @@ function renderActivityTab() {
   const container = document.getElementById('activity-feed');
   if (!container) return;
 
-  let entries = [...AppState.data.activityLog.entries];
+  let entries = AppState.data.activityLog.entries.filter(e => {
+    // Filter out pixel-office state script calls — not real work
+    const desc = (e.description || '').toLowerCase();
+    if (desc.includes('pixel-office/sage_state') || desc.includes('pixel-office/joy_state') ||
+        desc.includes('pixel-office/nox_state') || desc.includes('pixel-office/sag') ||
+        desc.includes('pixel-office/joy') || desc.includes('pixel-office/nox')) return false;
+    return true;
+  });
   
   // Apply filters
   const agentFilter = document.getElementById('activity-agent-filter')?.value || '';
@@ -388,7 +395,13 @@ function renderAgentTab(agentKey, agentName) {
   // Map agentKey to agent id used in data
   const agentId = agentKey === 'sage' ? 'health' : 'fun';
 
-  let entries = AppState.data.activityLog.entries?.filter(e => e.agent === agentId) || [];
+  let entries = (AppState.data.activityLog.entries || []).filter(e => {
+    if (e.agent !== agentId) return false;
+    // Filter out pixel-office state script calls — not real work
+    const desc = (e.description || '').toLowerCase();
+    if (desc.includes('pixel-office/')) return false;
+    return true;
+  });
 
   // Sort by timestamp (newest first)
   entries.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
