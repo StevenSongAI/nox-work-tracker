@@ -280,7 +280,6 @@ def sync_state_from_session_activity():
         mtime = os.path.getmtime(newest)
 
         if mtime > AGENT_LAST_MTIME[agent_name]:
-            # File was written since last check = actively working
             AGENT_LAST_MTIME[agent_name] = mtime
             AGENT_LAST_ACTIVE[agent_name] = now
             push_agent_state(agent_name, "executing", "Active session")
