@@ -20635,7 +20635,61 @@
       "project": "session_activity",
       "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/sag",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773094205200",
+      "timestamp": "2026-03-09T22:10:05.200Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773094213401",
+      "timestamp": "2026-03-09T22:10:13.401Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773094235271",
+      "timestamp": "2026-03-09T22:10:35.271Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # Check what CDP port the higgsfield script uses\ngrep -n \"18",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773094236552",
+      "timestamp": "2026-03-09T22:10:36.552Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: send",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773094239087",
+      "timestamp": "2026-03-09T22:10:39.087Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: sed -i '' 's|CDP_URL = \"http://127.0.0.1:18800\"|CDP_URL = \"h",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773094239444",
+      "timestamp": "2026-03-09T22:10:39.444Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 1922
+  "totalEntries": 1928
 }
