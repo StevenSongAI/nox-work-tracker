@@ -29923,7 +29923,52 @@
       "project": "session_activity",
       "description": "Executed script/command: # Run the title pattern scraper now (uses Playwright, same a",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773229955153",
+      "timestamp": "2026-03-11T11:52:35.153Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # Run the title pattern adapter now with the seeded raw file",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773229962735",
+      "timestamp": "2026-03-11T11:52:42.735Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # The adapter still shows old source videos \u2014 check what it ",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773229966635",
+      "timestamp": "2026-03-11T11:52:46.635Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: grep -n \"INPUT_FILE\\|raw\\|load\\|read\" ~/Desktop/Nox\\ Builds/",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773229969623",
+      "timestamp": "2026-03-11T11:52:49.623Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: sed -n '360,420p' ~/Desktop/Nox\\ Builds/nox-scrapers/title_p",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773229978104",
+      "timestamp": "2026-03-11T11:52:58.104Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # The adapter reads from raw.json but then uses its own ZMDE",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 2954
+  "totalEntries": 2959
 }
