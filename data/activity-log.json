@@ -29869,7 +29869,61 @@
       "project": "session_activity",
       "description": "Executed script/command: grep -n \"cache\\|CACHE\\|tweet_cache\\|seen_ids\" ~/Desktop/Nox\\",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773229557541",
+      "timestamp": "2026-03-11T11:45:57.541Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # Check what data the analysis script actually reads\ngrep -n",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773229578927",
+      "timestamp": "2026-03-11T11:46:18.927Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # Run the overnight analysis now to get fresh outliers\npytho",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773229597950",
+      "timestamp": "2026-03-11T11:46:37.950Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # Check if overnight_analysis.py writes to outliers-latest.j",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773229609356",
+      "timestamp": "2026-03-11T11:46:49.356Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # Check if overnight_analysis.py writes outliers-latest.json",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773229713418",
+      "timestamp": "2026-03-11T11:48:33.418Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # Run overnight_analysis.py now to refresh outliers-latest.j",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773229750260",
+      "timestamp": "2026-03-11T11:49:10.260Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # Run the title pattern scraper now (uses Playwright, same a",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 2948
+  "totalEntries": 2954
 }
