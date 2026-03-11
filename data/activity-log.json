@@ -29968,7 +29968,61 @@
       "project": "session_activity",
       "description": "Executed script/command: # The adapter reads from raw.json but then uses its own ZMDE",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773230405935",
+      "timestamp": "2026-03-11T12:00:05.935Z",
+      "agent": "sage",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/sag",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773230493953",
+      "timestamp": "2026-03-11T12:01:33.953Z",
+      "agent": "sage",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/sag",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773230516813",
+      "timestamp": "2026-03-11T12:01:56.813Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773230530484",
+      "timestamp": "2026-03-11T12:02:10.484Z",
+      "agent": "sage",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: status",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773230533764",
+      "timestamp": "2026-03-11T12:02:13.764Z",
+      "agent": "sage",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773230549810",
+      "timestamp": "2026-03-11T12:02:29.810Z",
+      "agent": "sage",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/sag",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 2959
+  "totalEntries": 2965
 }
