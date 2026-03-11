@@ -31759,7 +31759,34 @@
       "project": "session_activity",
       "description": "Created/updated file: shotlist.csv",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773266186280",
+      "timestamp": "2026-03-11T21:56:26.280Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # Now update the Higgsfield browser script to use port 18801",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773266191784",
+      "timestamp": "2026-03-11T21:56:31.784Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd \"/Users/stevenai/Desktop/Nox Builds/World Serpent Project",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773266226743",
+      "timestamp": "2026-03-11T21:57:06.743Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd \"/Users/stevenai/Desktop/Nox Builds/World Serpent Project",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 3158
+  "totalEntries": 3161
 }
