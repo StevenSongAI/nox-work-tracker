@@ -33433,7 +33433,34 @@
       "project": "session_activity",
       "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773314403056",
+      "timestamp": "2026-03-12T11:20:03.056Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773314405513",
+      "timestamp": "2026-03-12T11:20:05.513Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/.openclaw/workspace-nox/overnight_an",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773314450774",
+      "timestamp": "2026-03-12T11:20:50.774Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 3344
+  "totalEntries": 3347
 }
