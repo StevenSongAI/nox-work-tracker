@@ -33811,7 +33811,34 @@
       "project": "session_activity",
       "description": "Message action: send",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773327614475",
+      "timestamp": "2026-03-12T15:00:14.475Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773327634119",
+      "timestamp": "2026-03-12T15:00:34.119Z",
+      "agent": "sage",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: status",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773327640952",
+      "timestamp": "2026-03-12T15:00:40.952Z",
+      "agent": "sage",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: runs",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 3386
+  "totalEntries": 3389
 }
