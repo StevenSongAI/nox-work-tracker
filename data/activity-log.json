@@ -33982,7 +33982,25 @@
       "project": "session_activity",
       "description": "Web research: https://docs.openclaw.ai/cli/cron",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773336620152",
+      "timestamp": "2026-03-12T17:30:20.152Z",
+      "agent": "sage",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: status",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773336622762",
+      "timestamp": "2026-03-12T17:30:22.762Z",
+      "agent": "sage",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 3405
+  "totalEntries": 3407
 }
