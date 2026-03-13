@@ -36349,7 +36349,16 @@
       "project": "session_activity",
       "description": "Cron management: runs",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773432010493",
+      "timestamp": "2026-03-13T20:00:10.493Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 3668
+  "totalEntries": 3669
 }
