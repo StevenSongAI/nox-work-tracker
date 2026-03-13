@@ -36331,7 +36331,25 @@
       "project": "session_activity",
       "description": "Cron management: status",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773430223993",
+      "timestamp": "2026-03-13T19:30:23.993Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773430307655",
+      "timestamp": "2026-03-13T19:31:47.655Z",
+      "agent": "sage",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: runs",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 3666
+  "totalEntries": 3668
 }
