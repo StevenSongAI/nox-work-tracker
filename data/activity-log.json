@@ -34738,7 +34738,16 @@
       "project": "session_activity",
       "description": "Spawned subagent: You are classifying AI-generated images of a fantasy emerald",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773583904952",
+      "timestamp": "2026-03-15T14:11:44.952Z",
+      "agent": "main",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: Classify images in two storyboard grids. Use the `image` too",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 3545
+  "totalEntries": 3546
 }
