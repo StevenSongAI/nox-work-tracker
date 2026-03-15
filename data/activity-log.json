@@ -22300,7 +22300,52 @@
       "project": "session_activity",
       "description": "Cron management: list",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773617754623",
+      "timestamp": "2026-03-15T23:35:54.623Z",
+      "agent": "main",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: Analyze tweets from @theartofyoutube for insights about VIEW",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773617759131",
+      "timestamp": "2026-03-15T23:35:59.131Z",
+      "agent": "main",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: Analyze tweets from @theartofyoutube for insights about VIEW",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773617763571",
+      "timestamp": "2026-03-15T23:36:03.571Z",
+      "agent": "main",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: Analyze tweets from @theartofyoutube for insights about VIEW",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773617768188",
+      "timestamp": "2026-03-15T23:36:08.188Z",
+      "agent": "main",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: Analyze tweets from @theartofyoutube for insights about VIEW",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773617772675",
+      "timestamp": "2026-03-15T23:36:12.675Z",
+      "agent": "main",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: Analyze tweets from @theartofyoutube for insights about VIEW",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 2401
+  "totalEntries": 2406
 }
