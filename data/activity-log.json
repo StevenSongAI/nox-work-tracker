@@ -22435,7 +22435,43 @@
       "project": "session_activity",
       "description": "Cron management: status",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773616120818",
+      "timestamp": "2026-03-15T23:08:40.818Z",
+      "agent": "main",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: open",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773616282238",
+      "timestamp": "2026-03-15T23:11:22.238Z",
+      "agent": "main",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: You are analyzing tweets from @theartofyoutube for insights ",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773616287409",
+      "timestamp": "2026-03-15T23:11:27.409Z",
+      "agent": "main",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: You are analyzing tweets from @theartofyoutube for insights ",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773616292617",
+      "timestamp": "2026-03-15T23:11:32.617Z",
+      "agent": "main",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: You are analyzing tweets from @theartofyoutube for insights ",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 2416
+  "totalEntries": 2420
 }
