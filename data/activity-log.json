@@ -21814,7 +21814,25 @@
       "project": "session_activity",
       "description": "Message action: poll",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773664212244",
+      "timestamp": "2026-03-16T12:30:12.244Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773664231108",
+      "timestamp": "2026-03-16T12:30:31.108Z",
+      "agent": "sage",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 2347
+  "totalEntries": 2349
 }
