@@ -1,42 +1,6 @@
 {
   "entries": [
     {
-      "id": "session-1773041505732",
-      "timestamp": "2026-03-09T07:31:45.732Z",
-      "agent": "main",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1773043223684",
-      "timestamp": "2026-03-09T08:00:23.684Z",
-      "agent": "main",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: head -50 \"/Users/stevenai/Desktop/Nox Builds/nox-scrapers/ho",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1773044268464",
-      "timestamp": "2026-03-09T08:17:48.464Z",
-      "agent": "main",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1773044312249",
-      "timestamp": "2026-03-09T08:18:32.249Z",
-      "agent": "main",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
-      "source": "session_monitor"
-    },
-    {
       "id": "session-1773048636203",
       "timestamp": "2026-03-09T09:30:36.203Z",
       "agent": "sage",
@@ -21861,26 +21825,8 @@
       "source": "session_monitor"
     },
     {
-      "id": "session-1773646205676",
-      "timestamp": "2026-03-16T07:30:05.676Z",
-      "agent": "main",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1773646369414",
-      "timestamp": "2026-03-16T07:32:49.414Z",
-      "agent": "main",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1773646395602",
-      "timestamp": "2026-03-16T07:33:15.602Z",
+      "id": "session-1773649813197",
+      "timestamp": "2026-03-16T08:30:13.197Z",
       "agent": "joy",
       "type": "automation_config",
       "project": "session_activity",
@@ -21888,59 +21834,14 @@
       "source": "session_monitor"
     },
     {
-      "id": "session-1773646411035",
-      "timestamp": "2026-03-16T07:33:31.035Z",
+      "id": "session-1773649830212",
+      "timestamp": "2026-03-16T08:30:30.212Z",
       "agent": "sage",
       "type": "automation_config",
       "project": "session_activity",
       "description": "Cron management: list",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1773648020894",
-      "timestamp": "2026-03-16T08:00:20.894Z",
-      "agent": "joy",
-      "type": "automation_config",
-      "project": "session_activity",
-      "description": "Cron management: list",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1773648039512",
-      "timestamp": "2026-03-16T08:00:39.512Z",
-      "agent": "sage",
-      "type": "automation_config",
-      "project": "session_activity",
-      "description": "Cron management: list",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1773648436234",
-      "timestamp": "2026-03-16T08:07:16.234Z",
-      "agent": "main",
-      "type": "script_execution",
-      "project": "session_activity",
-      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1773648475435",
-      "timestamp": "2026-03-16T08:07:55.435Z",
-      "agent": "main",
-      "type": "browser_automation",
-      "project": "session_activity",
-      "description": "Browser action: screenshot",
-      "source": "session_monitor"
-    },
-    {
-      "id": "session-1773648505237",
-      "timestamp": "2026-03-16T08:08:25.237Z",
-      "agent": "main",
-      "type": "browser_automation",
-      "project": "session_activity",
-      "description": "Browser action: screenshot",
       "source": "session_monitor"
     }
   ],
-  "totalEntries": 2361
+  "totalEntries": 2350
 }
