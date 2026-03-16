@@ -21940,7 +21940,25 @@
       "project": "session_activity",
       "description": "Executed script/command: python3 /Users/stevenai/.openclaw/workspace-nox/overnight_an",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1773660608450",
+      "timestamp": "2026-03-16T11:30:08.450Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1773660620421",
+      "timestamp": "2026-03-16T11:30:20.421Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: ps aux | grep scraper.py | grep -v grep",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 2361
+  "totalEntries": 2363
 }
