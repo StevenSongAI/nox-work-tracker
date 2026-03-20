@@ -504,7 +504,7 @@ def sync_pixel_office_state(new_activities):
     import urllib.error
 
     API_URL = "https://nox-work-tracker-production.up.railway.app/api/agent-states"
-    ACTIVITY_WINDOW_SECONDS = 15 * 60  # 15 minutes
+    ACTIVITY_WINDOW_SECONDS = 2 * 60  # 2 minutes — fast idle detection
 
     AGENT_NAME_MAP = {
         'main': 'Nox',
@@ -518,17 +518,29 @@ def sync_pixel_office_state(new_activities):
         'Joy': '✨',
     }
 
-    # Agents that have new activity this run
-    active_this_run = set()
+    # Map activity types to pixel office animation states
+    ACTIVITY_TO_STATE = {
+        'file_write':         'writing',
+        'file_edit':          'writing',
+        'web_research':       'researching',
+        'browser_automation': 'researching',
+        'script_execution':   'executing',
+        'subagent_spawn':     'executing',
+        'communication':      'syncing',
+        'automation_config':  'syncing',
+    }
+
+    # Collect most recent activity type per agent from this run
+    agent_latest_activity = {}
     for a in (new_activities or []):
         raw = (a.get('agent') or '').lower()
         name = AGENT_NAME_MAP.get(raw)
         if name:
-            active_this_run.add(name)
+            agent_latest_activity[name] = a.get('type', 'file_write')
 
     # Check activity-log.json for recent activity per agent
     log_file = Path(__file__).parent / "data" / "activity-log.json"
-    recent_agents = set()
+    recent_agents = {}  # agent_name -> latest activity type
     try:
         with open(log_file) as f:
             log_data = json.load(f)
@@ -540,12 +552,17 @@ def sync_pixel_office_state(new_activities):
                     raw = (entry.get('agent') or '').lower()
                     name = AGENT_NAME_MAP.get(raw)
                     if name:
-                        recent_agents.add(name)
+                        # Keep the most recent activity type
+                        recent_agents[name] = entry.get('type', 'file_write')
             except Exception:
                 continue
     except Exception as e:
         logger.warning(f"Could not read activity log for pixel office sync: {e}")
         return
+
+    # Merge: prefer this-run activities over log-based ones
+    for name, act_type in agent_latest_activity.items():
+        recent_agents[name] = act_type
 
     # Fetch current states to avoid unnecessary writes
     try:
@@ -554,10 +571,15 @@ def sync_pixel_office_state(new_activities):
     except Exception:
         current_states = {}
 
-    # Determine desired state for each known agent
+    # Determine desired state for each known agent based on activity type
     for agent_name in ('Nox', 'Sage', 'Joy'):
-        desired = 'writing' if agent_name in recent_agents else 'idle'
-        detail  = 'Recently active' if desired == 'writing' else 'Standing by'
+        act_type = recent_agents.get(agent_name)
+        if act_type:
+            desired = ACTIVITY_TO_STATE.get(act_type, 'writing')
+            detail = f'{act_type.replace("_", " ").title()}'
+        else:
+            desired = 'idle'
+            detail = 'Standing by'
         current = current_states.get(agent_name, 'idle')
 
         if desired == current:

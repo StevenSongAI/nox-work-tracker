@@ -282,7 +282,7 @@ def sync_state_from_session_activity():
         if mtime > AGENT_LAST_MTIME[agent_name]:
             AGENT_LAST_MTIME[agent_name] = mtime
             AGENT_LAST_ACTIVE[agent_name] = now
-            push_agent_state(agent_name, "executing", "Active session")
+            push_agent_state(agent_name, "writing", "Active session")
         elif AGENT_LAST_ACTIVE[agent_name] > 0 and (now - AGENT_LAST_ACTIVE[agent_name]) > IDLE_THRESHOLD:
             # No new writes for IDLE_THRESHOLD seconds = idle
             AGENT_LAST_ACTIVE[agent_name] = 0
@@ -386,9 +386,28 @@ import urllib.request
 RAILWAY_URL = "https://nox-work-tracker-production.up.railway.app/api/agent-states"
 
 AGENT_LAST_ACTIVE = {"nox": 0, "sage": 0, "joy": 0}
-IDLE_THRESHOLD = 300  # 5 minutes of no activity → idle
+IDLE_THRESHOLD = 120  # 2 minutes of no activity → idle (fast reactivity)
 
 AGENT_EMOJI = {"nox": "⚡", "sage": "🌿", "joy": "✨"}
+
+# Map activity types to pixel office animation states
+ACTIVITY_TO_STATE = {
+    'file_write':         'writing',
+    'file_edit':          'writing',
+    'web_research':       'researching',
+    'browser_automation': 'researching',
+    'script_execution':   'executing',
+    'subagent_spawn':     'executing',
+    'communication':      'syncing',
+    'automation_config':  'syncing',
+    'bug_fix':            'writing',
+    'feature':            'writing',
+    'improvement':        'writing',
+    'research':           'researching',
+    'documentation':      'writing',
+    'refactor':           'writing',
+    'other':              'executing',
+}
 
 def push_agent_state(agent, state, detail=""):
     """Push agent state to pixel office via Railway API."""
@@ -414,12 +433,14 @@ def sync_states_from_activities(new_activities):
     """After detecting new activity, push working state; idle if nothing recent."""
     now = time.time()
     
-    # Mark agents as working based on new commits
+    # Mark agents with appropriate state based on activity type
     for activity in new_activities:
         agent = activity.get("agent", "nox")
         AGENT_LAST_ACTIVE[agent] = now
+        act_type = activity.get("type", "other")
+        state = ACTIVITY_TO_STATE.get(act_type, "executing")
         desc = activity.get("description", "")[:50]
-        push_agent_state(agent, "executing", desc)
+        push_agent_state(agent, state, desc)
     
     # Check for agents that have gone idle (no activity for IDLE_THRESHOLD)
     for agent, last_active in AGENT_LAST_ACTIVE.items():

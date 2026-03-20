@@ -6,6 +6,9 @@ const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(__dirname, 'data', 'activity-log.json');
 const META_FILE = path.join(__dirname, 'data', 'meta.json');
 
+// SSE: track connected clients for real-time push
+const sseClients = new Set();
+
 // Ensure data directory exists
 const dataDir = path.join(__dirname, 'data');
 if (!fs.existsSync(dataDir)) {
@@ -171,6 +174,14 @@ loadActivities();
 // Periodic cleanup (every hour)
 setInterval(cleanupOldActivities, 60 * 60 * 1000);
 
+// Broadcast state update to all SSE clients
+function broadcastSSE(eventType, data) {
+  const payload = `event: ${eventType}\ndata: ${JSON.stringify(data)}\n\n`;
+  for (const client of sseClients) {
+    try { client.write(payload); } catch (e) { sseClients.delete(client); }
+  }
+}
+
 const mimeTypes = {
   '.html': 'text/html',
   '.js': 'text/javascript',
@@ -179,6 +190,7 @@ const mimeTypes = {
   '.png': 'image/png',
   '.jpg': 'image/jpg',
   '.gif': 'image/gif',
+  '.webp': 'image/webp',
   '.svg': 'image/svg+xml',
   '.woff': 'application/font-woff',
   '.ttf': 'application/font-ttf'
@@ -201,6 +213,25 @@ const server = http.createServer((req, res) => {
     return;
   }
   
+  // SSE: real-time event stream for pixel office
+  if (pathname === '/events' && req.method === 'GET') {
+    res.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
+      'Access-Control-Allow-Origin': '*'
+    });
+    res.write('event: connected\ndata: {"status":"ok"}\n\n');
+    sseClients.add(res);
+    req.on('close', () => sseClients.delete(res));
+    // Keep-alive ping every 30s
+    const keepAlive = setInterval(() => {
+      try { res.write(':ping\n\n'); } catch (e) { clearInterval(keepAlive); sseClients.delete(res); }
+    }, 30000);
+    req.on('close', () => clearInterval(keepAlive));
+    return;
+  }
+
   // Health check
   if (pathname === '/health') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -235,6 +266,7 @@ const server = http.createServer((req, res) => {
         entry.id = entry.id || `act-${Date.now()}`;
         
         const added = addActivity(entry);
+        if (added) broadcastSSE('activity', entry);
         res.writeHead(added ? 201 : 409, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: added, id: entry.id }));
       } catch (err) {
@@ -290,6 +322,8 @@ const server = http.createServer((req, res) => {
         if (idx >= 0) states[idx] = update;
         else states.push(update);
         fs.writeFileSync(statesFile, JSON.stringify(states, null, 2));
+        // Broadcast state change via SSE
+        broadcastSSE('agent-state', update);
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ ok: true }));
       } catch(e) {
@@ -358,6 +392,7 @@ const server = http.createServer((req, res) => {
         const entry = {name:'Nox',emoji:'⚡',state:update.state,detail:update.detail||'',progress:update.progress||0,updated_at:new Date().toISOString()};
         if (idx >= 0) states[idx] = entry; else states.push(entry);
         fs.writeFileSync(statesFile, JSON.stringify(states, null, 2));
+        broadcastSSE('nox-state', {state:entry.state, detail:entry.detail, progress:entry.progress||0, updated_at:entry.updated_at});
         res.writeHead(200); res.end(JSON.stringify({ok:true}));
       } catch(e) { res.writeHead(500); res.end(JSON.stringify({ok:false})); }
     });

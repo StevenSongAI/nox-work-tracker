@@ -66,11 +66,11 @@ async function loadMemo() {
       memoDate.textContent = data.date || '';
       memoContent.innerHTML = data.memo.replace(/\n/g, '<br>');
     } else {
-      memoContent.innerHTML = '<div id="memo-placeholder">暂无昨日日记</div>';
+      memoContent.innerHTML = '<div id="memo-placeholder">No memo from yesterday</div>';
     }
   } catch (e) {
-    console.error('加载 memo 失败:', e);
-    memoContent.innerHTML = '<div id="memo-placeholder">加载失败</div>';
+    console.error('Failed to load memo:', e);
+    memoContent.innerHTML = '<div id="memo-placeholder">Failed to load</div>';
   }
 }
 
@@ -82,7 +82,7 @@ function updateLoadingProgress() {
     loadingProgressBar.style.width = percent + '%';
   }
   if (loadingText) {
-    loadingText.textContent = `正在加载 Star 的Pixel Office... ${percent}%`;
+    loadingText.textContent = `Loading Pixel Office... ${percent}%`;
   }
 }
 
@@ -101,89 +101,89 @@ function hideLoadingOverlay() {
 
 const STATES = {
   idle: { name: 'Idle', area: 'breakroom' },
-  writing: { name: '整理文档', area: 'writing' },
-  researching: { name: '搜索信息', area: 'researching' },
+  writing: { name: 'Writing', area: 'writing' },
+  researching: { name: 'Researching', area: 'researching' },
   executing: { name: 'Executing', area: 'writing' },
   syncing: { name: 'Syncing', area: 'writing' },
-  error: { name: '出错了', area: 'error' }
+  error: { name: 'Error', area: 'error' }
 };
 
 const BUBBLE_TEXTS = {
   idle: [
-    '待命中：耳朵竖起来了',
-    '我在这儿，随时可以开工',
-    '先把桌面收拾干净再说',
-    '呼——给大脑放个风',
-    '今天也要优雅地高效',
-    '等待，是为了更准确的一击',
-    '咖啡还热，灵感也还在',
-    '我在后台给你加 Buff',
-    '状态：静心 / 充电',
-    '小猫说：慢一点也没关系'
+    'Standing by, ears perked up',
+    'Ready to go whenever you are',
+    'Tidying up the workspace...',
+    'Giving the brain a breather',
+    'Staying sharp and efficient today',
+    'Waiting for the perfect moment',
+    'Coffee is warm, ideas are flowing',
+    'Buffing your systems in the background',
+    'Status: recharging',
+    'The cat says: take it easy'
   ],
   writing: [
-    '进入专注模式：勿扰',
-    '先把关键路径跑通',
-    '我来把复杂变简单',
-    '把 bug 关进笼子里',
-    '写到一半，先保存',
-    '把每一步都做成可回滚',
-    '今天的进度，明天的底气',
-    '先收敛，再发散',
-    '让系统变得更可解释',
-    '稳住，我们能赢'
+    'Focus mode: do not disturb',
+    'Running the critical path first',
+    'Making the complex simple',
+    'Caging this bug right now',
+    'Halfway there, saving progress',
+    'Every step is rollback-safe',
+    'Today\'s progress builds tomorrow\'s confidence',
+    'Narrowing down, then expanding',
+    'Making the system more explainable',
+    'Steady... we\'ve got this'
   ],
   researching: [
-    '我在挖证据链',
-    '让我把信息熬成结论',
-    '找到了：关键在这里',
-    '先把变量控制住',
-    '我在查：它为什么会这样',
-    '把直觉写成验证',
-    '先定位，再优化',
-    '别急，先画因果图'
+    'Digging through the evidence chain',
+    'Distilling information into conclusions',
+    'Found it: the key is right here',
+    'Controlling the variables first',
+    'Investigating: why does this happen?',
+    'Turning intuition into verification',
+    'Locate first, optimize later',
+    'Hold on, mapping the causal graph'
   ],
   executing: [
-    '执行中：不要眨眼',
-    '把任务切成小块逐个击破',
-    '开始跑 pipeline',
-    '一键推进：走你',
-    '让结果自己说话',
-    '先做最小可行，再做最美版本'
+    'Executing: don\'t blink',
+    'Breaking tasks into small wins',
+    'Kicking off the pipeline',
+    'One click to push forward',
+    'Letting the results speak',
+    'MVP first, polished version next'
   ],
   syncing: [
-    '同步中：把今天锁进云里',
-    '备份不是仪式，是安全感',
-    '写入中…别断电',
-    '把变更交给时间戳',
-    '云端对齐：咔哒',
-    '同步完成前先别乱动',
-    '把未来的自己从灾难里救出来',
-    '多一份备份，少一份后悔'
+    'Syncing: locking today into the cloud',
+    'Backups aren\'t rituals, they\'re peace of mind',
+    'Writing... don\'t pull the plug',
+    'Handing changes off to timestamps',
+    'Cloud alignment: click',
+    'Don\'t touch anything until sync is done',
+    'Saving future-me from disaster',
+    'One more backup, one less regret'
   ],
   error: [
-    '警报响了：先别慌',
-    '我闻到 bug 的味道了',
-    '先复现，再谈修复',
-    '把日志给我，我会说人话',
-    '错误不是敌人，是线索',
-    '把影响面圈起来',
-    '先止血，再手术',
-    '我在：马上定位根因',
-    '别怕，这种我见多了',
-    '报警中：让问题自己现形'
+    'Alarm triggered: stay calm',
+    'I can smell the bug from here',
+    'Reproduce first, then fix',
+    'Give me the logs, I\'ll translate',
+    'Errors aren\'t enemies, they\'re clues',
+    'Containing the blast radius',
+    'Stop the bleeding, then operate',
+    'On it: finding the root cause now',
+    'Don\'t worry, I\'ve seen this before',
+    'Alert mode: letting the problem reveal itself'
   ],
   cat: [
-    '喵~',
-    '咕噜咕噜…',
-    '尾巴摇一摇',
-    '晒太阳最开心',
-    '有人来看我啦',
-    '我是这个办公室的吉祥物',
-    '伸个懒腰',
-    '今天的罐罐准备好了吗',
-    '呼噜呼噜',
-    '这个位置视野最好'
+    'Meow~',
+    'Purr purr...',
+    '*tail swish*',
+    'Sunbathing is the best',
+    'Oh, a visitor!',
+    'I\'m this office\'s mascot',
+    '*big stretch*',
+    'Is today\'s treat ready?',
+    'Zzz... zzz...',
+    'Best view in the house'
   ]
 };
 
@@ -193,7 +193,7 @@ let waypoints = [];
 let lastWanderAt = 0;
 let coordsOverlay, coordsDisplay, coordsToggle;
 let showCoords = false;
-const FETCH_INTERVAL = 2000;
+const FETCH_INTERVAL = 2000;       // Fallback polling interval (used only if SSE disconnects)
 const BLINK_INTERVAL = 2500;
 const BUBBLE_INTERVAL = 8000;
 const CAT_BUBBLE_INTERVAL = 18000;
@@ -202,6 +202,9 @@ const TYPEWRITER_DELAY = 50;
 let agents = {}; // agentId -> sprite/container
 let lastAgentsFetch = 0;
 const AGENTS_FETCH_INTERVAL = 2500;
+let sseConnected = false;            // SSE connection state
+let eventSource = null;              // SSE EventSource instance
+let serverroomCrashMode = false;     // Server room crash animation flag
 
 // agent 颜色配置
 const AGENT_COLORS = {
@@ -263,7 +266,7 @@ async function initGame() {
     }
   }
 
-  console.log('WebP 支持:', supportsWebP);
+  console.log('WebP support:', supportsWebP);
   new Phaser.Game(config);
 }
 
@@ -537,7 +540,7 @@ function create() {
   coordsToggle.addEventListener('click', () => {
     showCoords = !showCoords;
     coordsOverlay.style.display = showCoords ? 'block' : 'none';
-    coordsToggle.textContent = showCoords ? '隐藏坐标' : '显示坐标';
+    coordsToggle.textContent = showCoords ? 'Hide Coords' : 'Show Coords';
     coordsToggle.style.background = showCoords ? '#e94560' : '#333';
   });
 
@@ -552,52 +555,42 @@ function create() {
 
   loadMemo();
   fetchStatus();
-  // 先强制加一个测试用的尼卡 agent 渲染
-  const testNika = {
-    agentId: 'agent_nika',
-    name: '尼卡',
-    isMain: false,
-    state: 'writing',
-    detail: '在画像素画...',
-    area: 'writing',
-    authStatus: 'approved',
-    updated_at: new Date().toISOString()
-  };
-  renderAgent(testNika);
   fetchAgents();
-
-  // 测试用：让尼卡模拟走来走去
-  window.testNikaState = 'writing';
-  window.testNikaTimer = setInterval(() => {
-    const states = ['idle', 'writing', 'researching', 'executing'];
-    const areas = { idle: 'breakroom', writing: 'writing', researching: 'writing', executing: 'writing' };
-    window.testNikaState = states[Math.floor(Math.random() * states.length)];
-    const testAgent = {
-      agentId: 'agent_nika',
-      name: '尼卡',
-      isMain: false,
-      state: window.testNikaState,
-      detail: '在画像素画...',
-      area: areas[window.testNikaState],
-      authStatus: 'approved',
-      updated_at: new Date().toISOString()
-    };
-    renderAgent(testAgent);
-  }, 5000);
+  connectSSE();
 }
 
 function update(time) {
-  if (time - lastFetch > FETCH_INTERVAL) { fetchStatus(); lastFetch = time; }
-  if (time - lastAgentsFetch > AGENTS_FETCH_INTERVAL) { fetchAgents(); lastAgentsFetch = time; }
+  // Only poll when SSE is disconnected (fallback mode)
+  if (!sseConnected && time - lastFetch > FETCH_INTERVAL) { fetchStatus(); lastFetch = time; }
+  if (!sseConnected && time - lastAgentsFetch > AGENTS_FETCH_INTERVAL) { fetchAgents(); lastAgentsFetch = time; }
 
   const effectiveStateForServer = pendingDesiredState || currentState;
+
+  // Server room: normal when working, crash mode when error, off when idle
   if (serverroom) {
-    if (effectiveStateForServer === 'idle') {
+    if (effectiveStateForServer === 'error') {
+      // CRASH MODE: fast animation + red tint
+      if (!serverroomCrashMode) {
+        serverroomCrashMode = true;
+        serverroom.anims.play('serverroom_on', true);
+        serverroom.anims.msPerFrame = 1000 / 18; // 18 fps (3x normal speed)
+        serverroom.setTint(0xff4444); // red tint
+      }
+    } else if (effectiveStateForServer === 'idle') {
       if (serverroom.anims.isPlaying) {
         serverroom.anims.stop();
         serverroom.setFrame(0);
       }
+      if (serverroomCrashMode) {
+        serverroomCrashMode = false;
+        serverroom.clearTint();
+      }
     } else {
+      // Normal working mode
+      if (serverroomCrashMode) {
+        serverroomCrashMode = false;
+        serverroom.clearTint();
+      }
       if (!serverroom.anims.isPlaying || serverroom.anims.currentAnim?.key !== 'serverroom_on') {
         serverroom.anims.play('serverroom_on', true);
       }
@@ -713,6 +706,17 @@ function fetchStatus() {
             window.starWorking.setVisible(false);
             window.starWorking.anims.stop();
           }
+        } else if (nextState === 'researching') {
+          // Use dedicated researching animation
+          sofa.anims.stop();
+          sofa.setTexture('sofa_idle');
+          if (window.starWorking) {
+            window.starWorking.setVisible(false);
+            window.starWorking.anims.stop();
+          }
+          star.setVisible(true);
+          star.setPosition(areas.researching.x, areas.researching.y);
+          star.anims.play('star_researching', true);
         } else {
           sofa.anims.stop();
           sofa.setTexture('sofa_idle');
@@ -725,11 +729,20 @@ function fetchStatus() {
         }
 
         if (serverroom) {
-          if (nextState === 'idle') {
+          if (nextState === 'error') {
+            serverroom.anims.play('serverroom_on', true);
+            serverroom.anims.msPerFrame = 1000 / 18;
+            serverroom.setTint(0xff4444);
+            serverroomCrashMode = true;
+          } else if (nextState === 'idle') {
             serverroom.anims.stop();
             serverroom.setFrame(0);
+            serverroom.clearTint();
+            serverroomCrashMode = false;
           } else {
             serverroom.anims.play('serverroom_on', true);
+            serverroom.clearTint();
+            serverroomCrashMode = false;
           }
         }
 
@@ -752,7 +765,7 @@ function fetchStatus() {
       }
     })
     .catch(error => {
-      typewriterTarget = '连接失败，正在重试...';
+      typewriterTarget = 'Connection failed, retrying...';
       typewriterText = '';
       typewriterIndex = 0;
     });
@@ -787,21 +800,7 @@ function moveStar(time) {
           currentState = pendingDesiredState;
           pendingDesiredState = null;
 
-          if (currentState === 'idle') {
-            star.setVisible(false);
-            star.anims.stop();
-            if (window.starWorking) {
-              window.starWorking.setVisible(false);
-              window.starWorking.anims.stop();
-            }
-          } else {
-            star.setVisible(false);
-            star.anims.stop();
-            if (window.starWorking) {
-              window.starWorking.setVisible(true);
-              window.starWorking.anims.play('star_working', true);
-            }
-          }
+          applyStateVisuals(currentState);
         }
       }
     } else {
@@ -809,29 +808,161 @@ function moveStar(time) {
         isMoving = false;
         currentState = pendingDesiredState;
         pendingDesiredState = null;
-
-        if (currentState === 'idle') {
-          star.setVisible(false);
-          star.anims.stop();
-          if (window.starWorking) {
-            window.starWorking.setVisible(false);
-            window.starWorking.anims.stop();
-          }
-          if (game.textures.exists('sofa_busy')) {
-            sofa.setTexture('sofa_busy');
-            sofa.anims.play('sofa_busy', true);
-          }
-        } else {
-          star.setVisible(false);
-          star.anims.stop();
-          if (window.starWorking) {
-            window.starWorking.setVisible(true);
-            window.starWorking.anims.play('star_working', true);
-          }
-          sofa.anims.stop();
-          sofa.setTexture('sofa_idle');
-        }
+        applyStateVisuals(currentState);
       }
+    }
+  }
+}
+
+function applyStateVisuals(state) {
+  if (state === 'idle') {
+    star.setVisible(false);
+    star.anims.stop();
+    if (window.starWorking) {
+      window.starWorking.setVisible(false);
+      window.starWorking.anims.stop();
+    }
+    if (game.textures.exists('sofa_busy')) {
+      sofa.setTexture('sofa_busy');
+      sofa.anims.play('sofa_busy', true);
+    }
+  } else if (state === 'researching') {
+    if (window.starWorking) {
+      window.starWorking.setVisible(false);
+      window.starWorking.anims.stop();
+    }
+    star.setVisible(true);
+    star.anims.play('star_researching', true);
+    sofa.anims.stop();
+    sofa.setTexture('sofa_idle');
+  } else {
+    star.setVisible(false);
+    star.anims.stop();
+    if (window.starWorking) {
+      window.starWorking.setVisible(true);
+      window.starWorking.anims.play('star_working', true);
+    }
+    sofa.anims.stop();
+    sofa.setTexture('sofa_idle');
+  }
+}
+
+function connectSSE() {
+  if (eventSource) { eventSource.close(); }
+  try {
+    eventSource = new EventSource('/events');
+    eventSource.addEventListener('connected', () => {
+      sseConnected = true;
+      console.log('SSE connected - real-time updates active');
+    });
+    eventSource.addEventListener('nox-state', (e) => {
+      try {
+        const data = JSON.parse(e.data);
+        handleStateUpdate(data);
+      } catch (err) { console.error('SSE nox-state parse error:', err); }
+    });
+    eventSource.addEventListener('agent-state', (e) => {
+      try {
+        const data = JSON.parse(e.data);
+        // Nox is the main character — update via handleStateUpdate, not renderAgent
+        if ((data.name || '').toLowerCase() === 'nox') {
+          handleStateUpdate(data);
+          return;
+        }
+        const stateInfo = STATES[normalizeState(data.state)] || STATES.idle;
+        renderAgent({
+          agentId: 'agent_' + (data.name || '').toLowerCase(),
+          name: data.name,
+          state: data.state,
+          detail: data.detail,
+          area: stateInfo.area,
+          authStatus: 'approved',
+          updated_at: data.updated_at
+        });
+      } catch (err) { console.error('SSE agent-state parse error:', err); }
+    });
+    eventSource.onerror = () => {
+      sseConnected = false;
+      console.log('SSE disconnected - falling back to polling');
+      eventSource.close();
+      // Reconnect after 5 seconds
+      setTimeout(connectSSE, 5000);
+    };
+  } catch (err) {
+    sseConnected = false;
+    console.log('SSE unavailable - using polling');
+  }
+}
+
+function handleStateUpdate(data) {
+  const nextState = normalizeState(data.state);
+  const stateInfo = STATES[nextState] || STATES.idle;
+  const nextLine = '[' + stateInfo.name + '] ' + (data.detail || '...');
+
+  if (nextState !== currentState) {
+    typewriterTarget = nextLine;
+    typewriterText = '';
+    typewriterIndex = 0;
+    pendingDesiredState = null;
+    currentState = nextState;
+
+    if (nextState === 'idle') {
+      if (game.textures.exists('sofa_busy')) {
+        sofa.setTexture('sofa_busy');
+        sofa.anims.play('sofa_busy', true);
+      }
+      star.setVisible(false);
+      star.anims.stop();
+      if (window.starWorking) { window.starWorking.setVisible(false); window.starWorking.anims.stop(); }
+    } else if (nextState === 'error') {
+      sofa.anims.stop(); sofa.setTexture('sofa_idle');
+      star.setVisible(false); star.anims.stop();
+      if (window.starWorking) { window.starWorking.setVisible(false); window.starWorking.anims.stop(); }
+    } else if (nextState === 'syncing') {
+      sofa.anims.stop(); sofa.setTexture('sofa_idle');
+      star.setVisible(false); star.anims.stop();
+      if (window.starWorking) { window.starWorking.setVisible(false); window.starWorking.anims.stop(); }
+    } else if (nextState === 'researching') {
+      sofa.anims.stop(); sofa.setTexture('sofa_idle');
+      if (window.starWorking) { window.starWorking.setVisible(false); window.starWorking.anims.stop(); }
+      star.setVisible(true);
+      star.setPosition(areas.researching.x, areas.researching.y);
+      star.anims.play('star_researching', true);
+    } else {
+      sofa.anims.stop(); sofa.setTexture('sofa_idle');
+      star.setVisible(false); star.anims.stop();
+      if (window.starWorking) { window.starWorking.setVisible(true); window.starWorking.anims.play('star_working', true); }
+    }
+
+    // Server room crash on error
+    if (serverroom) {
+      if (nextState === 'error') {
+        serverroom.anims.play('serverroom_on', true);
+        serverroom.anims.msPerFrame = 1000 / 18;
+        serverroom.setTint(0xff4444);
+        serverroomCrashMode = true;
+      } else if (nextState === 'idle') {
+        serverroom.anims.stop(); serverroom.setFrame(0);
+        serverroom.clearTint(); serverroomCrashMode = false;
+      } else {
+        serverroom.anims.play('serverroom_on', true);
+        serverroom.clearTint(); serverroomCrashMode = false;
+      }
+    }
+
+    if (syncAnimSprite) {
+      if (nextState === 'syncing') {
+        syncAnimSprite.anims.play('sync_anim', true);
+      } else {
+        if (syncAnimSprite.anims.isPlaying) syncAnimSprite.anims.stop();
+        syncAnimSprite.setFrame(0);
+      }
+    }
+  } else {
+    if (!typewriterTarget || typewriterTarget !== nextLine) {
+      typewriterTarget = nextLine;
+      typewriterText = '';
+      typewriterIndex = 0;
     }
   }
 }
@@ -867,7 +998,7 @@ function showBubble() {
 function showCatBubble() {
   if (!window.catSprite) return;
   if (window.catBubble) { window.catBubble.destroy(); window.catBubble = null; }
-  const texts = BUBBLE_TEXTS.cat || ['喵~', '咕噜咕噜…'];
+  const texts = BUBBLE_TEXTS.cat || ['Meow~', 'Purr purr...'];
   const text = texts[Math.floor(Math.random() * texts.length)];
   const anchorX = window.catSprite.x;
   const anchorY = window.catSprite.y - 60;
@@ -902,7 +1033,7 @@ function fetchAgents() {
       }
     })
     .catch(error => {
-      console.error('拉取 agents 失败:', error);
+      console.error('Failed to fetch agents:', error);
     });
 }
 
