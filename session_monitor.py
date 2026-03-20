@@ -15,7 +15,7 @@ from pathlib import Path
 import time
 
 # Setup logging to auto_tracker.log
-log_dir = Path("/Users/stevenai/Desktop/Nox Builds/nox-work-tracker-repo/logs")
+log_dir = Path("/Users/stevenai/Desktop/Nox Builds/nox-work-tracker/logs")
 log_dir.mkdir(parents=True, exist_ok=True)
 log_file = log_dir / "auto_tracker.log"
 
@@ -39,7 +39,7 @@ AGENT_DIRS = [
 
 # Track last timestamp we saw in each session (not just "processed" flag)
 SESSION_TIMESTAMPS = {}
-SESSIONS_CACHE_FILE = Path("/Users/stevenai/Desktop/Nox Builds/nox-work-tracker-repo/.processed_sessions.json")
+SESSIONS_CACHE_FILE = Path("/Users/stevenai/Desktop/Nox Builds/nox-work-tracker/.processed_sessions.json")
 
 def load_session_timestamps():
     """Load last-seen timestamp for each session."""

@@ -14,7 +14,7 @@ from pathlib import Path
 import re
 
 # Paths
-TRACKER_DIR = Path("/Users/stevenai/Desktop/Nox Builds/nox-work-tracker-repo")
+TRACKER_DIR = Path("/Users/stevenai/Desktop/Nox Builds/nox-work-tracker")
 ACTIVITY_LOG = TRACKER_DIR / "data" / "activity-log.json"
 META_FILE = TRACKER_DIR / "meta.json"
 STOP_FILE = TRACKER_DIR / "STOP_AUTO_TRACKER"
@@ -38,7 +38,7 @@ SESSIONS_DIR = Path("/Users/stevenai/.openclaw/agents/main/sessions")
 # Git repos to monitor
 REPOS_TO_MONITOR = [
     "/Users/stevenai/Desktop/Nox Builds/nox-dashboard",
-    "/Users/stevenai/Desktop/Nox Builds/nox-work-tracker-repo",
+    "/Users/stevenai/Desktop/Nox Builds/nox-work-tracker",
     "/Users/stevenai/Desktop/Nox Builds/nox-scrapers",
     "/Users/stevenai/Desktop/Nox Builds/Ice Dragon Video",
     "/Users/stevenai/Desktop/Nox Builds/RALPH LOOPS",
