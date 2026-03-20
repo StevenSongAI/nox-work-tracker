@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,10 +18,10 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            min-height: 100vh;
+            height: auto;
             font-family: 'ArkPixel', 'Courier New', monospace;
-            padding: 20px 0;
-            gap: 20px;
+            padding: 20px 0 0;
+            gap: 12px;
             overflow-x: hidden;
         }
         /* Bottom panel container */
@@ -37,8 +37,6 @@
             width: 1280px;
             height: 720px;
             max-width: 95vw;
-            /* Mobile: use visible height to prevent bottom panel cropping */
-            max-height: 70vh;
             /* Key: force 16:9 ratio to prevent canvas stretch */
             aspect-ratio: 16 / 9;
         }
