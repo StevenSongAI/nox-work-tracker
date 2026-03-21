@@ -13,8 +13,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 import re
 
-# Paths
-TRACKER_DIR = Path("/Users/stevenai/Desktop/Nox Builds/nox-work-tracker")
+# Paths - auto-detect from script location, or use env var override
+TRACKER_DIR = Path(os.environ.get("TRACKER_DIR", Path(__file__).resolve().parent))
 ACTIVITY_LOG = TRACKER_DIR / "data" / "activity-log.json"
 META_FILE = TRACKER_DIR / "meta.json"
 STOP_FILE = TRACKER_DIR / "STOP_AUTO_TRACKER"
@@ -32,17 +32,13 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Session transcript paths for all 3 agents
-SESSIONS_DIR = Path("/Users/stevenai/.openclaw/agents/main/sessions")
+# Session transcript paths - use OPENCLAW_HOME env var or default ~/.openclaw
+OPENCLAW_HOME = Path(os.environ.get("OPENCLAW_HOME", Path.home() / ".openclaw"))
+SESSIONS_DIR = OPENCLAW_HOME / "agents" / "main" / "sessions"
 
-# Git repos to monitor
-REPOS_TO_MONITOR = [
-    "/Users/stevenai/Desktop/Nox Builds/nox-dashboard",
-    "/Users/stevenai/Desktop/Nox Builds/nox-work-tracker",
-    "/Users/stevenai/Desktop/Nox Builds/nox-scrapers",
-    "/Users/stevenai/Desktop/Nox Builds/Ice Dragon Video",
-    "/Users/stevenai/Desktop/Nox Builds/RALPH LOOPS",
-]
+# Git repos to monitor - set TRACKER_REPOS env var as colon-separated paths, or leave empty
+_default_repos = str(TRACKER_DIR)  # at minimum, monitor ourselves
+REPOS_TO_MONITOR = os.environ.get("TRACKER_REPOS", _default_repos).split(":")
 
 # Track what we've already logged
 SEEN_COMMITS = {}
@@ -268,7 +264,7 @@ def sync_state_from_session_activity():
     """Push working state only when session file actually changes (new message written)."""
     import os, glob, time
     now = time.time()
-    sessions_base = "/Users/stevenai/.openclaw/agents"
+    sessions_base = str(OPENCLAW_HOME / "agents")
     agent_map = {"main": "nox", "sage": "sage", "joy": "joy"}
 
     for agent_dir, agent_name in agent_map.items():

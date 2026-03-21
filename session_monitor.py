@@ -14,8 +14,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 import time
 
+# Paths - auto-detect from script location, or use env var override
+TRACKER_DIR = Path(os.environ.get("TRACKER_DIR", Path(__file__).resolve().parent))
+OPENCLAW_HOME = Path(os.environ.get("OPENCLAW_HOME", Path.home() / ".openclaw"))
+
 # Setup logging to auto_tracker.log
-log_dir = Path("/Users/stevenai/Desktop/Nox Builds/nox-work-tracker/logs")
+log_dir = TRACKER_DIR / "logs"
 log_dir.mkdir(parents=True, exist_ok=True)
 log_file = log_dir / "auto_tracker.log"
 
@@ -31,15 +35,15 @@ logger = logging.getLogger(__name__)
 
 # Session transcript directories - scan ALL agents
 AGENT_DIRS = [
-    Path("/Users/stevenai/.openclaw/agents/main/sessions"),
-    Path("/Users/stevenai/.openclaw/agents/nox/sessions"),
-    Path("/Users/stevenai/.openclaw/agents/sage/sessions"),
-    Path("/Users/stevenai/.openclaw/agents/joy/sessions"),
+    OPENCLAW_HOME / "agents" / "main" / "sessions",
+    OPENCLAW_HOME / "agents" / "nox" / "sessions",
+    OPENCLAW_HOME / "agents" / "sage" / "sessions",
+    OPENCLAW_HOME / "agents" / "joy" / "sessions",
 ]
 
 # Track last timestamp we saw in each session (not just "processed" flag)
 SESSION_TIMESTAMPS = {}
-SESSIONS_CACHE_FILE = Path("/Users/stevenai/Desktop/Nox Builds/nox-work-tracker/.processed_sessions.json")
+SESSIONS_CACHE_FILE = TRACKER_DIR / ".processed_sessions.json"
 
 def load_session_timestamps():
     """Load last-seen timestamp for each session."""

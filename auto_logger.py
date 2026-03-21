@@ -22,8 +22,8 @@ except ImportError as e:
     print(f"   Falling back to git-based logging only.")
     api_logger = None
 
-# Constants
-WORK_TRACKER_PATH = "/Users/stevenai/Desktop/Nox Builds/nox-work-tracker-repo"
+# Constants - auto-detect from script location, or use env var override
+WORK_TRACKER_PATH = os.environ.get("TRACKER_DIR", os.path.dirname(os.path.abspath(__file__)))
 ACTIVITY_LOG_PATH = os.path.join(WORK_TRACKER_PATH, "data", "activity-log.json")
 META_PATH = os.path.join(WORK_TRACKER_PATH, "data", "meta.json")
 ROOT_META_PATH = os.path.join(WORK_TRACKER_PATH, "meta.json")
