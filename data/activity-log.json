@@ -64216,7 +64216,25 @@
       "project": "session_activity",
       "description": "Cron management: list",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1774309439872",
+      "timestamp": "2026-03-23T23:43:59.872Z",
+      "agent": "main",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: screenshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774309444741",
+      "timestamp": "2026-03-23T23:44:04.741Z",
+      "agent": "main",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: screenshot",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 6267
+  "totalEntries": 6269
 }
