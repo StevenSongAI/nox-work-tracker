@@ -63001,7 +63001,43 @@
       "project": "session_activity",
       "description": "Executed script/command: openclaw cron add \\\n  --name \"ytjobs candidates script ready",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1774271827816",
+      "timestamp": "2026-03-23T13:17:07.816Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd \"/Users/stevenai/Desktop/Nox Builds/ytjobs-scraper\" && py",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774271843822",
+      "timestamp": "2026-03-23T13:17:23.822Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd \"/Users/stevenai/Desktop/Nox Builds/ytjobs-scraper\" && py",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774271874836",
+      "timestamp": "2026-03-23T13:17:54.836Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd \"/Users/stevenai/Desktop/Nox Builds/ytjobs-scraper\" && py",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774271917254",
+      "timestamp": "2026-03-23T13:18:37.254Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: openclaw cron add \\\n  --name \"ytjobs daily candidates\" \\\n  -",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 6132
+  "totalEntries": 6136
 }
