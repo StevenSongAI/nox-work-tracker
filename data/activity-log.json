@@ -77114,7 +77114,79 @@
       "project": "session_activity",
       "description": "Executed script/command: cd \"/Users/stevenai/Desktop/Nox Builds/Phoenix Project\" && \\",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1774370298486",
+      "timestamp": "2026-03-24T16:38:18.486Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774370367630",
+      "timestamp": "2026-03-24T16:39:27.630Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # Check if Higgsfield is using a different CDP port\npython3 ",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774370375879",
+      "timestamp": "2026-03-24T16:39:35.879Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # Find what CDP port higgsfield_run.py is using\ngrep -r \"188",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774370386547",
+      "timestamp": "2026-03-24T16:39:46.547Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: grep -n \"cdp\\|18800\\|debug\\|connect\" \"/Users/stevenai/Deskto",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774370391341",
+      "timestamp": "2026-03-24T16:39:51.341Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: grep -n \"playwright\\|browser\\|chromium\\|port\\|debug\" \"/Users",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774370395066",
+      "timestamp": "2026-03-24T16:39:55.066Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: grep -n \"playwright\\|browser\\|chromium\\|port\\|debug\\|cdp\\|co",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774370398265",
+      "timestamp": "2026-03-24T16:39:58.265Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: grep -n \"18800\\|cdp\\|connect_over\\|debug\\|port\" \"/Users/stev",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774370405860",
+      "timestamp": "2026-03-24T16:40:05.860Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd \"/Users/stevenai/Desktop/Nox Builds/Phoenix Project\" && \\",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 7461
+  "totalEntries": 7469
 }
