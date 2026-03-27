@@ -118397,7 +118397,34 @@
       "project": "session_activity",
       "description": "Executed script/command: # 51 shots, ~20s each upload + generate = ~17 min minimum, b",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1774572561902",
+      "timestamp": "2026-03-27T00:49:21.902Z",
+      "agent": "main",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: screenshot",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774572575103",
+      "timestamp": "2026-03-27T00:49:35.103Z",
+      "agent": "main",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: navigate",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774572601759",
+      "timestamp": "2026-03-27T00:50:01.759Z",
+      "agent": "main",
+      "type": "browser_automation",
+      "project": "session_activity",
+      "description": "Browser action: screenshot",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 11272
+  "totalEntries": 11275
 }
