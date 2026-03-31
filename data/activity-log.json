@@ -167994,7 +167994,16 @@
       "project": "session_activity",
       "description": "Executed script/command: # Use the ORIGINAL full CSV (60 shots) \u2014 the download script",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1774959724577",
+      "timestamp": "2026-03-31T12:22:04.577Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: openclaw cron add \\\n  --name \"monkey-retry2-check\" \\\n  --at ",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 15915
+  "totalEntries": 15916
 }
