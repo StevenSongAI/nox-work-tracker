@@ -168021,7 +168021,88 @@
       "project": "session_activity",
       "description": "Executed script/command: rm -rf \"/Users/stevenai/Desktop/Nox Builds/Youtube/Monkey Pr",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1774961146780",
+      "timestamp": "2026-03-31T12:45:46.780Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774961164699",
+      "timestamp": "2026-03-31T12:46:04.699Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: \n# ytjobs scrapers\nps aux | grep \"scraper.py\" | grep -v grep",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774961176935",
+      "timestamp": "2026-03-31T12:46:16.935Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774962133093",
+      "timestamp": "2026-03-31T13:02:13.093Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd '/Users/stevenai/Desktop/Nox Builds/ytjobs-scraper' && py",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774962133093",
+      "timestamp": "2026-03-31T13:02:13.093Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: cd '/Users/stevenai/Desktop/Nox Builds/ytjobs-scraper' && py",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774962141155",
+      "timestamp": "2026-03-31T13:02:21.155Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: head -5 '/Users/stevenai/Desktop/Nox Builds/ytjobs-scraper/d",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774962141155",
+      "timestamp": "2026-03-31T13:02:21.155Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: head -5 '/Users/stevenai/Desktop/Nox Builds/ytjobs-scraper/d",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774962145797",
+      "timestamp": "2026-03-31T13:02:25.797Z",
+      "agent": "main",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: ",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1774962145797",
+      "timestamp": "2026-03-31T13:02:25.797Z",
+      "agent": "main",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: ",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 15918
+  "totalEntries": 15927
 }
