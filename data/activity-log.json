@@ -167985,7 +167985,16 @@
       "project": "session_activity",
       "description": "Executed script/command: # Clean output dirs\nrm -f \"/Users/stevenai/Desktop/Nox Build",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1774959342688",
+      "timestamp": "2026-03-31T12:15:42.688Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: # Use the ORIGINAL full CSV (60 shots) \u2014 the download script",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 15914
+  "totalEntries": 15915
 }
