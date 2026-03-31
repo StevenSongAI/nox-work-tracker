@@ -168012,7 +168012,16 @@
       "project": "session_activity",
       "description": "Cron management: list",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1774960640839",
+      "timestamp": "2026-03-31T12:37:20.839Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: rm -rf \"/Users/stevenai/Desktop/Nox Builds/Youtube/Monkey Pr",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 15917
+  "totalEntries": 15918
 }
