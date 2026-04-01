@@ -175487,7 +175487,16 @@
       "project": "session_activity",
       "description": "Cron management: list",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1775076505589",
+      "timestamp": "2026-04-01T20:48:25.589Z",
+      "agent": "main",
+      "type": "web_research",
+      "project": "session_activity",
+      "description": "Web research: https://docs.openclaw.ai/help/troubleshooting",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 16616
+  "totalEntries": 16617
 }
