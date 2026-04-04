@@ -176819,7 +176819,25 @@
       "project": "session_activity",
       "description": "Edited file: openclaw.json",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1775313994851",
+      "timestamp": "2026-04-04T14:46:34.851Z",
+      "agent": "main",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: Reply with exactly: MODEL_OK if you started successfully wit",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775313997890",
+      "timestamp": "2026-04-04T14:46:37.890Z",
+      "agent": "main",
+      "type": "subagent_spawn",
+      "project": "session_activity",
+      "description": "Spawned subagent: Reply with exactly: MODEL_OK if you started successfully wit",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 16764
+  "totalEntries": 16766
 }
