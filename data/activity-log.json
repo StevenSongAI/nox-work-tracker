@@ -180034,7 +180034,25 @@
       "project": "session_activity",
       "description": "Message action: poll",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1775422811772",
+      "timestamp": "2026-04-05T21:00:11.772Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775422811772",
+      "timestamp": "2026-04-05T21:00:11.772Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 17103
+  "totalEntries": 17105
 }
