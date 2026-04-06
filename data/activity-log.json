@@ -180187,7 +180187,700 @@
       "project": "session_activity",
       "description": "Cron management: list",
       "source": "session_monitor"
+    },
+    {
+      "id": "session-1775433862249",
+      "timestamp": "2026-04-06T00:04:22.249Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775433934694",
+      "timestamp": "2026-04-06T00:05:34.694Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: tail -n 20 /tmp/ytjobs_scraper.log 2>/dev/null || true\nps au",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775433945544",
+      "timestamp": "2026-04-06T00:05:45.544Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 - << 'EOF'\nimport time\nfrom pathlib import Path\nbase",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775433948632",
+      "timestamp": "2026-04-06T00:05:48.632Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775435411726",
+      "timestamp": "2026-04-06T00:30:11.726Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775435411726",
+      "timestamp": "2026-04-06T00:30:11.726Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775435414891",
+      "timestamp": "2026-04-06T00:30:14.891Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775437215926",
+      "timestamp": "2026-04-06T01:00:15.926Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775437897908",
+      "timestamp": "2026-04-06T01:11:37.908Z",
+      "agent": "main",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: SKILL.md",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775438031411",
+      "timestamp": "2026-04-06T01:13:51.411Z",
+      "agent": "main",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: SKILL.md",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775438088041",
+      "timestamp": "2026-04-06T01:14:48.041Z",
+      "agent": "main",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: SKILL.md",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775438439582",
+      "timestamp": "2026-04-06T01:20:39.582Z",
+      "agent": "main",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: SKILL.md",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775439012331",
+      "timestamp": "2026-04-06T01:30:12.331Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775439012331",
+      "timestamp": "2026-04-06T01:30:12.331Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775439019109",
+      "timestamp": "2026-04-06T01:30:19.109Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775439021192",
+      "timestamp": "2026-04-06T01:30:21.192Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775440810399",
+      "timestamp": "2026-04-06T02:00:10.399Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775442620214",
+      "timestamp": "2026-04-06T02:30:20.214Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775442620214",
+      "timestamp": "2026-04-06T02:30:20.214Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775442624478",
+      "timestamp": "2026-04-06T02:30:24.478Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775442628759",
+      "timestamp": "2026-04-06T02:30:28.759Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775444408821",
+      "timestamp": "2026-04-06T03:00:08.821Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775444416840",
+      "timestamp": "2026-04-06T03:00:16.840Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775444425187",
+      "timestamp": "2026-04-06T03:00:25.187Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775444429420",
+      "timestamp": "2026-04-06T03:00:29.420Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775444444799",
+      "timestamp": "2026-04-06T03:00:44.799Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775444495728",
+      "timestamp": "2026-04-06T03:01:35.728Z",
+      "agent": "main",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: MEMORY.md",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775444513589",
+      "timestamp": "2026-04-06T03:01:53.589Z",
+      "agent": "main",
+      "type": "file_write",
+      "project": "session_activity",
+      "description": "Created/updated file: 2026-04-05.md",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775444517204",
+      "timestamp": "2026-04-06T03:01:57.204Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775446212540",
+      "timestamp": "2026-04-06T03:30:12.540Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775446215506",
+      "timestamp": "2026-04-06T03:30:15.506Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448025492",
+      "timestamp": "2026-04-06T04:00:25.492Z",
+      "agent": "sage",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: find \"/Users/stevenai/Desktop/Nox Builds\" -name sage_state.p",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448027775",
+      "timestamp": "2026-04-06T04:00:27.775Z",
+      "agent": "sage",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: find \"/Users/stevenai/Desktop/Nox Builds\" -name sage_state.p",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448051943",
+      "timestamp": "2026-04-06T04:00:51.943Z",
+      "agent": "sage",
+      "type": "file_write",
+      "project": "session_activity",
+      "description": "Created/updated file: 2026-04-06.md",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448069713",
+      "timestamp": "2026-04-06T04:01:09.713Z",
+      "agent": "sage",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: MEMORY.md",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448096138",
+      "timestamp": "2026-04-06T04:01:36.138Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448111552",
+      "timestamp": "2026-04-06T04:01:51.552Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/pixel-office/joy",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448117652",
+      "timestamp": "2026-04-06T04:01:57.652Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: find /Users/stevenai/Desktop -maxdepth 4 -name joy_state.py",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448123698",
+      "timestamp": "2026-04-06T04:02:03.698Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: find '/Users/stevenai/Desktop/Nox Builds' -maxdepth 5 -name ",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448132844",
+      "timestamp": "2026-04-06T04:02:12.844Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 - <<'PY'\nfrom pathlib import Path\np=Path('/Users/ste",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448135464",
+      "timestamp": "2026-04-06T04:02:15.464Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: stat '/Users/stevenai/Desktop/Nox Builds/pixel-office/nox_st",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448140512",
+      "timestamp": "2026-04-06T04:02:20.512Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 '/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448143515",
+      "timestamp": "2026-04-06T04:02:23.515Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 '/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448167826",
+      "timestamp": "2026-04-06T04:02:47.826Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448189197",
+      "timestamp": "2026-04-06T04:03:09.197Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 - <<'PY'\nimport json\nfrom datetime import date, date",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448203254",
+      "timestamp": "2026-04-06T04:03:23.254Z",
+      "agent": "joy",
+      "type": "file_write",
+      "project": "session_activity",
+      "description": "Created/updated file: 2026-04-06.md",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448206292",
+      "timestamp": "2026-04-06T04:03:26.292Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: /Users/stevenai/Desktop/joy-builds/qmd_wrapper.sh update && ",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448212834",
+      "timestamp": "2026-04-06T04:03:32.834Z",
+      "agent": "joy",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 '/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448264855",
+      "timestamp": "2026-04-06T04:04:24.855Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775448353153",
+      "timestamp": "2026-04-06T04:05:53.153Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775449813097",
+      "timestamp": "2026-04-06T04:30:13.097Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775449819516",
+      "timestamp": "2026-04-06T04:30:19.516Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775449823699",
+      "timestamp": "2026-04-06T04:30:23.699Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775451613618",
+      "timestamp": "2026-04-06T05:00:13.618Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775451613618",
+      "timestamp": "2026-04-06T05:00:13.618Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775453411746",
+      "timestamp": "2026-04-06T05:30:11.746Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775453411746",
+      "timestamp": "2026-04-06T05:30:11.746Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775455211014",
+      "timestamp": "2026-04-06T06:00:11.014Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775455222031",
+      "timestamp": "2026-04-06T06:00:22.031Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775455225015",
+      "timestamp": "2026-04-06T06:00:25.015Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775457011040",
+      "timestamp": "2026-04-06T06:30:11.040Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775457030168",
+      "timestamp": "2026-04-06T06:30:30.168Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/Desktop/Nox\\ Builds/ytjobs-scraper/b",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775457041355",
+      "timestamp": "2026-04-06T06:30:41.355Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: pgrep -af \"build_dashboard.py|ytjobs_dashboard_build\" | sed ",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775457939450",
+      "timestamp": "2026-04-06T06:45:39.450Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 '/Users/stevenai/Desktop/Nox Builds/nox-scrapers/tit",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775457961039",
+      "timestamp": "2026-04-06T06:46:01.039Z",
+      "agent": "main",
+      "type": "file_edit",
+      "project": "session_activity",
+      "description": "Edited file: TASKS.md",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775457968733",
+      "timestamp": "2026-04-06T06:46:08.733Z",
+      "agent": "main",
+      "type": "file_write",
+      "project": "session_activity",
+      "description": "Created/updated file: 2026-04-06.md",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775458808830",
+      "timestamp": "2026-04-06T07:00:08.830Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 /Users/stevenai/.openclaw/workspace-nox/overnight_an",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775458826047",
+      "timestamp": "2026-04-06T07:00:26.047Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775460745539",
+      "timestamp": "2026-04-06T07:32:25.539Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775462410795",
+      "timestamp": "2026-04-06T08:00:10.795Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775462415314",
+      "timestamp": "2026-04-06T08:00:15.314Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775462418823",
+      "timestamp": "2026-04-06T08:00:18.823Z",
+      "agent": "joy",
+      "type": "communication",
+      "project": "session_activity",
+      "description": "Message action: poll",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775462662758",
+      "timestamp": "2026-04-06T08:04:22.758Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775462768235",
+      "timestamp": "2026-04-06T08:06:08.235Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: ps aux | grep -E 'hourly_youtube_scraper.py|hourly_x_scraper",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775462788626",
+      "timestamp": "2026-04-06T08:06:28.626Z",
+      "agent": "main",
+      "type": "script_execution",
+      "project": "session_activity",
+      "description": "Executed script/command: python3 \"/Users/stevenai/Desktop/Nox Builds/pixel-office/nox",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775464214299",
+      "timestamp": "2026-04-06T08:30:14.299Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
+    },
+    {
+      "id": "session-1775466010254",
+      "timestamp": "2026-04-06T09:00:10.254Z",
+      "agent": "joy",
+      "type": "automation_config",
+      "project": "session_activity",
+      "description": "Cron management: list",
+      "source": "session_monitor"
     }
   ],
-  "totalEntries": 17120
+  "totalEntries": 17197
 }
